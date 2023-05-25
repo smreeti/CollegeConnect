@@ -59,17 +59,17 @@ const validateUser = async (req) => {
     if (!validateField(mobileNumber))
         errors.push("Please enter mobile number");
     else if (!validateMobileNumber(mobileNumber))
-        errors.push("Please enter a valid mobile number");
+        errors.push("Please enter a valid mobile number.");
 
     if (!validateField(username))
         errors.push("Please enter username");
     else if (!validateUsername(username))
-        errors.push("Username can only contain letters, numbers, and underscores");
+        errors.push("Username can only contain letters, numbers, and underscores.");
 
     if (!validateField(password))
         errors.push("Please enter password");
     else if (!validatePassword(password))
-        errors.push("Password should be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, and one digit");
+        errors.push("Password should be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, and one digit.");
 
     const existingUser = await User.findOne({
         $or: [

@@ -1,12 +1,15 @@
 require('dotenv').config();
 const express = require('express');
+const cors = require('cors');
 const { dbConnect, seedInitialData } = require('./db/db.js');
-
-const app = express();
 const route = require('./routes/routes.js');
 const bodyParser = require('body-parser');
 const expressSession = require('express-session');
 const flash = require('connect-flash');
+
+const app = express();
+// Enable CORS for all routes
+app.use(cors());
 
 const port = process.env.API_SERVER_PORT || 4000;
 
@@ -20,7 +23,6 @@ app.use(express.urlencoded());
 app.use(flash());
 app.use(route);
 app.use((req, res) => res.render('notfound')); //creating a 404 page for non-existing route
-
 
 (async function () {
     try {
@@ -38,11 +40,3 @@ app.use((req, res) => res.render('notfound')); //creating a 404 page for non-exi
         console.log('ERROR:', err);
     }
 }());
-
-// app.get('/', (req, res) => {
-//     console.log("home page")
-// });
-
-// app.get('/about', (req, res) => {
-//     console.log("about page")
-// });

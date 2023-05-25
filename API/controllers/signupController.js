@@ -14,7 +14,8 @@ const signupUser = async (req, res) => {
         email,
         mobileNumber,
         username,
-        password
+        password,
+        userType
     } = req.body;
 
     const errors = await validateUser(req, res);
@@ -23,16 +24,17 @@ const signupUser = async (req, res) => {
     if (!validateField(collegeInfo))
         errors.push("College info not found");
 
-    const userType = await UserType.findOne({ code: "REGULAR_USER" });
+    const userTypeId = await UserType.findOne({ name: userType });
     if (!validateField(userType))
         errors.push("User type not found");
 
-    parseErrors(errors, res);
+    if (errors.length > 0)
+        return res.status(404).json({ error: errors });
 
     try {
         await User.create({
-            collegeInfo,
-            userType,
+            collegeInfoId: collegeInfo,
+            userTypeId,
             firstName,
             lastName,
             email,
@@ -42,27 +44,9 @@ const signupUser = async (req, res) => {
         });
 
         return res.json({ message: "User saved successfully" });
-        // return res.redirect('/login');
     } catch (error) {
-        // const validationErrors = Object.values(error.errors).map((err) => err.message);
-        // req.flash('validationErrors', validationErrors);
-        // req.flash('data', req.body);
-        // return res.render('signup', {
-        //     errors: req.flash('validationErrors')
-        // });
-        return res.status(404).json({ error: errors });
+        return res.status(404).json({ error: errors[0] });
     }
 };
-
-
-const parseErrors = (errors, res) => {
-    if (errors.length > 0) {
-        // return res.render('signup', {
-        //     errors
-        // });
-
-        return res.status(404).json({ error: errors });
-    }
-}
 
 module.exports = { signupUser };

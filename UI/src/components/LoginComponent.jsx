@@ -1,4 +1,5 @@
 import React from 'react';
+import SignupComponent from './SignupComponent.jsx';
 
 export default class LoginComponent extends React.Component {
 
@@ -11,6 +12,7 @@ export default class LoginComponent extends React.Component {
         return (
             <main>
                 <h1>Login</h1>
+                <SignupComponent />
             </main>
         );
     }
