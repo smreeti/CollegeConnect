@@ -1,6 +1,5 @@
-const {signup, signupUser}= require('./signupcontroller.js');
+const { signupUser } = require('./signupcontroller.js');
 
 module.exports = {
-    signup,
     signupUser
 }

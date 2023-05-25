@@ -47,6 +47,8 @@ const dbConnect = async () => {
 
 // Insert data in the database when the server starts
 async function seedInitialData() {
+    await UserType.deleteMany({});
+    await CollegeInfo.deleteMany({});
     await UserType.create(userTypeData);
     await CollegeInfo.create(collegeData);
 }

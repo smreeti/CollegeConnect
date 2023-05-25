@@ -1,22 +1,10 @@
 const User = require('../models/User.js');
 const UserType = require('../models/UserType.js');
 const CollegeInfo = require('../models/CollegeInfo.js');
-
-const signup = (req, res) => {
-    let username = "";
-    let password = "";
-    const data = req.flash('data')[0];
-
-    if (data) {
-        username = data.username;
-        password = data.password;
-    }
-
-    return res.render('signup', {
-        passwordError: false,
-        errors: req.flash('validationErrors')
-    });
-};
+const {
+    validateField,
+    validateUser
+} = require('../utils/ValidationUtil.js')
 
 const signupUser = async (req, res) => {
     const {
@@ -29,22 +17,19 @@ const signupUser = async (req, res) => {
         password
     } = req.body;
 
+    const errors = await validateUser(req, res);
+
+    const collegeInfo = await CollegeInfo.findById(collegeInfoId);
+    if (!validateField(collegeInfo))
+        errors.push("College info not found");
+
+    const userType = await UserType.findOne({ code: "REGULAR_USER" });
+    if (!validateField(userType))
+        errors.push("User type not found");
+
+    parseErrors(errors, res);
+
     try {
-        const existingUser = await User.findOne({ email });
-        if (existingUser) {
-            return res.status(422).json({ error: "User already exists" });
-        }
-
-        const collegeInfo = await CollegeInfo.findById(collegeInfoId);
-        if (!collegeInfo) {
-            return res.status(404).json({ error: "College info not found" });
-        }
-
-        const userType = await UserType.findOne({ code: "REGULAR_USER" });
-        if (!userType) {
-            return res.status(404).json({ error: "User type not found" });
-        }
-
         await User.create({
             collegeInfo,
             userType,
@@ -59,13 +44,25 @@ const signupUser = async (req, res) => {
         return res.json({ message: "User saved successfully" });
         // return res.redirect('/login');
     } catch (error) {
-        const validationErrors = Object.values(error.errors).map((err) => err.message);
-        req.flash('validationErrors', validationErrors);
-        req.flash('data', req.body);
-        return res.render('signup', {
-            errors: req.flash('validationErrors')
-        });
+        // const validationErrors = Object.values(error.errors).map((err) => err.message);
+        // req.flash('validationErrors', validationErrors);
+        // req.flash('data', req.body);
+        // return res.render('signup', {
+        //     errors: req.flash('validationErrors')
+        // });
+        return res.status(404).json({ error: errors });
     }
 };
 
-module.exports = { signup, signupUser };
+
+const parseErrors = (errors, res) => {
+    if (errors.length > 0) {
+        // return res.render('signup', {
+        //     errors
+        // });
+
+        return res.status(404).json({ error: errors });
+    }
+}
+
+module.exports = { signupUser };
