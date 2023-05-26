@@ -10,6 +10,7 @@ const flash = require('connect-flash');
 const app = express();
 // Enable CORS for all routes
 app.use(cors());
+app.set('view engine', 'ejs'); // Set EJS as the default template engine
 
 const port = process.env.API_SERVER_PORT || 4000;
 

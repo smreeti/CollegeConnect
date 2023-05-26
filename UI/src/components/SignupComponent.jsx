@@ -1,6 +1,7 @@
 import React from "react";
 import TextInput from './InputComponents/TextInput.jsx';
 import NumInput from './InputComponents/NumInput.jsx';
+import SelectInput from './InputComponents/SelectInput.jsx';
 import UserType from "../../utils/UserTypeConstants.js";
 import handleFormValidation from "../../utils/validation.js";
 
@@ -11,16 +12,43 @@ class SignupComponent extends React.Component {
         this.state = {
             user: {},
             errors: [],
-            serverErrors: []
+            serverErrors: [],
+            collegeInfoList: []
         };
         this.signup = this.signup.bind(this);
         this.handleOnChange = this.handleOnChange.bind(this);
+        this.fetchCollegeList = this.fetchCollegeList.bind(this);
+    }
+
+    componentDidMount() {
+        this.fetchCollegeList();
+    }
+
+    async fetchCollegeList() {
+        await fetch("http://localhost:4000/fetchCollegeList", {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            },
+        }).then(res => res.json())
+            .then(data => {
+                if (data?.error?.length > 0)
+                    console.log("err");
+                else {
+                    this.setState({
+                        collegeInfoList: data
+                    })
+                }
+            }).catch(error => {
+                console.log(error);
+            })
     }
 
     async signup(e) {
         e.preventDefault();
 
         const form = document.forms.signupform;
+
         const user = {
             firstName: form.firstName.value,
             lastName: form.lastName.value,
@@ -29,8 +57,7 @@ class SignupComponent extends React.Component {
             username: form.username.value,
             password: form.password.value,
             userType: UserType.REGULAR_USER,
-            // collegeInfoId: form.collegeInfoId.value
-            collegeInfoId: "646fdca917131c8dbd53fcc"
+            collegeInfoId: form.selectedCollege.value
         }
 
         this.setServerErrors([]);
@@ -42,9 +69,8 @@ class SignupComponent extends React.Component {
         }
     }
 
-    handleOnChange(event, naturalValue) {
-        const { name, value: textValue } = event.target;
-        const value = naturalValue === undefined ? textValue : naturalValue;
+    handleOnChange(event) {
+        const { name, value } = event.target;
 
         this.setState(prevState => ({
             user: { ...prevState.user, [name]: value }
@@ -54,7 +80,7 @@ class SignupComponent extends React.Component {
     async signupUser(user) {
 
         await fetch("http://localhost:4000/signupUser", {
-            method: "post",
+            method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
@@ -93,19 +119,22 @@ class SignupComponent extends React.Component {
                 email,
                 mobileNumber,
                 username,
-                password
+                password,
+                selectedCollege
             }
         } = this.state;
 
-        console.log("serber",this.state.serverErrors);
+        const selectCollegeOptions = this.state.collegeInfoList.map((college) => (
+            <option key={college._id} value={college._id}>
+                {college.name}
+            </option>
+        ));
 
         return (
             <>
                 <section>
                     <h1>Sign up</h1>
                     <form name="signupform" method="POST" onSubmit={this.signup}>
-
-
                         {this.state?.serverErrors && (
                             <ul className="error-list">
                                 {this.state?.serverErrors.map((error, index) => (
@@ -186,6 +215,18 @@ class SignupComponent extends React.Component {
                                 key="PasswordInput"
                             />
                             <p className="required">{this.state?.errors["password"]}</p>
+
+                            <label htmlFor="college"><b>College</b></label>
+                            <span className="required">*</span>
+
+                            <select
+                                value={selectedCollege}
+                                name="selectedCollege"
+                                id="selectedCollege"
+                                onChange={this.handleOnChange}
+                            >
+                                {selectCollegeOptions}
+                            </select>
                         </div>
 
                         <div>
