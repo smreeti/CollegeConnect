@@ -1,9 +1,10 @@
 import React from "react";
 import TextInput from './InputComponents/TextInput.jsx';
 import NumInput from './InputComponents/NumInput.jsx';
-import SelectInput from './InputComponents/SelectInput.jsx';
 import UserType from "../../utils/UserTypeConstants.js";
 import handleFormValidation from "../../utils/validation.js";
+import { API_TO_FETCH_COLLEGE_INFO, API_TO_SIGNUP_USER } from "../../utils/APIRequestUrl.js";
+import fetchData from "../../utils/FetchAPI.js";
 
 class SignupComponent extends React.Component {
 
@@ -25,23 +26,18 @@ class SignupComponent extends React.Component {
     }
 
     async fetchCollegeList() {
-        await fetch("http://localhost:4000/fetchCollegeList", {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json"
-            },
-        }).then(res => res.json())
-            .then(data => {
-                if (data?.error?.length > 0)
-                    console.log("err");
-                else {
-                    this.setState({
-                        collegeInfoList: data
-                    })
-                }
-            }).catch(error => {
-                console.log(error);
-            })
+        try {
+            const data = await fetchData(API_TO_FETCH_COLLEGE_INFO, "GET");
+            if (!data.error) {
+                this.setState({
+                    collegeInfoList: data
+                });
+            } else {
+                console.log("Error:", data.error);
+            }
+        } catch (error) {
+            console.log("Error:", error);
+        }
     }
 
     async signup(e) {
@@ -62,6 +58,7 @@ class SignupComponent extends React.Component {
 
         this.setServerErrors([]);
         let formErrors = await handleFormValidation(user);
+        
         if (Object.keys(formErrors).length > 0) {
             this.setFormErrors(formErrors);
         } else {
@@ -79,24 +76,18 @@ class SignupComponent extends React.Component {
 
     async signupUser(user) {
 
-        await fetch("http://localhost:4000/signupUser", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(user)
-        }).then(res => res.json())
-            .then(data => {
-                if (data?.error?.length > 0) {
-                    this.setServerErrors(data.error);
-                    this.setFormErrors([]);
-                }
-                else
-                    console.log("User saved successfully");
-            }).catch(error => {
-                console.log(error);
-                this.setServerErrors(error);
-            })
+        try {
+            const data = await fetchData(API_TO_SIGNUP_USER, "POST", user);
+            if (!data.error) {
+                console.log("User saved successfully");
+            } else {
+                this.setServerErrors(data.error);
+                this.setFormErrors([]);
+            }
+        } catch (error) {
+            console.log("Error:", error);
+            this.setServerErrors(error);
+        }
     }
 
     setFormErrors(formErrors) {

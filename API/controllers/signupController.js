@@ -55,8 +55,8 @@ const fetchCollegeInfo = async (collegeInfoId, errors) => {
 }
 
 const fetchUserType = async (userType) => {
-    const userTypeId = await UserType.findOne({ name: userType });
-    if (!userType)
+    const userTypeId = await UserType.findOne({ code: userType });
+    if (!userTypeId)
         errors.push("User type not found");
     return userTypeId;
 }
