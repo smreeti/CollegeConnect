@@ -45,6 +45,8 @@ export default class LoginComponent extends React.Component {
     async loginUser(user) {
         try {
             const data = await fetchData(API_TO_LOGIN_USER, "POST", user);
+
+            console.log(data);
             if (!data.error) {
                 console.log("User logged in successfully");
             } else {

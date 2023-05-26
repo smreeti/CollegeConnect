@@ -1,6 +1,7 @@
 const User = require('../models/User.js');
 const UserType = require('../models/UserType.js');
 const CollegeInfo = require('../models/CollegeInfo.js');
+
 const {
     validateUser
 } = require('../utils/ValidationUtil.js')
@@ -38,7 +39,7 @@ const signupUser = async (req, res) => {
 
         return res.json({ message: "User saved successfully" });
     } catch (error) {
-        return res.status(404).json({ error: errors[0] });
+        return res.status(404).json({ error: errors});
     }
 };
 
