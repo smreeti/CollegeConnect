@@ -1,6 +1,6 @@
 import React from 'react';
 import { Routes, Route, useNavigate, Navigate } from 'react-router-dom';
-import LoginComponent from './components/LoginComponent.jsx';
+import MainDirectory from './components/MainDirectory.jsx';
 import NotFound from './NotFound.jsx';
 
 export default function AppRoutes() {
@@ -9,7 +9,7 @@ export default function AppRoutes() {
   return (
     <Routes>
       <Route path="/" element={<Navigate to="/home" replace />} />
-      <Route path="/home" element={<LoginComponent />} />
+      <Route path="/home" element={<MainDirectory />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
