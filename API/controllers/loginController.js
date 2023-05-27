@@ -6,7 +6,6 @@ const {
 } = require('../utils/ValidationUtil.js')
 
 const login = async (req, res) => {
-    console.log("hereee");
     const { username, password } = req.body;
 
     const errors = await validateLoginForm(username, password);
@@ -32,6 +31,8 @@ const login = async (req, res) => {
             // req.session.userType = user.userType;
             // req.session.isLoggedIn = true;
             return res.json({ message: "User logged in successfully", user });
+        } else {
+            return res.status(404).json({ error: "Sorry, your password was incorrect. Please double check your password." });
         }
     }
 

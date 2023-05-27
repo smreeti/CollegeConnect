@@ -83,14 +83,7 @@ export default class LoginComponent extends React.Component {
             <main>
                 <h1>Login</h1>
 
-                {this.state?.serverErrors && (
-                    <ul className="error-list">
-                        {this.state?.serverErrors.map((error, index) => (
-                            <li key={index}>{error}</li>
-                        ))}
-                    </ul>
-                )}
-
+                <p>{this.state?.serverErrors}</p>
                 <form name="loginform" method="POST" onSubmit={this.login}>
                     <div>
                         <label htmlFor="username"><b>Mobile number, username or email address</b></label>
