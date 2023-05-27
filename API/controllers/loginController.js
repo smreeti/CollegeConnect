@@ -1,8 +1,12 @@
 const User = require('../models/User.js');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+require("dotenv").config();
 
 const { validateLoginForm } = require('../utils/ValidationUtil.js')
 const { setSuccessResponse, setErrorResponse } = require('../utils/Response.js')
+
+const JWT_SECRET = process.env.JWT_SECRET;
 
 const login = async (req, res) => {
     const { username, password } = req.body;
@@ -28,7 +32,8 @@ const login = async (req, res) => {
             // req.session.userType = user.userType;
             // req.session.isLoggedIn = true;
             user.password = undefined;
-            return setSuccessResponse(res, "User logged in successfully", {user});
+            const token = jwt.sign({ _id: user._id }, JWT_SECRET);    
+            return setSuccessResponse(res, "User logged in successfully", { user, token });
         } else {
             return setErrorResponse(res, "Sorry, your password was incorrect. Please double check your password.");
         }

@@ -1,15 +1,17 @@
 import React from 'react';
-import { Routes, Route, useNavigate, Navigate } from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import MainDirectory from './components/MainDirectory.jsx';
 import NotFound from './NotFound.jsx';
+import HomeComponent from './components/HomeComponent.jsx';
 
 export default function AppRoutes() {
   const navigate = useNavigate();
 
   return (
     <Routes>
-      <Route path="/" element={<Navigate to="/home" replace />} />
-      <Route path="/home" element={<MainDirectory />} />
+      <Route path="/" element={<MainDirectory />} />
+
+      <Route path="/home" element={<HomeComponent />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
