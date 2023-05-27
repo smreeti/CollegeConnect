@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
+const authMiddleware = require('../middlewares/authMiddleware.js');
+
 const {
     signupUser,
     fetchCollegeList,
@@ -17,5 +19,9 @@ router.get(API_TO_FETCH_COLLEGE_INFO, fetchCollegeList);
 router.post(API_TO_SIGNUP_USER, signupUser);
 
 router.post(API_TO_LOGIN_USER, login);
+
+router.get("/protected", authMiddleware, (req, res) => {
+    res.send("Hello");
+})
 
 module.exports = router;
