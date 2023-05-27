@@ -3,8 +3,9 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 require("dotenv").config();
 
-const { validateLoginForm } = require('../utils/ValidationUtil.js')
-const { setSuccessResponse, setErrorResponse } = require('../utils/Response.js')
+const HttpStatus = require('../utils/HttpStatus.js');
+const { validateLoginForm } = require('../utils/ValidationUtil.js');
+const { setSuccessResponse, setErrorResponse } = require('../utils/Response.js');
 
 const JWT_SECRET = process.env.JWT_SECRET;
 
@@ -14,7 +15,7 @@ const login = async (req, res) => {
     const errors = await validateLoginForm(username, password);
 
     if (errors.length > 0)
-        return setErrorResponse(res, errors);
+        return setErrorResponse(res, HttpStatus.BAD_REQUEST, errors);
 
     const user = await User.findOne({
         $or: [
@@ -25,22 +26,21 @@ const login = async (req, res) => {
     });
 
     if (user) {
-
         let same = await bcrypt.compare(password, user.password);
         if (same) { //if passwords match
             // req.session.userId = user._id;
             // req.session.userType = user.userType;
             // req.session.isLoggedIn = true;
-            user.password = undefined;
-            const token = jwt.sign({ _id: user._id }, JWT_SECRET);    
+            user.password = undefined; //so that password is not exposed.
+            const token = jwt.sign({ _id: user._id }, JWT_SECRET);
             return setSuccessResponse(res, "User logged in successfully", { user, token });
         } else {
-            return setErrorResponse(res, "Sorry, your password was incorrect. Please double check your password.");
+            return setErrorResponse(res, HttpStatus.BAD_REQUEST, "Sorry, your password was incorrect. Please double check your password.");
         }
     }
 
     console.log("User not found");
-    return setErrorResponse(res, "Invalid username or password.");
+    return setErrorResponse(res, HttpStatus.BAD_REQUEST, "Invalid username or password.");
 }
 
 module.exports = { login };

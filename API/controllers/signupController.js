@@ -1,6 +1,7 @@
 const User = require('../models/User.js');
 const UserType = require('../models/UserType.js');
 const CollegeInfo = require('../models/CollegeInfo.js');
+const HttpStatus = require('../utils/HttpStatus.js');
 const { setSuccessResponse, setErrorResponse } = require('../utils/Response.js');
 
 const {
@@ -24,7 +25,7 @@ const signupUser = async (req, res) => {
     const userTypeId = await fetchUserType(userType);
 
     if (errors.length > 0)
-        return setErrorResponse(res, errors);
+        return setErrorResponse(res, HttpStatus.BAD_REQUEST, errors);
 
     try {
         await User.create({
@@ -40,7 +41,7 @@ const signupUser = async (req, res) => {
 
         return setSuccessResponse(res, { message: "User saved successfully" });
     } catch (error) {
-        return setErrorResponse(res, error);
+        return setErrorResponse(res, HttpStatus.INTERNAL_SERVER_ERROR, error);
     }
 };
 

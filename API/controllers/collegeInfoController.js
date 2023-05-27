@@ -1,4 +1,5 @@
 const CollegeInfo = require('../models/CollegeInfo.js');
+const HttpStatus = require('../utils/HttpStatus.js');
 const { setSuccessResponse, setErrorResponse } = require('../utils/Response.js');
 
 const fetchCollegeList = async (req, res) => {
@@ -6,7 +7,7 @@ const fetchCollegeList = async (req, res) => {
         const collegeList = await CollegeInfo.find();
         return setSuccessResponse(res, "College Info List fetched successfully", collegeList);
     } catch (error) {
-        return setErrorResponse(res, "Error fetching college list");
+        return setErrorResponse(res, HttpStatus.NOT_FOUND, "Error fetching college list");
     }
 };
 
