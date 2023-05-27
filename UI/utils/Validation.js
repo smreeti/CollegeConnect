@@ -35,7 +35,7 @@ const handleFormValidation = async (user) => {
         formErrors["password"] = "Password is required.";
     else if (!validatePassword(password))
         formErrors["password"] =
-         "Password should be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, and one digit.";
+            "Password should be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, and one digit.";
 
     return formErrors;
 }
@@ -65,4 +65,20 @@ const validatePassword = (password) => {
     return passwordRegex.test(password);
 };
 
-export default handleFormValidation;
+const handleLoginFormValidation = async (user) => {
+    let formErrors = {};
+    const { username, password } = user;
+
+    if (!username)
+        formErrors["username"] = "Mobile number, username or email address is required.";
+
+    if (!password)
+        formErrors["password"] = "Password is required.";
+    else if (!validatePassword(password))
+        formErrors["password"] =
+            "Password should be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, and one digit.";
+
+    return formErrors;
+}
+
+export { handleFormValidation, handleLoginFormValidation };

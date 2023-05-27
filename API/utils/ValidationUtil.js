@@ -80,12 +80,28 @@ const validateUser = async (req) => {
     });
 
     if (existingUser)
-        errors.push("User already exists");
+        errors.push("Sorry, user with given information already exists.");
 
     return errors;
 };
 
+
+const validateLoginForm = async (username, password) => {
+    const errors = [];
+
+    if (!username)
+        errors.push("Mobile number, username or email address is required.");
+
+    if (!password)
+        errors.push("Password is required.");
+    else if (!validatePassword(password))
+        errors.push("Password should be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, and one digit.");
+
+    return errors;
+}
+
 module.exports = {
     validateField,
-    validateUser
+    validateUser,
+    validateLoginForm
 }

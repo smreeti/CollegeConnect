@@ -1,8 +1,27 @@
 const express = require('express');
 const router = express.Router();
-const { signupUser, fetchCollegeList } = require('../controllers/controller.js');
 
-router.post('/signupUser', signupUser);
-router.get('/fetchCollegeList', fetchCollegeList);
+const authMiddleware = require('../middlewares/authMiddleware.js');
+
+const {
+    signupUser,
+    fetchCollegeList,
+    login
+} = require('../controllers/controller.js');
+
+const {
+    API_TO_FETCH_COLLEGE_INFO,
+    API_TO_SIGNUP_USER,
+    API_TO_LOGIN_USER
+} = require('../utils/APIRequestUrl.js');
+
+router.get(API_TO_FETCH_COLLEGE_INFO, fetchCollegeList);
+router.post(API_TO_SIGNUP_USER, signupUser);
+
+router.post(API_TO_LOGIN_USER, login);
+
+router.get("/protected", authMiddleware, (req, res) => {
+    res.send("Hello");
+})
 
 module.exports = router;

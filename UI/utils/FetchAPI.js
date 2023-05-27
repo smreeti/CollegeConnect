@@ -2,7 +2,10 @@ const fetchData = async (url, method, body = null) => {
     try {
         const requestOptions = {
             method,
-            headers: { "Content-Type": "application/json" },
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + localStorage.getItem("jwt")
+            },
             body: body ? JSON.stringify(body) : null
         };
 

@@ -2,7 +2,7 @@ import React from "react";
 import TextInput from './InputComponents/TextInput.jsx';
 import NumInput from './InputComponents/NumInput.jsx';
 import UserType from "../../utils/UserTypeConstants.js";
-import handleFormValidation from "../../utils/validation.js";
+import {handleFormValidation} from "../../utils/validation.js";
 import { API_TO_FETCH_COLLEGE_INFO, API_TO_SIGNUP_USER } from "../../utils/APIRequestUrl.js";
 import fetchData from "../../utils/FetchAPI.js";
 
@@ -30,7 +30,7 @@ class SignupComponent extends React.Component {
             const data = await fetchData(API_TO_FETCH_COLLEGE_INFO, "GET");
             if (!data.error) {
                 this.setState({
-                    collegeInfoList: data
+                    collegeInfoList: data.body
                 });
             } else {
                 console.log("Error:", data.error);

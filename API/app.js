@@ -4,7 +4,6 @@ const cors = require('cors');
 const { dbConnect, seedInitialData } = require('./db/db.js');
 const route = require('./routes/routes.js');
 const bodyParser = require('body-parser');
-const expressSession = require('express-session');
 const flash = require('connect-flash');
 
 const app = express();
@@ -21,7 +20,6 @@ app.use(express.json());
 app.use(express.urlencoded());
 
 /*To Flush error messages from session*/
-app.use(flash());
 app.use(route);
 app.use((req, res) => res.render('notfound')); //creating a 404 page for non-existing route
 
@@ -31,7 +29,7 @@ app.use((req, res) => res.render('notfound')); //creating a 404 page for non-exi
         await dbConnect();
 
         //populate initial static employee data in the database
-			await seedInitialData();
+        await seedInitialData();
 
         //app will start by listening on port 4000
         app.listen(port, function () {
