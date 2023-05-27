@@ -32,7 +32,8 @@ const login = async (req, res) => {
             // req.session.userType = user.userType;
             // req.session.isLoggedIn = true;
             const token = jwt.sign({ _id: user._id }, JWT_SECRET);
-            return setSuccessResponse(res, "User logged in successfully", { token });
+            user.password = undefined;
+            return setSuccessResponse(res, "User logged in successfully", { token, user });
         } else {
             return setErrorResponse(res, HttpStatus.BAD_REQUEST, "Sorry, your password was incorrect. Please double check your password.");
         }

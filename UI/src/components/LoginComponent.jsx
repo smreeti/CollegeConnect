@@ -44,7 +44,9 @@ const LoginComponent = () => {
 
             console.log(data);
             if (!data.error) {
-                console.log("User logged in successfully");
+                const { token, user } = data.body;
+                localStorage.setItem("jwt", token)
+                localStorage.setItem("user", JSON.stringify(user));
                 navigate('/home');
             } else {
                 setServerErrors(data.error);
