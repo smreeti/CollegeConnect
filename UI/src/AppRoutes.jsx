@@ -8,9 +8,10 @@ export default function AppRoutes() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const user = localStorage.getItem("user");
+    // Check if the user is authenticated
+    const isAuthenticated = localStorage.getItem('user') !== null;
 
-    if (!user) {
+    if (!isAuthenticated) {
       navigate('/');
     }
   }, [navigate]);

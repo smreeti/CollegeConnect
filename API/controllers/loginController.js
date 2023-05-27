@@ -28,9 +28,6 @@ const login = async (req, res) => {
     if (user) {
         let same = await bcrypt.compare(password, user.password);
         if (same) { //if passwords match
-            // req.session.userId = user._id;
-            // req.session.userType = user.userType;
-            // req.session.isLoggedIn = true;
             const token = jwt.sign({ _id: user._id }, JWT_SECRET);
             user.password = undefined;
             return setSuccessResponse(res, "User logged in successfully", { token, user });
