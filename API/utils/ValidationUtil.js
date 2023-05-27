@@ -80,7 +80,7 @@ const validateUser = async (req) => {
     });
 
     if (existingUser)
-        errors.push("User already exists");
+        errors.push("Sorry, user with given information already exists.");
 
     return errors;
 };

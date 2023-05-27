@@ -30,7 +30,7 @@ class SignupComponent extends React.Component {
             const data = await fetchData(API_TO_FETCH_COLLEGE_INFO, "GET");
             if (!data.error) {
                 this.setState({
-                    collegeInfoList: data
+                    collegeInfoList: data.body
                 });
             } else {
                 console.log("Error:", data.error);

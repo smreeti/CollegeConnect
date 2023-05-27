@@ -1,9 +1,8 @@
 const User = require('../models/User.js');
 const bcrypt = require('bcrypt');
 
-const {
-    validateLoginForm
-} = require('../utils/ValidationUtil.js')
+const { validateLoginForm } = require('../utils/ValidationUtil.js')
+const { setSuccessResponse, setErrorResponse } = require('../utils/Response.js')
 
 const login = async (req, res) => {
     const { username, password } = req.body;
@@ -11,7 +10,7 @@ const login = async (req, res) => {
     const errors = await validateLoginForm(username, password);
 
     if (errors.length > 0)
-        return res.status(404).json({ error: errors });
+        return setErrorResponse(res, errors);
 
     const user = await User.findOne({
         $or: [
@@ -21,8 +20,6 @@ const login = async (req, res) => {
         ]
     });
 
-    console.log("user", user);
-
     if (user) {
 
         let same = await bcrypt.compare(password, user.password);
@@ -30,14 +27,15 @@ const login = async (req, res) => {
             // req.session.userId = user._id;
             // req.session.userType = user.userType;
             // req.session.isLoggedIn = true;
-            return res.json({ message: "User logged in successfully", user });
+            user.password = undefined;
+            return setSuccessResponse(res, "User logged in successfully", {user});
         } else {
-            return res.status(404).json({ error: "Sorry, your password was incorrect. Please double check your password." });
+            return setErrorResponse(res, "Sorry, your password was incorrect. Please double check your password.");
         }
     }
 
     console.log("User not found");
-    return res.status(404).json({ error: "User not found" });
+    return setErrorResponse(res, "Invalid username or password.");
 }
 
 module.exports = { login };

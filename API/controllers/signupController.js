@@ -1,6 +1,7 @@
 const User = require('../models/User.js');
 const UserType = require('../models/UserType.js');
 const CollegeInfo = require('../models/CollegeInfo.js');
+const { setSuccessResponse, setErrorResponse } = require('../utils/Response.js');
 
 const {
     validateUser
@@ -23,7 +24,7 @@ const signupUser = async (req, res) => {
     const userTypeId = await fetchUserType(userType);
 
     if (errors.length > 0)
-        return res.status(404).json({ error: errors });
+        return setErrorResponse(res, errors);
 
     try {
         await User.create({
@@ -37,9 +38,9 @@ const signupUser = async (req, res) => {
             password
         });
 
-        return res.json({ message: "User saved successfully" });
+        return setSuccessResponse(res, { message: "User saved successfully" });
     } catch (error) {
-        return res.status(404).json({ error: errors});
+        return setErrorResponse(res, error);
     }
 };
 
