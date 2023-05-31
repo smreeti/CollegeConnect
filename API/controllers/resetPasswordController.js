@@ -33,8 +33,6 @@ const resetPassword = async (req, res) => {
             html: template,
         };
 
-        console.log(message);
-
          sendEmail(message);
         console.log('Reset password email sent');
         return res.send("ok")
