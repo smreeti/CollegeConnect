@@ -4,7 +4,7 @@ module.exports = {
     generateResetPasswordEmail: (email, token) => {
         const template = `
         <p>You requested a password reset.</p>
-        <h5>Click <a href="http://localhost:3000/reset/${token}">here</a> to reset your password.</h5>
+        <h4>Click <a href="http://localhost:3000/reset/${token}">here</a> to reset your password.</h4>
       `;
 
         return {
