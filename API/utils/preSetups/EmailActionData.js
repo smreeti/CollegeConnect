@@ -1,6 +1,6 @@
 module.exports = EmailActionData = [
     {
-        name: "Forgot Password",
-        code: "FORGOT_PASSWORD"
+        name: "Reset Password",
+        code: "RESET_PASSWORD"
     }
 ]

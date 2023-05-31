@@ -1,3 +1,3 @@
-const FORGOT_PASSWORD = "FORGOT_PASSWORD";
+const RESET_PASSWORD = "RESET_PASSWORD";
 
-module.exports = { FORGOT_PASSWORD };
+module.exports = { RESET_PASSWORD };
