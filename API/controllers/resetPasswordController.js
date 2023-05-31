@@ -3,9 +3,9 @@ require("dotenv").config();
 const crypto = require('crypto');
 const sendgridMail = require('@sendgrid/mail');
 const HttpStatus = require("../utils/HttpStatus.js");
-const {template, subject} = require('../utils/EmailTemplates/ResetPassword.js');
+const { template, subject, generateResetPasswordEmail } = require('../utils/EmailTemplates/ResetPassword.js');
 const { fetchUser } = require("./userController.js");
-const { setErrorResponse } = require("../utils/Response.js");
+const { setErrorResponse, setSuccessResponse } = require("../utils/Response.js");
 const { fetchEmailAction } = require("./emailActionController.js");
 const { RESET_PASSWORD } = require("../utils/EmailActionConstants.js");
 const { createEmailToken } = require("./emailTokenController.js");
@@ -26,16 +26,10 @@ const resetPassword = async (req, res) => {
         const emailAction = await fetchEmailAction(RESET_PASSWORD);
         await createEmailToken(randomToken, expiryDate, user._id, emailAction._id);
 
-        const message = {
-            from: "mool.smreeti@gmail.com",
-            to: "mool.smreeti@gmail.com",
-            subject: subject,
-            html: template,
-        };
+        const resetPasswordEmail = generateResetPasswordEmail(user.email, randomToken);
 
-         sendEmail(message);
-        console.log('Reset password email sent');
-        return res.send("ok")
+        await sendEmail(resetPasswordEmail);
+        return setSuccessResponse(res, "Reset Password Email Sent");
     } catch (error) {
         console.error(error.message);
         return setErrorResponse(res, HttpStatus.INTERNAL_SERVER_ERROR, "An error occurred.");
