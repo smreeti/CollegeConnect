@@ -20,8 +20,4 @@ router.post(API_TO_SIGNUP_USER, signupUser);
 
 router.post(API_TO_LOGIN_USER, login);
 
-router.get("/protected", authMiddleware, (req, res) => {
-    res.send("Hello");
-})
-
 module.exports = router;

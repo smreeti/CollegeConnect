@@ -1,0 +1,3 @@
+const FORGOT_PASSWORD = "FORGOT_PASSWORD";
+
+module.exports = { FORGOT_PASSWORD };
