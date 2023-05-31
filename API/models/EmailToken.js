@@ -1,16 +1,12 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-let uniqueValidator = require('mongoose-unique-validator');
 
 const EmailTokenSchema = new Schema({
     token: {
-        type: String,
-        required: [true, 'Please provide token'],
-        unique: true
+        type: String
     },
     expiryDate: {
-        type: Date,
-        required: [true, 'Please provide expiry date']
+        type: Date
     },
     lastModifiedDate: {
         type: Date
@@ -25,7 +21,6 @@ const EmailTokenSchema = new Schema({
     },
 });
 
-EmailTokenSchema.plugin(uniqueValidator);
 const EmailToken = mongoose.model('EmailToken', EmailTokenSchema);
 
 module.exports = EmailToken;

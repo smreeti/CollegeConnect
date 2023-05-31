@@ -1,10 +1,9 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
-const { dbConnect, seedInitialData } = require('./db/db.js');
 const route = require('./routes/routes.js');
 const bodyParser = require('body-parser');
-const flash = require('connect-flash');
+const { dbConnect, seedInitialData } = require('./db/db.js');
 
 const app = express();
 // Enable CORS for all routes
