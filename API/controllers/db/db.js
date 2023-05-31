@@ -1,11 +1,11 @@
 require("dotenv").config();
 const mongoose = require('mongoose');
-const UserType = require('../models/UserType.js');
-const CollegeInfo = require('../models/CollegeInfo.js');
-const CollegeInfoData = require("../utils/preSetups/CollegeInfoData.js");
-const UserTypeData = require("../utils/preSetups/UserTypeData.js");
-const EmailAction = require("../models/EmailAction.js");
-const EmailActionData = require("../utils/preSetups/EmailActionData.js");
+const UserType = require('../../models/UserType.js');
+const CollegeInfo = require('../../models/CollegeInfo.js');
+const CollegeInfoData = require("../../utils/preSetups/CollegeInfoData.js");
+const UserTypeData = require("../../utils/preSetups/UserTypeData.js");
+const EmailAction = require("../../models/EmailAction.js");
+const EmailActionData = require("../../utils/preSetups/EmailActionData.js");
 
 // Function to connect to MongoDB server
 const dbConnect = async () => {

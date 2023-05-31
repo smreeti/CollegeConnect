@@ -10,4 +10,12 @@ const createEmailToken = async (token, expiryDate, userId, emailActionId) => {
     });
 };
 
-module.exports = { createEmailToken }
+const findEmailToken = (sentToken, emailActionId) => {
+    return EmailToken.findOne({
+        token: sentToken,
+        expiryDate: { $gt: Date.now() },
+        emailActionId
+    }).populate('userId');
+}
+
+module.exports = { createEmailToken, findEmailToken }
