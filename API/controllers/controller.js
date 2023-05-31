@@ -1,9 +1,12 @@
-const { signupUser } = require('./signupcontroller.js');
+const { signupUser } = require('./signupController.js');
 const { fetchCollegeList } = require('./collegeInfoController.js');
 const { login } = require('./loginController.js');
+const { resetPassword, updatePassword } = require('./resetPasswordController.js');
 
 module.exports = {
     signupUser,
     fetchCollegeList,
-    login
+    login,
+    resetPassword,
+    updatePassword
 }
