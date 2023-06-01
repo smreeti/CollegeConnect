@@ -1,3 +1,62 @@
-.required{
-    color: red;
+body {
+    font-family: cursive !important;
+    background-color: #4FBFB0 !important;
+    margin: 0;
 }
+
+#particles-js {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #05345B;
+    z-index: -1;
+}
+
+.signup-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-items: center;
+    margin: 0 auto;
+    border-radius: 5px;
+    margin-top: 90px;
+    box-sizing: border-box;
+}
+
+.w-100{
+    height: 40px;
+    border-radius: 10px;
+    padding-left: 15px;
+}
+
+#particles-js {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #05345B;
+    z-index: -1;
+}
+
+
+.signup-submit-button{
+    border: none;
+    cursor: pointer;
+    background-color: black; 
+    color: white;
+}
+
+.signup-submit-button:hover{
+    background-color: white;
+    border: 1px solid black;
+    padding: 10px;
+}
+
+.logo-section {
+    text-align: center;
+}
+
+.logo-section img {
+    width: 100%;
+    height: 100%;
+}
+

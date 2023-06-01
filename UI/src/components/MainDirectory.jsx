@@ -12,7 +12,7 @@ export default class MainDirectory extends React.Component {
     render() {
         return (
             <main>
-                <LoginComponent />
+                {/* <LoginComponent /> */}
                 <SignupComponent />
             </main>
         );

@@ -7,10 +7,10 @@ import AppRoutes from './AppRoutes.jsx';
 export default function Page() {
     return (
         <div>
-            <Header />
-            <Navbar />
+            {/* <Header />
+            <Navbar /> */}
             <AppRoutes />
-            <Footer />
+            {/* <Footer /> */}
         </div>
     );
 }
