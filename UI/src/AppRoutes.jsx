@@ -3,6 +3,9 @@ import { Routes, Route, useNavigate } from 'react-router-dom';
 import MainDirectory from './components/MainDirectory.jsx';
 import NotFound from './NotFound.jsx';
 import HomeComponent from './components/HomeComponent.jsx';
+import SignupComponent from './components/SignupComponent.jsx';
+
+
 
 export default function AppRoutes() {
   const navigate = useNavigate();
@@ -21,6 +24,7 @@ export default function AppRoutes() {
       <Route path="/" element={<MainDirectory />} />
 
       <Route path="/home" element={<HomeComponent />} />
+      <Route path="/signup" element={<SignupComponent />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

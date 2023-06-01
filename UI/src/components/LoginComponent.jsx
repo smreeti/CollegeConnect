@@ -4,6 +4,10 @@ import TextInput from './InputComponents/TextInput.jsx';
 import { handleLoginFormValidation } from "../../utils/validation.js";
 import { API_TO_LOGIN_USER } from "../../utils/APIRequestUrl.js";
 import fetchData from "../../utils/FetchAPI.js";
+// import { Link } from 'react-router-dom';
+
+
+
 
 const LoginComponent = () => {
     const navigate = useNavigate();
@@ -11,9 +15,11 @@ const LoginComponent = () => {
     const [user, setUser] = useState({});
     const [errors, setErrors] = useState([]);
     const [serverErrors, setServerErrors] = useState([]);
+    const labelTitle="Input"
 
     const handleOnChange = (event) => {
         const { name, value } = event.target;
+       
 
         setUser((prevUser) => ({
             ...prevUser,
@@ -22,6 +28,8 @@ const LoginComponent = () => {
     };
 
     const login = async (e) => {
+
+      console.log("Log");
         e.preventDefault();
 
         const form = document.forms.loginform;
@@ -63,47 +71,101 @@ const LoginComponent = () => {
     };
 
     return (
-        <main>
-            <h1>Login</h1>
+        
+      <section>
+         <p>{serverErrors}</p>
+         <div className="main-form-container">
+      <div id="form_section" className="form-container">
+        <div className="login-form form-wraper">
+          <form name="loginform" method="POST" onSubmit={login}>
+            <div>
+              <div className="form-title">
+              <img src="../../public/assets/logotestnew" /> 
+              </div>
 
-            <p>{serverErrors}</p>
-            <form name="loginform" method="POST" onSubmit={login}>
-                <div>
-                    <label htmlFor="username">
-                        <b>Mobile number, username, or email address</b>
-                    </label>
-                    <span className="required">*</span>
-
-                    <TextInput
-                        id="username"
-                        name="username"
-                        placeholder="Enter mobile number, username, or email address"
-                        value={user.username || ""}
-                        onChange={handleOnChange}
-                        key="UsernameInput"
-                    />
-                    <p className="required">{errors["username"]}</p>
-
-                    <label htmlFor="password">
-                        <b>Password</b>
-                    </label>
-                    <span className="required">*</span>
-                    <TextInput
-                        id="password"
-                        name="password"
-                        placeholder="Enter password"
-                        value={user.password || ""}
-                        onChange={handleOnChange}
-                        key="PasswordInput"
-                    />
-                    <p className="required">{errors["password"]}</p>
-                </div>
-
-                <div>
-                    <button>Login</button>
-                </div>
-            </form>
-        </main>
+              <div className="input-group">
+                <TextInput
+                  id="username"
+                  name="username"
+                  placeholder="Enter mobile no., username, or email "
+                  value={user.username || ''}
+                  onChange={handleOnChange}
+                  key="UsernameInput"
+                  className="inpt_field"
+                />
+                <p className="required errormsg">{errors['username']}</p>
+              </div>
+              <div className="input-group">
+                <TextInput
+                  id="password"
+                  name="password"
+                  placeholder="Enter password"
+                  value={user.password || ''}
+                  onChange={handleOnChange}
+                  key="PasswordInput"
+                  className="inpt_field"
+                />
+                <p className="required errormsg">{errors['password']}</p>
+              </div>
+              <div className="forget-password">
+                <a href="">FORGOT PASSWORD ?</a>
+              </div>
+              <div className="action-button">
+                <button type="submit">Login</button>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div className="signUp-form form-wraper">
+          <div>
+            <div className="form-title">
+              <h2>Sign Up</h2>
+            </div>
+            <div className="input-group">
+              <div className="box">
+                <span>
+                  <input placeholder="Full Name" className="myInput" type="text" />
+                </span>
+              </div>
+            </div>
+            <div className="input-group">
+              <div className="box">
+                <span>
+                  <input placeholder="Email" className="myInput" type="text" />
+                </span>
+              </div>
+            </div>
+            <div className="input-group">
+              <div className="box">
+                <span>
+                  <input placeholder="Mobile No." className="myInput" type="number" />
+                </span>
+              </div>
+            </div>
+            <div style={{ marginBottom: '0px' }} className="input-group">
+              <div className="box">
+                <span>
+                  <input placeholder="Password" className="myInput" type="password" />
+                </span>
+              </div>
+            </div>
+            <div className="action-button">
+              <button>Sign Up</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="multiple-btn" className="bg-btn-container">
+        <div className="action-button">
+        <p className="noacc">Don't have an account?</p>
+        </div>
+        <div className="action-button">
+        <button onClick={() => navigate('/signup')} >Sign Up</button>
+        </div>
+      </div>
+    </div>
+    </section>
+     
     );
 };
 
