@@ -2,19 +2,20 @@ import React from 'react';
 
 export default function Header() {
     return (
-        <header className="header">
-        <div className="container">
-          <div className="logo"> Logo</div>
-          <nav className="navigation">
-            <ul className="nav-links">
-              <li><a href="#">Home</a></li>
-              <li><a href="#">Colleges</a></li>
-              <li><a href="#">Categories</a></li>
-              <li><a href="#">About Us</a></li>
-              <li><a href="#">Contact</a></li>
-            </ul>
-          </nav>
+          <section className="top-nav">
+        <div><a className="logonew" href="index.html" />
+       <img src='../../assets/logotestheader.png' />
         </div>
-      </header>
+    
+        <label className="menu-button-container" htmlFor="menu-toggle">
+          <div className="menu-button"></div>
+        </label>
+        <ul className="menu">
+          <li><a href="index.html">HOME</a></li>
+     
+          <li>CREATE ACCOUNT</li>
+      
+        </ul>
+      </section>
     )
 }
