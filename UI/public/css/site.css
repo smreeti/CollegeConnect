@@ -57,6 +57,7 @@ body {
 
 .banimg{
   height: 100%;
+  max-width: 100%;
 }
 
 .user-details h2 {
@@ -126,6 +127,7 @@ height: 300px;
 .login-logo{
   width: 150px;
   margin-top: 20px;
+  max-width: 100%;
 }
 
 .bigimg{
@@ -412,6 +414,14 @@ footer #footer {
     height: 38vh;
   }
 
+  .banimg{
+    height: 100%;
+    max-width: 100%;
+  }
+  .login-logo{
+    max-width: 100%;
+  }
+
   #login-container{
     height: 100vh;
     
@@ -438,6 +448,11 @@ footer #footer {
 
 @media screen and (min-width:1024px) and (max-width:1080px){
 
+  .banimg{
+    height: 100%;
+    max-width: 100%;
+  }
+  
   #login-container{
     height: 530px;
     display: flex;
@@ -459,6 +474,10 @@ footer #footer {
     height: 84%;
     margin-bottom: 20px;
   
+}
+
+.login-logo{
+  max-width: 100%;
 }
 }
 

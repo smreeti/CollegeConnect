@@ -111,7 +111,7 @@ const LoginComponent = () => {
                     Keep me signed in
                   </label><br /> */}
                   <button className="btn btn-primary btnblack" type="submit">Login</button>
-                  <h6 className="color">New User? <a href="google.com">Create an account</a></h6>
+                  <h6 className="color">New User? <a href="/signup">Create an account</a></h6>
                 </form>
               </div>
             </div>
