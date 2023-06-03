@@ -1,10 +1,10 @@
 body {
   font-family: cursive !important;
-  background: linear-gradient(to right, #2398bb, #90EE90) ;
+  background: linear-gradient(to right, #2398bb, #90EE90);
   margin: 0 auto;
- 
+
   height: 100%;
- }
+}
 
 #particles-js {
   position: absolute;
@@ -18,7 +18,7 @@ body {
 #login-container {
   display: flex;
   height: 570px;
-  
+
   justify-content: center;
   align-items: center;
 
@@ -40,7 +40,7 @@ body {
 .login-form {
   width: 50%;
   display: contents;
-  
+
   padding: 20px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
@@ -48,31 +48,27 @@ body {
 .user-details {
   margin-bottom: 20px;
   text-align: center;
- 
+
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
-.banimg{
+.banimg {
   height: 100%;
 }
 
 .user-details h2 {
   color: #05345B;
   margin-top: 20px;
-
-
-
 }
 
 /* .user-details h6 {
   /* color: #05345B;
   margin-bottom: 50px;
-  margin-top: 30px; */*/
-
-.user-details input[type="text"],
+  margin-top: 30px; */
+*/ .user-details input[type="text"],
 .user-details input[type="password"] {
   width: 350px;
   padding: 10px;
@@ -89,7 +85,7 @@ body {
   margin-bottom: 20px;
 }
 
-.errormsg{
+.errormsg {
   color: red;
   font-size: 13px;
   margin: 5px 0;
@@ -111,11 +107,11 @@ button:hover {
 
 
 
-.fields{
-height: 65px;
-border-radius: 50px;
-text-align: center;
-border: none;
+.fields {
+  height: 65px;
+  border-radius: 50px;
+  text-align: center;
+  border: none;
 
 }
 
@@ -123,28 +119,27 @@ border: none;
 height: 300px;
 } */
 
-.login-logo{
+.login-logo {
   width: 150px;
   margin-top: 20px;
 }
 
-.bigimg{
+.bigimg {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.logostyle{
+.logostyle {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   background: white;
-
- 
+  padding-right: 0px !important;
 }
 
-.btnblack{
+.btnblack {
   background-color: black !important;
   color: white !important;
   padding-top: 10px !important;
@@ -152,20 +147,20 @@ height: 300px;
   margin-top: 20px;
 }
 
-.pad{
+.pad {
   padding-top: 10px;
-  width: 300px;
+  width: 400px;
 
 }
 
-.forget{
-  font-size: 12px;
+.forget {
+  font-size: 14px;
   color: black;
   text-align: center;
-  
+
 }
 
-.formheight{
+.formheight {
   display: block;
   width: 100%;
   padding: 0.375rem 0.75rem;
@@ -181,7 +176,7 @@ height: 300px;
   -moz-appearance: none;
   appearance: none;
   border-radius: 0.375rem;
-  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
 
 }
 
@@ -189,7 +184,7 @@ height: 300px;
 
 
 
-.row>*{
+.row>* {
   padding-left: 0px !important;
 }
 
@@ -197,14 +192,14 @@ height: 300px;
   margin-top: 20px;
 }
 
-.color{
+.color {
   margin-top: 20px;
 }
 
 
 /* Footer */
 
-footer{
+footer {
   height: 150px !important;
 }
 
@@ -259,10 +254,10 @@ h2 {
   width: 200px;
   max-width: 200px;
   vertical-align: middle;
-  
+
 }
 
-.logonew{
+.logonew {
   color: #ffffff;
   font-size: 100%;
   font-weight: bold;
@@ -289,7 +284,7 @@ h2 {
   padding: 0;
 }
 
-.menu > li {
+.menu>li {
   margin: 0 1rem;
   overflow: hidden;
   font-size: 15px;
@@ -314,7 +309,7 @@ footer {
   background: #e6e7e8;
   color: #58595b;
   margin-top: 35px;
- height: 70px !important;
+  height: 70px !important;
   padding: 10px;
   position: fixed;
   left: 0;
@@ -341,7 +336,7 @@ footer li {
   min-height: 32px;
 }
 
-footer > p {
+footer>p {
   text-align: center;
   padding: 30px 0;
 }
@@ -388,15 +383,13 @@ footer #footer {
   gap: 10px;
 }
 
-
-
-
-
-
+.errpad1 {
+  text-align: left;
+}
 
 @media screen and (min-width:370px) and (max-width:1000px) {
 
-  #resrevtest{
+  #resrevtest {
     display: flex !important;
     flex-direction: column-reverse !important;
     display: flex !important;
@@ -405,21 +398,20 @@ footer #footer {
     align-items: center;
     height: 100%;
     margin-bottom: 100px;
-   
   }
 
-  .logostyle{
+  .logostyle {
     height: 38vh;
   }
 
-  #login-container{
+  #login-container {
     height: 100vh;
-    
+
     display: flex;
     /* justify-content: unset; */
     align-items: center;
-    
-   
+
+
     max-width: 95% !important;
 
   }
@@ -430,40 +422,36 @@ footer #footer {
 
   }
 
-  .container, .container-md, .container-sm {
+  .container,
+  .container-md,
+  .container-sm {
     max-width: 80%;
 
   }
 }
 
-@media screen and (min-width:1024px) and (max-width:1080px){
+@media screen and (min-width:1024px) and (max-width:1080px) {
 
-  #login-container{
+  #login-container {
     height: 530px;
     display: flex;
     /* justify-content: unset; */
-    align-items: center;    
-   
+    align-items: center;
+
     max-width: 95% !important;
   }
 
-  .logostyle{
+  .logostyle {
     height: 70vh;
   }
 
-  #reservetest{
+  #reservetest {
     min-height: 450px;
   }
 
   .action-section img {
     height: 84%;
     margin-bottom: 20px;
-  
+
+  }
 }
-}
-
-
-
-
-
-
