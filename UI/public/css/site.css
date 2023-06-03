@@ -28,7 +28,7 @@ body {
   /* border: 2px solid #ccc; */
   border-radius: 5px;
 
-  width: 70%;
+  width: 90%;
 
 
 }
@@ -403,14 +403,24 @@ footer #footer {
     flex-direction: column-reverse !important;
     justify-content: center;
     align-items: center;
+    height: 100%;
+    margin-bottom: 100px;
+   
+  }
+
+  .logostyle{
+    height: 38vh;
   }
 
   #login-container{
-    height: 95vh;
+    height: 100vh;
+    
     display: flex;
     /* justify-content: unset; */
     align-items: center;
-    width: 100;
+    
+   
+    max-width: 95% !important;
 
   }
 
@@ -424,6 +434,24 @@ footer #footer {
     max-width: 80%;
 
   }
+}
+
+@media screen and (min-width:1024px) and (max-width:1200px){
+
+  #login-container{
+    height: 100%;
+    display: flex;
+    /* justify-content: unset; */
+    align-items: center;
+    
+   
+    max-width: 95% !important;
+  }
+
+  .logostyle{
+    height: 70vh;
+  }
+  
 }
 
 
