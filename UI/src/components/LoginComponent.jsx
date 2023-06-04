@@ -72,7 +72,7 @@ const LoginComponent = () => {
             <h2 className="color logfix">Login</h2>
           </div>
           <form
-            className="formset"
+            className="formset px-sm-3"
             id="form1"
             name="loginform"
             method="POST"
