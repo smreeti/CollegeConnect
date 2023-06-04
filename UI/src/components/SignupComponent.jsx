@@ -125,13 +125,12 @@ class SignupComponent extends React.Component {
 
         return (
             <>
-                {/* <div id="particles-js"></div> */}
-
-                <section className="signup-container px-md-5 pt-md-3 mt-md-5">
+                <section className="signup-container px-md-5 pt-md-4">
                     <div className="row bg-white w-75">
-                        <div className="col-md-6 col-12 text-center p-3 p-md-5">
-                            <h2>Create An Account</h2>
-                            <p className="pb-2">Already a user? <Link to="/login">Sign In</Link></p>
+                        <div className="col-lg-6 col-12 text-center p-5 px-md-5 py-md-4">
+                            <img className="login-logo" src="../../assets/logotestnew.png" />
+                            <h2 className="mt-3">Create An Account</h2>
+                            <p className="fs-6">Already a user? <Link to="/login">Sign In</Link></p>
                             <form name="signupform" method="POST" onSubmit={this.signup}>
                                 {this.state?.serverErrors && (
                                     <ul className="error-list text-danger">
@@ -216,12 +215,12 @@ class SignupComponent extends React.Component {
                                     </select>
                                 </div>
 
-                                <div className="mt-4">
+                                <div className="mt-3">
                                     <button className="signup-submit-button w-100">Sign Up</button>
                                 </div>
                             </form>
                         </div>
-                        <div className="col-12 col-md-6 image-section px-0 order-first order-md-2">
+                        <div className="col-12 col-md-6 image-section px-0 d-none d-lg-block">
                             <img src="5a051759006413a0fc9ea48a50df14c3.jpg" alt="Image Placeholder" />
                         </div>
                     </div>

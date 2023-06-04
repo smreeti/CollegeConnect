@@ -66,10 +66,7 @@ const validateUser = async (req) => {
     else if (!validateUsername(username))
         errors.push("Username can only contain letters, numbers, and underscores.");
 
-    if (!validateField(password))
-        errors.push("Please enter password");
-    else if (!validatePassword(password))
-        errors.push("Password should be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, and one digit.");
+    checkPasswordValidity(password, errors);
 
     const existingUser = await User.findOne({
         $or: [
@@ -92,6 +89,12 @@ const validateLoginForm = async (username, password) => {
     if (!username)
         errors.push("Mobile number, username or email address is required.");
 
+    checkPasswordValidity(password, errors);
+
+    return errors;
+}
+
+const checkPasswordValidity = (password, errors) => {
     if (!password)
         errors.push("Password is required.");
     else if (!validatePassword(password))
@@ -103,5 +106,6 @@ const validateLoginForm = async (username, password) => {
 module.exports = {
     validateField,
     validateUser,
-    validateLoginForm
+    validateLoginForm,
+    checkPasswordValidity
 }

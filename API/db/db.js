@@ -1,36 +1,11 @@
 require("dotenv").config();
 const mongoose = require('mongoose');
-const UserType= require('../models/UserType.js');
-const CollegeInfo= require('../models/CollegeInfo.js');
-
-// Create an array of college data
-const collegeData = [
-    {
-        name: 'Conestoga College',
-        mobileNumber: '(519) 748-5220',
-        city: 'Kitchener',
-        address: '299 Doon Valley Dr',
-        postalCode: 'N2G 4M4'
-    },
-    {
-        name: 'Humber College',
-        mobileNumber: '(416) 675-3111',
-        city: 'Etobicoke',
-        address: '205 Humber College Blvd',
-        postalCode: 'M9W 5L7'
-    }
-];
-
-const userTypeData = [
-    {
-        name: "Admin",
-        code: "ADMIN"
-    },
-    {
-        name: "Regular user",
-        code: "REGULAR_USER"
-    }
-]
+const UserType = require('../models/UserType.js');
+const CollegeInfo = require('../models/CollegeInfo.js');
+const CollegeInfoData = require("../utils/preSetups/CollegeInfoData.js");
+const UserTypeData = require("../utils/preSetups/UserTypeData.js");
+const EmailAction = require("../models/EmailAction.js");
+const EmailActionData = require("../utils/preSetups/EmailActionData.js");
 
 // Function to connect to MongoDB server
 const dbConnect = async () => {
@@ -47,10 +22,18 @@ const dbConnect = async () => {
 
 // Insert data in the database when the server starts
 async function seedInitialData() {
-    await UserType.deleteMany({});
-    await CollegeInfo.deleteMany({});
-    await UserType.create(userTypeData);
-    await CollegeInfo.create(collegeData);
+    const userTypeCount = await UserType.countDocuments();
+    const collegeInfoCount = await CollegeInfo.countDocuments();
+    const emailActionCount = await EmailAction.countDocuments();
+
+    if (userTypeCount == 0)
+        await UserType.create(UserTypeData);
+
+    if (collegeInfoCount == 0)
+        await CollegeInfo.create(CollegeInfoData);
+
+    if (emailActionCount == 0)
+        await EmailAction.create(EmailActionData);
 }
 
 module.exports = { dbConnect, seedInitialData };
