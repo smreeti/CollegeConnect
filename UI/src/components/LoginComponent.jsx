@@ -22,7 +22,6 @@ const LoginComponent = () => {
   };
 
   const login = async (e) => {
-    console.log('Log');
     e.preventDefault();
 
     const form = document.forms.loginform;
@@ -43,11 +42,12 @@ const LoginComponent = () => {
     try {
       const data = await fetchData(API_TO_LOGIN_USER, 'POST', user);
 
-      console.log(data);
       if (!data.error) {
-        const { token, user } = data.body;
-        localStorage.setItem('jwt', token);
+        const { accessToken, refreshToken, user } = data.body;
+        localStorage.setItem('jwt', accessToken);
+        localStorage.setItem('refreshToken', refreshToken);
         localStorage.setItem('user', JSON.stringify(user));
+
         navigate('/home');
       } else {
         setServerErrors(data.error);
@@ -105,7 +105,7 @@ const LoginComponent = () => {
               <p className="required errormsg errpad1">{errors['password']}</p>
             </div>
 
-            <p>{serverErrors}</p>
+            <p className="required errormsg errpad1">{serverErrors}</p>
 
             <p className="color forget">Forgot Password ? </p>
             <button className="btn btn-primary btnblack" type="submit">

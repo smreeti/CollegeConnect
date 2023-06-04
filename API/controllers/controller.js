@@ -1,6 +1,6 @@
 const { signupUser } = require('./signupController.js');
 const { fetchCollegeList } = require('./collegeInfoController.js');
-const { login } = require('./loginController.js');
+const { login, verifyRefreshToken } = require('./loginController.js');
 const { resetPassword, updatePassword } = require('./resetPasswordController.js');
 
 module.exports = {
@@ -8,5 +8,6 @@ module.exports = {
     fetchCollegeList,
     login,
     resetPassword,
-    updatePassword
+    updatePassword,
+    verifyRefreshToken
 }
