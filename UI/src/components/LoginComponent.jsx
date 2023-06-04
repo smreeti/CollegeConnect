@@ -67,7 +67,6 @@ const LoginComponent = () => {
 
   return (
     <>
-      <p>{serverErrors}</p>
       <div id="login-container" className="container">
         <div id='resrevtest' className="row  ">
           <div className="col-lg-6 logostyle">
@@ -99,6 +98,9 @@ const LoginComponent = () => {
                       className=" formheight formmar" />
                     <p className="required errormsg errpad1">{errors['password']}</p>
                   </div>
+
+                  <p>{serverErrors}</p>
+
                   <p className="color forget">Forgot Password ? </p>
                   {/* <label className="signin">
                     <input type="checkbox" name="keep-signed-in" />
