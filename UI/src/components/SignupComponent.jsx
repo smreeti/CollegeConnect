@@ -127,9 +127,9 @@ class SignupComponent extends React.Component {
             <>
                 {/* <div id="particles-js"></div> */}
 
-                <section className="signup-container">
-                    <div className="row bg-white p-5">
-                        <div className="col-md-6 col-12">
+                <section className="signup-container px-md-5 pt-md-3 mt-md-5">
+                    <div className="row bg-white w-75">
+                        <div className="col-md-6 col-12 text-center p-3 p-md-5">
                             <h2>Create An Account</h2>
                             <p className="pb-2">Already a user? <Link to="/login">Sign In</Link></p>
                             <form name="signupform" method="POST" onSubmit={this.signup}>
@@ -142,33 +142,25 @@ class SignupComponent extends React.Component {
                                 )}
 
                                 <div>
-                                    <div className="row d-flex">
-                                        <div className="col">
-                                            <div>
-                                                <TextInput
-                                                    id="firstName"
-                                                    name="firstName"
-                                                    placeholder="First Name"
-                                                    value={firstName}
-                                                    onChange={this.handleOnChange}
-                                                    key="FirstNameInput"
-                                                    className="w-100"
-                                                />
-                                                <p className="text-danger">{this.state?.errors["firstName"]}</p>
-                                            </div>
-                                        </div>
-                                        <div className="col">
-                                            <TextInput
-                                                id="lastName"
-                                                name="lastName"
-                                                placeholder="Last Name"
-                                                value={lastName}
-                                                onChange={this.handleOnChange}
-                                                key="LastNameInput"
-                                                className="w-100" />
-                                            <p className="text-danger">{this.state?.errors["lastName"]}</p>
-                                        </div>
-                                    </div>
+                                    <TextInput
+                                        id="firstName"
+                                        name="firstName"
+                                        placeholder="First Name"
+                                        value={firstName}
+                                        onChange={this.handleOnChange}
+                                        key="FirstNameInput"
+                                        className="w-100"
+                                    />
+                                    <p className="text-danger">{this.state?.errors["firstName"]}</p>
+                                    <TextInput
+                                        id="lastName"
+                                        name="lastName"
+                                        placeholder="Last Name"
+                                        value={lastName}
+                                        onChange={this.handleOnChange}
+                                        key="LastNameInput"
+                                        className="w-100" />
+                                    <p className="text-danger">{this.state?.errors["lastName"]}</p>
                                     <TextInput
                                         id="email"
                                         name="email"
@@ -229,8 +221,8 @@ class SignupComponent extends React.Component {
                                 </div>
                             </form>
                         </div>
-                        <div className="col-12 col-md-6 logo-section">
-                            <img src="f78eccbd65dd5451e8809434a4f881b7.png" alt="Image Placeholder" />
+                        <div className="col-12 col-md-6 image-section px-0 order-first order-md-2">
+                            <img src="5a051759006413a0fc9ea48a50df14c3.jpg" alt="Image Placeholder" />
                         </div>
                     </div>
                 </section>
