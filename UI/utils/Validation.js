@@ -4,7 +4,7 @@
 const handleFormValidation = async (user) => {
     let formErrors = {};
 
-    const { firstName, lastName, email, mobileNumber, username, password, collegeInfo } = user;
+    const { firstName, lastName, email, mobileNumber, username, password, collegeInfoId } = user;
 
     if (!firstName)
         formErrors["firstName"] = "First name is required.";
@@ -36,6 +36,9 @@ const handleFormValidation = async (user) => {
     else if (!validatePassword(password))
         formErrors["password"] =
             "Password should be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, and one digit.";
+
+    if (!collegeInfoId)
+        formErrors["selectedCollege"] = "College is required.";
 
     return formErrors;
 }

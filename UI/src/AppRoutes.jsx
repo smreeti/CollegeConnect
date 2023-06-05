@@ -14,8 +14,13 @@ export default function AppRoutes() {
         const accessToken = localStorage.getItem('jwt');
         const refreshToken = localStorage.getItem('refreshToken');
 
+        const currentPath = window.location.pathname;
+
+        // Exclude authentication check for login and signup routes
+        if (currentPath === '/' || currentPath === '/signup')
+          return;
+
         if (!accessToken || !refreshToken) {
-          console.log("here");
           navigate('/');
           return;
         }

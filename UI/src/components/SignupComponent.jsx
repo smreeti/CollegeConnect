@@ -130,7 +130,7 @@ class SignupComponent extends React.Component {
                         <div className="col-lg-6 col-12 text-center p-5 px-md-5 py-md-4">
                             <img className="login-logo" src="../../assets/logotestnew.png" />
                             <h2 className="mt-3">Create An Account</h2>
-                            <p className="fs-6">Already a user? <Link to="/login">Sign In</Link></p>
+                            <p className="fs-6">Already a user? <Link to="/">Sign In</Link></p>
                             <form name="signupform" method="POST" onSubmit={this.signup}>
                                 {this.state?.serverErrors && (
                                     <ul className="error-list text-danger">
@@ -213,6 +213,8 @@ class SignupComponent extends React.Component {
                                     >
                                         {selectCollegeOptions}
                                     </select>
+                                    <p className="text-danger">{this.state?.errors["selectedCollege"]}</p>
+
                                 </div>
 
                                 <div className="mt-3">
