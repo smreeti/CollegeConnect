@@ -15,6 +15,7 @@ export default function AppRoutes() {
         const refreshToken = localStorage.getItem('refreshToken');
 
         if (!accessToken || !refreshToken) {
+          console.log("here");
           navigate('/');
           return;
         }
