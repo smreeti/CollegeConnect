@@ -2,6 +2,7 @@ body {
   font-family: cursive !important;
   background: linear-gradient(to right, #2398bb, #90ee90);
   margin: 0 auto;
+  overflow: hidden;
 }
 
 #particles-js {
@@ -55,8 +56,8 @@ body {
   margin-top: 20px;
 }
 
-.user-details input[type='text'],
-.user-details input[type='password'] {
+.user-details input[type="text"],
+.user-details input[type="password"] {
   max-width: 400px;
   padding: 10px;
   margin-bottom: 10px;
@@ -160,7 +161,7 @@ button:hover {
   height: 45px;
 }
 
-.row>* {
+.row > * {
   padding-left: 0px !important;
 }
 
@@ -196,10 +197,10 @@ body {
   font-size: clamp(1rem, 1.1rem, 1.2rem) !important;
 }
 
-img {
+/* img {
   max-width: 90px;
   height: auto;
-}
+} */
 
 a {
   text-decoration: none;
@@ -247,7 +248,7 @@ h2 {
   padding: 0;
 }
 
-.menu>li {
+.menu > li {
   margin: 0 1rem;
   overflow: hidden;
   font-size: 15px;
@@ -264,9 +265,9 @@ h2 {
 footer {
   background: #e6e7e8;
   color: #58595b;
-  margin-top: 35px;
-  height: 70px !important;
-  padding: 10px;
+  /* margin-top: 35px; */
+  height: 50px !important;
+  /* padding: 10px; */
   position: fixed;
   left: 0;
   bottom: 0;
@@ -291,7 +292,7 @@ footer li {
   min-height: 32px;
 }
 
-footer>p {
+footer > p {
   text-align: center;
   padding: 30px 0;
 }
@@ -319,6 +320,8 @@ footer a {
 .social_media div img {
   width: 40px;
   padding: 5px;
+  max-width: 90px;
+  height: auto;
 }
 
 footer hr {
@@ -402,6 +405,8 @@ footer #footer {
   .action-section img {
     height: 84%;
     margin-bottom: 20px;
+    max-width: 90px;
+    height: auto;
   }
 }
 
@@ -436,7 +441,7 @@ footer #footer {
   align-items: center;
 }
 
-#login-image>img {
+#login-image > img {
   display: none;
 }
 
@@ -456,11 +461,44 @@ footer #footer {
     grid-template-rows: auto;
   }
 
-  #login-image>img {
+  #login-image > img {
     width: 100%;
     height: 100%;
     max-width: 100%;
     object-fit: cover;
     display: block;
   }
+}
+
+.signup-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-items: center;
+  margin: 0 auto;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.w-100 {
+  height: 40px;
+  border-radius: 10px;
+  padding-left: 15px;
+}
+
+.signup-submit-button {
+  border: none;
+  cursor: pointer;
+  background-color: black;
+  color: white;
+}
+
+.logo-section {
+  text-align: center;
+}
+
+.image-section img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }

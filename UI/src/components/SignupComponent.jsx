@@ -1,10 +1,12 @@
 import React from "react";
+import Button from "react-bootstrap/Button";
 import TextInput from './InputComponents/TextInput.jsx';
 import NumInput from './InputComponents/NumInput.jsx';
 import UserType from "../../utils/UserTypeConstants.js";
-import {handleFormValidation} from "../../utils/validation.js";
+import { handleFormValidation } from "../../utils/validation.js";
 import { API_TO_FETCH_COLLEGE_INFO, API_TO_SIGNUP_USER } from "../../utils/APIRequestUrl.js";
 import fetchData from "../../utils/FetchAPI.js";
+import { Link } from "react-router-dom";
 
 class SignupComponent extends React.Component {
 
@@ -58,7 +60,7 @@ class SignupComponent extends React.Component {
 
         this.setServerErrors([]);
         let formErrors = await handleFormValidation(user);
-        
+
         if (Object.keys(formErrors).length > 0) {
             this.setFormErrors(formErrors);
         } else {
@@ -123,107 +125,105 @@ class SignupComponent extends React.Component {
 
         return (
             <>
-                <section>
-                    <h1>Sign up</h1>
-                    <form name="signupform" method="POST" onSubmit={this.signup}>
-                        {this.state?.serverErrors && (
-                            <ul className="error-list">
-                                {this.state?.serverErrors.map((error, index) => (
-                                    <li key={index}>{error}</li>
-                                ))}
-                            </ul>
-                        )}
+                <section className="signup-container px-md-5 pt-md-4">
+                    <div className="row bg-white w-75">
+                        <div className="col-lg-6 col-12 text-center p-5 px-md-5 py-md-4">
+                            <img className="login-logo" src="../../assets/logotestnew.png" />
+                            <h2 className="mt-3">Create An Account</h2>
+                            <p className="fs-6">Already a user? <Link to="/login">Sign In</Link></p>
+                            <form name="signupform" method="POST" onSubmit={this.signup}>
+                                {this.state?.serverErrors && (
+                                    <ul className="error-list text-danger">
+                                        {this.state?.serverErrors.map((error, index) => (
+                                            <li key={index}>{error}</li>
+                                        ))}
+                                    </ul>
+                                )}
 
-                        <div>
-                            <label htmlFor="firstName"><b>First Name</b></label>
-                            <span className="required">*</span>
-                            <TextInput
-                                id="firstName"
-                                name="firstName"
-                                placeholder="Enter First Name"
-                                value={firstName}
-                                onChange={this.handleOnChange}
-                                key="FirstNameInput"
-                            />
-                            <p className="required">{this.state?.errors["firstName"]}</p>
+                                <div>
+                                    <TextInput
+                                        id="firstName"
+                                        name="firstName"
+                                        placeholder="First Name"
+                                        value={firstName}
+                                        onChange={this.handleOnChange}
+                                        key="FirstNameInput"
+                                        className="w-100"
+                                    />
+                                    <p className="text-danger">{this.state?.errors["firstName"]}</p>
+                                    <TextInput
+                                        id="lastName"
+                                        name="lastName"
+                                        placeholder="Last Name"
+                                        value={lastName}
+                                        onChange={this.handleOnChange}
+                                        key="LastNameInput"
+                                        className="w-100" />
+                                    <p className="text-danger">{this.state?.errors["lastName"]}</p>
+                                    <TextInput
+                                        id="email"
+                                        name="email"
+                                        placeholder="Email"
+                                        value={email}
+                                        onChange={this.handleOnChange}
+                                        key="EmailInput"
+                                        className="w-100"
+                                    />
+                                    <p className="text-danger">{this.state?.errors["email"]}</p>
 
-                            <label htmlFor="lastName"><b>Last Name</b></label>
-                            <span className="required">*</span>
-                            <TextInput
-                                id="lastName"
-                                name="lastName"
-                                placeholder="Enter Last Name"
-                                value={lastName}
-                                onChange={this.handleOnChange}
-                                key="LastNameInput"
-                            />
-                            <p className="required">{this.state?.errors["lastName"]}</p>
+                                    <NumInput
+                                        id="mobileNumber"
+                                        name="mobileNumber"
+                                        placeholder="Phone Number"
+                                        value={mobileNumber}
+                                        onChange={this.handleOnChange}
+                                        key="MobileNumberInput"
+                                        className="w-100"
+                                    />
+                                    <p className="text-danger">{this.state?.errors["mobileNumber"]}</p>
 
-                            <label htmlFor="email"><b>Email</b></label>
-                            <span className="required">*</span>
-                            <TextInput
-                                id="email"
-                                name="email"
-                                placeholder="Enter Email"
-                                value={email}
-                                onChange={this.handleOnChange}
-                                key="EmailInput"
-                            />
-                            <p className="required">{this.state?.errors["email"]}</p>
+                                    <TextInput
+                                        id="username"
+                                        name="username"
+                                        placeholder="Username"
+                                        value={username}
+                                        onChange={this.handleOnChange}
+                                        key="UsernameInput"
+                                        className="w-100"
+                                    />
+                                    <p className="text-danger">{this.state?.errors["username"]}</p>
 
-                            <label htmlFor="mobileNumber"><b>Mobile Number</b></label>
-                            <span className="required">*</span>
-                            <NumInput
-                                id="mobileNumber"
-                                name="mobileNumber"
-                                placeholder="Enter Mobile Number"
-                                value={mobileNumber}
-                                onChange={this.handleOnChange}
-                                key="MobileNumberInput"
-                            />
-                            <p className="required">{this.state?.errors["mobileNumber"]}</p>
+                                    <TextInput
+                                        id="password"
+                                        name="password"
+                                        placeholder="Password"
+                                        value={password}
+                                        onChange={this.handleOnChange}
+                                        key="PasswordInput"
+                                        className="w-100"
+                                    />
+                                    <p className="text-danger">{this.state?.errors["password"]}</p>
 
-                            <label htmlFor="username"><b>Username</b></label>
-                            <span className="required">*</span>
-                            <TextInput
-                                id="username"
-                                name="username"
-                                placeholder="Enter username"
-                                value={username}
-                                onChange={this.handleOnChange}
-                                key="UsernameInput"
-                            />
-                            <p className="required">{this.state?.errors["username"]}</p>
+                                    <select
+                                        value={selectedCollege}
+                                        name="selectedCollege"
+                                        id="selectedCollege"
+                                        onChange={this.handleOnChange}
+                                        className="w-100"
+                                    >
+                                        {selectCollegeOptions}
+                                    </select>
+                                </div>
 
-                            <label htmlFor="password"><b>Password</b></label>
-                            <span className="required">*</span>
-                            <TextInput
-                                id="password"
-                                name="password"
-                                placeholder="Enter password"
-                                value={password}
-                                onChange={this.handleOnChange}
-                                key="PasswordInput"
-                            />
-                            <p className="required">{this.state?.errors["password"]}</p>
-
-                            <label htmlFor="college"><b>College</b></label>
-                            <span className="required">*</span>
-
-                            <select
-                                value={selectedCollege}
-                                name="selectedCollege"
-                                id="selectedCollege"
-                                onChange={this.handleOnChange}
-                            >
-                                {selectCollegeOptions}
-                            </select>
+                                <div className="mt-3">
+                                    <button className="signup-submit-button w-100">Sign Up</button>
+                                </div>
+                            </form>
                         </div>
-
-                        <div>
-                            <button>Sign up</button>
+                        <div className="col-12 col-md-6 image-section px-0 d-none d-lg-block">
+                            <img src="5a051759006413a0fc9ea48a50df14c3.jpg" alt="Image Placeholder" />
                         </div>
-                    </form>
+                    </div>
                 </section>
             </>
         )

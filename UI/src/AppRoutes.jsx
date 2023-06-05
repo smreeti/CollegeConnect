@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import { Routes, Route, useNavigate, Link } from 'react-router-dom';
 import MainDirectory from './components/MainDirectory.jsx';
 import NotFound from './NotFound.jsx';
 import HomeComponent from './components/HomeComponent.jsx';
