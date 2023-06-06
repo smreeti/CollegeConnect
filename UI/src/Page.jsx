@@ -4,7 +4,7 @@ import AppRoutes from './AppRoutes.jsx';
 
 export default function Page() {
     return (
-        <div>
+        <div className='scroll'>
             <AppRoutes />
             <Footer />
         </div>

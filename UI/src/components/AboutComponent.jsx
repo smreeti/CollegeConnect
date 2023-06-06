@@ -5,7 +5,7 @@ export default function About() {
   return (
     <>
       <Header />
-      <section className='scroll'>
+      <section>
         <div className="cover-image">
           <img src="../../assets/team.jpg" alt="Cover Image" />
           <div className="overlay">
