@@ -7,26 +7,26 @@ export default function Footer() {
   return (
     <footer>
       <section id="footer">
-        <div className="company">
+        <div className="company footmargin">
           <Link to="/about"> About us </Link>
         </div>
-        <div className="more_info">
-          <h1>Privacy</h1>
+        <div className="more_info footmargin">
+          <Link to ='/'>Privacy</Link>
         </div>
 
-        <div className="more_info">
-          <h1>Terms</h1>
+        <div className="more_info footmargin">
+        <Link to ='/'> Terms</Link>
         </div>
 
-        <div className="more_info">
-          <h1>Contact Us</h1>
+        <div className="more_info footmargin">
+        <Link to ='/'>  Contact Us</Link>
         </div>
 
-        <div className="more_info">
-          <h1>@copyright CollegeConnect</h1>
+        <div className="more_info footmargin">
+        <Link to ='/'>@copyright CollegeConnect</Link>
         </div>
 
-        <div className="social_media">
+        <div className="social_media footmargin">
           <FontAwesomeIcon icon={faInstagram} />
           <FontAwesomeIcon icon={faTwitter} />
           <FontAwesomeIcon icon={faFacebookF} />
