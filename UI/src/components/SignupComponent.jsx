@@ -1,5 +1,4 @@
 import React from "react";
-import Button from "react-bootstrap/Button";
 import TextInput from './InputComponents/TextInput.jsx';
 import NumInput from './InputComponents/NumInput.jsx';
 import UserType from "../../utils/UserTypeConstants.js";
@@ -65,6 +64,7 @@ class SignupComponent extends React.Component {
             this.setFormErrors(formErrors);
         } else {
             await this.signupUser(user);
+            window.location = '/';
         }
     }
 

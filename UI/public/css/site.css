@@ -255,6 +255,7 @@ h2 {
   list-style-type: none;
   margin: 0;
   padding: 0;
+  gap: 20px;
 }
 
 .menu > li {
@@ -275,7 +276,7 @@ footer {
   background: #e6e7e8;
   color: #58595b;
   /* margin-top: 35px; */
-  height: 50px !important;
+  height: 70px !important;
   /* padding: 10px; */
   position: fixed;
   left: 0;
@@ -422,7 +423,7 @@ footer #footer {
 }
 
 .main-container {
-  height: 90vh;
+  height: 93vh;
   display: flex;
   align-items: center;
   justify-content: center;
