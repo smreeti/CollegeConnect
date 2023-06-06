@@ -28,27 +28,19 @@ const UpdatePasswordComponent = () => {
         e.preventDefault();
 
         const form = document.forms.updatePasswordForm;
-        const confirmPassword = form.confirmPassword.value;
-        console.log(form.confirmPassword.value);
-
+        const password = form.confirmPassword.value;
         const user = {
             newPassword: form.password.value,
             token: id
         };
 
-        console.log("Password" + user.newPassword);
-        let formErrors = await handleUpdatePasswordValidation(user);
+        let formErrors = await handleUpdatePasswordValidation(password, user.newPassword);
 
         if (Object.keys(formErrors).length > 0) {
             setFormErrors(formErrors);
         } else {
-            if (user.newPassword == confirmPassword) {
-                console.log("Match");
-                await updatePasswordUser(user.newPassword);
-            }
-            else {
-                console.log("Match failed");
-            }
+            console.log("Match success");
+            await updatePasswordUser(user);
         }
     }
 
@@ -96,6 +88,7 @@ const UpdatePasswordComponent = () => {
                             />
                             <p className="text-danger small mb-3">{errors["password"]}</p>
 
+
                             <TextInput
                                 id="confirmPassword"
                                 name="confirmPassword"
@@ -105,6 +98,7 @@ const UpdatePasswordComponent = () => {
                                 type="password"
                                 className="w-100 small rounded p-md-2 p-1 border"
                             />
+                            <p className="text-danger small mb-3">{errors["confirmPassword"]}</p>
 
                             <p className="text-danger small mb-3">{serverErrors}</p>
 

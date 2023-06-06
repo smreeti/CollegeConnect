@@ -78,7 +78,7 @@ const ResetPasswordComponent = () => {
                             <TextInput
                                 id="username"
                                 name="username"
-                                placeholder="Email, Phone or Phone Number"
+                                placeholder="Enter mobile no., username, or email"
                                 value={user.username || ''}
                                 onChange={handleOnChange}
                                 key="UsernameInput"
