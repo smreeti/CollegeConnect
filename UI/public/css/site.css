@@ -2,15 +2,25 @@ body {
   font-family: cursive !important;
   background: linear-gradient(to right, #2398bb, #90ee90);
   margin: 0 auto;
-  overflow: hidden;
 }
 
-.headlogo{
-width: 100px;
+.headlogo {
+  width: 100px;
 }
 
-.scroll{
-  height: 100vh; /* Set the desired height for the container */
+.scroll {
+  height: 100vh;
+  /* Set the desired height for the container */
+  overflow: auto;
+}
+
+.headlogo {
+  width: 100px;
+}
+
+.scroll {
+  height: 100vh;
+  /* Set the desired height for the container */
   overflow: auto;
 }
 
@@ -40,7 +50,6 @@ width: 100px;
 .login-form {
   width: 50%;
   display: contents;
-
   padding: 20px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
@@ -48,7 +57,6 @@ width: 100px;
 .user-details {
   margin-bottom: 20px;
   text-align: center;
-
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -94,10 +102,6 @@ button {
   border: none;
   cursor: pointer;
   margin-top: 10%;
-}
-
-button:hover {
-  background-color: #033064;
 }
 
 .fields {
@@ -170,7 +174,7 @@ button:hover {
   height: 45px;
 }
 
-.row > * {
+.row>* {
   padding-left: 0px !important;
 }
 
@@ -184,7 +188,7 @@ button:hover {
 
 /* Footer */
 /* footer {
-  height: 150px !important;
+  height: 100px !important;
 } */
 
 * {
@@ -212,7 +216,7 @@ body {
 } */
 
 a {
-  text-decoration: none;
+  text-decoration: none !important;
 }
 
 li {
@@ -258,7 +262,7 @@ h2 {
   gap: 20px;
 }
 
-.menu > li {
+.menu>li {
   margin: 0 1rem;
   overflow: hidden;
   font-size: 15px;
@@ -300,7 +304,7 @@ footer li {
   min-height: 32px;
 }
 
-footer > p {
+footer>p {
   text-align: center;
   padding: 30px 0;
 }
@@ -352,7 +356,7 @@ footer #footer {
   text-align: left;
 }
 
-.footmargin{
+.footmargin {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -458,7 +462,7 @@ footer #footer {
   align-items: center;
 }
 
-#login-image > img {
+#login-image>img {
   display: none;
 }
 
@@ -478,7 +482,7 @@ footer #footer {
     grid-template-rows: auto;
   }
 
-  #login-image > img {
+  #login-image>img {
     width: 100%;
     height: 100%;
     max-width: 100%;
@@ -487,31 +491,11 @@ footer #footer {
   }
 }
 
+/* Sign Up Page */
 .signup-container {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  align-items: center;
   margin: 0 auto;
-  border-radius: 5px;
-  box-sizing: border-box;
-}
-
-.w-100 {
-  height: 40px;
-  border-radius: 10px;
-  padding-left: 15px;
-}
-
-.signup-submit-button {
-  border: none;
-  cursor: pointer;
-  background-color: black;
-  color: white;
-}
-
-.logo-section {
-  text-align: center;
+  box-sizing: border-box !important;
 }
 
 .image-section img {
@@ -578,7 +562,7 @@ footer p {
   color: #888;
 }
 
-.imgfull{
+.imgfull {
   max-width: 0px !important;
 }
 
@@ -631,16 +615,16 @@ footer p {
 }
 
 
-.container{
+.container {
   max-width: 1200px !important;
 }
 
-.midimg{
+.midimg {
   width: 90%;
   margin: 0 auto;
 }
 
 
-.footerspace{
+.footerspace {
   margin-bottom: 100px;
 }

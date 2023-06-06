@@ -5,6 +5,9 @@ import NotFound from './NotFound.jsx';
 import HomeComponent from './components/HomeComponent.jsx';
 import SignupComponent from './components/SignupComponent.jsx';
 import About from './components/AboutComponent.jsx';
+import ResetPasswordComponent from './components/ResetPassword.jsx';
+import EmailSentComponent from './components/EmailSentComponent.jsx';
+import UpdatePasswordComponent from './components/UpdatePasswordComponent.jsx';
 
 export default function AppRoutes() {
   const navigate = useNavigate();
@@ -41,6 +44,9 @@ export default function AppRoutes() {
       <Route path="/home" element={<HomeComponent />} />
       <Route path="/about" element={<About />} />
       <Route path="/signup" element={<SignupComponent />} />
+      <Route path="/resetPassword" element={<ResetPasswordComponent />} />
+      <Route path="/emailSent" element={<EmailSentComponent />} />
+      <Route path="/updatePassword/:id" element={<UpdatePasswordComponent />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
