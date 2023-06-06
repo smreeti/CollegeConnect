@@ -18,12 +18,6 @@ body {
   width: 100px;
 }
 
-.scroll {
-  height: 100vh;
-  /* Set the desired height for the container */
-  overflow: auto;
-}
-
 #particles-js {
   position: absolute;
   width: 100%;
