@@ -4,56 +4,47 @@ import { faInstagram, faTwitter, faFacebookF } from '@fortawesome/free-brands-sv
 
 export default function Footer() {
   return (
-    <footer>
-      <section id="footer">
-        <div className="need_help">
-          <h1>CollegeConnect</h1>
-        </div>
+    <h1>hello</h1>
+    // <footer>
+    //   <section id="footer">
+       
 
-        <div className="company">
-          <h1>About US</h1>
-        </div>
+    //     <div className="company">
+    //       <h1>About US</h1>
+    //     </div>
 
-        <div className="more_info">
-          <h1>Blog</h1>
-        </div>
+        
 
-        <div className="more_info">
-          <h1>Jobs</h1>
-        </div>
+       
 
-        <div className="more_info">
-          <h1>Help</h1>
-        </div>
+       
 
-        <div className="more_info">
-          <h1>API</h1>
-        </div>
+      
 
-        <div className="more_info">
-          <h1>Privacy</h1>
-        </div>
+    //     <div className="more_info">
+    //       <h1>Privacy</h1>
+    //     </div>
 
-        <div className="more_info">
-          <h1>Terms</h1>
-        </div>
+    //     <div className="more_info">
+    //       <h1>Terms</h1>
+    //     </div>
 
-        <div className="more_info">
-          <h1>Top Accounts</h1>
-        </div>
+    //     <div className="more_info">
+    //       <h1>Contact Us</h1>
+    //     </div>
 
-        <div className="more_info">
-          <h1>Contact US</h1>
-        </div>
+    //     <div className="more_info">
+    //       <h1>@copyrigh CollegeConnect</h1>
+    //     </div>
 
-        <div className="social_media">
-          <FontAwesomeIcon icon={faInstagram} />
-          <FontAwesomeIcon icon={faTwitter} />
-          <FontAwesomeIcon icon={faFacebookF} />
-        </div>
-      </section>
+    //     <div className="social_media">
+    //       <FontAwesomeIcon icon={faInstagram} />
+    //       <FontAwesomeIcon icon={faTwitter} />
+    //       <FontAwesomeIcon icon={faFacebookF} />
+    //     </div>
+    //   </section>
 
  
-    </footer>
+    // </footer>
   );
 }

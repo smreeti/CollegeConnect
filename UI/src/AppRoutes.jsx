@@ -4,6 +4,7 @@ import MainDirectory from './components/MainDirectory.jsx';
 import NotFound from './NotFound.jsx';
 import HomeComponent from './components/HomeComponent.jsx';
 import SignupComponent from './components/SignupComponent.jsx';
+import About from './components/AboutComponent.jsx';
 
 export default function AppRoutes() {
   const navigate = useNavigate();
@@ -17,7 +18,7 @@ export default function AppRoutes() {
         const currentPath = window.location.pathname;
 
         // Exclude authentication check for login and signup routes
-        if (currentPath === '/' || currentPath === '/signup')
+        if (currentPath === '/' || currentPath === '/signup') 
           return;
 
         if (!accessToken || !refreshToken) {
@@ -38,6 +39,7 @@ export default function AppRoutes() {
     <Routes>
       <Route path="/" element={<MainDirectory />} />
       <Route path="/home" element={<HomeComponent />} />
+      <Route path="/about" element={<About />} />
       <Route path="/signup" element={<SignupComponent />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
