@@ -6,7 +6,6 @@ import { handleFormValidation } from "../../utils/validation.js";
 import { API_TO_FETCH_COLLEGE_INFO, API_TO_SIGNUP_USER } from "../../utils/APIRequestUrl.js";
 import fetchData from "../../utils/FetchAPI.js";
 import { Link } from "react-router-dom";
-import Footer from "../Footer.jsx";
 
 class SignupComponent extends React.Component {
 
