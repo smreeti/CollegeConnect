@@ -6,7 +6,7 @@ import HomeComponent from './components/HomeComponent.jsx';
 import SignupComponent from './components/SignupComponent.jsx';
 import ResetPasswordComponent from './components/ResetPassword.jsx';
 import EmailSentComponent from './components/EmailSentComponent.jsx';
-import UpdatePasswordComponent from './components/UpdatePassword.jsx';
+import UpdatePasswordComponent from './components/UpdatePasswordComponent.jsx';
 
 export default function AppRoutes() {
   const navigate = useNavigate();
