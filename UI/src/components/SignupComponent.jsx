@@ -1,5 +1,4 @@
 import React from "react";
-import Button from "react-bootstrap/Button";
 import TextInput from './InputComponents/TextInput.jsx';
 import NumInput from './InputComponents/NumInput.jsx';
 import UserType from "../../utils/UserTypeConstants.js";
@@ -125,12 +124,15 @@ class SignupComponent extends React.Component {
 
         return (
             <>
-                <section className="signup-container px-md-5 pt-md-4">
+                <div className="container min-vh-100 d-flex align-items-center justify-content-center">
                     <div className="row bg-white w-75">
-                        <div className="col-lg-6 col-12 text-center p-5 px-md-5 py-md-4">
-                            <img className="login-logo" src="../../assets/logotestnew.png" />
-                            <h2 className="mt-3">Create An Account</h2>
-                            <p className="fs-6">Already a user? <Link to="/">Sign In</Link></p>
+                        <div className="col-lg-6 col-md-8 col-11 p-3 px-md-5 py-md-4">
+                            <div className="text-center">
+                                <img className="login-logo" src="../../assets/logotestnew.png" />
+                                <h2 className="mt-3">Create An Account</h2>
+                                <p className="fs-6">Already a user? <Link to="/">Sign In</Link></p>
+                            </div>
+
                             <form name="signupform" method="POST" onSubmit={this.signup}>
                                 {this.state?.serverErrors && (
                                     <ul className="error-list text-danger">
@@ -140,7 +142,7 @@ class SignupComponent extends React.Component {
                                     </ul>
                                 )}
 
-                                <div>
+                                <div className="fs-6">
                                     <TextInput
                                         id="firstName"
                                         name="firstName"
@@ -148,9 +150,9 @@ class SignupComponent extends React.Component {
                                         value={firstName}
                                         onChange={this.handleOnChange}
                                         key="FirstNameInput"
-                                        className="w-100"
+                                        className="w-100 small rounded p-md-2 p-1 border"
                                     />
-                                    <p className="text-danger">{this.state?.errors["firstName"]}</p>
+                                    <p className="text-danger small mb-3">{this.state?.errors["firstName"]}</p>
                                     <TextInput
                                         id="lastName"
                                         name="lastName"
@@ -158,8 +160,9 @@ class SignupComponent extends React.Component {
                                         value={lastName}
                                         onChange={this.handleOnChange}
                                         key="LastNameInput"
-                                        className="w-100" />
-                                    <p className="text-danger">{this.state?.errors["lastName"]}</p>
+                                        className="w-100 small rounded  p-md-2 p-1 border"
+                                    />
+                                    <p className="text-danger small mb-3">{this.state?.errors["lastName"]}</p>
                                     <TextInput
                                         id="email"
                                         name="email"
@@ -167,9 +170,9 @@ class SignupComponent extends React.Component {
                                         value={email}
                                         onChange={this.handleOnChange}
                                         key="EmailInput"
-                                        className="w-100"
+                                        className="w-100 small rounded p-md-2 p-1 border"
                                     />
-                                    <p className="text-danger">{this.state?.errors["email"]}</p>
+                                    <p className="text-danger small mb-3">{this.state?.errors["email"]}</p>
 
                                     <NumInput
                                         id="mobileNumber"
@@ -178,9 +181,9 @@ class SignupComponent extends React.Component {
                                         value={mobileNumber}
                                         onChange={this.handleOnChange}
                                         key="MobileNumberInput"
-                                        className="w-100"
+                                        className="w-100 small rounded p-md-2 p-1 border"
                                     />
-                                    <p className="text-danger">{this.state?.errors["mobileNumber"]}</p>
+                                    <p className="text-danger small mb-3">{this.state?.errors["mobileNumber"]}</p>
 
                                     <TextInput
                                         id="username"
@@ -189,9 +192,9 @@ class SignupComponent extends React.Component {
                                         value={username}
                                         onChange={this.handleOnChange}
                                         key="UsernameInput"
-                                        className="w-100"
+                                        className="w-100 small rounded p-md-2 p-1 border"
                                     />
-                                    <p className="text-danger">{this.state?.errors["username"]}</p>
+                                    <p className="text-danger small mb-3">{this.state?.errors["username"]}</p>
 
                                     <TextInput
                                         id="password"
@@ -200,25 +203,28 @@ class SignupComponent extends React.Component {
                                         value={password}
                                         onChange={this.handleOnChange}
                                         key="PasswordInput"
-                                        className="w-100"
+                                        type="password"
+                                        className="w-100 small rounded p-md-2 p-1 border"
                                     />
-                                    <p className="text-danger">{this.state?.errors["password"]}</p>
+                                    <p className="text-danger small mb-3">{this.state?.errors["password"]}</p>
 
                                     <select
                                         value={selectedCollege}
                                         name="selectedCollege"
                                         id="selectedCollege"
                                         onChange={this.handleOnChange}
-                                        className="w-100"
+                                        className="w-100 small rounded p-md-2 p-1 border"
                                     >
                                         {selectCollegeOptions}
                                     </select>
-                                    <p className="text-danger">{this.state?.errors["selectedCollege"]}</p>
+                                    <p className="text-danger small mb-3">{this.state?.errors["selectedCollege"]}</p>
 
                                 </div>
 
-                                <div className="mt-3">
-                                    <button className="signup-submit-button w-100">Sign Up</button>
+                                <div className="mt-3 text-center">
+                                    <button className="bg-black text-white rounded small" type="submit">
+                                        Sign Up
+                                    </button>
                                 </div>
                             </form>
                         </div>
@@ -226,7 +232,7 @@ class SignupComponent extends React.Component {
                             <img src="5a051759006413a0fc9ea48a50df14c3.jpg" alt="Image Placeholder" />
                         </div>
                     </div>
-                </section>
+                </div>
             </>
         )
     }

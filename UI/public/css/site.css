@@ -2,7 +2,6 @@ body {
   font-family: cursive !important;
   background: linear-gradient(to right, #2398bb, #90ee90);
   margin: 0 auto;
-  overflow: hidden;
 }
 
 #particles-js {
@@ -31,7 +30,6 @@ body {
 .login-form {
   width: 50%;
   display: contents;
-
   padding: 20px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
@@ -39,7 +37,6 @@ body {
 .user-details {
   margin-bottom: 20px;
   text-align: center;
-
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -85,10 +82,6 @@ button {
   border: none;
   cursor: pointer;
   margin-top: 10%;
-}
-
-button:hover {
-  background-color: #033064;
 }
 
 .fields {
@@ -175,7 +168,7 @@ button:hover {
 
 /* Footer */
 footer {
-  height: 150px !important;
+  height: 100px !important;
 }
 
 * {
@@ -470,31 +463,11 @@ footer #footer {
   }
 }
 
+/* Sign Up Page */
 .signup-container {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  align-items: center;
   margin: 0 auto;
-  border-radius: 5px;
-  box-sizing: border-box;
-}
-
-.w-100 {
-  height: 40px;
-  border-radius: 10px;
-  padding-left: 15px;
-}
-
-.signup-submit-button {
-  border: none;
-  cursor: pointer;
-  background-color: black;
-  color: white;
-}
-
-.logo-section {
-  text-align: center;
+  box-sizing: border-box !important;
 }
 
 .image-section img {

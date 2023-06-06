@@ -107,7 +107,7 @@ const LoginComponent = () => {
 
             <p className="required errormsg errpad1">{serverErrors}</p>
 
-            <p className="color forget">Forgot Password ? </p>
+            <p className="color forget"> <Link to="/resetPassword">Forgot Password ?</Link> </p>
             <button className="btn btn-primary btnblack" type="submit">
               Login
             </button>
