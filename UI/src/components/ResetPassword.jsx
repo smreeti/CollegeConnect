@@ -104,7 +104,7 @@ const ResetPasswordComponent = () => {
                         </div>
 
                         <Link to="/signup" className="text-decoration-none text-center">
-                            <p className="small text-black">Create a new account</p>
+                            <p className="small">Create a new account</p>
                         </Link>
 
                     </form>

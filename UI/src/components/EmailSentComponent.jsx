@@ -12,7 +12,17 @@ const EmailSentComponent = () => {
                         <p className="mt-md-4 mt-3">
                             We sent a link to your email to get back into your account.
                         </p>
-                        <Link to="/resetPassword" className="text-decoration-none">Ok</Link>
+                        <Link to="/resetPassword" className="mt-3">Ok</Link>
+
+                        <div className="d-flex mt-3">
+                            <hr className="hr w-50" />
+                            <small className="px-3 small">OR</small>
+                            <hr className="hr w-50" />
+                        </div>
+
+                        <Link to="/" className="text-center">
+                            <p className="small">Back to Login</p>
+                        </Link>
                     </div>
 
                 </div>

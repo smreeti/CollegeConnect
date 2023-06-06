@@ -28,13 +28,13 @@ const UpdatePasswordComponent = () => {
         e.preventDefault();
 
         const form = document.forms.updatePasswordForm;
-        const password = form.confirmPassword.value;
+        const confirmPassword = form.confirmPassword.value;
         const user = {
             newPassword: form.password.value,
             token: id
         };
 
-        let formErrors = await handleUpdatePasswordValidation(password, user.newPassword);
+        let formErrors = await handleUpdatePasswordValidation(confirmPassword, user.newPassword);
 
         if (Object.keys(formErrors).length > 0) {
             setFormErrors(formErrors);
@@ -104,13 +104,22 @@ const UpdatePasswordComponent = () => {
 
                         </div>
 
-                        <div className="mt-3 text-center">
+                        <div className="mt-5 text-center">
                             <button className="signup-submit-button rounded small">
                                 <p className="small mb-0">
                                     Update Password
                                 </p>
                             </button>
                         </div>
+                        <div className="d-flex mt-3">
+                            <hr className="hr w-50" />
+                            <small className="px-3 small">OR</small>
+                            <hr className="hr w-50" />
+                        </div>
+
+                        <Link to="/" className="text-center">
+                            <p className="small">Back to Login</p>
+                        </Link>
 
                     </form>
                 </div >
