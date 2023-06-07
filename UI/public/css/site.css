@@ -9,7 +9,7 @@ body {
 }
 
 .scroll {
-  height: 100vh;
+  height: auto;
   /* Set the desired height for the container */
   overflow: auto;
 }
@@ -34,7 +34,7 @@ body {
   align-items: center;
   margin: 0 auto;
   border-radius: 5px;
-  width: 70%;
+  width: 75%;
 }
 
 #resrevtest {
@@ -168,7 +168,7 @@ button {
   height: 45px;
 }
 
-.row>* {
+.row > * {
   padding-left: 0px !important;
 }
 
@@ -203,11 +203,6 @@ body {
   line-height: 1.4;
   font-size: clamp(1rem, 1.1rem, 1.2rem) !important;
 }
-
-/* img {
-  max-width: 90px;
-  height: auto;
-} */
 
 a {
   text-decoration: none !important;
@@ -256,7 +251,7 @@ h2 {
   gap: 20px;
 }
 
-.menu>li {
+.menu > li {
   margin: 0 1rem;
   overflow: hidden;
   font-size: 15px;
@@ -278,6 +273,7 @@ footer {
   bottom: -5px;
   width: 100%;
   transition: bottom 0.3s ease-in-out;
+  position: fixed;
 }
 
 footer h1 {
@@ -298,7 +294,7 @@ footer li {
   min-height: 32px;
 }
 
-footer>p {
+footer > p {
   text-align: center;
   padding: 30px 0;
 }
@@ -398,10 +394,14 @@ footer #footer {
     margin-bottom: 0px !important;
   }
 
-  .container,
-  .container-md,
-  .container-sm {
+  .about-us-container,
+  .about-us-container-md,
+  .about-us-container-sm {
     max-width: 80%;
+  }
+
+  .mx-w-100 {
+    max-width: 100% !important;
   }
 }
 
@@ -426,7 +426,7 @@ footer #footer {
 }
 
 .main-container {
-  height: 93vh;
+  height: auto;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -438,7 +438,7 @@ footer #footer {
   grid-template-rows: 1fr;
   background-color: white;
   /* padding: 40px; */
-  width: 70%;
+  width: 75%;
   margin: auto;
   min-height: 585px;
 }
@@ -456,7 +456,7 @@ footer #footer {
   align-items: center;
 }
 
-#login-image>img {
+#login-image > img {
   display: none;
 }
 
@@ -472,11 +472,11 @@ footer #footer {
     justify-content: center;
     grid-template-columns: 1fr 1fr;
     /* gap: 20px; */
-    width: 70%;
+    width: 75%;
     grid-template-rows: auto;
   }
 
-  #login-image>img {
+  #login-image > img {
     width: 100%;
     height: 100%;
     max-width: 100%;
@@ -497,7 +497,6 @@ footer #footer {
   height: 100%;
   object-fit: cover;
 }
-
 
 /* ABOUT US */
 
@@ -522,7 +521,7 @@ header h1 {
   text-align: center;
 }
 
-.about-section .container {
+.about-section .about-us-container {
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 40px;
@@ -548,7 +547,6 @@ header h1 {
 
 footer {
   text-align: center;
-
 }
 
 footer p {
@@ -560,13 +558,11 @@ footer p {
   max-width: 0px !important;
 }
 
-
 .cover-image {
   position: relative;
   width: 100%;
   height: 600px;
   overflow: hidden;
-
 }
 
 .cover-image img {
@@ -593,7 +589,6 @@ footer p {
   text-align: center;
 }
 
-
 .image-container {
   display: flex;
   justify-content: center;
@@ -608,8 +603,7 @@ footer p {
   width: 75%;
 }
 
-
-.container {
+.about-us-container {
   max-width: 1200px !important;
 }
 
@@ -617,7 +611,6 @@ footer p {
   width: 90%;
   margin: 0 auto;
 }
-
 
 .footerspace {
   margin-bottom: 100px;

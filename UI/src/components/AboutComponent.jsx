@@ -14,7 +14,7 @@ export default function About() {
         </div>
 
         <section className="about-section">
-          <div className="container">
+          <div className="about-us-container">
             <div className="row">
               <div className="col-md-6">
                 <video className="img-fluid" src="../../assets/Patterns.mp4" controls> </video>
@@ -33,7 +33,7 @@ export default function About() {
         </section>
 
         <section className="about-section">
-          <div className="container">
+          <div className="about-us-container">
             <div className="row">
               <div className="col-md-6 order-md-2">
                 <img src="../../assets/mantwo.jpg" alt="About Us Image" className="img-fluid" />
@@ -53,7 +53,7 @@ export default function About() {
         </section>
 
         <section className="about-section">
-          <div className="container">
+          <div className="about-us-container">
             <div className="row">
               <div className="col-md-6">
                 <img src="../../assets/man.jpg" alt="About Us Image" className="img-fluid" />
@@ -85,7 +85,7 @@ export default function About() {
         </div>
 
         <section className="about-section">
-          <div className="container footerspace">
+          <div className="about-us-container footerspace">
             <div className="row">
               <div className="col-md-6 order-md-2">
                 <img src="../../assets/graduate.jpg" alt="About Us Image" className="img-fluid" />
