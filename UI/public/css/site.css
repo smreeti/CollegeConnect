@@ -1,19 +1,25 @@
 body {
   font-family: cursive !important;
-  background: linear-gradient(to right, #2398bb, #90ee90);
-  background: #fff;
+  /* background: linear-gradient(to right, #2398bb, #90ee90); */
   margin: 0 auto;
 }
 
+.main-section{
+  background: linear-gradient(to right, #2398bb, #90ee90);
+}
 .headlogo {
   width: 100px;
 }
 
-.scroll {
+.standout{
+  font-size: larger !important;
+}
+
+/* .scroll {
   height: 100vh;
   /* Set the desired height for the container */
-  overflow: auto;
-}
+  /* overflow: auto; */
+   */
 
 .headlogo {
   width: 100px;
@@ -42,6 +48,7 @@ body {
   min-height: 500px;
 }
 
+
 .login-form {
   width: 50%;
   display: contents;
@@ -67,6 +74,12 @@ body {
   color: #05345b;
   margin-top: 20px;
 }
+
+.introduction{
+  background-color: beige;
+  margin-top: 7%;
+}
+
 
 .user-details input[type="text"],
 .user-details input[type="password"] {
@@ -288,6 +301,10 @@ footer h1 {
   color: black;
 }
 
+.aboutmargin{
+  margin-top: 4%;
+}
+
 footer hr {
   width: 70%;
   margin: auto;
@@ -368,7 +385,22 @@ footer #footer {
   text-align: center;
   width: 96%;
   margin: auto;
-  margin-top: 6%;
+  margin-top: 4%;
+ 
+}
+
+.fonttext{
+  font-size: 18px;
+}
+
+.wholesec{
+  background-color: #fff;
+  height: 100%;
+}
+
+
+.changecol{
+  background-color: #fff;
 }
 
 #collections_container h1,
@@ -547,7 +579,7 @@ footer #footer {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background-color: #dddddd;
+ 
 }
 
 .remmargin{
@@ -625,7 +657,7 @@ header h1 {
 .about-section {
   /* padding: 40px; */
   text-align: center;
-  margin-top: 6%;
+  margin-top: 4%;
 
 }
 
@@ -633,6 +665,9 @@ header h1 {
   background-color: #fff;
   /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
   padding: 40px;
+  padding-left: 90px;
+  margin-bottom: 4%;
+  padding-right: 90px;
 }
 
 .about-section .row {
@@ -711,12 +746,12 @@ footer {
 
 @keyframes slide {
   0% {
-    background: url(../assets/imgtwo.jpg), url(../assets/imgthree.jpg);
+    background: url(../assets/newimg/excited-friends-watching-video-mobile-phone.jpg), url(../assets/imgthree.jpg);
     width: 100%;
     animation: slide 20s infinite;
     background-repeat: no-repeat;
     background-position: center;
-    height: 500px;
+    height: 600px;
     background-size: cover;
   }
 
@@ -726,40 +761,42 @@ footer {
     animation: slide 20s infinite;
     background-repeat: no-repeat;
     background-position: center;
-    height: 500px;
+    height: 600px;
     background-size: cover;
   }
 
   50% {
-    background: url(../assets/imgfour.jpg), url(../assets/imgfive.jpg);
+    background: url(../assets/imgfour.jpg), url(../assets/newimg/people-holding-smartphones-with-dating-apps.jpg);
     animation: slide 20s infinite;
     width: 100%;
     background-repeat: no-repeat;
     background-position: center;
-    height: 500px;
+    height: 600px;
     background-size: cover;
   }
 
   75% {
-    background: url(../assets/imgfive.jpg), url(../assets/imgsix.jpg);
+    background: url(../assets/newimg/people-holding-smartphones-with-dating-apps.jpg), url(../assets/newimg/youth-technology-spring-concept-cheerful-pretty-young-woman-glasses-denim-jacket-laughing-smiling-looking-mobile-phone-display-send-funny-message-texting-as-standing-street.jpg);
     animation: slide 20s infinite;
     width: 100%;
     background-repeat: no-repeat;
     background-position: center;
-    height: 500px;
+    height: 600px;
     background-size: cover;
   }
 
   100% {
-    background: url(../assets/imgsix.jpg), url(../assets/imgseven.jpg);
+    background: url(../assets/newimg/youth-technology-spring-concept-cheerful-pretty-young-woman-glasses-denim-jacket-laughing-smiling-looking-mobile-phone-display-send-funny-message-texting-as-standing-street.jpg), url(../assets/imgseven.jpg);
     width: 100%;
     animation: slide 20s infinite;
     background-repeat: no-repeat;
     background-position: center;
-    height: 500px;
+    height: 600px;
     background-size: cover;
   }
 }
+
+
 
 
 
@@ -783,6 +820,8 @@ footer {
 .centertext{
   text-align: center;
   font-size: 30px;
+  width: 70%;
+  margin: 0 auto;
 }
 
 footer p {
@@ -854,5 +893,5 @@ footer p {
 
 
 .footerspace {
-  margin-bottom: 100px;
+  margin-bottom: 6%;
 }

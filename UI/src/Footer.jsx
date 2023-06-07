@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 export default function Footer() {
   return (
-    <footer>
+    <footer >
       <section id="footer">
         <div className="company footmargin">
           <Link to="/about"> About us </Link>

@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { handleLoginFormValidation } from '../../utils/validation.js';
-import { API_TO_LOGIN_USER } from '../../utils/APIRequestUrl.js';
-import fetchData from '../../utils/FetchAPI.js';
-import { Link } from 'react-router-dom';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { handleLoginFormValidation } from "../../utils/validation.js";
+import { API_TO_LOGIN_USER } from "../../utils/APIRequestUrl.js";
+import fetchData from "../../utils/FetchAPI.js";
+import { Link } from "react-router-dom";
 
 const LoginComponent = () => {
   const navigate = useNavigate();
@@ -40,21 +40,21 @@ const LoginComponent = () => {
 
   const loginUser = async (user) => {
     try {
-      const data = await fetchData(API_TO_LOGIN_USER, 'POST', user);
+      const data = await fetchData(API_TO_LOGIN_USER, "POST", user);
 
       if (!data.error) {
         const { accessToken, refreshToken, user } = data.body;
-        localStorage.setItem('jwt', accessToken);
-        localStorage.setItem('refreshToken', refreshToken);
-        localStorage.setItem('user', JSON.stringify(user));
+        localStorage.setItem("jwt", accessToken);
+        localStorage.setItem("refreshToken", refreshToken);
+        localStorage.setItem("user", JSON.stringify(user));
 
-        navigate('/home');
+        navigate("/home");
       } else {
         setServerErrors(data.error);
         setFormErrors([]);
       }
     } catch (error) {
-      console.log('Error:', error);
+      console.log("Error:", error);
       setServerErrors(error);
     }
   };
@@ -64,64 +64,73 @@ const LoginComponent = () => {
   };
 
   return (
-    <div className="main-container">
-      <div id="main-login-container">
-        <div id="login-form-container">
-          <div className="login-details">
-            <img className="login-logo" src="../../assets/logotestnew.png" />
-            <h2 className="color logfix">Login</h2>
+    <section className="main-section">
+      <div className="main-container">
+        <div id="main-login-container">
+          <div id="login-form-container">
+            <div className="login-details">
+              <img className="login-logo" src="../../assets/logotestnew.png" />
+              <h2 className="color logfix">Login</h2>
+            </div>
+            <form
+              className="formset px-sm-3"
+              id="form1"
+              name="loginform"
+              method="POST"
+              onSubmit={login}
+            >
+              <div className="form-group pad">
+                <input
+                  id="username"
+                  name="username"
+                  placeholder="Enter mobile no., username, or email "
+                  value={user.username || ""}
+                  onChange={handleOnChange}
+                  key="UsernameInput"
+                  className="formheight"
+                />
+                <p className="required errormsg errpad1">
+                  {errors["username"]}
+                </p>
+              </div>
+
+              <div className="form-group secform pad">
+                <input
+                  id="password"
+                  type="password"
+                  name="password"
+                  placeholder="Enter password"
+                  value={user.password || ""}
+                  onChange={handleOnChange}
+                  key="PasswordInput"
+                  className=" formheight formmar"
+                />
+                <p className="required errormsg errpad1">
+                  {errors["password"]}
+                </p>
+              </div>
+
+              <p className="required errormsg errpad1">{serverErrors}</p>
+
+              <p className="color forget">
+                {" "}
+                <Link to="/resetPassword">Forgot Password ?</Link>{" "}
+              </p>
+              <button className="btn btn-primary btnblack" type="submit">
+                Login
+              </button>
+              <h6 className="color">
+                New User?
+                <Link to="/signup"> Create an account</Link>
+              </h6>
+            </form>
           </div>
-          <form
-            className="formset px-sm-3"
-            id="form1"
-            name="loginform"
-            method="POST"
-            onSubmit={login}
-          >
-            <div className="form-group pad">
-              <input
-                id="username"
-                name="username"
-                placeholder="Enter mobile no., username, or email "
-                value={user.username || ''}
-                onChange={handleOnChange}
-                key="UsernameInput"
-                className="formheight"
-              />
-              <p className="required errormsg errpad1">{errors['username']}</p>
-            </div>
-
-            <div className="form-group secform pad">
-              <input
-                id="password"
-                type="password"
-                name="password"
-                placeholder="Enter password"
-                value={user.password || ''}
-                onChange={handleOnChange}
-                key="PasswordInput"
-                className=" formheight formmar"
-              />
-              <p className="required errormsg errpad1">{errors['password']}</p>
-            </div>
-
-            <p className="required errormsg errpad1">{serverErrors}</p>
-
-            <p className="color forget"> <Link to="/resetPassword">Forgot Password ?</Link> </p>
-            <button className="btn btn-primary btnblack" type="submit">
-              Login
-            </button>
-            <h6 className="color">
-              New User?
-              <Link to="/signup"> Create an account</Link>
-            </h6>
-          </form>
-        </div>
-        <div id="login-image">
-          <img src="../../assets/testimg.jpg" alt="Image Placeholder" />
+          <div id="login-image">
+            <img src="../../assets/cafe.jpg" alt="Image Placeholder" />
+          </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 
