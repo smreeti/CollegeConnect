@@ -5,7 +5,7 @@ export default function About() {
   return (
     <>
       <Header />
-      <section>
+      <section className='changeback'>
         <div className="cover-image">
           <img src="../../assets/team.jpg" alt="Cover Image" />
           <div className="overlay">
@@ -13,7 +13,7 @@ export default function About() {
           </div>
         </div>
 
-        <section className="about-section">
+        <section className="about-section changemargin">
           <div className="container">
             <div className="row">
               <div className="col-md-6">
@@ -22,7 +22,7 @@ export default function About() {
               <div className="col-md-6">
                 <h2>Welcome to CollegeConnect</h2>
                 <p>
-                  the ultimate social networking platform for college students. We are passionate about connecting students from all over the world and providing them with a unique platform to connect, collaborate, and succeed together.
+                  The ultimate social networking platform for college students. We are passionate about connecting students from all over the world and providing them with a unique platform to connect, collaborate, and succeed together.
                 </p>
                 <p>
                   At CollegeConnect, our mission is to create a thriving online community where college students can network, share knowledge, and explore opportunities. We believe that by connecting students from diverse backgrounds, we can foster an environment of collaboration and growth.
@@ -32,57 +32,75 @@ export default function About() {
           </div>
         </section>
 
-        <section className="about-section">
-          <div className="container">
-            <div className="row">
-              <div className="col-md-6 order-md-2">
-                <img src="../../assets/mantwo.jpg" alt="About Us Image" className="img-fluid" />
-              </div>
-              <div className="col-md-6 order-md-1">
-                <h3>Success Stories</h3>
-                <h2>Sarah Johnson - Founding a Startup</h2>
-                <p>
-                  "CollegeConnect played a pivotal role in my entrepreneurial journey. Through the platform, I connected with like-minded students who shared my passion for innovation. Together, we founded a startup that has now grown into a successful business. CollegeConnect provided the support and resources we needed to turn our dreams into reality."
+      
+<section id="top_selling_container">
+        <h1>SUCCESS STORIES</h1>
+        <div id="top_selling">
+          <div class="items">
+            <img className='imgbor' src="../../assets/ryan.jpg" alt="Scooby Doo" />
+            <p class="product_title"> <span className='success'> Sarah Thompson
+</span><br>
+            </br></p>
+           <p className='product_title'> Sarah, a high school student struggling with math, discovered EmpowerNet's vibrant online community. She connected with fellow students who excelled in math and found mentors who provided invaluable guidance. Through collaborative study sessions and resource sharing, Sarah's understanding of the subject skyrocketed. Encouraged by her newfound confidence, she pursued a degree in mathematics.
+
+</p>
 
 
-                </p>
 
-              </div>
-            </div>
+           
+ 
           </div>
-        </section>
+          <div class="items">
+            <img className='imgbor' src="../../assets/smiling.jpg" alt="Scooby Doo" />
+            <p class="product_title"> <span className='success'>Michael Rodriguez
 
-        <section className="about-section">
-          <div className="container">
-            <div className="row">
-              <div className="col-md-6">
-                <img src="../../assets/man.jpg" alt="About Us Image" className="img-fluid" />
-              </div>
-              <div className="col-md-6">
-                <h2>Mark Davis - Landing an Internship
-
-                </h2>
-                <p>
-                  "I owe my internship opportunity to CollegeConnect. By connecting with professionals in my field of interest, I gained valuable insights and guidance. The platform allowed me to showcase my skills and connect with recruiters. Thanks to CollegeConnect, I secured an internship that kickstarted my career."
+</span><br>
+            </br></p>
+           <p className='product_title'>Michael, a college freshman, faced difficulties transitioning from high school. He felt overwhelmed and isolated in his new academic environment. However, after joining EmpowerNet, he found a supportive network of like-minded students facing similar challenges. They shared tips on time management, study techniques, and coping with stress.
 
 
-                </p>
+</p>
 
-              </div>
-            </div>
+
+
+           
+ 
           </div>
-        </section>
 
-        {/* <div className="image-container">
-      <img src="../../assets/group.jpg" alt="Large Image" />
-    </div> */}
+          <div class="items">
+            <img className='imgbor' src="../../assets/woman.jpg" alt="Scooby Doo" />
+            <p class="product_title"> <span className='success'> Namita Thapar
+</span><br>
+            </br></p>
+           <p className='product_title'> Namita, a shy and introverted student, struggled with public speaking. She yearned to overcome her fears and excel in this essential skill. Through EmpowerNet, she discovered a community dedicated to honing communication abilities. Emily participated in virtual speaking contests, received constructive feedback, and attended webinars hosted by renowned public speakers. </p>
 
-        <div className="cover-image midimg">
+
+
+           
+ 
+          </div>
+
+       
+
+       
+        </div>
+      </section>
+
+        {/* <div className="cover-image midimg">
           <img src="../../assets/group.jpg" alt="Cover Image" />
           <div className="overlay">
             <h1>We’re commited to fostering a safe and supportive community for everyone</h1>
           </div>
+        </div> */}
+
+
+        <section className="cover-image midimg" id="hero_banner">
+        <div>
+          <div className="slideshow overlay">         
         </div>
+        </div>
+      </section>
+      <p className='centertext'>We’re commited to fostering a safe and supportive community for everyone</p>
 
         <section className="about-section">
           <div className="container footerspace">
