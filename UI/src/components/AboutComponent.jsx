@@ -13,7 +13,7 @@ export default function About() {
           </div>
         </div>
 
-        <section className="about-section">
+        <section className="about-section remmargin">
           <div className="container">
             <div className="row">
               <div className="col-md-6">

@@ -550,6 +550,10 @@ footer #footer {
   background-color: #dddddd;
 }
 
+.remmargin{
+  margin-top: 0px !important;
+}
+
 .login-details {
   justify-content: center;
   display: flex;
