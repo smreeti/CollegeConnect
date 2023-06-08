@@ -2,7 +2,6 @@ require("dotenv").config();
 
 module.exports = {
   generateResetPasswordEmail: (username, email, token) => {
-
     const template = `<!DOCTYPE html>
                         <html>
                         <head>
@@ -47,6 +46,10 @@ module.exports = {
                                 .reset-button{
                                     text-align: center;
                                     margin: 35px auto;
+                                }
+
+                                .reset-button a{
+                                    color: white !important;
                                 }
                         </style>
                         </head>

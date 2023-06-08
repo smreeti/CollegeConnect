@@ -124,10 +124,10 @@ class SignupComponent extends React.Component {
     ));
 
     return (
-      <section className="main-section">
-        <div className="container min-vh-100 d-flex align-items-center justify-content-center">
+      <div style={{ minHeight: '100%' }} className="py-md-5 py-0">
+        <div className="main-container d-flex align-items-center justify-content-center pb-lg-4 pb-md-0 sign-up-container">
           <div className="row bg-white w-75">
-            <div className="col-lg-6 col-md-8 col-11 p-3 px-md-5 py-md-4">
+            <div className="col-lg-6 col p-3 px-md-5 py-md-4">
               <div className="text-center">
                 <img className="login-logo" src="../../assets/logotestnew.png" />
                 <h2 className="mt-3">Create An Account</h2>
@@ -224,7 +224,7 @@ class SignupComponent extends React.Component {
 
                 <div className="mt-3 text-center">
                   <button className="bg-black text-white rounded small" type="submit">
-                    Sign Up
+                    <p className="small mb-0">Sign Up</p>
                   </button>
                 </div>
               </form>
@@ -234,7 +234,7 @@ class SignupComponent extends React.Component {
             </div>
           </div>
         </div>
-      </section>
+      </div >
     )
   }
 }

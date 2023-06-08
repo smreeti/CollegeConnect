@@ -1,6 +1,6 @@
 body {
   font-family: cursive !important;
-  /* background: linear-gradient(to right, #2398bb, #90ee90); */
+  background: linear-gradient(to right, #2398bb, #90ee90);
   margin: 0 auto;
 }
 
@@ -47,7 +47,6 @@ body {
   min-height: 500px;
 }
 
-
 .login-form {
   width: 50%;
   display: contents;
@@ -78,7 +77,6 @@ body {
   background-color: beige;
   margin-top: 7%;
 }
-
 
 .user-details input[type="text"],
 .user-details input[type="password"] {
@@ -181,7 +179,7 @@ button {
   height: 45px;
 }
 
-.row>* {
+.row > * {
   padding-left: 0px !important;
 }
 
@@ -203,7 +201,7 @@ button {
   margin: 0;
   font-size: 100%;
   box-sizing: border-box;
-  font-family: cursive;
+  /* font-family: cursive; */
 }
 
 html,
@@ -269,7 +267,7 @@ h2 {
   gap: 20px;
 }
 
-.menu>li {
+.menu > li {
   margin: 0 1rem;
   overflow: hidden;
   font-size: 15px;
@@ -315,7 +313,7 @@ footer li {
   min-height: 32px;
 }
 
-footer>p {
+footer > p {
   text-align: center;
   padding: 30px 0;
 }
@@ -375,7 +373,6 @@ footer #footer {
   font-size: 12px !important;
 }
 
-
 /* ABOUT US MODIFIED */
 
 #collections_container,
@@ -385,7 +382,6 @@ footer #footer {
   width: 96%;
   margin: auto;
   margin-top: 4%;
-
 }
 
 .fonttext {
@@ -396,7 +392,6 @@ footer #footer {
   background-color: #fff;
   height: 100%;
 }
-
 
 .changecol {
   background-color: #fff;
@@ -410,7 +405,6 @@ footer #footer {
   font-size: clamp(1.5rem, 2vw - 1rem, 2.5rem);
 }
 
-
 #top_selling {
   margin-top: 20px;
   display: flex;
@@ -420,7 +414,6 @@ footer #footer {
   justify-content: space-evenly;
   margin-top: 2%;
 }
-
 
 #top_selling .items {
   display: flex;
@@ -433,7 +426,6 @@ footer #footer {
 }
 
 #top_selling .product_title {
-
   font-size: 0.9rem;
   padding: 4px 0;
 }
@@ -461,13 +453,11 @@ footer #footer {
 }
 
 #top_selling .product_title {
-
   font-size: 0.9rem;
   padding: 4px 0;
 }
 
 .product_title {
-
   width: 300px;
   word-wrap: break-word;
 }
@@ -475,7 +465,6 @@ footer #footer {
 .success {
   text-decoration: underline;
   font-size: 1.5rem;
-
 }
 
 #collections_container h1,
@@ -526,9 +515,9 @@ footer #footer {
     margin-bottom: 0px !important;
   }
 
-  .container,
-  .container-md,
-  .container-sm {
+  .about-us-container,
+  .about-us-container-md,
+  .about-us-container-sm {
     max-width: 80%;
   }
 }
@@ -554,7 +543,7 @@ footer #footer {
 }
 
 .main-container {
-  height: 93vh;
+  min-height: 93vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -575,7 +564,6 @@ footer #footer {
   display: flex;
   flex-direction: column;
   justify-content: center;
-
 }
 
 .remmargin {
@@ -589,7 +577,7 @@ footer #footer {
   align-items: center;
 }
 
-#login-image>img {
+#login-image > img {
   display: none;
 }
 
@@ -609,7 +597,7 @@ footer #footer {
     grid-template-rows: auto;
   }
 
-  #login-image>img {
+  #login-image > img {
     width: 100%;
     height: 100%;
     max-width: 100%;
@@ -631,11 +619,16 @@ footer #footer {
   object-fit: cover;
 }
 
+.sign-up-container {
+  height: unset !important;
+}
+
+/* Sign Up End */
 
 /* ABOUT US */
 
 body {
-  font-family: Arial, sans-serif;
+  /* font-family: Arial, sans-serif; */
   background-color: #f8f8f8;
 }
 
@@ -654,10 +647,9 @@ header h1 {
   /* padding: 40px; */
   text-align: center;
   margin-top: 4%;
-
 }
 
-.about-section .container {
+.about-section .about-us-container {
   background-color: #fff;
   /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
   padding: 40px;
@@ -726,8 +718,8 @@ footer {
 }
 
 .slideshow {
-
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(../../assets/imgone.jpg) no-repeat center left;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url(../../assets/imgone.jpg) no-repeat center left;
   animation: slide 20s infinite;
   height: 500px;
   background-position: center;
@@ -736,10 +728,10 @@ footer {
   background-repeat: no-repeat;
 }
 
-
 @keyframes slide {
   0% {
-    background: url(../assets/newimg/excited-friends-watching-video-mobile-phone.jpg), url(../assets/imgthree.jpg);
+    background: url(../assets/newimg/excited-friends-watching-video-mobile-phone.jpg),
+      url(../assets/imgthree.jpg);
     width: 100%;
     animation: slide 20s infinite;
     background-repeat: no-repeat;
@@ -769,7 +761,8 @@ footer {
   }
 
   75% {
-    background: url(../assets/newimg/mobile-app.jpg), url(../assets/newimg/youth-technology-spring-concept-cheerful-pretty-young-woman-glasses-denim-jacket-laughing-smiling-looking-mobile-phone-display-send-funny-message-texting-as-standing-street.jpg);
+    background: url(../assets/newimg/mobile-app.jpg),
+      url(../assets/newimg/youth-technology-spring-concept-cheerful-pretty-young-woman-glasses-denim-jacket-laughing-smiling-looking-mobile-phone-display-send-funny-message-texting-as-standing-street.jpg);
     animation: slide 20s infinite;
     width: 100%;
     background-repeat: no-repeat;
@@ -779,7 +772,8 @@ footer {
   }
 
   100% {
-    background: url(../assets/newimg/youth-technology-spring-concept-cheerful-pretty-young-woman-glasses-denim-jacket-laughing-smiling-looking-mobile-phone-display-send-funny-message-texting-as-standing-street.jpg), url(../assets/imgseven.jpg);
+    background: url(../assets/newimg/youth-technology-spring-concept-cheerful-pretty-young-woman-glasses-denim-jacket-laughing-smiling-looking-mobile-phone-display-send-funny-message-texting-as-standing-street.jpg),
+      url(../assets/imgseven.jpg);
     width: 100%;
     animation: slide 20s infinite;
     background-repeat: no-repeat;
@@ -823,13 +817,11 @@ footer p {
   max-width: 0px !important;
 }
 
-
 .cover-image {
   position: relative;
   width: 100%;
   height: 600px;
   overflow: hidden;
-
 }
 
 .cover-image img {
@@ -870,8 +862,7 @@ footer p {
   width: 75%;
 }
 
-
-.container {
+.about-us-container {
   max-width: 1600px !important;
 }
 
@@ -879,7 +870,6 @@ footer p {
   width: 90%;
   margin: 0 auto;
 }
-
 
 .footerspace {
   margin-bottom: 6%;
