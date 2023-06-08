@@ -65,7 +65,7 @@ const UpdatePasswordComponent = () => {
     };
 
     return (
-        <>
+        <section className="main-section">
             <div className="container min-vh-100 d-flex align-items-center justify-content-center">
                 <div className="col-lg-6 col-md-8 col-11 p-3 bg-white px-md-5 py-md-4">
                     <div className="text-center">
@@ -124,7 +124,7 @@ const UpdatePasswordComponent = () => {
                     </form>
                 </div >
             </div >
-        </>
+        </section>
     )
 }
 

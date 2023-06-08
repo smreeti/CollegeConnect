@@ -36,6 +36,7 @@ const resetPassword = async (req, res) => {
 
     await createEmailToken(randomToken, expiryDate, user._id, emailAction._id);
     const resetPasswordEmail = generateResetPasswordEmail(
+      user.username,
       user.email,
       randomToken
     );
