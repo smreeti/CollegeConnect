@@ -47,13 +47,13 @@ export default function About() {
         <section id="top_selling_container" className="changecol">
           <h1>SUCCESS STORIES</h1>
           <div id="top_selling">
-            <div class="items">
+            <div className="items">
               <img
                 className="imgbor"
                 src="../../assets/ryan.jpg"
                 alt="Scooby Doo"
               />
-              <p class="product_title">
+              <p className="product_title">
                 {" "}
                 <span className="success"> Sarah Thompson</span>
                 <br></br>
@@ -69,13 +69,13 @@ export default function About() {
                 pursued a degree in mathematics.
               </p>
             </div>
-            <div class="items">
+            <div className="items">
               <img
                 className="imgbor"
                 src="../../assets/smiling.jpg"
                 alt="Scooby Doo"
               />
-              <p class="product_title">
+              <p className="product_title">
                 {" "}
                 <span className="success">Michael Rodriguez</span>
                 <br></br>
@@ -90,13 +90,13 @@ export default function About() {
               </p>
             </div>
 
-            <div class="items">
+            <div className="items">
               <img
                 className="imgbor"
                 src="../../assets/woman.jpg"
                 alt="Scooby Doo"
               />
-              <p class="product_title">
+              <p className="product_title">
                 {" "}
                 <span className="success"> Namita Thapar</span>
                 <br></br>

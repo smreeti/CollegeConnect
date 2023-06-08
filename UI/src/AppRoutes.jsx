@@ -8,6 +8,7 @@ import About from './components/AboutComponent.jsx';
 import ResetPasswordComponent from './components/ResetPassword.jsx';
 import EmailSentComponent from './components/EmailSentComponent.jsx';
 import UpdatePasswordComponent from './components/UpdatePasswordComponent.jsx';
+import LogoutComponent from './components/LogoutComponent.jsx';
 
 export default function AppRoutes() {
   const navigate = useNavigate();
@@ -21,7 +22,7 @@ export default function AppRoutes() {
         const currentPath = window.location.pathname;
 
         // Exclude authentication check for login and signup routes
-        if (currentPath === '/' || currentPath === '/signup') 
+        if (currentPath === '/' || currentPath === '/signup')
           return;
 
         if (!accessToken || !refreshToken) {
@@ -39,6 +40,7 @@ export default function AppRoutes() {
   }, [navigate]);
 
   return (
+
     <Routes>
       <Route path="/" element={<MainDirectory />} />
       <Route path="/home" element={<HomeComponent />} />
@@ -47,6 +49,7 @@ export default function AppRoutes() {
       <Route path="/resetPassword" element={<ResetPasswordComponent />} />
       <Route path="/emailSent" element={<EmailSentComponent />} />
       <Route path="/updatePassword/:id" element={<UpdatePasswordComponent />} />
+      <Route path="/logout" element={<LogoutComponent />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
