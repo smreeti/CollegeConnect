@@ -1,8 +1,8 @@
 require("dotenv").config();
 
 module.exports = {
-  generateResetPasswordEmail: (username, email, token) => {
-    const template = `<!DOCTYPE html>
+    generateResetPasswordEmail: (username, email, token) => {
+        const template = `<!DOCTYPE html>
                         <html>
                         <head>
                             <meta charset="utf-8">
@@ -32,7 +32,7 @@ module.exports = {
                                 }
                                 
                                 a {
-                                    color: #ffffff;
+                                    color: #ffffff !important;
                                     background-color: #007bff;
                                     text-decoration: none;
                                     padding: 10px 20px;
@@ -69,11 +69,11 @@ module.exports = {
                         </body>
                         </html>
               `;
-    return {
-      from: process.env.FROM_EMAIL_ADDRESS,
-      to: email,
-      subject: "Reset Password",
-      html: template,
-    };
-  },
+        return {
+            from: process.env.FROM_EMAIL_ADDRESS,
+            to: email,
+            subject: "Reset Password",
+            html: template,
+        };
+    },
 };
