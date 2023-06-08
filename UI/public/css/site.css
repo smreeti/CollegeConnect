@@ -759,7 +759,7 @@ footer {
   }
 
   50% {
-    background: url(../assets/imgfour.jpg), url(../assets/newimg/people-holding-smartphones-with-dating-apps.jpg);
+    background: url(../assets/imgfour.jpg), url(../assets/newimg/mobile-app.jpg);
     animation: slide 20s infinite;
     width: 100%;
     background-repeat: no-repeat;
@@ -769,7 +769,7 @@ footer {
   }
 
   75% {
-    background: url(../assets/newimg/people-holding-smartphones-with-dating-apps.jpg), url(../assets/newimg/youth-technology-spring-concept-cheerful-pretty-young-woman-glasses-denim-jacket-laughing-smiling-looking-mobile-phone-display-send-funny-message-texting-as-standing-street.jpg);
+    background: url(../assets/newimg/mobile-app.jpg), url(../assets/newimg/youth-technology-spring-concept-cheerful-pretty-young-woman-glasses-denim-jacket-laughing-smiling-looking-mobile-phone-display-send-funny-message-texting-as-standing-street.jpg);
     animation: slide 20s infinite;
     width: 100%;
     background-repeat: no-repeat;

@@ -1,6 +1,8 @@
 import React from 'react';
 
 import fetchData from "../../utils/FetchAPI.js";
+import Header from '../Header.jsx';
+import { getLoggedInUser } from '../../utils/Auth.js';
 
 export default class HomeComponent extends React.Component {
 
@@ -25,9 +27,10 @@ export default class HomeComponent extends React.Component {
 
     render() {
         return (
-            <main>
-                <h1>Welcome to Home page</h1>
-            </main>
+            <>
+                <Header />
+                <h1>Welcome to Home page, {getLoggedInUser()}</h1>
+            </>
         );
     }
 }
