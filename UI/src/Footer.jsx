@@ -27,9 +27,9 @@ export default function Footer() {
         </div>
 
         <div className="social_media footmargin">
-          <FontAwesomeIcon icon={faInstagram} />
-          <FontAwesomeIcon icon={faTwitter} />
-          <FontAwesomeIcon icon={faFacebookF} />
+          <FontAwesomeIcon icon={faInstagram} className='instagramIcon'/>
+          <FontAwesomeIcon icon={faTwitter} className='twitterIcon'/>
+          <FontAwesomeIcon icon={faFacebookF} className='facebookIcon' />
         </div>
       </section>
     </footer>

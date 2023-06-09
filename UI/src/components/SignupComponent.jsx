@@ -179,7 +179,7 @@ class SignupComponent extends React.Component {
                     <NumInput
                       id="mobileNumber"
                       name="mobileNumber"
-                      placeholder="Phone Number"
+                      placeholder="Mobile Number"
                       value={mobileNumber}
                       onChange={this.handleOnChange}
                       key="MobileNumberInput"
