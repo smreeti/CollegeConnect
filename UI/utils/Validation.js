@@ -108,10 +108,6 @@ const handleResetPasswordValidation = async (user) => {
 
 const handleUpdatePasswordValidation = async (confirmPassword, newPassword) => {
 
-  console.log("cdssdv")
-  console.log(confirmPassword)
-  console.log(newPassword);
-
   let formErrors = {};
 
   if (!newPassword) {
