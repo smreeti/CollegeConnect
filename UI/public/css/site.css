@@ -769,7 +769,7 @@ footer {
 
   75% {
     background: url(../assets/newimg/mobile-app.jpg),
-      url(../assets/newimg/youth-technology-spring-concept-cheerful-pretty-young-woman-glasses-denim-jacket-laughing-smiling-looking-mobile-phone-display-send-funny-message-texting-as-standing-street.jpg);
+      url(../assets/newimg/pretty-young-woman.jpg);
     animation: slide 20s infinite;
     width: 100%;
     background-repeat: no-repeat;
@@ -779,7 +779,7 @@ footer {
   }
 
   100% {
-    background: url(../assets/newimg/youth-technology-spring-concept-cheerful-pretty-young-woman-glasses-denim-jacket-laughing-smiling-looking-mobile-phone-display-send-funny-message-texting-as-standing-street.jpg),
+    background: url(../assets/newimg/pretty-young-woman.jpg),
       url(../assets/imgseven.jpg);
     width: 100%;
     animation: slide 20s infinite;
