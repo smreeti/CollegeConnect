@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { getLoggedInUser } from '../utils/Auth';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHome, faUser, faInfo, faSignOutAlt} from '@fortawesome/free-solid-svg-icons';
 
 export default function Header() {
   const isLoggedIn = getLoggedInUser() ? true : false;
@@ -15,10 +17,30 @@ export default function Header() {
         <div className="menu-button"></div>
       </label>
       <ul className="menu">
-     <img className='icons' src='../../assets/homeicon.png' />   <Link to="/user"> Home </Link>
-     <img className='icons' src='../../assets/aboutusicon.png' />    <Link to="/about"> About Us </Link>
 
-        {isLoggedIn && <Link to="/logout"> Logout </Link>}
+        <li>
+          <FontAwesomeIcon className='icons' icon={faHome} />
+          <Link to="/home"> Home </Link>
+        </li>
+
+        <li>
+          <FontAwesomeIcon className='icons' icon={faUser} />
+          <Link to="/profile"> Profile </Link>
+        </li>
+
+        <li>
+          <FontAwesomeIcon className='icons' icon={faInfo} />
+          <Link to="/about"> About Us </Link>
+        </li>
+
+        {isLoggedIn && (
+          <li>
+            <Link to="/logout">
+              <FontAwesomeIcon className="icons" icon={faSignOutAlt} />
+              Logout
+            </Link>
+          </li>
+        )}
       </ul>
     </section>
   )

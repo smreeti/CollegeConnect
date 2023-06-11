@@ -2,11 +2,10 @@ import React from "react";
 
 import Header from "../Header.jsx";
 
-
-function UserDetails() {
+function ProfileComponent() {
   return (
     <main>
-          <Header />
+      <Header />
       <div className="user_details_container">
         <div>
           <div className="image_mainblock">
@@ -75,7 +74,7 @@ function UserDetails() {
           <div className="image_grid">
             <div className="images">
               <img alt="captured images" className="p_img" src="images/../../assets/userimgfour.jpg" />
-             <img alt="like button" className="icon" src="../../assets/like.png" />
+              <img alt="like button" className="icon" src="../../assets/like.png" />
               <span className="number">45</span>
             </div>
 
@@ -120,4 +119,4 @@ function UserDetails() {
   );
 }
 
-export default UserDetails;
+export default ProfileComponent;
