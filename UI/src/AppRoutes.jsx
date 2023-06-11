@@ -9,6 +9,7 @@ import ResetPasswordComponent from './components/ResetPassword.jsx';
 import EmailSentComponent from './components/EmailSentComponent.jsx';
 import UpdatePasswordComponent from './components/UpdatePasswordComponent.jsx';
 import LogoutComponent from './components/LogoutComponent.jsx';
+import UserDetails from './components/UserDetails.jsx';
 
 export default function AppRoutes() {
   const navigate = useNavigate();
@@ -43,6 +44,7 @@ export default function AppRoutes() {
 
     <Routes>
       <Route path="/" element={<MainDirectory />} />
+      <Route path="/user" element={<UserDetails />} />
       <Route path="/home" element={<HomeComponent />} />
       <Route path="/about" element={<About />} />
       <Route path="/signup" element={<SignupComponent />} />
