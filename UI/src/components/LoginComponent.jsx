@@ -69,7 +69,7 @@ const LoginComponent = () => {
         <div id="main-login-container">
           <div id="login-form-container">
             <div className="login-details">
-              <img className="login-logo" src="../../assets/logotestnew.png" />
+              <img className="login-logo" src="../../assets/logo.png" />
               <h2 className="color logfix">Login</h2>
             </div>
             <form

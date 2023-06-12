@@ -17,7 +17,7 @@ module.exports = {
                                     max-width: 600px;
                                     margin: 0 auto;
                                     padding: 20px;
-                                    background-color: #f4f4f4;
+                                    background-color: #e3e3e3;
                                     border-radius: 5px;
                                 }
                             
@@ -27,7 +27,7 @@ module.exports = {
                                 }
                                 
                                 p {
-                                    color: #666666;
+                                    color: black;
                                     margin-bottom: 20px;
                                 }
                                 
@@ -41,6 +41,7 @@ module.exports = {
                                 
                                 a:hover {
                                     background-color: #0056b3;
+                                    cursor: pointer;
                                 }
 
                                 .reset-button{

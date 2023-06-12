@@ -107,6 +107,7 @@ const handleResetPasswordValidation = async (user) => {
 };
 
 const handleUpdatePasswordValidation = async (confirmPassword, newPassword) => {
+
   let formErrors = {};
 
   if (!newPassword) {
@@ -116,7 +117,7 @@ const handleUpdatePasswordValidation = async (confirmPassword, newPassword) => {
       "Must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, and one digit.";
   } else if (!confirmPassword) {
     formErrors["confirmPassword"] = "Please confirm your password";
-  } else if (password != newPassword) {
+  } else if (confirmPassword != newPassword) {
     formErrors["confirmPassword"] = "Both input fields must match";
   }
 
