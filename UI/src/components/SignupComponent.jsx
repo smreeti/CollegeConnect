@@ -64,7 +64,6 @@ class SignupComponent extends React.Component {
       this.setFormErrors(formErrors);
     } else {
       await this.signupUser(user);
-      window.location = '/';
     }
   }
 
@@ -82,6 +81,7 @@ class SignupComponent extends React.Component {
       const data = await fetchData(API_TO_SIGNUP_USER, "POST", user);
       if (!data.error) {
         console.log("User saved successfully");
+        window.location = '/';
       } else {
         this.setServerErrors(data.error);
         this.setFormErrors([]);
