@@ -3,6 +3,7 @@ import Header from "../Header.jsx";
 import fetchData from "../../utils/FetchAPI.js";
 import { CLOUD_NAME, CLOUD_URL, UPLOAD_PRESET } from "../../utils/CloudinaryConfig.js";
 import { API_TO_SAVE_POST } from "../../utils/APIRequestUrl.js";
+import { handleCreatePostValidation } from "../../utils/validation.js";
 
 class CreatePostComponent extends React.Component {
     constructor() {
@@ -12,7 +13,9 @@ class CreatePostComponent extends React.Component {
                 caption: "",
                 image: null
             },
-            isLoading: false
+            isLoading: false,
+            errors: [],
+            serverErrors: [],
         };
         this.handleOnChange = this.handleOnChange.bind(this);
         this.createPost = this.createPost.bind(this);
@@ -46,10 +49,26 @@ class CreatePostComponent extends React.Component {
             caption: form.caption.value,
             image: form.image.files[0]
         }
+        let formErrors = handleCreatePostValidation(post.image);
 
-        this.setState({ isLoading: true });  // Set isLoading to true
+        if (Object.keys(formErrors).length > 0) {
+            this.setFormErrors(formErrors);
+        } else {
+            this.setState({ isLoading: true });  // Set isLoading to true
+            await this.uploadPostToCloudinary(post);
+        }
+    }
 
-        await this.uploadPostToCloudinary(post);
+    setFormErrors(formErrors) {
+        this.setState({
+            errors: formErrors
+        });
+    }
+
+    setServerErrors(serverErrors) {
+        this.setState({
+            serverErrors: serverErrors
+        });
     }
 
     uploadPostToCloudinary = async (post) => {
@@ -86,12 +105,11 @@ class CreatePostComponent extends React.Component {
                 this.resetForm();
                 console.log("Post saved successfully");
             } else {
-                // this.setServerErrors(data.error);
-                // this.setFormErrors([]);
+                this.setServerErrors(data.error);
+                this.setFormErrors([]);
             }
         } catch (error) {
-            console.log("Error:", error);
-            // this.setServerErrors(error);
+            this.setServerErrors(error);
         } finally {
             this.setState({ isLoading: false });  // Set isLoading to false
         }
@@ -117,6 +135,14 @@ class CreatePostComponent extends React.Component {
             <>
                 <Header />
                 <form className="" id="createPostform" name="createPostform" method="POST" onSubmit={this.createPost}>
+                    {this.state?.serverErrors && (
+                        <ul className="error-list text-danger">
+                            {this.state?.serverErrors.map((error, index) => (
+                                <li key={index}>{error}</li>
+                            ))}
+                        </ul>
+                    )}
+
                     <div>
                         <input
                             type="text"
@@ -126,15 +152,14 @@ class CreatePostComponent extends React.Component {
                             onChange={this.handleOnChange}
                         />
 
-                        <div className="file-field input-field">
-                            <div>
-                                <span>Upload Image</span>
-                                <input
-                                    type="file"
-                                    name="image"
-                                    onChange={this.handleOnChange}
-                                />
-                            </div>
+                        <div>
+                            <span>Upload Image</span>
+                            <input
+                                type="file"
+                                name="image"
+                                onChange={this.handleOnChange}
+                            />
+                            <p className="text-danger small mb-3">{this.state?.errors["image"]}</p>
                         </div>
 
                         {image && (

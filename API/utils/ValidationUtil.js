@@ -82,7 +82,6 @@ const validateUser = async (req) => {
     return errors;
 };
 
-
 const validateLoginForm = async (username, password) => {
     const errors = [];
 
@@ -103,9 +102,18 @@ const checkPasswordValidity = (password, errors) => {
     return errors;
 }
 
+const validateCreatePostForm = async (imageUrl) => {
+    const errors = [];
+
+    if (!imageUrl || imageUrl.length <= 0)
+        errors.push("Image is required.");
+    return errors;
+}
+
 module.exports = {
     validateField,
     validateUser,
     validateLoginForm,
-    checkPasswordValidity
+    checkPasswordValidity,
+    validateCreatePostForm
 }

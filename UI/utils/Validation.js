@@ -124,9 +124,18 @@ const handleUpdatePasswordValidation = async (confirmPassword, newPassword) => {
   return formErrors;
 };
 
+const handleCreatePostValidation = (image) => {
+  let formErrors = {};
+  if (!image)
+    formErrors["image"] = "Image is required.";
+
+  return formErrors;
+}
+
 export {
   handleFormValidation,
   handleLoginFormValidation,
   handleResetPasswordValidation,
   handleUpdatePasswordValidation,
+  handleCreatePostValidation
 };
