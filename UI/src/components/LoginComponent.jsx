@@ -70,7 +70,7 @@ const LoginComponent = () => {
           <div id="login-form-container">
             <div className="login-details">
               <img className="login-logo" src="../../assets/logo.png" />
-              <h2 className="color logfix">Login</h2>
+              <h2 className="color logfix fontstyle">Login</h2>
             </div>
             <form
               className="formset px-sm-3"
@@ -81,7 +81,7 @@ const LoginComponent = () => {
             >
               <div className="form-group pad">
                 <input
-                  id="username"
+                  id="username" 
                   name="username"
                   placeholder="Enter mobile no., username, or email "
                   value={user.username || ""}
@@ -112,14 +112,14 @@ const LoginComponent = () => {
 
               <p className="required errormsg errpad1">{serverErrors}</p>
 
-              <p className="color forget">
+              <p className="color forget fontstyle">
                 {" "}
                 <Link to="/resetPassword">Forgot Password ?</Link>{" "}
               </p>
               <button className="btn btn-primary btnblack" type="submit">
                 Login
               </button>
-              <h6 className="color">
+              <h6 className="color fontstyle">
                 New User?
                 <Link to="/signup"> Create an account</Link>
               </h6>

@@ -3,8 +3,77 @@ body {
   margin: 0 auto;
 }
 
+/* start */
+.menu {
+  display: flex;
+  flex-direction: row;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.menu > li {
+  margin: 0 1rem;
+  overflow: hidden;
+}
+
+.menu-button-container {
+  display: none;
+  height: 100%;
+  width: 30px;
+  cursor: pointer;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+#menu-toggle {
+  display: none;
+}
+.menu-button,
+.menu-button::before,
+.menu-button::after {
+  display: block;
+  background-color: #fff;
+  position: absolute;
+  height: 4px;
+  width: 30px;
+  transition: transform 400ms cubic-bezier(0.23, 1, 0.32, 1);
+  border-radius: 2px;
+}
+
+.menu-button::before {
+  content: '';
+  margin-top: -8px;
+}
+
+.menu-button::after {
+  content: '';
+  margin-top: 8px;
+}
+
+#menu-toggle:checked + .menu-button-container .menu-button::before {
+  margin-top: 0px;
+  transform: rotate(405deg);
+}
+
+#menu-toggle:checked + .menu-button-container .menu-button {
+  background: rgba(255, 255, 255, 0);
+}
+
+#menu-toggle:checked + .menu-button-container .menu-button::after {
+  margin-top: 0px;
+  transform: rotate(-405deg);
+}
+
+.menu a {
+  color: #ffffff;
+}
+
+
+
 .main-section {
   background: linear-gradient(to right, #2398bb, #90ee90);
+  height: 700px;
 }
 
 .headlogo {
@@ -259,7 +328,7 @@ h2 {
   list-style-type: none;
   margin: 0;
   padding: 0;
-  gap: 20px;
+  /* gap: 20px; */
 }
 
 .menu>li {
@@ -278,6 +347,7 @@ h2 {
 */
 footer {
   background: #212121;
+  position: fixed;
   color: #58595b;
   /* height: 90px !important; */
   left: 0;
@@ -348,12 +418,13 @@ footer #footer {
   max-width: 1200px;
   margin: auto;
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   grid-template-rows: auto;
   justify-content: center;
   align-items: start;
   gap: 10px;
   /* height: 50px; */
+ 
 }
 
 .errpad1 {
@@ -482,7 +553,56 @@ footer #footer {
   color: #1DA1F2;
 }
 
-@media screen and (min-width: 370px) and (max-width: 1000px) {
+@media screen and (min-width: 360px) and (max-width: 1000px) {
+
+  .main-section{
+    height: 100% !important;
+  }
+
+  .main-container{
+    min-height: 95vh !important;
+  }
+
+  .formheight{
+    width: 200px;
+    font-size: 10px;
+    margin: 0 auto;
+    height: 30px;
+}
+  .secform{
+    margin-top: 0 !important;
+  }
+
+  .fontstyle{
+    font-size: 10px;
+  }
+
+  .product_title{
+    width: 100% !important;
+  }
+
+.footmargin a{
+  font-size: 8px !important;
+}
+
+.resimg{
+  max-width: 100% !important;
+  height: auto !important;
+  display: block !important;
+}
+
+.resdiv{
+  max-width: 100% !important;
+  height: auto !important;
+  /* display: block !important; */
+}
+
+#top_selling .product_title
+
+{
+  font-size: 1.5rem;
+}
+
   #resrevtest {
     display: flex !important;
     flex-direction: column-reverse !important;
@@ -529,7 +649,21 @@ footer #footer {
   }
 }
 
-@media screen and (min-width: 1024px) and (max-width: 1080px) {
+@media screen and (min-width: 1023px) and (max-width: 1080px) {
+
+
+  .resimg{
+  
+    height: auto !important;
+    display: block !important;
+  }
+  
+  .resdiv{
+    max-width: 100% !important;
+    height: auto !important;
+    
+  }
+
   #login-container {
     height: 530px;
     display: flex;
@@ -596,6 +730,15 @@ footer #footer {
 }
 
 @media screen and (min-width: 1024px) {
+
+  .main-section{
+    height: 100% !important;
+  }
+
+  .main-container{
+    min-height: 95vh !important;
+  }
+
   #main-login-container {
     justify-content: center;
     grid-template-columns: 1fr 1fr;
@@ -1148,7 +1291,56 @@ footer p {
 }
 
 
+@media (max-width: 700px) {
+  .menu {
+    position: absolute;
+    top: 0;
+    margin-top: 50px;
+    left: 0;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    z-index: 99999;
+  }
+
+  #menu-toggle ~ .menu li {
+    height: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    transition: height 400ms cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  #menu-toggle:checked ~ .menu li {
+    border: 1px solid rgba(255, 255, 255, 0.096);
+    height: 2.5em;
+    padding: 0.5em;
+    transition: height 400ms cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  .menu > li {
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    padding: 0.5em 0;
+    width: 100%;
+    color: white;
+    background-color:#212121;
+    
+  }
+
+  .menu > li:not(:last-child) {
+    border-bottom: 1px solid #444;
+  }
+}
+
+
+
+
+
 @media screen and (min-width: 768px) {
+  
   .user_details_container {
     background: #F5F5F5;
 }
@@ -1292,3 +1484,52 @@ footer p {
 
 
 }
+
+@media screen and (min-width: 250px) and (max-width:420px) {
+
+  .formheight{
+    width: 150px;
+    font-size: 10px;
+    margin: 0 auto;
+    height: 30px;
+}
+
+.main-section{
+  height: 100%;
+}
+
+.footmargin{
+  font-size: 7px !important;
+}
+
+.secform{
+  margin-top: 0 !important;
+}
+
+.fontstyle{
+  font-size: 10px;
+}
+
+  .product_title{
+    width: 100% !important;
+  }
+
+  .resimg{
+    max-width: 100% !important;
+    height: auto !important;
+    display: block !important;
+  }
+  
+  .resdiv{
+    max-width: 100% !important;
+    height: auto !important;
+    display: block !important;
+  }
+  
+  
+}
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) {
+  .main-container {
+    min-height: 97vh !important;
+}}
