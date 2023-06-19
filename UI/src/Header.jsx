@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { getLoggedInUser } from '../utils/Auth';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome, faUser, faInfo, faSignOutAlt} from '@fortawesome/free-solid-svg-icons';
+import { faHome, faUser, faInfo, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 
 export default function Header() {
   const isLoggedIn = getLoggedInUser() ? true : false;
@@ -26,6 +26,11 @@ export default function Header() {
         <li>
           <FontAwesomeIcon className='icons' icon={faUser} />
           <Link to="/profile"> Profile </Link>
+        </li>
+
+        <li>
+          <FontAwesomeIcon className='icons' icon={faUser} />
+          <Link to="/createPost"> Create Post </Link>
         </li>
 
         <li>

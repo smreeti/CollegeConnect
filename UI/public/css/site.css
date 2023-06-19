@@ -482,6 +482,11 @@ footer #footer {
   color: #1DA1F2;
 }
 
+
+.post-image>img {
+  width: 30%;
+}
+
 @media screen and (min-width: 370px) and (max-width: 1000px) {
   #resrevtest {
     display: flex !important;
@@ -1296,7 +1301,4 @@ footer p {
     vertical-align: top;
     font-size: 15px;
   }
-
-
-
 }
