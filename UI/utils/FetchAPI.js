@@ -30,10 +30,12 @@ const fetchData = async (url, method, body = null) => {
         console.log("Error:", data.error);
         return { error: data.error };
       }
+
     } else {
       console.log("Error:", data.error);
       return { error: data.error };
     }
+
   } catch (error) {
     console.log("Error:", error);
     return { error: error.message };

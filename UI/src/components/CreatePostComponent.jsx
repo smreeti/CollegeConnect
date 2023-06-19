@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "../Header.jsx";
+import fetchData from "../../utils/FetchAPI.js";
 import { CLOUD_NAME, CLOUD_URL, UPLOAD_PRESET } from "../../utils/CloudinaryConfig.js";
-import { post } from "../../../API/routes/routes.js";
 import { API_TO_SAVE_POST } from "../../utils/APIRequestUrl.js";
 
 class CreatePostComponent extends React.Component {
@@ -15,6 +15,8 @@ class CreatePostComponent extends React.Component {
         };
         this.handleOnChange = this.handleOnChange.bind(this);
         this.createPost = this.createPost.bind(this);
+        // this.uploadPostToCloudinary = this.uploadPostToCloudinary.bind(this);
+        // this.uploadPostToServer = this.uploadPostToServer.bind(this);
     }
 
     handleOnChange = event => {
@@ -46,9 +48,9 @@ class CreatePostComponent extends React.Component {
             image: form.image.files[0]
         }
 
-        await uploadPostToCloudinary(post);
+        await this.uploadPostToCloudinary(post);
     }
-    
+
     uploadPostToCloudinary = async (post) => {
         const data = new FormData();
         data.append("file", post.image);
@@ -75,7 +77,6 @@ class CreatePostComponent extends React.Component {
             console.log(err);
         }
     };
-
 
     uploadPostToServer = async (post) => {
         try {
