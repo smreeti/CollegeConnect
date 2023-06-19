@@ -73,7 +73,12 @@ body {
 
 .main-section {
   background: linear-gradient(to right, #2398bb, #90ee90);
-  height: 700px;
+  /* height: 700px; */
+}
+
+.backgroundcol{
+  background: linear-gradient(to right, #2398bb, #90ee90);
+  height: 100%;
 }
 
 .headlogo {
@@ -347,7 +352,7 @@ h2 {
 */
 footer {
   background: #212121;
-  position: fixed;
+  position:relative;
   color: #58595b;
   /* height: 90px !important; */
   left: 0;
@@ -555,8 +560,9 @@ footer #footer {
 
 @media screen and (min-width: 360px) and (max-width: 1000px) {
 
-  .main-section{
-    height: 100% !important;
+  .ressignform{
+    width: 200px;
+    margin: 0 auto;
   }
 
   .main-container{
@@ -735,9 +741,9 @@ footer #footer {
     height: 100% !important;
   }
 
-  .main-container{
+  /* .main-container{
     min-height: 95vh !important;
-  }
+  } */
 
   #main-login-container {
     justify-content: center;

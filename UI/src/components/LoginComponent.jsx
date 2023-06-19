@@ -64,7 +64,8 @@ const LoginComponent = () => {
   };
 
   return (
-    <section className="main-section">
+
+          <section className="main-section">
       <div className="main-container">
         <div id="main-login-container">
           <div id="login-form-container">
@@ -131,6 +132,8 @@ const LoginComponent = () => {
         </div>
       </div>
     </section>
+
+
   );
 };
 

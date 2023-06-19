@@ -144,7 +144,7 @@ class SignupComponent extends React.Component {
                     </ul>
                   )}
 
-                  <div className="fs-6">
+                  <div className="fs-6 ressignform">
                     <TextInput
                       id="firstName"
                       name="firstName"
