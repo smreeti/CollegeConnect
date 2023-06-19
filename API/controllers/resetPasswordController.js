@@ -58,8 +58,6 @@ const resetPassword = async (req, res) => {
 };
 
 const updatePassword = async (req, res) => {
-  console.log("here");
-  console.log(req.body);
 
   const { newPassword, token } = req.body;
 

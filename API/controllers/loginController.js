@@ -36,12 +36,12 @@ const login = async (req, res) => {
 
             return setSuccessResponse(res, "User logged in successfully", { accessToken, refreshToken, user });
         } else {
-            return setErrorResponse(res, HttpStatus.BAD_REQUEST, "Sorry, your password was incorrect. Please double check your password.");
+            return setErrorResponse(res, HttpStatus.BAD_REQUEST, "Invalid login credentials.");
         }
     }
 
     console.log("User not found");
-    return setErrorResponse(res, HttpStatus.BAD_REQUEST, "Invalid username or password.");
+    return setErrorResponse(res, HttpStatus.BAD_REQUEST, "Invalid login credentials.");
 }
 
 const verifyRefreshToken = (req, res) => {
