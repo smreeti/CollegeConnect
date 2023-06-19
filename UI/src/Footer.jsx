@@ -11,25 +11,30 @@ export default function Footer() {
           <Link to="/about"> About us </Link>
         </div>
         <div className="more_info footmargin">
-          <Link to ='/'>Privacy</Link>
+          <Link to='/'>Privacy</Link>
         </div>
 
         <div className="more_info footmargin">
-        <Link to ='/'> Terms</Link>
+          <Link to='/'> Terms</Link>
         </div>
 
         <div className="more_info footmargin">
-        <Link to ='/'>  Contact Us</Link>
+          <Link to='/'>  Contact Us</Link>
         </div>
 
         <div className="more_info footmargin">
-        <Link to ='/'>@copyright CollegeConnect</Link>
+          <Link to='/'>@copyright CollegeConnect</Link>
         </div>
 
         <div className="social_media footmargin">
-          <FontAwesomeIcon icon={faInstagram} className='instagramIcon'/>
-          <FontAwesomeIcon icon={faTwitter} className='twitterIcon'/>
-          <FontAwesomeIcon icon={faFacebookF} className='facebookIcon' />
+          <Link target='blank' to='https://www.instagram.com/'>
+            <FontAwesomeIcon icon={faInstagram} className='instagramIcon' /></Link>
+
+          <Link target='blank' to='https://www.twitter.com/'>
+            <FontAwesomeIcon icon={faTwitter} className='twitterIcon' /></Link>
+            
+          <Link target='blank' to='https://www.facebook.com/'>
+            <FontAwesomeIcon icon={faFacebookF} className='facebookIcon' /></Link>
         </div>
       </section>
     </footer>

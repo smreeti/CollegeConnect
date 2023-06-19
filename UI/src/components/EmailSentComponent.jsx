@@ -8,7 +8,8 @@ const EmailSentComponent = () => {
             <div className="main-container">
                 <div className="col-lg-6 col-12 p-3 bg-white px-md-5 py-md-4">
                     <div className="text-center">
-                        <img className="login-logo" src="../../assets/logo.png" />
+                        <Link to='/'>
+                            <img className="login-logo" src="../../assets/logo.png" /></Link>
                         <p className="mt-md-4 mt-3">
                             We sent a link to your email to get back into your account.
                         </p>

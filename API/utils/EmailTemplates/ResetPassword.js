@@ -56,11 +56,11 @@ module.exports = {
                         </head>
                             
                         <body>
-                            <div class="container">
+                            <div className="container">
                                 <h1>Password Reset Request</h1>
                                 <p>Dear ${username},</p>
                                 <p>You have requested a password reset for your account. To proceed with resetting your password, please click the button below:</p>
-                                <p class = "reset-button">
+                                <p className = "reset-button">
                                     <a href="http://localhost:3000/#/updatePassword/${token}">Reset Password</a>
                                 </p>
                                 <p>If you did not request a password reset, please ignore this email. Your account is still secure.</p>

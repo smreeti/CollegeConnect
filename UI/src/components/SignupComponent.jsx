@@ -130,7 +130,8 @@ class SignupComponent extends React.Component {
             <div className="row bg-white w-75">
               <div className="col-lg-6 col p-3 px-md-5 py-md-4">
                 <div className="text-center">
-                  <img className="login-logo" src="../../assets/logo.png" />
+                  <Link to='/'>
+                    <img className="login-logo" src="../../assets/logo.png" /></Link>
                   <h2 className="mt-3">Create An Account</h2>
                   <p className="fs-6">Already a user? <Link to="/">Sign In</Link></p>
                 </div>

@@ -69,7 +69,9 @@ const LoginComponent = () => {
         <div id="main-login-container">
           <div id="login-form-container">
             <div className="login-details">
-              <img className="login-logo" src="../../assets/logo.png" />
+              <Link to='/'>
+                <img className="login-logo" src="../../assets/logo.png" />
+              </Link>
               <h2 className="color logfix">Login</h2>
             </div>
             <form
