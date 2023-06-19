@@ -11,12 +11,11 @@ class CreatePostComponent extends React.Component {
             post: {
                 caption: "",
                 image: null
-            }
+            },
+            isLoading: false
         };
         this.handleOnChange = this.handleOnChange.bind(this);
         this.createPost = this.createPost.bind(this);
-        // this.uploadPostToCloudinary = this.uploadPostToCloudinary.bind(this);
-        // this.uploadPostToServer = this.uploadPostToServer.bind(this);
     }
 
     handleOnChange = event => {
@@ -47,6 +46,8 @@ class CreatePostComponent extends React.Component {
             caption: form.caption.value,
             image: form.image.files[0]
         }
+
+        this.setState({ isLoading: true });  // Set isLoading to true
 
         await this.uploadPostToCloudinary(post);
     }
@@ -82,6 +83,7 @@ class CreatePostComponent extends React.Component {
         try {
             const data = await fetchData(API_TO_SAVE_POST, "POST", post);
             if (!data.error) {
+                this.resetForm();
                 console.log("Post saved successfully");
             } else {
                 // this.setServerErrors(data.error);
@@ -90,12 +92,25 @@ class CreatePostComponent extends React.Component {
         } catch (error) {
             console.log("Error:", error);
             // this.setServerErrors(error);
+        } finally {
+            this.setState({ isLoading: false });  // Set isLoading to false
         }
+    }
+
+    resetForm = () => {
+        // Clear selected image and caption after successful submission
+        this.setState({
+            post: {
+                caption: "",
+                image: null
+            }
+        });
     }
 
     render() {
         const {
-            post: { caption, image }
+            post: { caption, image },
+            isLoading
         } = this.state;
 
         return (
@@ -128,7 +143,11 @@ class CreatePostComponent extends React.Component {
                             </div>
                         )}
 
-                        <button type="submit">Submit post</button>
+                        {isLoading ? (
+                            <div className="loader">Loading...</div>  // Show loader while isLoading is true
+                        ) : (
+                            <button type="submit">Submit post</button>
+                        )}
                     </div>
                 </form>
             </>
