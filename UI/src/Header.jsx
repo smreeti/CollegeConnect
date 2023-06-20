@@ -13,9 +13,21 @@ export default function Header() {
         <img className='headlogo' src='../../assets/logotestheader.png' /></Link>
       </div>
 
-      <label className="menu-button-container" htmlFor="menu-toggle">
+      {/* <label className="menu-button-container" htmlFor="menu-toggle">
         <div className="menu-button"></div>
       </label>
+      
+      
+      
+      */}
+<label className="menu-button-container" htmlFor="menu-toggle">
+        {/* <div className="menu-button"></div> */}
+      </label>
+      <input id="menu-toggle" type="checkbox" />
+        <label class="menu-button-container" for="menu-toggle">
+          <div class="menu-button"></div>
+        </label>
+
       <ul className="menu">
 
         <li>
