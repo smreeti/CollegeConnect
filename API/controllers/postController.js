@@ -7,6 +7,9 @@ const savePost = async (req, res) => {
     const { caption, imageUrl } = req.body;
     try {
         let errors = await validateCreatePostForm(imageUrl);
+        const user = req.user;
+        
+        console.log(user);
 
         if (errors.length > 0)
             return setErrorResponse(res, HttpStatus.BAD_REQUEST, errors);

@@ -24,6 +24,9 @@ const PostSchema = new Schema({
     postedBy: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User"
+    },
+    isCollegePost: {
+        type: String
     }
 });
 
