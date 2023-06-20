@@ -14,7 +14,7 @@ const API_TO_UPDATE_PASSWORD = BASE_SERVER_URL + "/updatePassword";
 
 const API_TO_SAVE_POST = BASE_SERVER_URL + "/savePost";
 
-const API_TO_FETCH_ALL_POSTS = "/allPosts";
+const API_TO_FETCH_ALL_POSTS = BASE_SERVER_URL + "/allPosts";
 
 export {
   API_TO_FETCH_COLLEGE_INFO,

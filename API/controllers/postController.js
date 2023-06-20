@@ -2,6 +2,7 @@ const Post = require("../models/Post");
 const HttpStatus = require("../utils/HttpStatus.js");
 const { setSuccessResponse, setErrorResponse } = require('../utils/Response.js');
 const { validateCreatePostForm } = require("../utils/ValidationUtil");
+const { fetchFollowingUsers } = require("./userFollowingController");
 
 const savePost = async (req, res) => {
     const { caption, imageUrl } = req.body;
@@ -27,11 +28,13 @@ const savePost = async (req, res) => {
 }
 
 const fetchAllPosts = async (req, res) => {
+    console.log("here");
+
     const loggedInUser = req.user;
     try {
         const followingUsers = await fetchFollowingUsers(loggedInUser._id);
 
-        console.log(followingUsers);
+        console.log("now", followingUsers);
 
         const posts = await Post.find({
             postedBy: { $in: followingUsers },
