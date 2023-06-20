@@ -28,29 +28,23 @@ const savePost = async (req, res) => {
 }
 
 const fetchAllPosts = async (req, res) => {
-    console.log("here");
-
     const loggedInUser = req.user;
     try {
         const followingUsers = await fetchFollowingUsers(loggedInUser._id);
 
-        console.log("now", followingUsers);
-
         const posts = await Post.find({
             postedBy: { $in: followingUsers },
             isCollegePost: 'Y'
-        }).sort({ createdDate: -1 })
-
-        console.log(posts);
+        }).populate('postedBy')
+            .sort({ createdDate: -1 })
 
         if (posts)
-            return setSuccessResponse(res, { message: "Posts fetched successfully", posts });
+            return setSuccessResponse(res, "Posts fetched successfully", posts);
         else
             return setErrorResponse(res, HttpStatus.NOT_FOUND, "Error fetching posts");
     } catch (error) {
         return setErrorResponse(res, HttpStatus.INTERNAL_SERVER_ERROR, error);
     }
-    return posts;
 }
 
 module.exports = { savePost, fetchAllPosts };

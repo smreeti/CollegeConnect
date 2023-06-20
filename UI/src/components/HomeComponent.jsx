@@ -1,7 +1,8 @@
 import React from 'react';
+import { formatDistanceToNow } from 'date-fns';
 
-import fetchData from "../../utils/FetchAPI.js";
 import Header from '../Header.jsx';
+import fetchData from "../../utils/FetchAPI.js";
 import { getLoggedInUser } from '../../utils/Auth.js';
 import { API_TO_FETCH_ALL_POSTS } from '../../utils/APIRequestUrl.js';
 
@@ -9,37 +10,47 @@ export default class HomeComponent extends React.Component {
 
     constructor() {
         super();
-        this.state = {};
-        // this.fetchProtectedPage = this.fetchProtectedPage.bind(this);
+        this.state = {
+            posts: []
+        };
     }
 
     componentDidMount() {
         this.fetchAllPosts();
     }
 
-    async fetchProtectedPage() {
-        try {
-            const data = await fetchData("http://localhost:4000/protected", "POST");
-            console.log(data);
-        } catch (error) {
-            console.log("Error:", error);
-        }
-    }
-
     async fetchAllPosts() {
         try {
             const data = await fetchData(API_TO_FETCH_ALL_POSTS, "POST");
-            console.log(data);
+            this.setState({
+                posts: data.body
+            })
         } catch (error) {
             console.log("Error:", error);
         }
     }
 
     render() {
+        const { posts } = this.state;
         return (
             <>
                 <Header />
                 <h1>Welcome to Home page, {getLoggedInUser()}</h1>
+
+                {posts.length > 0 ? (
+                    posts.map((post) => (
+                        <div key={post._id}>
+                            <img src={post.imageUrl} alt="Post" className='post-image' />
+                            <p>Posted by: {post.postedBy.username}</p>
+                            <p>Caption: {post.caption}</p>
+                            <p>Likes: {post.likes}</p>
+                            <p>Comments: {post.comments}</p>
+                            <p>Created date: {formatDistanceToNow(new Date(post.createdDate), { addSuffix: true })}</p>
+                        </div>
+                    ))
+                ) : (
+                    <p>No posts found.</p>
+                )}
             </>
         );
     }
