@@ -66,8 +66,10 @@ class CreatePostComponent extends React.Component {
     }
 
     setServerErrors(serverErrors) {
+        let errors = [];
+        errors.push(serverErrors);
         this.setState({
-            serverErrors: serverErrors
+            serverErrors: errors
         });
     }
 
@@ -121,7 +123,9 @@ class CreatePostComponent extends React.Component {
             post: {
                 caption: "",
                 image: null
-            }
+            },
+            errors: [],
+            serverErrors: []
         });
     }
 

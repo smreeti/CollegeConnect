@@ -7,7 +7,7 @@ const { setErrorResponse } = require('../utils/Response.js');
 
 const JWT_SECRET = process.env.JWT_SECRET;
 
-module.exports = (req, res, next) => {    
+module.exports = (req, res, next) => {
     const { authorization } = req.headers;
 
     if (!authorization)
@@ -19,10 +19,11 @@ module.exports = (req, res, next) => {
             return setErrorResponse(res, HttpStatus.UNAUTHORIZED, "You must be logged in");
 
         const { _id } = payload;
-        User.findById(_id).then(existingUser => {
-            existingUser.password = undefined; //so that password is not exposed.
-            req.user = existingUser;
-            next();
-        }).populate('userTypeId');
+        User.findById(_id).populate('userTypeId')
+            .then(existingUser => {
+                existingUser.password = undefined; //so that password is not exposed.
+                req.user = existingUser;
+                next();
+            });
     });
 }
