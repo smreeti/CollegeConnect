@@ -10,13 +10,7 @@ export default function Footer() {
         <div className="company footmargin">
           <Link to="/about"> About us </Link>
         </div>
-        <div className="more_info footmargin">
-          <Link to='/'>Privacy</Link>
-        </div>
-
-        <div className="more_info footmargin">
-          <Link to='/'> Terms</Link>
-        </div>
+      
 
         <div className="more_info footmargin">
           <Link to='/'>  Contact Us</Link>

@@ -2,6 +2,32 @@ body {
   font-family: cursive !important;
   margin: 0 auto;
 }
+.dropdown-menu.show {
+  background-color: #212121;
+  min-width: 130px;
+} 
+
+
+
+#profile-dropdown{
+  background: none;
+  border: 0 !important;
+}
+
+#username{
+  padding: 10px;
+  font-style: italic;
+}
+
+
+#prfimg{
+  width: 30px;
+}
+
+.menu a:hover{
+  color: white;
+  background-color: #212121;
+}
 
 /* Hamburger */
 
@@ -557,6 +583,9 @@ footer #footer {
 }
 
 @media screen and (min-width: 370px) and (max-width: 1000px) {
+
+
+
   #resrevtest {
     display: flex !important;
     flex-direction: column-reverse !important;
@@ -1040,7 +1069,7 @@ footer p {
   align-items: flex-start;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 700px) {
 
   #main-login-container {
     width: 90% !important;
