@@ -21,8 +21,11 @@ const {
   API_TO_VERIFY_REFRESH_TOKEN,
   API_TO_RESET_PASSWORD,
   API_TO_SAVE_POST,
+  API_TO_FETCH_ALL_POSTS,
 } = require("../utils/APIRequestUrl.js");
+
 const { setSuccessResponse } = require("../utils/Response.js");
+const { fetchAllPosts } = require("../controllers/postController.js");
 
 router.get(API_TO_FETCH_COLLEGE_INFO, fetchCollegeList);
 router.post(API_TO_SIGNUP_USER, signupUser);
@@ -39,5 +42,6 @@ router.post("/protected", authMiddleware, (req, res) => {
 });
 
 router.post(API_TO_SAVE_POST, authMiddleware, savePost);
+router.post(API_TO_FETCH_ALL_POSTS, authMiddleware, fetchAllPosts);
 
 module.exports = router;

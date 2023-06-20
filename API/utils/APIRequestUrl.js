@@ -11,6 +11,7 @@ const API_TO_UPDATE_PASSWORD = "/updatePassword";
 const API_TO_VERIFY_REFRESH_TOKEN = "/refresh";
 
 const API_TO_SAVE_POST = "/savePost";
+const API_TO_FETCH_ALL_POSTS = "/allPosts";
 
 module.exports = {
     API_TO_FETCH_COLLEGE_INFO,
@@ -19,5 +20,6 @@ module.exports = {
     API_TO_RESET_PASSWORD,
     API_TO_UPDATE_PASSWORD,
     API_TO_VERIFY_REFRESH_TOKEN,
-    API_TO_SAVE_POST
+    API_TO_SAVE_POST,
+    API_TO_FETCH_ALL_POSTS
 };
