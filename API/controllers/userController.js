@@ -1,4 +1,5 @@
 const User = require('../models/User.js');
+const UserType = require('../models/UserType.js');
 
 const fetchUser = (username) => {
     const user = User.findOne({
@@ -11,4 +12,15 @@ const fetchUser = (username) => {
     return user ? user : null;
 }
 
-module.exports = { fetchUser };
+const fetchAdminUser = async (collegeId) => {
+    const adminUser = await User.findOne({
+        userTypeId: {
+            $in: await UserType.findOne({ code: "SUPER_ADMIN" })
+        },
+        collegeInfoId: collegeId
+    });
+
+    return adminUser;
+};
+
+module.exports = { fetchUser, fetchAdminUser };

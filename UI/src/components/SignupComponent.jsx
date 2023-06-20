@@ -100,7 +100,7 @@ class SignupComponent extends React.Component {
 
   setServerErrors(serverErrors) {
     this.setState({
-      serverErrors: serverErrors
+      serverErrors: [serverErrors],
     });
   }
 
