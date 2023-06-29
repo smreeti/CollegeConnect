@@ -11,6 +11,7 @@ const {
   updatePassword,
   verifyRefreshToken,
   savePost,
+  searchUserByUsername,
 } = require("../controllers/controller.js");
 
 const {
@@ -22,6 +23,7 @@ const {
   API_TO_RESET_PASSWORD,
   API_TO_SAVE_POST,
   API_TO_FETCH_ALL_POSTS,
+  API_TO_SEARCH_USERS,
 } = require("../utils/APIRequestUrl.js");
 
 const { setSuccessResponse } = require("../utils/Response.js");
@@ -43,5 +45,7 @@ router.post("/protected", authMiddleware, (req, res) => {
 
 router.post(API_TO_SAVE_POST, authMiddleware, savePost);
 router.post(API_TO_FETCH_ALL_POSTS, authMiddleware, fetchAllPosts);
+
+router.post(API_TO_SEARCH_USERS, authMiddleware, searchUserByUsername);
 
 module.exports = router;

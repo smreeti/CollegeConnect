@@ -13,6 +13,8 @@ const API_TO_VERIFY_REFRESH_TOKEN = "/refresh";
 const API_TO_SAVE_POST = "/savePost";
 const API_TO_FETCH_ALL_POSTS = "/allPosts";
 
+const API_TO_SEARCH_USERS ="/searchUser";
+
 module.exports = {
     API_TO_FETCH_COLLEGE_INFO,
     API_TO_SIGNUP_USER,
@@ -21,5 +23,6 @@ module.exports = {
     API_TO_UPDATE_PASSWORD,
     API_TO_VERIFY_REFRESH_TOKEN,
     API_TO_SAVE_POST,
-    API_TO_FETCH_ALL_POSTS
+    API_TO_FETCH_ALL_POSTS,
+    API_TO_SEARCH_USERS
 };
