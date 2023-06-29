@@ -14,11 +14,15 @@ const SearchUserComponent = () => {
         <>
             <div id="modal1" className="modal" ref={searchModal}>
                 <div className="modal-content">
-                    <h4>Modal Header</h4>
-                    <p>A bunch of text</p>
+                    <input
+                        type="text"
+                        placeholder="search users"
+                        value={search}
+                        onChange={(e) => setSearch(e.target.value)}
+                    />
                 </div>
                 <div className="modal-footer">
-                    <a href="#!" className="modal-close waves-effect waves-green btn-flat">Agree</a>
+                    <a href="#!" className="modal-close waves-effect waves-green btn-flat">Close</a>
                 </div>
             </div>
         </>
