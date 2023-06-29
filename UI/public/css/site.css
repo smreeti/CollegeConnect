@@ -2,6 +2,71 @@ body {
   font-family: cursive !important;
   margin: 0 auto;
 }
+
+
+/*Create POST START*/
+
+/* Add the following styles to your CSS file */
+
+/* Style the form container */
+#createPostform {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+/* Style the input fields */
+#createPostform input[type="text"],
+#createPostform input[type="file"] {
+  margin-bottom: 10px;
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+/* Style the error messages */
+.error-list {
+  list-style-type: none;
+  padding: 0;
+  margin-bottom: 10px;
+}
+
+/* Style the submit button */
+#createPostform button[type="submit"] {
+  padding: 8px 16px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#createPostform button[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+/* Style the loader */
+.loader {
+  margin-top: 20px;
+}
+
+/* Style the post image container */
+.post-image {
+  margin-top: 20px;
+}
+
+.post-image img {
+  max-width: 100%;
+  height: auto;
+}
+
+
+
+/*Create POST END*/
+
+
+
 .dropdown-menu.show {
   background-color: #212121;
   min-width: 130px;
