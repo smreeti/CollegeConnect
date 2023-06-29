@@ -7,6 +7,8 @@ import { faHome, faUser, faInfo, faSignOutAlt } from '@fortawesome/free-solid-sv
 import { faImage  } from '@fortawesome/free-solid-svg-icons';
 
 
+
+
 export default function Header() {
   const isLoggedIn = getLoggedInUser() ? true : false;
 
@@ -28,41 +30,54 @@ export default function Header() {
       <ul className="menu">
         
 <li>
-<input type="text" id="search-input" placeholder="Search..." />
+<input type="text" id="search-input" placeholder="Search" />
 
 </li>
         <li>
-          <FontAwesomeIcon className='icons' icon={faHome} />
-          <Link to="/home"> Home </Link>
+          <FontAwesomeIcon className='icons iconimg' icon={faHome} />
+          <Link className='menuname' to="/home"> Home </Link>
         </li>
 
         <li>
-          <FontAwesomeIcon className='icons' icon={faImage } />
-          <Link to="/createPost"> Create Post </Link>
+          <FontAwesomeIcon className='icons iconimg' icon={faImage } />
+          <Link className='menuname' to="/createPost"> Create Post </Link>
         </li>
 
         <li>
-          <FontAwesomeIcon className='icons' icon={faInfo} />
-          <Link to="/about"> About Us </Link>
+          <FontAwesomeIcon className='icons iconimg' icon={faInfo} />
+          <Link className='menuname' to="/about"> About Us </Link>
         </li>
 
-        <Dropdown>
+     
+
+          <li>
+
+        <Dropdown className='iconimg'>
           <Dropdown.Toggle variant="secondary" id="profile-dropdown">
            <img id='prfimg' src='./../assets/viewprofileimage.jpeg' />
             <span id='username' >John Doe</span>
           </Dropdown.Toggle>
+        
 
+          <li>
           <Dropdown.Menu className='test'>
             <Dropdown.Item className="custom-item">
+            <FontAwesomeIcon className='icons' icon={faUser} />
+
               <Link to="/profile"> Profile </Link>
             </Dropdown.Item>
             {isLoggedIn && (
               <Dropdown.Item>
+                <FontAwesomeIcon className="icons" icon={faSignOutAlt} />
                 <Link to="/logout"> Logout </Link>
               </Dropdown.Item>
             )}
           </Dropdown.Menu>
+          </li>
+        
         </Dropdown>
+        </li>
+    
       </ul>
     </section>
   )
