@@ -5,7 +5,6 @@ import { handleResetPasswordValidation } from "../../utils/validation.js";
 import { API_TO_RESET_PASSWORD } from "../../utils/APIRequestUrl.js";
 import fetchData from "../../utils/FetchAPI.js";
 
-
 const ResetPasswordComponent = () => {
     const navigate = useNavigate();
 
@@ -114,6 +113,5 @@ const ResetPasswordComponent = () => {
         </section>
     )
 }
-
 
 export default ResetPasswordComponent;

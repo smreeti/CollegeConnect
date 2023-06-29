@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { getLoggedInUser } from '../utils/Auth';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome, faUser, faInfo, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faUser, faInfo, faSignOutAlt, faSearch } from '@fortawesome/free-solid-svg-icons';
 
 export default function Header() {
   const isLoggedIn = getLoggedInUser() ? true : false;
@@ -21,6 +21,11 @@ export default function Header() {
         <li>
           <FontAwesomeIcon className='icons' icon={faHome} />
           <Link to="/home"> Home </Link>
+        </li>
+
+        <li>
+          <FontAwesomeIcon className='icons' icon={faSearch} />
+          <Link to="/search" data-target="modal1" className="modal-trigger"> Search </Link>
         </li>
 
         <li>
