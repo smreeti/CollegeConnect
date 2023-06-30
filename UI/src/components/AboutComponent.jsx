@@ -154,7 +154,7 @@ export default function About() {
                 />
               </div>
               <div className="col-md-6 order-md-1">
-                <h1>Stand out on CollegeConnect</h1>
+                <h1 className="std">Stand out on CollegeConnect</h1>
 
                 <p className="standout">
                   Connect with more people, build influence, and create
