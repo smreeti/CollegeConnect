@@ -122,7 +122,7 @@ const CreatePostComponent = () => {
       <Header />
       <div id="modal1" className="modal" ref={createPostModal}>
 
-        <div className="modal-content">
+        <div className="modal-content fix-upload-button">
         <div className="modalcross">
           <div className="modal-header modalsubdiv">
             <h4 className="posting">Create New Post</h4>
@@ -158,7 +158,7 @@ const CreatePostComponent = () => {
                 <div className="uploadimgset"><img src="../../assets/uploadicon.png" /></div>    
 
                  <div className="drag">   
-                <span>Drag photos and videos here </span>
+              
                 <input className="choosefile" type="file" name="image" onChange={handleOnChange} />
                 <p className="text-danger small mb-3">{errors["image"]}</p>
                 </div>
@@ -166,14 +166,18 @@ const CreatePostComponent = () => {
               
 
               <div className="capdiv">
-              <input
-                type="text"
-                placeholder="caption"
-                name="caption"
-                className="caption"
-                value={post.caption}
-                onChange={handleOnChange}
+
+             
+              
+              <textarea
+                  type="text"
+                  placeholder="caption"
+                  name="caption"
+                  className="caption"
+                  value={post.caption}
+                  onChange={handleOnChange}
               />
+
 
               </div>    
 
@@ -187,7 +191,7 @@ const CreatePostComponent = () => {
                 <div className="loader">Loading...</div>
               ) : (
                 <div className="btndiv">
-                <button className="btnsubmit" type="submit">Submit post</button>
+                <button className="btnblack btnpost" type="submit">Submit post</button>
                 </div>
               )}
             </div>
