@@ -51,6 +51,16 @@ body {
   margin-top: 5% !important;
 }
 
+#username{
+  font-size: 13px;
+}
+
+
+.subbtn{
+  background-color: black !important;
+  margin-top: 40px;
+}
+
 .modal-content input[type="text"],
 .modal-content input[type="file"],
 .modal-content button[type="submit"] {
@@ -217,7 +227,7 @@ button[type="submit"]:hover {
 .dropdown-menu.show {
   background-color: #212121;
   min-width: 130px;
-  margin-left: 50px;
+  margin-top: 2px;
 } 
 
 .iconimg{
@@ -315,6 +325,7 @@ button[type="submit"]:hover {
 .menu a {
   color: #ffffff;
   font-size: 13px;
+  text-align: center;
 }
 
 

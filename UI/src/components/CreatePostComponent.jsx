@@ -114,90 +114,90 @@ const CreatePostComponent = () => {
   };
 
   const cancelModal = () => {
-    // Logic to close the modal
+    const modalInstance = M.Modal.getInstance(createPostModal.current);
+    modalInstance.close();
   };
 
   return (
     <>
       <Header />
       <div id="modal1" className="modal" ref={createPostModal}>
+  <div className="modal-dialog">
+    <div className="modal-content">
+      <div className="modal-header">
+        <h4 className="modal-title">Create New Post</h4>
+        <button
+          type="button"
+          className="close"
+          onClick={cancelModal}
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
 
-        <div className="modal-content fix-upload-button">
-        <div className="modalcross">
-          <div className="modal-header modalsubdiv">
-            <h4 className="posting">Create New Post</h4>
-           
-          </div>
-          <FontAwesomeIcon
-              icon={faTimes}
-              className="modal-close modalsubdiv"
-              onClick={cancelModal}
+      <form
+        className="modal-body"
+        id="createPostform"
+        name="createPostform"
+        method="POST"
+        onSubmit={createPost}
+      >
+        {serverErrors.length > 0 && (
+          <ul className="error-list text-danger">
+            {serverErrors.map((error, index) => (
+              <li key={index}>{error}</li>
+            ))}
+          </ul>
+        )}
+
+        <div className="form-group">
+          <div className="custom-file">
+            <input
+              type="file"
+              className="custom-file-input"
+              id="image"
+              name="image"
+              onChange={handleOnChange}
             />
-
-      </div>
-          <form
-            className=""
-            id="createPostform"
-            name="createPostform"
-            method="POST"
-            onSubmit={createPost}
-          >
-            {serverErrors.length > 0 && (
-              <ul className="error-list text-danger">
-                {serverErrors.map((error, index) => (
-                  <li key={index}>{error}</li>
-                ))}
-              </ul>
-            )}
-
-            <div>
-             
-
-              <div>
-
-                <div className="uploadimgset"><img src="../../assets/uploadicon.png" /></div>    
-
-                 <div className="drag">   
-              
-                <input className="choosefile" type="file" name="image" onChange={handleOnChange} />
-                <p className="text-danger small mb-3">{errors["image"]}</p>
-                </div>
-              </div>
-              
-
-              <div className="capdiv">
-
-             
-              
-              <textarea
-                  type="text"
-                  placeholder="caption"
-                  name="caption"
-                  className="caption"
-                  value={post.caption}
-                  onChange={handleOnChange}
-              />
-
-
-              </div>    
-
-              {post.image && (
-                <div className="post-image">
-                  <img src={URL.createObjectURL(post.image)} alt="Selected" />
-                </div>
-              )}
-
-              {isLoading ? (
-                <div className="loader">Loading...</div>
-              ) : (
-                <div className="btndiv">
-                <button className="btnblack btnpost" type="submit">Submit post</button>
-                </div>
-              )}
-            </div>
-          </form>
+            <label className="custom-file-label" htmlFor="image">
+              Choose File
+            </label>
+            <p className="text-danger small">{errors["image"]}</p>
+          </div>
         </div>
-      </div>
+
+        <div className="form-group">
+          <textarea
+            className="form-control"
+            rows="3"
+            placeholder="Caption"
+            name="caption"
+            value={post.caption}
+            onChange={handleOnChange}
+          />
+        </div>
+
+        {post.image && (
+          <div className="post-image">
+            <img src={URL.createObjectURL(post.image)} alt="Selected" />
+          </div>
+        )}
+
+        {isLoading ? (
+          <div className="loader">Loading...</div>
+        ) : (
+          <button className="subbtn" type="submit">
+            Submit Post
+          </button>
+        )}
+      </form>
+    </div>
+  </div>
+</div>
+
+
     </>
   );
 };

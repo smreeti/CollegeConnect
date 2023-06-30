@@ -1,6 +1,7 @@
 const path = require("path");
 
 module.exports = {
+  
   mode: "development",
   entry: "./src/app.jsx",
   output: {
@@ -63,4 +64,6 @@ module.exports = {
       chunks: "all",
     },
   },
+
+  
 };
