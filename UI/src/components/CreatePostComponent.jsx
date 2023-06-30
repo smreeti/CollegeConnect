@@ -121,7 +121,7 @@ const CreatePostComponent = () => {
   return (
     <>
       <Header />
-      <div id="modal1" className="modal" ref={createPostModal}>
+      <div id="modal1" className="modal modcen" ref={createPostModal}>
   <div className="modal-dialog">
     <div className="modal-content">
       <div className="modal-header">

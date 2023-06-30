@@ -837,6 +837,12 @@ footer #footer {
     border-radius: var(--bs-modal-border-radius);
     outline: 0;
     height: 500px;}
+
+    .modcen{
+      display: flex !important;
+      align-items: center;
+    }
+
   /**/
 
 
