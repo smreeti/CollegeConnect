@@ -73,7 +73,7 @@ export default function Header() {
           <Dropdown className="iconimg">
             <Dropdown.Toggle variant="secondary" id="profile-dropdown">
               <img id="prfimg" src="./../assets/viewprofileimage.jpeg" />
-              <span id="username">John Doe</span>
+              <span id="john">John Doe</span>
             </Dropdown.Toggle>
             <li>
               <Dropdown.Menu className="test">
