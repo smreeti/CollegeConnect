@@ -1,122 +1,72 @@
 import React from "react";
 
 import Header from "../Header.jsx";
+import { API_TO_FETCH_PROFILE_DETAILS } from "../../utils/APIRequestUrl.js";
+import fetchData from "../../utils/FetchAPI.js";
 
-function ProfileComponent() {
-  return (
-    <main>
-      <Header />
-      <div className="user_details_container">
-        <div>
-          <div className="image_mainblock">
-            <div className="creator_block">
-              <img alt="photographer Image" className="creator_image" src="../../assets/elevated.jpg" />
-            </div>
+export default class HomeComponent extends React.Component {
 
-            <div className="container_button">
-              <button>
-                <span className="b_text">MOST LIKED</span>
-              </button>
-              <button>
-                <span className="b_text">+ FOLLOW</span>
-              </button>
+  constructor() {
+    super();
+    this.state = {
+      userProfileDetails: {}
+    }
+  }
 
-              <div className="sync">
-                <div className="creator_desc">John Doe</div>
-                <div className="creator_details first_text">100 FOLLOWERS</div>
-                <div className="creator_details t_layout">1000 LIKES</div>
-                <div className="creator_details t_layout">10 POSTS</div>
-                <div className="desc">Hey Community! I am a professional photographer and I love to capture the real-life moments. Please follow to not miss my latest uploads.</div>
+  componentDidMount() {
+    this.fetchUserProfileDetails();
+  }
+
+  async fetchUserProfileDetails() {
+    try {
+      const data = await fetchData(API_TO_FETCH_PROFILE_DETAILS, "POST");
+      this.setState({
+        userProfileDetails: data.body
+      })
+
+    } catch (error) {
+      console.log("Error:", error);
+    }
+  }
+
+  render() {
+
+    const { userProfileDetails: { posts, userDetail } } = this.state;
+
+    return (
+      <main>
+        <Header />
+        <div className="user_details_container">
+          <div>
+            <div className="image_mainblock">
+              <div className="creator_block">
+                <img alt="photographer Image" className="creator_image" src="../../assets/elevated.jpg" />
+              </div>
+
+              <div className="container_button">
+                <div className="sync">
+                  <div className="creator_desc">{userDetail?.firstName + " " + userDetail?.lastName}</div>
+                  <div className="creator_details first_text">100 Followers</div>
+                  <div className="creator_details t_layout">1000 Following</div>
+                  <div className="creator_details t_layout">{posts?.length} POSTS</div>
+                  <div className="desc">Hey Community! I am a professional photographer and I love to capture the real-life moments. Please follow to not miss my latest uploads.</div>
+                </div>
               </div>
             </div>
-          </div>
 
-          <div className="image_grid">
-            <div className="images">
-              <img alt="captured images" className="p_img" src="../../assets/students.jpg" />
-              <img alt="like button" className="icon" src="../../assets/like.png" />
-              <span className="number">45</span>
-            </div>
-
-            <div className="images">
-              <img alt="captured images" className="p_img" src="../../assets/potrait.jpg" />
-              <img alt="like button" className="icon" src="../../assets/like.png" />
-              <span className="number">45</span>
-            </div>
-
-            <div className="images">
-              <img alt="captured images" className="p_img" src="../../assets/young.jpg" />
-              <img alt="like button" className="icon" src="../../assets/like.png" />
-              <span className="number">45</span>
-            </div>
-          </div>
-
-          <div className="image_grid">
-            <div className="images">
-              <img alt="captured images" className="p_img" src="../../assets/userimgone.jpg" />
-              <img alt="like button" className="icon" src="../../assets/like.png" />
-              <span className="number">45</span>
-            </div>
-
-            <div className="images">
-              <img alt="captured images" className="p_img" src="../../assets/userimgtwo.jpg" />
-              <img alt="like button" className="icon" src="../../assets/like.png" />
-              <span className="number">45</span>
-            </div>
-
-            <div className="images">
-              <img alt="captured images" className="p_img" src="../../assets/userimgthree.jpg" />
-              <img alt="like button" className="icon" src="../../assets/like.png" />
-              <span className="number">45</span>
-            </div>
-          </div>
-
-          <div className="image_grid">
-            <div className="images">
-              <img alt="captured images" className="p_img" src="images/../../assets/userimgfour.jpg" />
-              <img alt="like button" className="icon" src="../../assets/like.png" />
-              <span className="number">45</span>
-            </div>
-
-            <div className="images">
-              <img alt="captured images" className="p_img" src="../../assets/userimgfive.jpg" />
-              <img alt="like button" className="icon" src="../../assets/like.png" />
-              <span className="number">45</span>
-            </div>
-
-            <div className="images">
-              <img alt="captured images" className="p_img" src="../../assets/userimgsix.jpg" />
-              <img alt="like button" className="icon" src="../../assets/like.png" />
-              <span className="number">45</span>
-            </div>
-          </div>
-
-          <div className="image_grid">
-            <div className="images">
-              <img alt="captured images" className="p_img" src="../../assets/userimgseven.jpg" />
-              <img alt="like button" className="icon" src="../../assets/like.png" />
-              <span className="number">45</span>
-            </div>
-
-            <div className="images">
-              <img alt="captured images" className="p_img" src="../../assets/userimgeight.jpg" />
-              <img alt="like button" className="icon" src="../../assets/like.png" />
-              <span className="number">45</span>
-            </div>
-
-            <div className="images">
-              <img alt="captured images" className="p_img" src="../../assets/userimgnine.jpg" />
-              <img alt="like button" className="icon" src="../../assets/like.png" />
-              <span className="number">45</span>
+            <div className="image_grid">
+              {posts?.length > 0 ? (
+                posts.map((post) => (
+                  <div className="images" key={post.id}>
+                    <img alt="captured images" className="p_img" src={post.imageUrl} />
+                    <span className="number">Likes: {post.likes} </span>
+                    <span className="number">Comments: {post.comments}</span>
+                  </div>
+                ))) : "No post(s) yet."}
             </div>
           </div>
         </div>
-        {/* <div className="see_more">
-          <a href="#">See More >> </a>
-        </div> */}
-      </div>
-    </main>
-  );
+      </main>
+    );
+  }
 }
-
-export default ProfileComponent;

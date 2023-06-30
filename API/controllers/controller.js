@@ -4,6 +4,7 @@ const { login, verifyRefreshToken } = require("./loginController.js");
 const { resetPassword, updatePassword } = require("./resetPasswordController.js");
 const { savePost } = require("./postController.js");
 const { searchUserByUsername } = require('./userController.js')
+const { fetchProfileDetails } = require('./profileController.js')
 
 module.exports = {
   signupUser,
@@ -13,5 +14,6 @@ module.exports = {
   updatePassword,
   verifyRefreshToken,
   savePost,
-  searchUserByUsername
+  searchUserByUsername,
+  fetchProfileDetails
 };

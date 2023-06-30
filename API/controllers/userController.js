@@ -38,9 +38,21 @@ const searchUserByUsername = async (req, res) => {
 
         return setSuccessResponse(res, "Users fetched successfully", users);
     } catch (e) {
-        console.log(e); 
+        console.log(e);
         return setErrorResponse(res, HttpStatus.INTERNAL_SERVER_ERROR, "An error occurred while fetching users.");
     }
 }
 
-module.exports = { fetchUser, fetchAdminUser, searchUserByUsername };
+const fetchUserDetails = async (loggedInUser) => {
+    try {
+        const userDetail = await User.findOne({
+            _id: loggedInUser._id
+        }).select("firstName lastName username profilePicture");
+        
+        return userDetail;
+    } catch (error) {
+        return setErrorResponse(res, HttpStatus.INTERNAL_SERVER_ERROR, error);
+    }
+}
+
+module.exports = { fetchUser, fetchAdminUser, searchUserByUsername, fetchUserDetails };
