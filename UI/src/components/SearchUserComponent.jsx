@@ -30,23 +30,25 @@ const SearchUserComponent = () => {
         }
     }
 
+    const closeSearchModal = () => {
+        M.Modal.getInstance(searchModal.current).close();
+        setSearch('');
+    }
+
     return (
         <>
             <div id="modal1" className="modal" ref={searchModal}>
                 <div className="modal-content">
-                    
+
                     <div className="modal-close-btn">
-                        <button className="close-btn" onClick={() => {
-                            M.Modal.getInstance(searchModal.current).close();
-                            setSearch('');
-                        }}>
+                        <button className="close-btn" onClick={() => closeSearchModal()}>
                             Close
                         </button>
                     </div>
 
                     <input
                         type="text"
-                        placeholder="search users"
+                        placeholder="Search users"
                         value={search}
                         onChange={(e) => searchUsers(e.target.value)}
                     />
@@ -54,14 +56,13 @@ const SearchUserComponent = () => {
                     <ul className="collection">
                         {userDetails?.length > 0 && search ? (
                             userDetails.map(userDetail => {
-                                return <Link key={userDetail._id} onClick={() => {
-                                    M.Modal.getInstance(searchModal.current).close()
-                                    setSearch('')
-                                }}>
+                                return <Link key={userDetail._id} onClick={() => closeSearchModal()}>
                                     <li className="collection-item" key={userDetail._id}>
                                         <img className="profilePic"
                                             src={userDetail.profilePicture == "default" ? "assets/logo.png" : userDetail.profilePicture} />
-                                        {userDetail.username}</li></Link>
+                                        {userDetail.username}
+                                    </li>
+                                </Link>
                             })
                         ) : (search ? "No user(s) found" : "")}
                     </ul>

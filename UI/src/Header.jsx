@@ -1,11 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getLoggedInUser } from '../utils/Auth';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faUser, faInfo, faSignOutAlt, faSearch } from '@fortawesome/free-solid-svg-icons';
+import SearchUserComponent from './components/SearchUserComponent.jsx';
 
 export default function Header() {
   const isLoggedIn = getLoggedInUser() ? true : false;
+
+  const [isSearchModalOpen, setIsSearchModalOpen] = useState(false);
+
+  const openSearchModal = () => {
+    setIsSearchModalOpen(true);
+  };
 
   return (
     <section className="top-nav">
@@ -25,7 +32,7 @@ export default function Header() {
 
         <li>
           <FontAwesomeIcon className='icons' icon={faSearch} />
-          <Link to="/search" data-target="modal1" className="modal-trigger"> Search </Link>
+          <button onClick={openSearchModal} data-target="modal1" className="modal-trigger">Search</button>
         </li>
 
         <li>
@@ -52,6 +59,8 @@ export default function Header() {
           </li>
         )}
       </ul>
+
+      {isSearchModalOpen && <SearchUserComponent />}
     </section>
   )
 }
