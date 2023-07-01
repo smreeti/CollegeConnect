@@ -10,12 +10,14 @@ import { handleCreatePostValidation } from "../../utils/validation.js";
 import M from "materialize-css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
+import { API_TO_SAVE_POST } from "../../utils/APIRequestUrl.js";
 
 const CreatePostComponent = () => {
   const [post, setPost] = useState({
     caption: "",
     image: null,
   });
+
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState([]);
   const [serverErrors, setServerErrors] = useState([]);
@@ -91,7 +93,7 @@ const CreatePostComponent = () => {
     try {
       const data = await fetchData(API_TO_SAVE_POST, "POST", post);
       if (!data.error) {
-        resetForm();
+        cancelModal();
         console.log("Post saved successfully");
       } else {
         setServerErrors([data.error]);
@@ -104,17 +106,22 @@ const CreatePostComponent = () => {
     }
   };
 
-  const resetForm = () => {
+  const cancelModal = () => {
+
     setPost({
       caption: "",
       image: null,
     });
+
+    // Reset the file input field
+    const fileInput = document.getElementById("image");
+    if (fileInput)
+      fileInput.value = null;
+
     setErrors([]);
     setServerErrors([]);
-  };
 
-  const cancelModal = () => {
-    const modalInstance = M.Modal.getInstance(createPostModal.current);
+    const modalInstance = M.Modal.getInstance(createPostModal.current); //close modal
     modalInstance.close();
   };
 
@@ -122,81 +129,74 @@ const CreatePostComponent = () => {
     <>
       <Header />
       <div id="modal1" className="modal modcen" ref={createPostModal}>
-  <div className="modal-dialog">
-    <div className="modal-content">
-      <div className="modal-header">
-        <h4 className="modal-title">Create New Post</h4>
-        <button
-          type="button"
-          className="close"
-          onClick={cancelModal}
-          data-dismiss="modal"
-          aria-label="Close"
-        >
-          <span aria-hidden="true">&times;</span>
-        </button>
+        <div className="modal-dialog">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h4 className="modal-title">Create New Post</h4>
+
+              <FontAwesomeIcon
+                icon={faTimes}
+                className="close"
+                onClick={cancelModal}
+              />
+            </div>
+
+            <form
+              className="modal-body"
+              id="createPostform"
+              name="createPostform"
+              method="POST"
+              onSubmit={createPost}
+            >
+              {serverErrors?.length > 0 && (
+                <ul className="error-list text-danger">
+                  {serverErrors.map((error, index) => (
+                    <li key={index}>{error.toString()}</li>
+                  ))}
+                </ul>
+              )}
+
+              <div className="form-group">
+                <div className="custom-file">
+                  <input
+                    type="file"
+                    className="custom-file-input"
+                    id="image"
+                    name="image"
+                    onChange={handleOnChange}
+                  />
+                  <p className="text-danger small">{errors["image"]}</p>
+                </div>
+              </div>
+
+              <div className="form-group">
+                <textarea
+                  className="form-control caption"
+                  rows="3"
+                  placeholder="Caption"
+                  name="caption"
+                  value={post.caption}
+                  onChange={handleOnChange}
+                />
+              </div>
+
+              {post.image && (
+                <div className="post-image">
+                  <img src={URL.createObjectURL(post.image)} alt="Selected" />
+                </div>
+              )}
+
+              {isLoading ? (
+                <div className="loader">Loading...</div>
+              ) : (
+                <button className="subbtn" type="submit">
+                  Submit Post
+                </button>
+              )}
+            </form>
+          </div>
+        </div>
       </div>
-
-      <form
-        className="modal-body"
-        id="createPostform"
-        name="createPostform"
-        method="POST"
-        onSubmit={createPost}
-      >
-        {serverErrors.length > 0 && (
-          <ul className="error-list text-danger">
-            {serverErrors.map((error, index) => (
-              <li key={index}>{error}</li>
-            ))}
-          </ul>
-        )}
-
-        <div className="form-group">
-          <div className="custom-file">
-            <input
-              type="file"
-              className="custom-file-input"
-              id="image"
-              name="image"
-              onChange={handleOnChange}
-            />
-            <label className="custom-file-label" htmlFor="image">
-              Choose File
-            </label>
-            <p className="text-danger small">{errors["image"]}</p>
-          </div>
-        </div>
-
-        <div className="form-group">
-          <textarea
-            className="form-control"
-            rows="3"
-            placeholder="Caption"
-            name="caption"
-            value={post.caption}
-            onChange={handleOnChange}
-          />
-        </div>
-
-        {post.image && (
-          <div className="post-image">
-            <img src={URL.createObjectURL(post.image)} alt="Selected" />
-          </div>
-        )}
-
-        {isLoading ? (
-          <div className="loader">Loading...</div>
-        ) : (
-          <button className="subbtn" type="submit">
-            Submit Post
-          </button>
-        )}
-      </form>
-    </div>
-  </div>
-</div>
-
 
     </>
   );

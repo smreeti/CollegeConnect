@@ -1,4 +1,4 @@
 export const getLoggedInUser = () => {
     const user = localStorage.getItem('user');
-    return user ? JSON.parse(user).firstName : null;
+    return user ? JSON.parse(user) : null;
 };

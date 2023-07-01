@@ -23,7 +23,7 @@ export default function Header() {
     setIsMenuOpen(false);
   };
 
-  const isLoggedIn = getLoggedInUser() ? true : false;
+  const loggedInUser = getLoggedInUser();
 
   return (
     <section className="top-nav">
@@ -33,65 +33,96 @@ export default function Header() {
         </Link>
       </div>
 
-      <input id="menu-toggle" type="checkbox" checked={isMenuOpen} onChange={toggleMenu} />
+      <input
+        id="menu-toggle"
+        type="checkbox"
+        checked={isMenuOpen}
+        onChange={toggleMenu}
+      />
       <label className="menu-button-container" htmlFor="menu-toggle">
         <div className="menu-button"></div>
       </label>
       <ul className="menu">
         <li>
           <FontAwesomeIcon className="icons" icon={faHome} />
-          <Link to="/home" onClick={closeMenu}> Home </Link>
+          <Link to="/home" onClick={closeMenu}>
+            Home
+          </Link>
         </li>
 
         <li>
           <FontAwesomeIcon className="icons" icon={faSearch} />
-          <Link to="/search" data-target="modal1" className="modal-trigger" onClick={closeMenu}>
-            {" "}
-            Search{" "}
+          <Link
+            to="/search"
+            data-target="modal1"
+            className="modal-trigger"
+            onClick={closeMenu}
+          >
+            Search
           </Link>
         </li>
 
         <li>
           <FontAwesomeIcon className="icons" icon={faUser} />
-          <Link to="/profile" onClick={closeMenu}> Profile </Link>
+          <Link to="/profile" onClick={closeMenu}>
+            Profile
+          </Link>
         </li>
 
         <li>
           <FontAwesomeIcon className="icons" icon={faFileImage} />
-          <Link to="/createPost" data-target="modal1" className="modal-trigger" onClick={closeMenu}>
-            {" "}
-            Create Post{" "}
+          <Link
+            to="/createPost"
+            data-target="modal1"
+            className="modal-trigger"
+            onClick={closeMenu}
+          >
+            Create Post
           </Link>
         </li>
 
         <li>
           <FontAwesomeIcon className="icons" icon={faInfo} />
-          <Link to="/about" onClick={closeMenu}> About Us </Link>
+          <Link to="/about" onClick={closeMenu}>
+            About Us
+          </Link>
         </li>
 
         <li className="heightli">
-          <Dropdown className="iconimg">
-            <Dropdown.Toggle variant="secondary" id="profile-dropdown">
-              <img id="prfimg" src="./../assets/viewprofileimage.jpeg" />
-              <span id="john">John Doe</span>
-            </Dropdown.Toggle>
-            <li>
+          {loggedInUser && (
+            <Dropdown className="iconimg">
+              <Dropdown.Toggle variant="secondary" id="profile-dropdown">
+                {loggedInUser?.profilePicture === "default" ? (
+                  <img id="prfimg" src="/assets/profile.png" alt="Profile" />
+                ) : (
+                  <img
+                    id="prfimg"
+                    src={loggedInUser?.profilePicture}
+                    alt="Profile"
+                  />
+                )}
+                <span id="profileName">
+                  {loggedInUser?.firstName + " " + loggedInUser?.lastName}
+                </span>
+              </Dropdown.Toggle>
+
               <Dropdown.Menu className="test">
                 <Dropdown.Item className="custom-item">
                   <FontAwesomeIcon className="icons" icon={faUser} />
-
-                  <Link to="/profile" onClick={closeMenu}> Profile </Link>
+                  <Link to="/profile" onClick={closeMenu}>
+                    Profile
+                  </Link>
                 </Dropdown.Item>
 
-                {isLoggedIn && (
-                  <Dropdown.Item>
-                    <FontAwesomeIcon className="icons" icon={faSignOutAlt} />
-                    <Link to="/logout" onClick={closeMenu}> Logout </Link>
-                  </Dropdown.Item>
-                )}
+                <Dropdown.Item>
+                  <FontAwesomeIcon className="icons" icon={faSignOutAlt} />
+                  <Link to="/logout" onClick={closeMenu}>
+                    Logout
+                  </Link>
+                </Dropdown.Item>
               </Dropdown.Menu>
-            </li>
-          </Dropdown>
+            </Dropdown>
+          )}
         </li>
       </ul>
     </section>

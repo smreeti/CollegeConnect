@@ -35,7 +35,6 @@ export default class HomeComponent extends React.Component {
         return (
             <>
                 <Header />
-                <h1>Welcome to Home page, {getLoggedInUser()}</h1>
 
                 {posts.length > 0 ? (
                     posts.map((post) => (
