@@ -12,11 +12,12 @@ body {
   position: fixed;
   z-index: 9999;
   left: 0;
-  top: 0;
+  top: 0 !important;
   width: 100%;
   height: 100%;
   overflow: auto;
   background-color: rgba(0, 0, 0, 0.8);
+  color: black;
 }
 
 .modal-content {
@@ -26,13 +27,15 @@ body {
   border-radius: 12px;
   max-width: 600px;
   width: 90%;
+}
 
+.modal-overlay {
+  display: none !important;
 }
 
 .modal-content form {
   display: flex;
   flex-direction: column;
-  /* align-items: flex-start; */
 }
 
 .choosefile {
@@ -127,8 +130,8 @@ button[type="submit"]:hover {
 }
 
 .modal-close {
-  margin-left: 40%;
-  ;
+  display: flex;
+  justify-content: flex-end;
 }
 
 .modalcross {
@@ -549,13 +552,19 @@ h2 {
 }
 
 .top-nav {
+  position: fixed !important;
+  /* position: -webkit-fixed !important; */
+  width: 100%;
+  top: 0 !important;
+  z-index: 999 !important;
+
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
   background-color: #e6e7e8;
   border-bottom: 1px solid #e0e5eb;
-  box-shadow: 0px 1px 8px #e6e7e8;
+  box-shadow: 0px 1px 4px #e6e7e8;
   color: black;
   height: 50px;
   padding: 1em;
@@ -794,6 +803,12 @@ footer #footer {
 
 .post-image>img {
   width: 30%;
+}
+
+.collection-item{
+  display: flex;
+  gap: 10px;
+  padding-bottom: 10px;
 }
 
 @media screen and (min-width: 370px) and (max-width: 1000px) {

@@ -5,12 +5,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faUser, faInfo, faSignOutAlt, faSearch, faFileImage } from '@fortawesome/free-solid-svg-icons';
 import SearchUserComponent from './components/SearchUserComponent.jsx';
 import { Dropdown } from "react-bootstrap";
+import CreatePostComponent from './components/CreatePostComponent.jsx';
 
 export default function Header() {
   const loggedInUser = getLoggedInUser();
 
   const [isMenuOpen, setIsMenuOpen] = useState(false); // State to track the menu open/close state
   const [isSearchModalOpen, setIsSearchModalOpen] = useState(false);
+  const [isCreatePostModalOpen, setIsCreatePostModalOpen] = useState(false);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -23,6 +25,10 @@ export default function Header() {
   const openSearchModal = () => {
     setIsSearchModalOpen(true);
   };
+
+  const openCreatePostModal = () => {
+    setIsCreatePostModalOpen(true);
+  }
 
   return (
     <section className="top-nav">
@@ -49,7 +55,7 @@ export default function Header() {
 
         <li>
           <FontAwesomeIcon className='icons' icon={faSearch} />
-          <button onClick={openSearchModal} data-target="modal1" className="modal-trigger">Search</button>
+          <Link onClick={openSearchModal} data-target="modal1" className="modal-trigger">Search</Link>
         </li>
 
         <li>
@@ -59,14 +65,7 @@ export default function Header() {
 
         <li>
           <FontAwesomeIcon className="icons" icon={faFileImage} />
-          <Link
-            to="/createPost"
-            data-target="modal1"
-            className="modal-trigger"
-            onClick={closeMenu}
-          >
-            Create Post
-          </Link>
+          <Link onClick={openCreatePostModal} data-target="createPostModal" className="modal-trigger">Create Post</Link>
         </li>
 
         <li>
@@ -113,6 +112,8 @@ export default function Header() {
       </ul>
 
       {isSearchModalOpen && <SearchUserComponent />}
+
+      {isCreatePostModalOpen && <CreatePostComponent />}
     </section>
   )
 }

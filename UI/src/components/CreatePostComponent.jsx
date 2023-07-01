@@ -1,5 +1,4 @@
 import React, { useRef, useEffect, useState } from "react";
-import Header from "../Header.jsx";
 import fetchData from "../../utils/FetchAPI.js";
 import {
   CLOUD_NAME,
@@ -127,8 +126,7 @@ const CreatePostComponent = () => {
 
   return (
     <>
-      <Header />
-      <div id="modal1" className="modal modcen" ref={createPostModal}>
+      <div id="createPostModal" className="modal modcen" ref={createPostModal}>
         <div className="modal-dialog">
           <div className="modal-content">
             <div className="modal-header">
