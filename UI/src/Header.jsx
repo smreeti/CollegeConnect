@@ -1,19 +1,16 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { getLoggedInUser } from "../utils/Auth";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faHome,
-  faUser,
-  faInfo,
-  faSignOutAlt,
-  faSearch,
-  faFileImage,
-} from "@fortawesome/free-solid-svg-icons";
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { getLoggedInUser } from '../utils/Auth';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHome, faUser, faInfo, faSignOutAlt, faSearch, faFileImage } from '@fortawesome/free-solid-svg-icons';
+import SearchUserComponent from './components/SearchUserComponent.jsx';
 import { Dropdown } from "react-bootstrap";
 
 export default function Header() {
+  const loggedInUser = getLoggedInUser();
+
   const [isMenuOpen, setIsMenuOpen] = useState(false); // State to track the menu open/close state
+  const [isSearchModalOpen, setIsSearchModalOpen] = useState(false);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -23,14 +20,14 @@ export default function Header() {
     setIsMenuOpen(false);
   };
 
-  const loggedInUser = getLoggedInUser();
+  const openSearchModal = () => {
+    setIsSearchModalOpen(true);
+  };
 
   return (
     <section className="top-nav">
-      <div>
-        <Link to="/" className="logonew">
-          <img className="headlogo" src="../../assets/logotestheader.png" />
-        </Link>
+      <div><Link to="/" className="logonew" >
+        <img className='headlogo' src='../../assets/logotestheader.png' /></Link>
       </div>
 
       <input
@@ -42,31 +39,22 @@ export default function Header() {
       <label className="menu-button-container" htmlFor="menu-toggle">
         <div className="menu-button"></div>
       </label>
+
       <ul className="menu">
+
         <li>
-          <FontAwesomeIcon className="icons" icon={faHome} />
-          <Link to="/home" onClick={closeMenu}>
-            Home
-          </Link>
+          <FontAwesomeIcon className='icons' icon={faHome} />
+          <Link to="/home"> Home </Link>
         </li>
 
         <li>
-          <FontAwesomeIcon className="icons" icon={faSearch} />
-          <Link
-            to="/search"
-            data-target="modal1"
-            className="modal-trigger"
-            onClick={closeMenu}
-          >
-            Search
-          </Link>
+          <FontAwesomeIcon className='icons' icon={faSearch} />
+          <button onClick={openSearchModal} data-target="modal1" className="modal-trigger">Search</button>
         </li>
 
         <li>
-          <FontAwesomeIcon className="icons" icon={faUser} />
-          <Link to="/profile" onClick={closeMenu}>
-            Profile
-          </Link>
+          <FontAwesomeIcon className='icons' icon={faUser} />
+          <Link to="/profile"> Profile </Link>
         </li>
 
         <li>
@@ -82,10 +70,8 @@ export default function Header() {
         </li>
 
         <li>
-          <FontAwesomeIcon className="icons" icon={faInfo} />
-          <Link to="/about" onClick={closeMenu}>
-            About Us
-          </Link>
+          <FontAwesomeIcon className='icons' icon={faInfo} />
+          <Link to="/about"> About Us </Link>
         </li>
 
         <li className="heightli">
@@ -125,6 +111,8 @@ export default function Header() {
           )}
         </li>
       </ul>
+
+      {isSearchModalOpen && <SearchUserComponent />}
     </section>
-  );
+  )
 }

@@ -47,4 +47,19 @@ const fetchAllPosts = async (req, res) => {
     }
 }
 
-module.exports = { savePost, fetchAllPosts };
+const fetchUserPosts = async (loggedInUser) => {
+    try {
+        const posts = await Post.find({
+            postedBy: loggedInUser,
+            isCollegePost: 'N'
+        })
+            .select("imageUrl likes comments")
+            .sort({ createdDate: -1 });
+
+        return posts;
+    } catch (error) {
+        return setErrorResponse(res, HttpStatus.INTERNAL_SERVER_ERROR, error);
+    }
+}
+
+module.exports = { savePost, fetchAllPosts, fetchUserPosts };
