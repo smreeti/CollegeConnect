@@ -3,6 +3,7 @@ import React from "react";
 import Header from "../Header.jsx";
 import { API_TO_FETCH_PROFILE_DETAILS } from "../../utils/APIRequestUrl.js";
 import fetchData from "../../utils/FetchAPI.js";
+import { Link } from "react-router-dom";
 
 export default class HomeComponent extends React.Component {
 
@@ -50,6 +51,8 @@ export default class HomeComponent extends React.Component {
                   <div className="creator_details t_layout">1000 Following</div>
                   <div className="creator_details t_layout">{posts?.length} POSTS</div>
                   <div className="desc">Hey Community! I am a professional photographer and I love to capture the real-life moments. Please follow to not miss my latest uploads.</div>
+
+                  <Link to="/edit">Edit Profile</Link>
                 </div>
               </div>
             </div>

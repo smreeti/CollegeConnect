@@ -1,6 +1,7 @@
 const User = require('../models/User.js');
 const UserType = require('../models/UserType.js');
 const { setSuccessResponse, setErrorResponse } = require('../utils/Response.js');
+const { validateImage } = require('../utils/ValidationUtil.js');
 
 const fetchUser = (username) => {
     const user = User.findOne({
@@ -46,7 +47,7 @@ const searchUserByUsername = async (req, res) => {
     }
 }
 
-const fetchUserDetails = async (loggedInUser) => {
+const fetchUserMinDetails = async (loggedInUser) => {
     try {
         const userDetail = await User.findOne({
             _id: loggedInUser._id
@@ -58,4 +59,43 @@ const fetchUserDetails = async (loggedInUser) => {
     }
 }
 
-module.exports = { fetchUser, fetchAdminUser, searchUserByUsername, fetchUserDetails };
+const fetchUserDetails = async (req, res) => {
+    const loggedInUser = req.user;
+    try {
+        const userDetail = await User.findOne({
+            _id: loggedInUser._id
+        }).populate('collegeInfoId');
+
+        userDetail.password = undefined;
+        return setSuccessResponse(res, "User detail fetched successfully", userDetail);
+    } catch (error) {
+        return setErrorResponse(res, HttpStatus.INTERNAL_SERVER_ERROR, error);
+    }
+}
+const editProfilePhoto = async (req, res) => {
+    const loggedInUser = req.user;
+    const { imageUrl } = req.body;
+
+    try {
+        let errors = await validateImage(imageUrl);
+        if (errors.length > 0)
+            return setErrorResponse(res, HttpStatus.BAD_REQUEST, errors);
+
+        await User.findByIdAndUpdate(loggedInUser._id, {
+            profilePicture: imageUrl
+        });
+
+        return setSuccessResponse(res, { message: "Profile picture saved successfully" });
+    } catch (error) {
+        return setErrorResponse(res, HttpStatus.INTERNAL_SERVER_ERROR, error);
+    }
+};
+
+module.exports = {
+    fetchUser,
+    fetchAdminUser,
+    searchUserByUsername,
+    fetchUserMinDetails,
+    fetchUserDetails,
+    editProfilePhoto
+};

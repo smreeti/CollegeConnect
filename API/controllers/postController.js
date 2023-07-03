@@ -7,7 +7,7 @@ const { fetchFollowingUsers } = require("./userFollowingController");
 const savePost = async (req, res) => {
     const { caption, imageUrl } = req.body;
     try {
-        let errors = await validateCreatePostForm(imageUrl);
+        let errors = await validateImage(imageUrl);
         const user = req.user;
         const isAdminUserType = user.userTypeId.code == "SUPER_ADMIN" || user.userTypeId.code == "ADMIN";
 

@@ -102,7 +102,7 @@ const checkPasswordValidity = (password, errors) => {
     return errors;
 }
 
-const validateCreatePostForm = async (imageUrl) => {
+const validateImage = async (imageUrl) => {
     const errors = [];
 
     if (!imageUrl || imageUrl.length <= 0)
@@ -115,5 +115,5 @@ module.exports = {
     validateUser,
     validateLoginForm,
     checkPasswordValidity,
-    validateCreatePostForm
+    validateImage
 }

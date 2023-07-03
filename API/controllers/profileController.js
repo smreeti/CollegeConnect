@@ -1,11 +1,11 @@
 const { setSuccessResponse, setErrorResponse } = require('../utils/Response');
 const { fetchUserPosts } = require('./postController.js');
-const { fetchUserDetails } = require('./userController.js');
+const { fetchUserMinDetails } = require('./userController.js');
 
 const fetchProfileDetails = async (req, res) => {
     const loggedInUser = req.user;
 
-    const userDetail = await fetchUserDetails(loggedInUser);
+    const userDetail = await fetchUserMinDetails(loggedInUser);
     const posts = await fetchUserPosts(loggedInUser);
 
     if (userDetail)

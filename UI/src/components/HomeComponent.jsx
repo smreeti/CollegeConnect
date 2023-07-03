@@ -5,7 +5,6 @@ import { faComment, faHeart, faHeartCircleMinus, faUser } from '@fortawesome/fre
 
 import Header from '../Header.jsx';
 import fetchData from "../../utils/FetchAPI.js";
-import { getLoggedInUser } from '../../utils/Auth.js';
 import { API_TO_FETCH_ALL_POSTS } from '../../utils/APIRequestUrl.js';
 import { Link } from 'react-router-dom';
 
