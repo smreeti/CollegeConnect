@@ -27,10 +27,13 @@ const fetchAdminUser = async (collegeId) => {
 const searchUserByUsername = async (req, res) => {
     try {
         const { username } = req.body;
+        const loggedInUser = req.user;
+
         let usernamePattern = new RegExp("^" + username);
 
         const users = await User.find({
-            username: { $regex: usernamePattern }
+            username: { $regex: usernamePattern },
+            collegeInfoId: loggedInUser.collegeInfoId
         }).select("username profilePicture");
 
         if (users.length === 0)
@@ -48,7 +51,7 @@ const fetchUserDetails = async (loggedInUser) => {
         const userDetail = await User.findOne({
             _id: loggedInUser._id
         }).select("firstName lastName username profilePicture");
-        
+
         return userDetail;
     } catch (error) {
         return setErrorResponse(res, HttpStatus.INTERNAL_SERVER_ERROR, error);
