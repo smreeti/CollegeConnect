@@ -1,7 +1,7 @@
 const Post = require("../models/Post");
 const HttpStatus = require("../utils/HttpStatus.js");
 const { setSuccessResponse, setErrorResponse } = require('../utils/Response.js');
-const { validateCreatePostForm } = require("../utils/ValidationUtil");
+const { validateImage } = require("../utils/ValidationUtil");
 const { fetchFollowingUsers } = require("./userFollowingController");
 
 const savePost = async (req, res) => {
