@@ -1,7 +1,7 @@
 import React from 'react';
 import { formatDistanceToNow } from 'date-fns';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faComment, faHeart, faHeartCircleMinus, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faComment, faHeart, faFaceMeh, faUser } from '@fortawesome/free-solid-svg-icons';
 
 import Header from '../Header.jsx';
 import fetchData from "../../utils/FetchAPI.js";
@@ -15,7 +15,7 @@ export default class HomeComponent extends React.Component {
         super();
         this.state = {
             posts: [],
-            iconColor: "silver"
+            iconColor: "silver",
         };
     }
 
@@ -46,20 +46,25 @@ export default class HomeComponent extends React.Component {
         return (
             <>
                 <Header />
-                <div className='bg-light'>
+                <div style={{ background: 'url(../../assets/annie-spratt-0ZPSX_mQ3xI-unsplash.jpg)' }}>
+
                     {posts.length > 0 ? (
                         posts.map((post) => (
-                            <div className='row my-5'>
-                                <div key={post._id} className='col-lg-4 col-md-8 col-10 mx-auto card'>
-                                    <div className="card-header px-2">
+                            <div className=''>
+                                <div key={post._id} className='col-lg-4 col-md-8 col-10 mx-auto card  mt-5'>
+                                    <div className="card-header">
                                         <p className='my-0 d-flex align-items-center text-fluid'>
                                             <FontAwesomeIcon icon={faUser} className='me-md-2 me-1' />
                                             <Link>{post.postedBy.username}</Link>
                                         </p>
                                     </div>
-                                    <Link>
-                                        <img src={post.imageUrl} alt="Post" className='card-img-top' />
-                                    </Link>
+                                    <div style={{ height: '500px' }}>
+                                        <Link>
+
+                                            <img src={post.imageUrl} alt="Post" className='card-img-top' style={{ maxHeight: '100%', maxWidth: '100%' }} />
+                                        </Link>
+
+                                    </div>
                                     <div className='card-body'>
                                         <div className="me-auto">
                                             <div className="d-flex flex-wrap">
@@ -81,12 +86,32 @@ export default class HomeComponent extends React.Component {
                                     </div>
                                 </div>
                             </div >
+
                         ))
                     ) : (
-                        <p>No posts found.</p>
+                        <div className="main-container" style={{ background: 'silver' }}>
+                            <div className="col-lg-6 col-12 p-3 px-md-5 py-md-4 card">
+                                <div className="text-center">
+                                    {/* <Link to='/'>
+                                        <img className="login-logo" src="../../assets/logo.png" />
+                                    </Link> */}
+                                    <p>
+                                        <FontAwesomeIcon icon={faFaceMeh} size='6x' color='grey' />
+
+                                    </p>
+                                    <h2 className="fs-2">
+                                        Sorry No Post Yet!
+                                    </h2>
+                                    <p className="mt-md-4 mt-3">
+                                        <small>Follow others to see their posts</small>
+                                    </p>
+                                </div>
+
+                            </div>
+                        </div>
                     )
                     }
-                </div >
+                </div>
             </>
         );
     }
