@@ -1,7 +1,7 @@
 const User = require('../models/User.js');
 const UserType = require('../models/UserType.js');
 const { setSuccessResponse, setErrorResponse } = require('../utils/Response.js');
-const { validateImage } = require('../utils/ValidationUtil.js');
+const { validateImage, validateUser } = require('../utils/ValidationUtil.js');
 
 const fetchUser = (username) => {
     const user = User.findOne({
@@ -72,6 +72,7 @@ const fetchUserDetails = async (req, res) => {
         return setErrorResponse(res, HttpStatus.INTERNAL_SERVER_ERROR, error);
     }
 }
+
 const editProfilePhoto = async (req, res) => {
     const loggedInUser = req.user;
     const { imageUrl } = req.body;
@@ -91,11 +92,45 @@ const editProfilePhoto = async (req, res) => {
     }
 };
 
+const editProfile = async (req, res) => {
+    const loggedInUser = req.user;
+    const {
+        firstName,
+        lastName,
+        email,
+        mobileNumber,
+        username
+    } = req.body;
+
+    req.body.isEdit = true;
+    req.body.loggedInUserId = loggedInUser._id;
+
+    try {
+        const errors = await validateUser(req);
+
+        if (errors.length > 0)
+            return setErrorResponse(res, HttpStatus.BAD_REQUEST, errors);
+
+        await User.findByIdAndUpdate(loggedInUser._id, {
+            firstName,
+            lastName,
+            email,
+            mobileNumber,
+            username
+        });
+
+        return setSuccessResponse(res, { message: "Profile updated successfully" });
+    } catch (error) {
+        return setErrorResponse(res, HttpStatus.INTERNAL_SERVER_ERROR, error);
+    }
+}
+
 module.exports = {
     fetchUser,
     fetchAdminUser,
     searchUserByUsername,
     fetchUserMinDetails,
     fetchUserDetails,
-    editProfilePhoto
+    editProfilePhoto,
+    editProfile
 };

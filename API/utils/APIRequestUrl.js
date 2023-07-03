@@ -18,6 +18,7 @@ const API_TO_FETCH_PROFILE_DETAILS = "/profileDetails";
 
 const API_TO_FETCH_USER_DETAILS = "/userDetails";
 const API_TO_EDIT_PROFILE_PHOTO = "/editProfilePhoto";
+const API_TO_EDIT_PROFILE = "/editProfile";
 
 module.exports = {
     API_TO_FETCH_COLLEGE_INFO,
@@ -31,5 +32,6 @@ module.exports = {
     API_TO_SEARCH_USERS,
     API_TO_FETCH_PROFILE_DETAILS,
     API_TO_FETCH_USER_DETAILS,
-    API_TO_EDIT_PROFILE_PHOTO
+    API_TO_EDIT_PROFILE_PHOTO,
+    API_TO_EDIT_PROFILE
 };
