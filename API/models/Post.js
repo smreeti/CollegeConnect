@@ -19,7 +19,7 @@ const PostSchema = new Schema({
     },
     createdDate: {
         type: Date,
-        default: new Date()
+        default: Date.now
     },
     postedBy: {
         type: mongoose.Schema.Types.ObjectId,
