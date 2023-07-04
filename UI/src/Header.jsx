@@ -55,25 +55,19 @@ export default function Header() {
 
         <li className='tabmenu'>
           <FontAwesomeIcon className='icons' icon={faSearch} />
-          <Link onClick=  {() => {
-          toggleMenu(); // Close the menu when Create Post is clicked
-          openSearchModal(); // Open the Create Post modal
-        }}
-         data-target="modal1" className="modal-trigger">Search</Link>
-        </li>
-
-      
-        <li className='tabmenu'>
-          <FontAwesomeIcon className='icons' icon={faUser} />
-          <Link to="/profile"> Profile </Link>
+          <Link onClick={() => {
+            toggleMenu(); // Close the menu when Create Post is clicked
+            openSearchModal(); // Open the Create Post modal
+          }}
+            data-target="modal1" className="modal-trigger">Search</Link>
         </li>
 
         <li className='tabmenu'>
           <FontAwesomeIcon className="icons" icon={faFileImage} />
-          <Link   onClick={() => {
-          toggleMenu(); // Close the menu when Create Post is clicked
-          openCreatePostModal(); // Open the Create Post modal
-        }} data-target="createPostModal" className="modal-trigger">Create Post</Link>
+          <Link onClick={() => {
+            toggleMenu(); // Close the menu when Create Post is clicked
+            openCreatePostModal(); // Open the Create Post modal
+          }} data-target="createPostModal" className="modal-trigger">Create Post</Link>
         </li>
 
         <li className='tabmenu'>
