@@ -48,6 +48,44 @@ const handleFormValidation = async (user) => {
   return formErrors;
 };
 
+const handleEditFormValidation = async (user) => {
+  let formErrors = {};
+
+  const {
+    firstName,
+    lastName,
+    email,
+    mobileNumber,
+    username
+  } = user;
+
+  if (!firstName) formErrors["firstName"] = "First name is required.";
+  else if (!validateName(firstName))
+    formErrors["firstName"] =
+      "First name must be atleast 3 characters and cannot contain special characters.";
+
+  if (!lastName) formErrors["lastName"] = "Last name is required.";
+  else if (!validateName(lastName))
+    formErrors["lastName"] =
+      "Last name must be atleast 3 characters and cannot contain special characters.";
+
+  if (!email) formErrors["email"] = "Email is required.";
+  else if (!validateEmail(email))
+    formErrors["email"] = "Please enter a valid email.";
+
+  if (!mobileNumber) formErrors["mobileNumber"] = "Mobile number is required.";
+  else if (!validateMobileNumber(mobileNumber))
+    formErrors["mobileNumber"] =
+      "Please enter a valid 10 digits mobile number.";
+
+  if (!username) formErrors["username"] = "Username is required.";
+  else if (!validateUsername(username))
+    formErrors["username"] =
+      "Username can only contain letters, numbers, and underscores.";
+
+  return formErrors;
+}
+
 const validateName = (name) => {
   const nameRegex = /^[a-zA-Z]{3,}$/;
   return nameRegex.test(name);
@@ -137,5 +175,6 @@ export {
   handleLoginFormValidation,
   handleResetPasswordValidation,
   handleUpdatePasswordValidation,
-  handleCreatePostValidation
+  handleCreatePostValidation,
+  handleEditFormValidation
 };

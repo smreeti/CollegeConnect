@@ -3,7 +3,7 @@ const { fetchCollegeList } = require("./collegeInfoController.js");
 const { login, verifyRefreshToken } = require("./loginController.js");
 const { resetPassword, updatePassword } = require("./resetPasswordController.js");
 const { savePost } = require("./postController.js");
-const { searchUserByUsername } = require('./userController.js')
+const { searchUserByUsername, fetchUserDetails } = require('./userController.js')
 const { fetchProfileDetails } = require('./profileController.js')
 
 module.exports = {
@@ -15,5 +15,6 @@ module.exports = {
   verifyRefreshToken,
   savePost,
   searchUserByUsername,
-  fetchProfileDetails
+  fetchProfileDetails,
+  fetchUserDetails
 };

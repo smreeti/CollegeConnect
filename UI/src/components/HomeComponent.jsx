@@ -5,7 +5,6 @@ import { faComment, faHeart, faFaceMeh, faUser } from '@fortawesome/free-solid-s
 
 import Header from '../Header.jsx';
 import fetchData from "../../utils/FetchAPI.js";
-import { getLoggedInUser } from '../../utils/Auth.js';
 import { API_TO_FETCH_ALL_POSTS } from '../../utils/APIRequestUrl.js';
 import { Link } from 'react-router-dom';
 
@@ -58,9 +57,9 @@ export default class HomeComponent extends React.Component {
                                             <Link>{post.postedBy.username}</Link>
                                         </p>
                                     </div>
+
                                     <div style={{ height: '500px' }}>
                                         <Link>
-
                                             <img src={post.imageUrl} alt="Post" className='card-img-top' style={{ maxHeight: '100%', maxWidth: '100%' }} />
                                         </Link>
 
@@ -85,8 +84,7 @@ export default class HomeComponent extends React.Component {
                                         </small>
                                     </div>
                                 </div>
-                            </div >
-
+                            </div>
                         ))
                     ) : (
                         <div className="main-container" style={{ background: 'url(../../assets/annie-spratt-0ZPSX_mQ3xI-unsplash.jpg)' }}>

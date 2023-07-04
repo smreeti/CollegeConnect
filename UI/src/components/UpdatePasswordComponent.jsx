@@ -6,7 +6,6 @@ import { API_TO_UPDATE_PASSWORD } from "../../utils/APIRequestUrl.js";
 import fetchData from "../../utils/FetchAPI.js";
 import { useParams } from 'react-router-dom';
 
-
 const UpdatePasswordComponent = () => {
     const { id } = useParams();
     const navigate = useNavigate();

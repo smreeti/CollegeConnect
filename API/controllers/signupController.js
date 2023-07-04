@@ -20,10 +20,11 @@ const signupUser = async (req, res) => {
     mobileNumber,
     username,
     password,
-    userType,
+    userType
   } = req.body;
+  req.body.isEdit = false;
 
-  const errors = await validateUser(req, res);
+  const errors = await validateUser(req);
   const collegeInfo = await fetchCollegeInfo(collegeInfoId, errors);
   const userTypeId = await fetchUserType(userType);
 

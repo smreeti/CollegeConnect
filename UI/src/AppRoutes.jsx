@@ -12,6 +12,7 @@ import LogoutComponent from './components/LogoutComponent.jsx';
 import ProfileComponent from './components/ProfileComponent.jsx';
 import CreatePostComponent from './components/CreatePostComponent.jsx';
 import SearchUserComponent from './components/SearchUserComponent.jsx';
+import EditUserComponent from './components/EditUserComponent.jsx';
 
 export default function AppRoutes() {
   const navigate = useNavigate();
@@ -53,10 +54,12 @@ export default function AppRoutes() {
       <Route path="/emailSent" element={<EmailSentComponent />} />
       <Route path="/updatePassword/:id" element={<UpdatePasswordComponent />} />
       <Route path="/profile" element={<ProfileComponent />} />
-      <Route path="/logout" element={<LogoutComponent />} />
 
       <Route path="/createPost" element={<CreatePostComponent />} />
       <Route path="/search" element={<SearchUserComponent />} />
+      <Route path="/edit" element={<EditUserComponent />} />
+
+      <Route path="/logout" element={<LogoutComponent />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
