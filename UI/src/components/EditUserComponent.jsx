@@ -187,7 +187,7 @@ export default class EditUserComponent extends React.Component {
                                                     onChange={this.handleOnChange}
                                                     type="text"
                                                     class="form-control labelset"
-                                                    placeholder="first name"
+                                                    placeholder="enter first name"
                                                 />
                                                 <p className="required errormsg errpad1 labelset">
                                                     {this.state?.errors["firstName"]}
@@ -203,7 +203,7 @@ export default class EditUserComponent extends React.Component {
                                                     value={lastName || ""}
                                                     onChange={this.handleOnChange}
                                                     class="form-control labelset"
-                                                    placeholder="lastName"
+                                                    placeholder="enter lastName"
                                                 />
                                                 <p className="required errormsg errpad1 labelset">
                                                     {this.state?.errors["lastName"]}
@@ -255,7 +255,7 @@ export default class EditUserComponent extends React.Component {
                                                     value={username || ""}
                                                     onChange={this.handleOnChange}
                                                     class="form-control labelset"
-                                                    placeholder="education"
+                                                    placeholder="enter username"
                                                 />
                                             </div>
 
@@ -283,9 +283,9 @@ export default class EditUserComponent extends React.Component {
                                             Save Profile
                                         </button>
 
-                                        <button class="btnprofile btnmargin" type="button" onClick={this.clearFields}>
+                                        {/* <button class="btnprofile btnmargin" type="button" onClick={this.clearFields}>
                                             Clear Fields
-                                        </button>
+                                        </button> */}
                                     </div>
                                 </div>
                                 <div class="col-md-4">

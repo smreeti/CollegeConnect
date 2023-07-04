@@ -73,7 +73,7 @@ const SearchUserComponent = () => {
                         ) : (search ? "No user(s) found" : "")}
                     </ul>
 
-                    <div className='suguser'><span id='usermar'>Suggested Colleges</span>
+                    {/* <div className='suguser'><span id='usermar'>Suggested Colleges</span>
           <li className="collection-item">
             <img
               className="suggestionprofilePic"
@@ -106,7 +106,7 @@ const SearchUserComponent = () => {
       <span className='uniname'>UOT </span> 
             <button className="followButton">Follow</button>
           </li>
-          </div>
+          </div> */}
                 </div>
             </div>
         </>
