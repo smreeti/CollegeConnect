@@ -51,7 +51,7 @@ export default class HomeComponent extends React.Component {
                     {posts.length > 0 ? (
                         posts.map((post) => (
                             <div className=''>
-                                <div key={post._id} className='col-lg-4 col-md-8 col-10 mx-auto card  mt-5'>
+                                <div key={post._id} className='col-lg-4 col-md-8 col-10 mx-auto card mt-5'>
                                     <div className="card-header">
                                         <p className='my-0 d-flex align-items-center text-fluid'>
                                             <FontAwesomeIcon icon={faUser} className='me-md-2 me-1' />
@@ -89,7 +89,7 @@ export default class HomeComponent extends React.Component {
 
                         ))
                     ) : (
-                        <div className="main-container" style={{ background: 'silver' }}>
+                        <div className="main-container" style={{ background: 'url(../../assets/annie-spratt-0ZPSX_mQ3xI-unsplash.jpg)' }}>
                             <div className="col-lg-6 col-12 p-3 px-md-5 py-md-4 card">
                                 <div className="text-center">
                                     {/* <Link to='/'>
@@ -97,9 +97,8 @@ export default class HomeComponent extends React.Component {
                                     </Link> */}
                                     <p>
                                         <FontAwesomeIcon icon={faFaceMeh} size='6x' color='grey' />
-
                                     </p>
-                                    <h2 className="fs-2">
+                                    <h2 className="fs-3 fw-bold">
                                         Sorry No Post Yet!
                                     </h2>
                                     <p className="mt-md-4 mt-3">
