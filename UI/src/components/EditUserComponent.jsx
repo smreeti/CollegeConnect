@@ -158,8 +158,8 @@ export default class EditUserComponent extends React.Component {
                 width="150px"
               />
             )}
-            <span class="font-weight-bold namespacing usernamespace">Ayush Datt</span
-            ><span class="text-black-50 namespacing">ayush@conestogac.on.ca</span>
+            <span class="font-weight-bold namespacing usernamespace">ayush</span
+            ><span class="text-black-50 namespacing">ayush@gmail.com</span>
             <span> </span>
             <div className="modcen">
             <Link
@@ -195,7 +195,7 @@ export default class EditUserComponent extends React.Component {
               </div>
 
               <div class="col-md-6">
-                <label class="labels labelset labelset ">Surname</label>
+                <label class="labels labelset labelset ">Lastname</label>
                 <input
                   type="text"
                   id="lastName"
@@ -203,7 +203,7 @@ export default class EditUserComponent extends React.Component {
                   value={lastName || ""}
                   onChange={this.handleOnChange}
                   class="form-control labelset"
-                  placeholder="surname"
+                  placeholder="lastName"
                 />
                 <p className="required errormsg errpad1 labelset">
                   {this.state?.errors["lastName"]}
@@ -211,7 +211,7 @@ export default class EditUserComponent extends React.Component {
               </div>
             </div>
 
-            <div class="row mt-3">
+            <div class="row">
               <div class="col-md-12">
                 <label class="labels labelset" labelset>Email ID</label>
                 <input
