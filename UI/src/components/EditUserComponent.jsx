@@ -4,7 +4,7 @@ import { API_TO_EDIT_PROFILE, API_TO_FETCH_USER_DETAILS } from "../../utils/APIR
 import Header from "../Header.jsx";
 import EditProfilePhotoComponent from "./EditProfilePhotoComponent.jsx";
 import { Link } from "react-router-dom";
-import { handleEditFormValidation, handleFormValidation } from "../../utils/validation";
+import { handleEditFormValidation } from "../../utils/validation";
 
 export default class EditUserComponent extends React.Component {
     constructor() {
@@ -123,7 +123,7 @@ export default class EditUserComponent extends React.Component {
             <>
                 <Header />
 
-              
+
 
                 <section className="usersection">
                     <form
@@ -136,7 +136,7 @@ export default class EditUserComponent extends React.Component {
                             <div class="row">
                                 <div class="col-md-3 border-right">
                                     <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-                                     
+
                                         {profilePicture === "default" ? (
                                             <img
                                                 class="edituserimg"
@@ -278,12 +278,12 @@ export default class EditUserComponent extends React.Component {
                                         </button>
 
                                         {this.state?.serverErrors && (
-                    <ul className="error-list text-danger">
-                        {this.state?.serverErrors.map((error, index) => (
-                            <li className="backenderror" key={index}>{error}</li>
-                        ))}
-                    </ul>
-                )}
+                                            <ul className="error-list text-danger">
+                                                {this.state?.serverErrors.map((error, index) => (
+                                                    <li className="backenderror" key={index}>{error}</li>
+                                                ))}
+                                            </ul>
+                                        )}
 
                                         {/* <button class="btnprofile btnmargin" type="button" onClick={this.clearFields}>
                                             Clear Fields

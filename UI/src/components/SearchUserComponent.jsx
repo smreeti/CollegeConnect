@@ -72,41 +72,6 @@ const SearchUserComponent = () => {
                             })
                         ) : (search ? "No user(s) found" : "")}
                     </ul>
-
-                    {/* <div className='suguser'><span id='usermar'>Suggested Colleges</span>
-          <li className="collection-item">
-            <img
-              className="suggestionprofilePic"
-              src="../../assets/waterloologo.png"
-            />
-           <span className='uniname'>UOW</span> 
-            <button className="followButton">Follow</button>
-          </li>
-          <li className="collection-item">
-            <img
-              className="suggestionprofilePic"
-              src="../../assets/laurie.png"
-            />
-        <span className='uniname'> WLU </span>
-            <button className="followButton">Follow</button>
-          </li>
-          <li className="collection-item">
-            <img
-              className="suggestionprofilePic"
-              src="../../assets/windsor.jpeg"
-            />
-       <span className='uniname'>  UOW </span>
-            <button className="followButton">Follow</button>
-          </li>
-          <li className="collection-item">
-            <img
-              className="suggestionprofilePic"
-              src="../../assets/toronto.jpeg"
-            />
-      <span className='uniname'>UOT </span> 
-            <button className="followButton">Follow</button>
-          </li>
-          </div> */}
                 </div>
             </div>
         </>
