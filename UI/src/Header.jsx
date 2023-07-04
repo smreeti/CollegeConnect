@@ -65,7 +65,10 @@ export default function Header() {
 
         <li>
           <FontAwesomeIcon className="icons" icon={faFileImage} />
-          <Link onClick={openCreatePostModal} data-target="createPostModal" className="modal-trigger">Create Post</Link>
+          <Link   onClick={() => {
+          toggleMenu(); // Close the menu when Create Post is clicked
+          openCreatePostModal(); // Open the Create Post modal
+        }} data-target="createPostModal" className="modal-trigger">Create Post</Link>
         </li>
 
         <li>
