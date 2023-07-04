@@ -145,21 +145,21 @@ export default class EditUserComponent extends React.Component {
             <label class="labels">Profile Picture </label>
             {profilePicture === "default" ? (
               <img
-                className="edituserimg"
+                class="edituserimg"
                 src="/assets/profile.png"
                 alt="Profile"
               />
             ) : (
               <img
-                className="edituserimg"
+                class="edituserimg rounded-circle imgmargin"
                 src={profilePicture}
                 alt="Profile"
-                class="rounded-circle imgmargin"
-                width="150px"
+               
+                
               />
             )}
-            <span class="font-weight-bold namespacing usernamespace">ayush</span
-            ><span class="text-black-50 namespacing">ayush@gmail.com</span>
+            <span class="font-weight-bold namespacing usernamespace">ayush</span>
+          
             <span> </span>
             <div className="modcen">
             <Link
