@@ -13,8 +13,6 @@ import { API_TO_SAVE_POST } from "../../utils/APIRequestUrl.js";
 
 
 
-
-
 const CreatePostComponent = () => {
   const [post, setPost] = useState({
     caption: "",

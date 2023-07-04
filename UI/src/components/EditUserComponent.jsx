@@ -97,6 +97,15 @@ export default class EditUserComponent extends React.Component {
         });
     }
 
+    clearFields = () => {
+        const form = document.forms.editform;
+        form.firstName.value = "";
+        form.lastName.value = "";
+        form.email.value = "";
+        form.mobileNumber.value = "";
+        form.username.value = "";
+      };
+
     render() {
         const {
             userDetails: {
@@ -112,7 +121,7 @@ export default class EditUserComponent extends React.Component {
 
         return (
             <>
-                {/* <Header /> */}
+                <Header />
 
                 {this.state?.serverErrors && (
                     <ul className="error-list text-danger">
@@ -122,101 +131,185 @@ export default class EditUserComponent extends React.Component {
                     </ul>
                 )}
 
-                <section>
-                    <form
-                        id="editform"
-                        name="editform"
-                        method="POST"
-                        onSubmit={this.editProfile}
-                    >
-                        <div>
-                            <label>First Name</label>
-                            <input type="text"
-                                id="firstName"
-                                name="firstName"
-                                value={firstName || ""}
-                                onChange={this.handleOnChange}
-                            />
-                            <p className="text-danger small mb-3">{this.state?.errors["firstName"]}</p>
-                        </div>
+<section className="usersection">
+  <form
+    id="editform"
+    name="editform"
+    method="POST"
+    onSubmit={this.editProfile}
+  >
+    <div className="container rounded bg-white mb-5 spacing">
+      <div class="row">
+        <div class="col-md-3 border-right">
+          <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+            <label class="labels">Profile Picture </label>
+            {profilePicture === "default" ? (
+              <img
+                className="edituserimg"
+                src="/assets/profile.png"
+                alt="Profile"
+              />
+            ) : (
+              <img
+                className="edituserimg"
+                src={profilePicture}
+                alt="Profile"
+                class="rounded-circle imgmargin"
+                width="150px"
+              />
+            )}
+            <span class="font-weight-bold namespacing usernamespace">Ayush Datt</span
+            ><span class="text-black-50 namespacing">ayush@conestogac.on.ca</span>
+            <span> </span>
+            <div className="modcen">
+            <Link
+              onClick={this.openEditProfilePhotoModal}
+              data-target="editProfilePicModal"
+              className="modalcenter modal-trigger change-profile-photo-link modalcenter"
+            >
+              Change profile photo
+            </Link>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-5 border-right">
+          <div class="p-3 py-5">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <h4 class="text-centre ">Profile Settings</h4>
+            </div>
+            <div class="row mt-2">
+              <div class="col-md-6">
+                <label class="labels labelset">Name</label>
+                <input
+                  id="firstName"
+                  name="firstName"
+                  value={firstName || ""}
+                  onChange={this.handleOnChange}
+                  type="text"
+                  class="form-control labelset"
+                  placeholder="first name"
+                />
+                <p className="required errormsg errpad1 labelset">
+                  {this.state?.errors["firstName"]}
+                </p>
+              </div>
 
-                        <div>
-                            <label>Last Name</label>
-                            <input type="text"
-                                id="lastName"
-                                name="lastName"
-                                value={lastName || ""}
-                                onChange={this.handleOnChange}
-                            />
-                            <p className="text-danger small mb-3">{this.state?.errors["lastName"]}</p>
-                        </div>
+              <div class="col-md-6">
+                <label class="labels labelset labelset ">Surname</label>
+                <input
+                  type="text"
+                  id="lastName"
+                  name="lastName"
+                  value={lastName || ""}
+                  onChange={this.handleOnChange}
+                  class="form-control labelset"
+                  placeholder="surname"
+                />
+                <p className="required errormsg errpad1 labelset">
+                  {this.state?.errors["lastName"]}
+                </p>
+              </div>
+            </div>
 
-                        <div>
-                            <label>Email</label>
-                            <input type="text"
-                                id="email"
-                                name="email"
-                                value={email || ""}
-                                onChange={this.handleOnChange}
-                            />
-                            <p className="text-danger small mb-3">{this.state?.errors["email"]}</p>
-                        </div>
+            <div class="row mt-3">
+              <div class="col-md-12">
+                <label class="labels labelset" labelset>Email ID</label>
+                <input
+                  type="text"
+                  id="email"
+                  name="email"
+                  value={email || ""}
+                  onChange={this.handleOnChange}
+                  class="form-control labelset"
+                  placeholder="enter email id"
+                />
+              </div>
 
-                        <div>
-                            <label>Mobile Number</label>
-                            <input type="text"
-                                id="mobileNumber"
-                                name="mobileNumber"
-                                value={mobileNumber || ""}
-                                onChange={this.handleOnChange}
-                            />
-                            <p className="text-danger small mb-3">{this.state?.errors["mobileNumber"]}</p>
-                        </div>
+              <p className="required errormsg errpad1 labelset labelset">
+                {this.state?.errors["email"]}
+              </p>
 
-                        <div>
-                            <label>Username</label>
-                            <input type="text"
-                                id="username"
-                                name="username"
-                                value={username || ""}
-                                onChange={this.handleOnChange}
-                            />
-                            <p className="text-danger small mb-3">{this.state?.errors["username"]}</p>
-                        </div>
+              <div class="col-md-12">
+                <label class="labels labelset">Mobile Number</label>
+                <input
+                  type="text"
+                  id="mobileNumber"
+                  name="mobileNumber"
+                  value={mobileNumber || ""}
+                  onChange={this.handleOnChange}
+                  class="form-control labelset"
+                  placeholder="enter phone number"
+                />
+              </div>
 
-                        <div>
-                            <label>College</label>
-                            <input type="text"
-                                id="collegeInfo"
-                                name="collegeInfo"
-                                value={collegeInfoId?.name || ""}
-                                onChange={this.handleOnChange}
-                                disabled
-                            />
-                        </div>
+              <p className="required errormsg errpad1 labelset">
+                {this.state?.errors["mobileNumber"]}
+              </p>
 
-                        <div>
-                            <label>Profile Picture </label>
-                            {profilePicture === "default" ? (
-                                <img id="prfimg" src="/assets/profile.png" alt="Profile" />
-                            ) : (
-                                <img
-                                    id="prfimg"
-                                    src={profilePicture}
-                                    alt="Profile"
-                                />
-                            )}
+              <div class="col-md-12">
+                <label class="labels labelset">Username</label>
+                <input
+                  type="text"
+                  id="username"
+                  name="username"
+                  value={username || ""}
+                  onChange={this.handleOnChange}
+                  class="form-control labelset"
+                  placeholder="education"
+                />
+              </div>
 
-                            <Link onClick={this.openEditProfilePhotoModal}
-                                data-target="editProfilePicModal"
-                                className="modal-trigger">Change profile photo </Link>
-                        </div>
+              <p className="required errormsg errpad1 labelset">
+                {this.state?.errors["username"]}
+              </p>
 
-                        <button type="submit">Edit</button>
-                    </form>
+              <div class="col-md-12">
+                <label class="labels labelset">College</label>
+                <input
+                  type="text"
+                  id="collegeInfo"
+                  name="collegeInfo"
+                  value={collegeInfoId?.name || ""}
+                  onChange={this.handleOnChange}
+                  disabled
+                  class="form-control labelset"
+                  placeholder="education"
+                />
+              </div>
+            </div>
+          </div>
+          <div class=" text-center btnspace">
+            <button class="btnprofile" type="submit">
+              Save Profile
+            </button>
 
-                    {this.state.isEditProfilePhotoModal && <EditProfilePhotoComponent />}
-                </section>
+            <button class="btnprofile btnmargin" type="button" onClick={this.clearFields}>
+            Clear Fields
+          </button>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="p-3 py-5">
+            <h4 class="text-center">About me</h4>
+            <p class="text-center">
+            I am a dedicated student currently pursuing my studies in web development at Conestoga College. With a passion for technology and a keen interest in the ever-evolving world of web development, I am committed to honing my skills and staying up-to-date with the latest industry trends.
+
+
+            </p>
+            <img
+              src="../../assets/waterloo.jpg"
+              alt="Additional Info"
+              class="img-fluid"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+
+  {this.state.isEditProfilePhotoModal && <EditProfilePhotoComponent />}
+</section>
+
             </>
         );
     }
