@@ -123,13 +123,7 @@ export default class EditUserComponent extends React.Component {
             <>
                 <Header />
 
-                {this.state?.serverErrors && (
-                    <ul className="error-list text-danger">
-                        {this.state?.serverErrors.map((error, index) => (
-                            <li key={index}>{error}</li>
-                        ))}
-                    </ul>
-                )}
+              
 
                 <section className="usersection">
                     <form
@@ -142,7 +136,7 @@ export default class EditUserComponent extends React.Component {
                             <div class="row">
                                 <div class="col-md-3 border-right">
                                     <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-                                        <label class="labels">Profile Picture </label>
+                                     
                                         {profilePicture === "default" ? (
                                             <img
                                                 class="edituserimg"
@@ -179,7 +173,7 @@ export default class EditUserComponent extends React.Component {
                                         </div>
                                         <div class="row mt-2">
                                             <div class="col-md-6">
-                                                <label class="labels labelset">Name</label>
+                                                <label class="labels labelset">Firstname</label>
                                                 <input
                                                     id="firstName"
                                                     name="firstName"
@@ -282,6 +276,14 @@ export default class EditUserComponent extends React.Component {
                                         <button class="btnprofile" type="submit">
                                             Save Profile
                                         </button>
+
+                                        {this.state?.serverErrors && (
+                    <ul className="error-list text-danger">
+                        {this.state?.serverErrors.map((error, index) => (
+                            <li className="backenderror" key={index}>{error}</li>
+                        ))}
+                    </ul>
+                )}
 
                                         {/* <button class="btnprofile btnmargin" type="button" onClick={this.clearFields}>
                                             Clear Fields

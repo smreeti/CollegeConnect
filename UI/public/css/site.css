@@ -92,6 +92,12 @@ body {
   margin-left: 2rem;
 }
 
+.backenderror{
+  margin-top: 20px;
+  
+  color: red !important;
+}
+
 .namespacing{
   margin-bottom: 1.5rem;
 }
@@ -995,7 +1001,7 @@ footer #footer {
     position: relative;
     display: flex;
     flex-direction: column;
-    width: 90%;
+    width: 90% !important;
     color: var(--bs-modal-color);
     pointer-events: auto;
     background-color: var(--bs-modal-bg);
@@ -1918,7 +1924,8 @@ footer p {
 
 
   .modal-content{
-    height: 480px;
+    height: auto;
+    width: auto;
   }
 
 
