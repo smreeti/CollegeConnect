@@ -45,7 +45,7 @@ export default class HomeComponent extends React.Component {
         return (
             <>
                 <Header />
-                <div style={{ background: 'url(../../assets/annie-spratt-0ZPSX_mQ3xI-unsplash.jpg)' }}>
+                <div style={{ background: '#F5F5DC' }}>
 
                     {posts.length > 0 ? (
                         posts.map((post) => (
@@ -57,7 +57,7 @@ export default class HomeComponent extends React.Component {
                                             <Link>{post.postedBy.username}</Link>
                                         </p>
                                     </div>
-                                    
+
                                     <div style={{ height: '500px' }}>
                                         <Link>
                                             <img src={post.imageUrl} alt="Post" className='card-img-top' style={{ maxHeight: '100%', maxWidth: '100%' }} />
@@ -76,9 +76,13 @@ export default class HomeComponent extends React.Component {
                                             <p className='fw-bold my-1 me-1 text-wrap'>{post.postedBy.username} </p> <p className='fw-light my-1'> {post.caption}</p>
                                         </div>
                                         <div className="d-flex fs-6">
-                                            {post.comments === 0 ? <small><FontAwesomeIcon icon={faUser} className='me-1' /> <input type="text" className='border-0' placeholder='Add a commment...' /></small> : post.comments}
-
+                                            <small><FontAwesomeIcon icon={faUser} className='me-1' /> <input type="text" className='border-0' placeholder='Add a commment...' /></small>
                                         </div>
+                                        <Link>
+                                            <div>
+                                                {post.comments > 0 && <small>View {post.comments} comments</small>}
+                                            </div>
+                                        </Link>
                                         <small>
                                             {formatDistanceToNow(new Date(post.createdDate), { addSuffix: true })}
                                         </small>
@@ -87,22 +91,22 @@ export default class HomeComponent extends React.Component {
                             </div>
                         ))
                     ) : (
-                        <div className="main-container" style={{ background: 'silver' }}>
+                        <div className="main-container" style={{ background: '#F5F5DC' }}>
                             <div className="col-lg-6 col-12 p-3 px-md-5 py-md-4 card">
                                 <div className="text-center">
                                     {/* <Link to='/'>
                                         <img className="login-logo" src="../../assets/logo.png" />
                                     </Link> */}
-                                    <p>
-                                        <FontAwesomeIcon icon={faFaceMeh} size='6x' color='grey' />
+                                    <p className='mt-md-5 mt-2'>
+                                        <FontAwesomeIcon icon={faFaceMeh} size='3x' color='#008080' />
 
                                     </p>
-                                    <h2 className="fs-2">
+                                    <h2 className="fs-2" style={{ color: '#008080' }}>
                                         Sorry No Post Yet!
                                     </h2>
-                                    <p className="mt-md-4 mt-3">
+                                    <Link className="mt-md-4 mt-3" >
                                         <small>Follow others to see their posts</small>
-                                    </p>
+                                    </Link>
                                 </div>
 
                             </div>

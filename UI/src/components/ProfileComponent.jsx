@@ -3,16 +3,47 @@ import React from "react";
 import Header from "../Header.jsx";
 import { API_TO_FETCH_PROFILE_DETAILS } from "../../utils/APIRequestUrl.js";
 import fetchData from "../../utils/FetchAPI.js";
-import { Link } from "react-router-dom";
 
-export default class HomeComponent extends React.Component {
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faComment, faHeart, faFaceMeh, faUser } from '@fortawesome/free-solid-svg-icons';
+import { Link } from 'react-router-dom'
+import UserViewPost from './UserViewPost.jsx';
+
+
+export default class ProfileComponent extends React.Component {
 
   constructor() {
     super();
     this.state = {
-      userProfileDetails: {}
+      userProfileDetails: {},
+      likes: 0,
+      isLiked: false,
+      isUserPostOpen: false,
+      selectedImage: ''
     }
   }
+
+  likedIcon = () => {
+    const { isLiked, likes } = this.state;
+    this.setState({
+      likes: isLiked ? likes - 1 : likes + 1,
+      isLiked: !isLiked
+    });
+  };
+
+  handleImageClick = (imageUrl) => {
+    this.setState({
+      isUserPostOpen: true,
+      selectedImage: imageUrl
+    });
+  };
+
+  handleCloseModal = () => {
+    this.setState({
+      isUserPostOpen: false,
+      selectedImage: ''
+    });
+  }; is
 
   componentDidMount() {
     this.fetchUserProfileDetails();
@@ -33,13 +64,14 @@ export default class HomeComponent extends React.Component {
   render() {
 
     const { userProfileDetails: { posts, userDetail } } = this.state;
-
+    const { isLiked, likes } = this.state;
+    const { isUserPostOpen, selectedImage } = this.state;
     return (
       <main>
         <Header />
         <div className="user_details_container">
-          <div>
-            <div className="image_mainblock">
+          <div className="mt-5">
+            <div className="d-flex align-items-center border rounded-3 border-2 mt-5" style={{ background: '#f4f49f' }}>
               <div className="creator_block">
                 <img alt="photographer Image" className="creator_image" src="../../assets/elevated.jpg" />
               </div>
@@ -51,24 +83,40 @@ export default class HomeComponent extends React.Component {
                   <div className="creator_details t_layout">1000 Following</div>
                   <div className="creator_details t_layout">{posts?.length} POSTS</div>
                   <div className="desc">Hey Community! I am a professional photographer and I love to capture the real-life moments. Please follow to not miss my latest uploads.</div>
-
-                  <Link to="/edit">Edit Profile</Link>
                 </div>
               </div>
             </div>
 
-            <div className="image_grid">
-              {posts?.length > 0 ? (
-                posts.map((post) => (
-                  <div className="images" key={post.id}>
-                    <img alt="captured images" className="p_img" src={post.imageUrl} />
-                    <span className="number">Likes: {post.likes} </span>
-                    <span className="number">Comments: {post.comments}</span>
-                  </div>
-                ))) : "No post(s) yet."}
-            </div>
+
+            {posts?.length == 0 ? (
+              <div className="d-flex justify-content-center align-items-center profile_no_post" >
+                <p className="text-center">
+                  "No post(s) yet."
+                </p>
+              </div>
+            ) :
+              <div className="image_grid mt-5">
+                {posts?.length > 0 && (
+                  posts.map((post) => (
+                    <Link onClick={this.handleImageClick} >
+                      <div className="images" key={post.id}>
+                        <img alt="captured images" className="p_img" src={post.imageUrl} />
+                        <div className="text">
+                          <div>
+                            <FontAwesomeIcon icon={faHeart} className='me-3' color={isLiked ? 'red' : 'silver'} onClick={this.likedIcon} />
+                            {likes > 0 ? <small className='fs-6 fw-lighter'><p>{this.state.likes}</p></small> : null}
+                          </div>
+                          <FontAwesomeIcon icon={faComment} />
+                        </div>
+                      </div>
+                    </Link>
+                  )))}
+              </div>
+            }
           </div>
         </div>
+        {isUserPostOpen &&
+          <UserViewPost />}
       </main>
     );
   }
