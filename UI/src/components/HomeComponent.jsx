@@ -49,8 +49,8 @@ export default class HomeComponent extends React.Component {
 
                     {posts.length > 0 ? (
                         posts.map((post) => (
-                            <div className='row my-5 bs-gutter' key={post._id}>
-                                <div className='col-lg-4 col-md-8 col-10 mx-auto card mt-4 px-0'>
+                            <div className='mt-5' key={post._id}>
+                                <div className='col-lg-4 col-md-8 col-10 mx-auto card mt-5 px-0'>
                                     <div className="card-header px-2">
                                         <p className='my-0 d-flex align-items-center text-fluid'>
                                             <FontAwesomeIcon icon={faUser} className='me-md-2 me-1' />

@@ -1,16 +1,12 @@
 import React from "react";
 
 import Header from "../Header.jsx";
-import { API_TO_FETCH_PROFILE_DETAILS } from "../../utils/APIRequestUrl.js";
+import { API_TO_FETCH_PROFILE_DETAILS, API_TO_VIEW_FOLLOWERS } from "../../utils/APIRequestUrl.js";
 import fetchData from "../../utils/FetchAPI.js";
-import M from "materialize-css";
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faComment, faHeart, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom'
 import UserViewPost from './UserViewPost.jsx';
-
-
 
 export default class ProfileComponent extends React.Component {
 
@@ -21,8 +17,9 @@ export default class ProfileComponent extends React.Component {
       likes: 0,
       isLiked: false,
       isUserPostOpen: false,
+      followers: [],
+      userDetails: [],
     };
-    this.openUserPost = React.createRef();
   }
 
   likedIcon = () => {
@@ -37,23 +34,13 @@ export default class ProfileComponent extends React.Component {
     console.log('Image clicked:', src);
     this.setState({
       isUserPostOpen: true,
+      selectedImage: src,
     });
-  };
-
-  handleCloseModal = () => {
-    this.setState({
-      isUserPostOpen: false,
-    });
-  };
-
-  cancelModal = () => {
-    const modalInstance = M.Modal.getInstance(this.openUserPost.current);
-    modalInstance.close();
   };
 
   componentDidMount() {
     this.fetchUserProfileDetails();
-    M.Modal.init(this.openUserPost.current);
+    // this.fetchFollowers();
   }
 
   async fetchUserProfileDetails() {
@@ -68,11 +55,20 @@ export default class ProfileComponent extends React.Component {
     }
   }
 
-  render() {
+  // async fetchFollowers() {
+  //   try {
+  //     const data = await fetchData(API_TO_VIEW_FOLLOWERS, "POST");
+  //     this.setState({
+  //       userDetail: data.body
+  //     });
+  //   } catch (error) {
+  //     console.log("Error:", error);
+  //   }
+  // }
 
+  render() {
     const { userProfileDetails: { posts, userDetail } } = this.state;
-    const { isLiked, likes } = this.state;
-    const { isUserPostOpen, selectedImage } = this.state;
+    const { isLiked, likes, isUserPostOpen, followers } = this.state;
     return (
       <main>
         <Header />
@@ -86,8 +82,17 @@ export default class ProfileComponent extends React.Component {
               <div className="container_button">
                 <div className="sync">
                   <div className="creator_desc">{userDetail?.firstName + " " + userDetail?.lastName}</div>
-                  <div className="creator_details first_text">100 Followers</div>
-                  <div className="creator_details t_layout">1000 Following</div>
+                  <Link>
+                    <div className="creator_details first_text">100 Followers</div>
+                  </Link>
+                  <Link>
+                    <div className="creator_details t_layout">
+                      {followers.map((follower) => (
+                        <li key={follower.id}>
+                          <span>{follower.username}</span>
+                        </li>
+                      ))}1000 Following</div>
+                  </Link>
                   <div className="creator_details t_layout">{posts?.length} POSTS</div>
                   <div className="desc">Hey Community! I am a professional photographer and I love to capture the real-life moments. Please follow to not miss my latest uploads.</div>
                 </div>
@@ -106,16 +111,17 @@ export default class ProfileComponent extends React.Component {
                 <div className="image_grid mt-5 user_details_container">
                   {posts?.length > 0 && (
                     posts.map((post) => (
-                      <Link to='#' onClick={() => this.handleImageClick(post.imageUrl)} data-target="openUserPost" >
+                      <Link onClick={() => this.handleImageClick(post.imageUrl)} data-target="openUserPost" >
                         <div className="images" key={post.id}>
                           <img alt="captured images" className="p_img" src={post.imageUrl} />
-                          {/* <div className="text">
+                          <p>{post.caption}</p>
+                          <div className="text">
                             <div>
-                              <FontAwesomeIcon icon={faHeart} className='me-3' color={isLiked ? 'red' : 'silver'} onClick={this.likedIcon} />
+                              <FontAwesomeIcon icon={faHeart} className='me-3' color={isLiked ? 'red' : 'gray'} onClick={this.likedIcon} />
                               {likes > 0 ? <small className='fs-6 fw-lighter'><p>{this.state.likes}</p></small> : null}
                             </div>
                             <FontAwesomeIcon icon={faComment} />
-                          </div> */}
+                          </div>
                         </div>
                       </Link>
                     )))}
@@ -125,7 +131,10 @@ export default class ProfileComponent extends React.Component {
           </div>
         </div>
         {isUserPostOpen &&
-          (<>Yo</>)}
+          (<UserViewPost
+            selectedImage={this.state.selectedImage}
+            selectedCaption={this.state.selectedCaption} />
+          )}
       </main>
     );
   }
