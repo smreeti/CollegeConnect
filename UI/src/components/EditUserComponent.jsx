@@ -57,6 +57,7 @@ export default class EditUserComponent extends React.Component {
             email: form.email.value,
             mobileNumber: form.mobileNumber.value,
             username: form.username.value,
+            bio: form.bio ? form.bio.value : ""
         };
 
         this.setServerErrors([]);
@@ -115,15 +116,14 @@ export default class EditUserComponent extends React.Component {
                 mobileNumber,
                 username,
                 collegeInfoId,
-                profilePicture
-            },
+                profilePicture,
+                bio
+            }
         } = this.state;
 
         return (
             <>
                 <Header />
-
-
 
                 <section className="usersection">
                     <form
@@ -133,27 +133,23 @@ export default class EditUserComponent extends React.Component {
                         onSubmit={this.editProfile}
                     >
                         <div className="container rounded bg-white mb-5 spacing">
-                            <div class="row">
-                                <div class="col-md-3 border-right">
-                                    <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-
+                            <div className="row">
+                                <div className="col-md-3 border-right">
+                                    <div className="d-flex flex-column align-items-center text-center p-3 py-5">
                                         {profilePicture === "default" ? (
                                             <img
-                                                class="edituserimg"
+                                                className="edituserimg"
                                                 src="/assets/profile.png"
                                                 alt="Profile"
                                             />
                                         ) : (
                                             <img
-                                                class="edituserimg rounded-circle imgmargin"
+                                                className="edituserimg rounded-circle imgmargin"
                                                 src={profilePicture}
                                                 alt="Profile"
-
-
                                             />
                                         )}
-                                        <span class="font-weight-bold namespacing usernamespace">{firstName + " " + lastName}</span>
-
+                                        <span className="font-weight-bold namespacing usernamespace">{firstName + " " + lastName}</span>
                                         <span> </span>
                                         <div className="modcen">
                                             <Link
@@ -166,21 +162,21 @@ export default class EditUserComponent extends React.Component {
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-5 border-right">
-                                    <div class="p-3 py-5">
-                                        <div class="d-flex justify-content-between align-items-center mb-3">
-                                            <h4 class="text-centre ">Profile Settings</h4>
+                                <div className="col-md-5 border-right">
+                                    <div className="p-3 py-5">
+                                        <div className="d-flex justify-content-between align-items-center mb-3">
+                                            <h4 className="text-centre ">Profile Settings</h4>
                                         </div>
-                                        <div class="row mt-2">
-                                            <div class="col-md-6">
-                                                <label class="labels labelset">Firstname</label>
+                                        <div className="row mt-2">
+                                            <div className="col-md-6">
+                                                <label htmlFor="firstName" className="labels labelset">Firstname</label>
                                                 <input
                                                     id="firstName"
                                                     name="firstName"
                                                     value={firstName || ""}
                                                     onChange={this.handleOnChange}
                                                     type="text"
-                                                    class="form-control labelset"
+                                                    className="form-control labelset"
                                                     placeholder="enter first name"
                                                 />
                                                 <p className="required errormsg errpad1 labelset">
@@ -188,15 +184,15 @@ export default class EditUserComponent extends React.Component {
                                                 </p>
                                             </div>
 
-                                            <div class="col-md-6">
-                                                <label class="labels labelset labelset ">Lastname</label>
+                                            <div className="col-md-6">
+                                                <label htmlFor="lastName" className="labels labelset">Lastname</label>
                                                 <input
                                                     type="text"
                                                     id="lastName"
                                                     name="lastName"
                                                     value={lastName || ""}
                                                     onChange={this.handleOnChange}
-                                                    class="form-control labelset"
+                                                    className="form-control labelset"
                                                     placeholder="enter lastName"
                                                 />
                                                 <p className="required errormsg errpad1 labelset">
@@ -205,33 +201,33 @@ export default class EditUserComponent extends React.Component {
                                             </div>
                                         </div>
 
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <label class="labels labelset" labelset>Email ID</label>
+                                        <div className="row">
+                                            <div className="col-md-12">
+                                                <label htmlFor="email" className="labels labelset">Email ID</label>
                                                 <input
                                                     type="text"
                                                     id="email"
                                                     name="email"
                                                     value={email || ""}
                                                     onChange={this.handleOnChange}
-                                                    class="form-control labelset"
+                                                    className="form-control labelset"
                                                     placeholder="enter email id"
                                                 />
                                             </div>
 
-                                            <p className="required errormsg errpad1 labelset labelset">
+                                            <p className="required errormsg errpad1 labelset">
                                                 {this.state?.errors["email"]}
                                             </p>
 
-                                            <div class="col-md-12">
-                                                <label class="labels labelset">Mobile Number</label>
+                                            <div className="col-md-12">
+                                                <label htmlFor="mobileNumber" className="labels labelset">Mobile Number</label>
                                                 <input
                                                     type="text"
                                                     id="mobileNumber"
                                                     name="mobileNumber"
                                                     value={mobileNumber || ""}
                                                     onChange={this.handleOnChange}
-                                                    class="form-control labelset"
+                                                    className="form-control labelset"
                                                     placeholder="enter phone number"
                                                 />
                                             </div>
@@ -240,15 +236,15 @@ export default class EditUserComponent extends React.Component {
                                                 {this.state?.errors["mobileNumber"]}
                                             </p>
 
-                                            <div class="col-md-12">
-                                                <label class="labels labelset">Username</label>
+                                            <div className="col-md-12">
+                                                <label htmlFor="username" className="labels labelset">Username</label>
                                                 <input
                                                     type="text"
                                                     id="username"
                                                     name="username"
                                                     value={username || ""}
                                                     onChange={this.handleOnChange}
-                                                    class="form-control labelset"
+                                                    className="form-control labelset"
                                                     placeholder="enter username"
                                                 />
                                             </div>
@@ -257,8 +253,8 @@ export default class EditUserComponent extends React.Component {
                                                 {this.state?.errors["username"]}
                                             </p>
 
-                                            <div class="col-md-12">
-                                                <label class="labels labelset">College</label>
+                                            <div className="col-md-12">
+                                                <label htmlFor="collegeInfo" className="labels labelset">College</label>
                                                 <input
                                                     type="text"
                                                     id="collegeInfo"
@@ -266,14 +262,14 @@ export default class EditUserComponent extends React.Component {
                                                     value={collegeInfoId?.name || ""}
                                                     onChange={this.handleOnChange}
                                                     disabled
-                                                    class="form-control labelset"
+                                                    className="form-control labelset"
                                                     placeholder="education"
                                                 />
                                             </div>
                                         </div>
                                     </div>
-                                    <div class=" text-center btnspace">
-                                        <button class="btnprofile" type="submit">
+                                    <div className=" text-center btnspace">
+                                        <button className="btnprofile" type="submit">
                                             Save Profile
                                         </button>
 
@@ -285,23 +281,28 @@ export default class EditUserComponent extends React.Component {
                                             </ul>
                                         )}
 
-                                        {/* <button class="btnprofile btnmargin" type="button" onClick={this.clearFields}>
+                                        {/* <button className="btnprofile btnmargin" type="button" onClick={this.clearFields}>
                                             Clear Fields
                                         </button> */}
                                     </div>
                                 </div>
-                                <div class="col-md-4">
-                                    <div class="p-3 py-5">
-                                        <h4 class="text-center">About me</h4>
-                                        <p class="text-center">
-                                            I am a dedicated student currently pursuing my studies in web development at Conestoga College. With a passion for technology and a keen interest in the ever-evolving world of web development, I am committed to honing my skills and staying up-to-date with the latest industry trends.
+                                <div className="col-md-4">
+                                    <div className="p-3 py-5">
+                                        <h4 className="text-center">About me</h4>
 
+                                        <textarea
+                                            value={bio}
+                                            onChange={this.handleOnChange}
+                                            className="form-control bio"
+                                            row="3"
+                                            name="bio"
+                                            placeholder="Enter your bio"
+                                        ></textarea>
 
-                                        </p>
                                         <img
                                             src="../../assets/waterloo.jpg"
                                             alt="Additional Info"
-                                            class="img-fluid"
+                                            className="img-fluid"
                                         />
                                     </div>
                                 </div>
@@ -311,7 +312,6 @@ export default class EditUserComponent extends React.Component {
 
                     {this.state.isEditProfilePhotoModal && <EditProfilePhotoComponent />}
                 </section>
-
             </>
         );
     }

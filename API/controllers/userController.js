@@ -99,7 +99,8 @@ const editProfile = async (req, res) => {
         lastName,
         email,
         mobileNumber,
-        username
+        username,
+        bio
     } = req.body;
 
     req.body.isEdit = true;
@@ -116,7 +117,8 @@ const editProfile = async (req, res) => {
             lastName,
             email,
             mobileNumber,
-            username
+            username,
+            bio
         });
 
         return setSuccessResponse(res, { message: "Profile updated successfully" });

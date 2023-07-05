@@ -113,6 +113,12 @@ body {
   align-items: center;
 }
 
+.bio{
+  min-height: 150px;
+  max-height: 250px;
+  margin-bottom: 15px;
+}
+
 .edituserimg{
   width: 250px;
 }
