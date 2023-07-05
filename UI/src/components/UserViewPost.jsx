@@ -1,76 +1,40 @@
-import React, { useRef, useEffect, useState } from "react";
-import Header from "../Header.jsx";
-import { API_TO_FETCH_PROFILE_DETAILS } from "../../utils/APIRequestUrl.js";
-import fetchData from "../../utils/FetchAPI.js";
+// import React, { useRef, useEffect, useState } from 'react'
+// import { Link } from 'react-router-dom';
+// import M from 'materialize-css'
+// import fetchData from '../../utils/FetchAPI'
+// import { API_TO_FETCH_PROFILE_DETAILS } from '../../utils/APIRequestUrl'
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { faTimes } from "@fortawesome/free-solid-svg-icons";
 
-export default class UserViewPost extends React.Component {
-    constructor() {
-        super();
-        this.state = {
-            userProfileDetails: {},
-        };
-        this.openUserPost = React.createRef();
-    }
+// const UserViewPost = () => {
+//     const openUserPost = useRef(null);
+//     const [userDetails, setUserDetails] = useState([])
 
-    componentDidMount() {
-        this.fetchUserProfileDetails();
-        M.Modal.init(this.openUserPost.current);
-    }
+//     useEffect(() => {
+//         M.Modal.init(openUserPost.current)
+//     }, []);
 
-    async fetchUserProfileDetails() {
-        try {
-            const data = await fetchData(API_TO_FETCH_PROFILE_DETAILS, "POST");
-            this.setState({
-                userProfileDetails: data.body
-            })
+//     const handleCloseModal = () => {
+//         M.Modal.getInstance(openUserPost.current).close();
+//     }
 
-        } catch (error) {
-            console.log("Error:", error);
-        }
-    }
+//     return (
+//         <div id="openUserPost" className="modal modcen" ref={openUserPost}>
+//             <div className="modal-dialog">
+//                 <div className="modal-content">
+//                     <div className="modal-header">
+//                         <h4 className="modal-title">Title</h4>
 
-    // cancelModal = () => {
+//                         <FontAwesomeIcon
+//                             icon={faTimes}
+//                             className="close"
+//                             onClick={handleCloseModal}
+//                         />
+//                     </div>
+//                 </div>
+//             </div>
+//         </div>
+//     );
+// }
 
-    //     setPost({
-    //         caption: "",
-    //         image: null,
-    //     });
-
-    //     // Reset the file input field
-    //     const fileInput = document.getElementById("image");
-    //     if (fileInput)
-    //         fileInput.value = null;
-
-    //     setErrors([]);
-    //     setServerErrors([]);
-
-    //     const modalInstance = M.Modal.getInstance(createPostModal.current); //close modal
-    //     modalInstance.close();
-    // };
-
-    render() {
-        const { userProfileDetails: { posts, userDetail } } = this.state;
-
-        return (
-            <>
-                <div id="openUserPost" className="modal modcen" ref={openUserPost}>
-                    <div className="modal-dialog">
-                        <div className="modal-content">
-                            <div className="modal-header">
-                                <h4 className="modal-title">{posts.imageUrl}</h4>
-
-                                <FontAwesomeIcon
-                                    icon={faTimes}
-                                    className="close"
-                                    onClick={cancelModal}
-                                />
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </>
-
-        );
-    }
-}
+// export default UserViewPost;

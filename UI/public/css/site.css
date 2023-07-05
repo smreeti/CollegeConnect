@@ -899,17 +899,6 @@ footer #footer {
   }
 }
 
-@media screen and (min-width: 768px) and (max-width: 1000px) {
-  .image_grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 30px;
-  }
-
-  .p_img {
-    height: 300px;
-  }
-}
-
 .main-container {
   min-height: 93vh;
   display: flex;
@@ -1449,18 +1438,49 @@ footer p {
 
 .text {
   position: absolute;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.6);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
-.text:hover {
+/* .text:hover {
   opacity: 1;
+} */
+
+.modal {
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #000000;
+  transition: opacity 0.4 ease, visibility 0.4 ease, transform 0.4 ease-in-out;
+  visibility: hidden;
+  opacity: 0;
+  transform: scale(0);
+  overflow: hidden;
+  z-index: 999;
+}
+
+.modal .open {
+  visibility: visible;
+  opacity: 1;
+  transform: scale(1);
+}
+
+.model img {
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  max-height: 100%;
+  display: block;
+  line-height: 0;
+  box-sizing: border-box;
+  padding: 20px 0 20px;
+  margin: 0 auto;
 }
 
 .t_layout {
@@ -1474,13 +1494,24 @@ footer p {
 }
 
 .image_grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
+  -webkit-column-count: 3;
+  -moz-column-count: 3;
+  column-count: 3;
+  -webkit-column-width: 33%;
+  -moz-column-width: 33%;
+  column-width: 33%;
+  padding: 0 12px;
 }
 
-.images {
-  position: relative;
+/* .image_grid .images:hover {
+  filter: brightness(0.2);
+} */
+
+.image_grid .images {
+  -webkit-transition: all 350ms ease;
+  transition: all 350ms ease;
+  cursor: pointer;
+  margin-bottom: 12px;
 }
 
 .icon {
@@ -1676,13 +1707,24 @@ footer p {
   .std {
     font-size: 1rem;
   }
+}
 
+@media (max-width: 991px) {
   .image_grid {
-    grid-template-columns: auto;
+    -webkit-column-count: 2;
+    -moz-column-count: 2;
+    column-count: 2;
   }
+}
 
-  .p_img {
-    height: 200px;
+@media (max-width: 480px) {
+  .image_grid {
+    -webkit-column-count: 1;
+    -moz-column-count: 1;
+    column-count: 1;
+    -webkit-column-width: 100%;
+    -moz-column-width: 100%;
+    column-width: 100%;
   }
 }
 
