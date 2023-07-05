@@ -45,6 +45,9 @@ const UserSchema = new Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'CollegeInfo'
     },
+    bio: {
+        type: String
+    }
 });
 
 UserSchema.pre('save', function (next) {

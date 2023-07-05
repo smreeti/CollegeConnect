@@ -3,6 +3,188 @@ body {
   margin: 0 auto;
 }
 
+/*Edit profile start*/
+
+.suguser {
+  background: black;
+  display: flex;
+  color: white;
+  margin-bottom: 10px;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+#usermar {
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+.followButton {
+  height: 45px !important;
+  width: 85px !important;
+  background-color: #0095f6 !important;
+  color: white !important;
+  padding-top: 10px !important;
+  font-size: small !important;
+  margin-top: 5px;
+  border-radius: 12px;
+}
+
+.uniname {
+  font-size: 10px;
+  margin-top: 12px;
+  color: white;
+}
+
+.suggestionprofilePic {
+  width: 60px;
+  height: 60px;
+  border: 2px solid #e3e3e3;
+  border-radius: 50%;
+}
+
+.labelset {
+  margin-left: 10px;
+}
+
+.modcen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btnprofile {
+  height: 45px !important;
+  width: 130px !important;
+  background-color: black !important;
+  color: white !important;
+  padding-top: 10px !important;
+  font-size: small !important;
+}
+
+.change-profile-photo-link {
+  color: #007bff;
+  /* Blue color, you can choose your desired color */
+  text-decoration: none;
+  cursor: pointer;
+  font-weight: bold;
+  padding: 5px 10px;
+  border: 2px solid #007bff;
+  border-radius: 5px;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.change-profile-photo-link:hover {
+  background-color: black;
+  color: #fff;
+}
+
+.spacing {
+  margin-top: 5.5rem !important;
+}
+
+.btnspace {
+  margin-bottom: 40px;
+}
+
+.btnmargin {
+  margin-left: 2rem;
+}
+
+.backenderror {
+  margin-top: 20px;
+
+  color: red !important;
+}
+
+.namespacing {
+  margin-bottom: 1.5rem;
+}
+
+.usernamespace {
+  margin-top: 1rem;
+}
+
+.usersection {
+  background: #f5f5dc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bio {
+  min-height: 150px;
+  max-height: 250px;
+  margin-bottom: 15px;
+}
+
+.edituserimg {
+  width: 250px;
+}
+
+.imgmargin {
+  margin-top: 2rem;
+}
+
+.editporfileimg {
+  width: 50%;
+}
+
+.editusersection {
+  background: #dddddd;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-control:focus {
+  box-shadow: none;
+  border-color: #ba68c8;
+}
+
+.border-right {
+  border-right: 1px solid #dee2e6 !important;
+}
+
+.profile-button {
+  background: rgb(99, 39, 120);
+  box-shadow: none;
+  border: none;
+}
+
+.profile-button:hover {
+  background: #682773;
+}
+
+.profile-button:focus {
+  background: #682773;
+  box-shadow: none;
+}
+
+.profile-button:active {
+  background: #682773;
+  box-shadow: none;
+}
+
+.back:hover {
+  color: #682773;
+  cursor: pointer;
+}
+
+.labels {
+  font-size: 11px;
+}
+
+.add-experience:hover {
+  background: #ba68c8;
+  color: #fff;
+  cursor: pointer;
+  border: solid 1px #ba68c8;
+}
+
+/*Edit profile end*/
+
 .fix-upload-button .btndiv {
   margin-top: 20px;
 }
@@ -49,6 +231,7 @@ body {
 
 #profileName {
   font-size: 13px;
+  margin-left: 10px;
 }
 
 .subbtn {
@@ -128,7 +311,7 @@ button[type="submit"]:hover {
 
 .modal-content {
   width: 495px;
-  height: 590px;
+  height: auto;
 }
 
 .modal-close {
@@ -810,12 +993,16 @@ footer #footer {
 }
 
 @media screen and (min-width: 370px) and (max-width: 1000px) {
+  .labelset {
+    margin-left: 12px;
+  }
+
   /*responsive modal start */
   .modal-content {
     position: relative;
     display: flex;
     flex-direction: column;
-    width: 90%;
+    width: 90% !important;
     color: var(--bs-modal-color);
     pointer-events: auto;
     background-color: var(--bs-modal-bg);
@@ -829,6 +1016,7 @@ footer #footer {
   .modcen {
     display: flex !important;
     align-items: center;
+    justify-content: center;
   }
 
   /**/
@@ -880,6 +1068,14 @@ footer #footer {
 }
 
 @media screen and (min-width: 1024px) and (max-width: 1080px) {
+  .labelset {
+    margin-left: 12px;
+  }
+
+  .usersection {
+    height: auto !important;
+  }
+
   #login-container {
     height: 530px;
     display: flex;
@@ -946,6 +1142,10 @@ footer #footer {
 }
 
 @media screen and (min-width: 1024px) {
+  .labelset {
+    margin-left: 12px;
+  }
+
   #main-login-container {
     justify-content: center;
     grid-template-columns: 1fr 1fr;
@@ -1317,6 +1517,10 @@ footer p {
 }
 
 @media screen and (max-width: 700px) {
+  .labelset {
+    margin-left: 12px;
+  }
+
   #main-login-container {
     width: 90% !important;
   }
@@ -1533,6 +1737,14 @@ footer p {
 }
 
 @media screen and (min-width: 768px) {
+  .labelset {
+    margin-left: 12px;
+  }
+
+  .user_details_container {
+    background: #f5f5f5;
+  }
+
   .image_mainblock {
     background-color: #ffffff;
     margin: 0 auto;
@@ -1656,6 +1868,10 @@ footer p {
 }
 
 @media (max-width: 700px) {
+  .labelset {
+    margin-left: 12px;
+  }
+
   .menu {
     position: absolute;
     top: 0;
@@ -1666,6 +1882,7 @@ footer p {
     justify-content: center;
     align-items: center;
     z-index: 99999;
+    background-color: #212121;
   }
 
   #menu-toggle ~ .menu li {
@@ -1686,9 +1903,9 @@ footer p {
     /* height: 120px; */
   }
 
-  #menu-toggle:checked ~ .menu li.heightli {
+  /* #menu-toggle:checked ~ .menu li.heightli {
     height: 150px !important;
-  }
+  } */
 
   .menu > li {
     display: flex;
@@ -1729,11 +1946,30 @@ footer p {
 }
 
 @media screen and (min-width: 250px) and (max-width: 420px) {
+  .labelset {
+    margin-left: 12px;
+  }
+
+  .modalcenter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .modal-content {
+    height: auto;
+    width: auto;
+  }
+
   .formheight {
     width: 150px;
     font-size: 10px;
     margin: 0 auto;
     height: 30px;
+  }
+
+  .btnmargin {
+    margin-left: 0.23rem;
   }
 
   .main-section {
@@ -1778,4 +2014,23 @@ footer p {
   height: 30px;
   border: 2px solid #e3e3e3;
   border-radius: 50%;
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+  .labelset {
+    margin-left: 12px;
+  }
+
+  .namespacing {
+    font-size: 13px;
+    text-align: center;
+  }
+
+  .btnmargin {
+    margin-left: 1rem;
+  }
+
+  .menu a {
+    padding-left: 0px !important;
+  }
 }

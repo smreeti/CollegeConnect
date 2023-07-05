@@ -48,32 +48,34 @@ export default function Header() {
 
       <ul className="menu">
 
-        <li>
+        <li className='tabmenu'>
           <FontAwesomeIcon className='icons' icon={faHome} />
           <Link to="/home"> Home </Link>
         </li>
 
-        <li>
+        <li className='tabmenu'>
           <FontAwesomeIcon className='icons' icon={faSearch} />
-          <Link onClick={openSearchModal} data-target="modal1" className="modal-trigger">Search</Link>
+          <Link onClick={() => {
+            toggleMenu(); // Close the menu when Create Post is clicked
+            openSearchModal(); // Open the Create Post modal
+          }}
+            data-target="modal1" className="modal-trigger">Search</Link>
         </li>
 
-        <li>
-          <FontAwesomeIcon className='icons' icon={faUser} />
-          <Link to="/profile"> Profile </Link>
-        </li>
-
-        <li>
+        <li className='tabmenu'>
           <FontAwesomeIcon className="icons" icon={faFileImage} />
-          <Link onClick={openCreatePostModal} data-target="createPostModal" className="modal-trigger">Create Post</Link>
+          <Link onClick={() => {
+            toggleMenu(); // Close the menu when Create Post is clicked
+            openCreatePostModal(); // Open the Create Post modal
+          }} data-target="createPostModal" className="modal-trigger">Create Post</Link>
         </li>
 
-        <li>
+        <li className='tabmenu'>
           <FontAwesomeIcon className='icons' icon={faInfo} />
           <Link to="/about"> About Us </Link>
         </li>
 
-        <li className="heightli">
+        <li className="heightli tabmenu">
           {loggedInUser && (
             <Dropdown className="iconimg">
               <Dropdown.Toggle variant="secondary" id="profile-dropdown">

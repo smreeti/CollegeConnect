@@ -99,7 +99,8 @@ const editProfile = async (req, res) => {
         lastName,
         email,
         mobileNumber,
-        username
+        username,
+        bio
     } = req.body;
 
     req.body.isEdit = true;
@@ -111,15 +112,16 @@ const editProfile = async (req, res) => {
         if (errors.length > 0)
             return setErrorResponse(res, HttpStatus.BAD_REQUEST, errors);
 
-        await User.findByIdAndUpdate(loggedInUser._id, {
+        const user = await User.findByIdAndUpdate(loggedInUser._id, {
             firstName,
             lastName,
             email,
             mobileNumber,
-            username
-        });
+            username,
+            bio
+        }, { new: true });
 
-        return setSuccessResponse(res, { message: "Profile updated successfully" });
+        return setSuccessResponse(res, { message: "Profile updated successfully" }, user);
     } catch (error) {
         return setErrorResponse(res, HttpStatus.INTERNAL_SERVER_ERROR, error);
     }
