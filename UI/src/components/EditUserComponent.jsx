@@ -74,6 +74,7 @@ export default class EditUserComponent extends React.Component {
         try {
             const data = await fetchData(API_TO_EDIT_PROFILE, "POST", user);
             if (!data.error) {
+                await this.updateLocalStorage(data.body);
                 window.location.reload();
                 console.log("User edited successfully");
             } else {
@@ -84,6 +85,11 @@ export default class EditUserComponent extends React.Component {
             console.log("Error:", error);
             this.setServerErrors(error);
         }
+    }
+
+    async updateLocalStorage(user) {
+        localStorage.removeItem("user");
+        localStorage.setItem("user", JSON.stringify(user));
     }
 
     setFormErrors(formErrors) {
