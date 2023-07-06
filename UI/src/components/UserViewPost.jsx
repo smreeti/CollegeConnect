@@ -4,7 +4,7 @@ import M from 'materialize-css'
 import fetchData from '../../utils/FetchAPI'
 import { API_TO_FETCH_PROFILE_DETAILS } from '../../utils/APIRequestUrl'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTimes } from "@fortawesome/free-solid-svg-icons";
+import { faTimes, faHeart, faComment } from "@fortawesome/free-solid-svg-icons";
 
 export default class UserViewPost extends React.Component {
     constructor(props) {
@@ -12,6 +12,9 @@ export default class UserViewPost extends React.Component {
         this.openUserPost = React.createRef();
         this.state = {
             userProfileDetails: {},
+            likes: 0,
+            isLiked: false,
+
         };
     }
 
@@ -27,6 +30,14 @@ export default class UserViewPost extends React.Component {
         modalInstance.close();
     };
 
+    likedIcon = () => {
+        const { isLiked, likes } = this.state;
+        this.setState({
+            likes: isLiked ? likes - 1 : likes + 1,
+            isLiked: !isLiked
+        });
+    };
+
     async fetchUserProfileDetails() {
         try {
             const data = await fetchData(API_TO_FETCH_PROFILE_DETAILS, "POST");
@@ -40,7 +51,7 @@ export default class UserViewPost extends React.Component {
     }
 
     render() {
-        const { userProfileDetails: { posts, userDetail } } = this.state;
+        const { userProfileDetails: { posts, userDetail }, likes, isLiked } = this.state;
         const { selectedImage, selectedCaption, username } = this.props;
         return (
             <div id="openUserPost" className="modal modcen p-5" ref={this.openUserPost}>
@@ -61,9 +72,24 @@ export default class UserViewPost extends React.Component {
 
                                 </div>
                                 <div className="col-3">
-                                    <div className='px-2'>
-                                        <p style={{ display: 'inline-block' }}>{userDetail?.username} <small>Lorem ipsum dolor sit amet</small></p>
+                                    <div className='text-wrap'>
+                                        <p>{userDetail?.username}:</p> <p className='user-caption'>Lorem ipsum dolor sit amet</p>
                                     </div>
+                                    <div className="d-flex flex-wrap">
+                                        <FontAwesomeIcon icon={faHeart} className='me-3' color={isLiked ? 'red' : 'gray'} onClick={this.likedIcon} />
+                                        <FontAwesomeIcon icon={faComment} />
+                                    </div>
+                                    {likes > 0 ? <p className='likes'>Liked by {this.state.likes} people</p> : null}
+                                    {posts?.length > 0 && (
+                                        posts.map((post) => (
+                                            <Link>
+                                                <div>
+                                                    {post.comments.length > 0 && <small>View {post.comments.length} comments</small>}
+                                                </div>
+                                            </Link>
+                                        ))
+                                    )}
+
                                 </div>
                             </div>
 

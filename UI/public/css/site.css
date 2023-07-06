@@ -2010,3 +2010,12 @@ footer p {
     padding-left: 0px !important;
   }
 }
+
+/* UserView Post */
+.likes {
+  font-size: 13px !important;
+}
+
+.user-caption {
+  font-size: 14px !important;
+}
