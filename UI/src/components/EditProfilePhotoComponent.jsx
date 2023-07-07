@@ -117,7 +117,7 @@ const EditProfilePhotoComponent = () => {
 
   return (
     <>
-      <div id="editProfilePicModal" className="modal modcen" ref={createPostModal}>
+      <div id="editProfilePicModal" className="modal" ref={createPostModal}>
         <div className="modal-dialog">
           <div className="modal-content">
             <div className="modal-header">

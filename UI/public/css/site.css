@@ -48,12 +48,6 @@ body {
   margin-left: 10px;
 }
 
-.modcen {
-  display: flex !important;
-  justify-content: center;
-  align-items: center;
-}
-
 .btnprofile {
   height: 45px !important;
   width: 130px !important;
@@ -1012,14 +1006,6 @@ footer #footer {
     outline: 0;
     height: 500px;
   }
-
-  .modcen {
-    display: flex !important;
-    align-items: center;
-    justify-content: center;
-  }
-
-  /**/
 
   #resrevtest {
     display: flex !important;

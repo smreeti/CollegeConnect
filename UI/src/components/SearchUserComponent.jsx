@@ -39,7 +39,7 @@ const SearchUserComponent = () => {
 
     return (
         <>
-            <div id="modal1" className="modal modcen" ref={searchModal}>
+            <div id="modal1" className="modal" ref={searchModal}>
                 <div className="modal-content">
                     <div className="modal-close">
                         <FontAwesomeIcon
