@@ -1608,10 +1608,8 @@ footer p {
 }
 
 .creator_desc {
-  margin-top: 5%;
   font-size: 15px;
   color: #212121;
-  margin-top: 20px;
   font-weight: bold;
   text-align: center;
 }
@@ -1624,12 +1622,6 @@ footer p {
 
 .first_text {
   text-align: center;
-}
-
-.desc {
-  float: left;
-  margin-top: 20px;
-  font-size: x-small;
 }
 
 .p_img {
@@ -1712,6 +1704,32 @@ footer p {
   text-align: center;
 }
 
+/* ProfileComponent Post */
+.likes {
+  font-size: 13px !important;
+}
+
+.user-caption {
+  font-size: 13px !important;
+}
+
+.edit_profile_button {
+  display: flex;
+  font-size: 13px;
+  background-color: #ba68c8;
+  color: white;
+  border-radius: 5px;
+  border: 2px solid #ba68c8;
+  cursor: pointer;
+  margin-top: 20px !important;
+  transition: background-color 0.4s ease;
+}
+
+.edit_profile_button:hover {
+  background-color: transparent;
+  color: black;
+}
+
 @media screen and (min-width: 768px) {
   .labelset {
     margin-left: 12px;
@@ -1787,10 +1805,8 @@ footer p {
   }
 
   .creator_desc {
-    margin-top: 5%;
     font-size: 20px;
     color: #212121;
-    margin-top: 20px;
     font-weight: bold;
     text-align: left;
   }
@@ -2011,11 +2027,8 @@ footer p {
   }
 }
 
-/* UserView Post */
-.likes {
-  font-size: 13px !important;
-}
-
-.user-caption {
-  font-size: 13px !important;
+@media (max-width: 768px) {
+  .edit_profile_button {
+    margin: auto;
+  }
 }

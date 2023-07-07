@@ -83,12 +83,15 @@ export default class ProfileComponent extends React.Component {
           <div className="mt-5">
             <div className="d-flex align-items-center border rounded-3 border-2 mt-5" style={{ background: '#f4f49f' }}>
               <div className="creator_block">
-                <img alt="photographer Image" className="creator_image" src="../../assets/elevated.jpg" />
+                {userDetail?.profilePicture ?
+                  (<img alt="photographer Image" className="creator_image" src={userDetail?.profilePicture} />) :
+                  <img alt="photographer Image" className="creator_image" src="../../assets/defaultProfile.png" />
+                }
               </div>
 
-              <div className="container_button">
+              <div className="container_button py-3">
                 <div className="sync">
-                  <div className="creator_desc">{userDetail?.firstName + " " + userDetail?.lastName}</div>
+                  <div className="creator_desc">{userDetail?.firstName + " " + userDetail?.lastName} </div>
                   <Link>
                     <div className="creator_details first_text">100 Followers</div>
                   </Link>
@@ -103,9 +106,10 @@ export default class ProfileComponent extends React.Component {
 
                   <div className="creator_details t_layout">{posts?.length} POSTS</div>
                   <div className="desc">Hey Community! I am a professional photographer and I love to capture the real-life moments. Please follow to not miss my latest uploads.</div>
-                  <Link to="/edit">Edit Profile</Link>
-
                 </div>
+                <Link to="/edit">
+                  <input type="button" value="Edit profile" className="edit_profile_button p-1" />
+                </Link>
               </div>
             </div>
 
@@ -118,7 +122,7 @@ export default class ProfileComponent extends React.Component {
               </div>
             ) :
               <>
-                <div className="d-flex mt-3">
+                <div className="d-flex mt-md-4 mt-3">
                   <hr className="hr w-50" />
                   <small className="px-3 small">POST</small>
                   <hr className="hr w-50" />
@@ -129,7 +133,6 @@ export default class ProfileComponent extends React.Component {
                       <Link onClick={() => this.handleImageClick(post)} data-target="openUserPost" className="modal-trigger">
                         <div className="images" key={post.id}>
                           <img alt="captured images" className="p_img" src={post.imageUrl} />
-                          <p>{post.caption}</p>
                           <div className="text">
                             <div>
                               <FontAwesomeIcon icon={faHeart} className='me-3' color={isLiked ? 'red' : 'gray'}
@@ -150,6 +153,7 @@ export default class ProfileComponent extends React.Component {
         {isUserPostOpen &&
           (<PostDetailComponent
             selectedPostId={this.state.selectedPostId}
+            userDetail={userDetail}
           />
           )}
       </main>
