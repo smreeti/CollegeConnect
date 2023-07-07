@@ -115,6 +115,11 @@ export default class ProfileComponent extends React.Component {
               </div>
             ) :
               <>
+                <div className="d-flex mt-3">
+                  <hr className="hr w-50" />
+                  <small className="px-3 small">POST</small>
+                  <hr className="hr w-50" />
+                </div>
                 <div className="image_grid mt-5 user_details_container">
                   {posts?.length > 0 && (
                     posts.map((post) => (

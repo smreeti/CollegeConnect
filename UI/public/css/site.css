@@ -1557,6 +1557,20 @@ footer p {
   object-fit: cover;
 }
 
+.creator_block_post {
+  width: 40px;
+  border-radius: 50%;
+  vertical-align: middle;
+  height: 40px;
+}
+
+.creator_image_post {
+  width: 35px;
+  border-radius: 70%;
+  height: 35px;
+  object-fit: cover;
+}
+
 .container_button {
   height: auto;
   margin: 0 auto;
@@ -2003,5 +2017,5 @@ footer p {
 }
 
 .user-caption {
-  font-size: 14px !important;
+  font-size: 13px !important;
 }
