@@ -145,7 +145,7 @@ export default class EditUserComponent extends React.Component {
                                         {profilePicture === "default" ? (
                                             <img
                                                 className="edituserimg"
-                                                src="/assets/profile.png"
+                                                src="/assets/defaultProfileImage.png"
                                                 alt="Profile"
                                             />
                                         ) : (

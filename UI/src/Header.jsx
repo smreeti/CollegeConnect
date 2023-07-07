@@ -80,7 +80,7 @@ export default function Header() {
             <Dropdown className="iconimg">
               <Dropdown.Toggle variant="secondary" id="profile-dropdown">
                 {loggedInUser?.profilePicture === "default" ? (
-                  <img id="prfimg" src="/assets/profile.png" alt="Profile" />
+                  <img id="prfimg" src="/assets/defaultProfileImage.png" alt="Profile" />
                 ) : (
                   <img
                     id="prfimg"

@@ -60,11 +60,11 @@ const PostDetailComponent = (props) => {
                                     <div className="creator_block_post">
                                         <img alt="photographer Image" className="creator_image_post" src={userDetail?.profilePicture} />
                                     </div>
-                                    <small className='d-flex'>
+                                    <small>
                                         {postDetails?.postedBy?.username}:
-                                        <p className='user-caption '>
+                                        <span className='user-caption ps-1 mb-0'>
                                             {postDetails?.caption}
-                                        </p>
+                                        </span>
                                     </small>
                                 </div>
                                 <p></p>
@@ -72,14 +72,14 @@ const PostDetailComponent = (props) => {
                                     <FontAwesomeIcon icon={faHeart} className='me-3' />
                                     <FontAwesomeIcon icon={faComment} />
                                 </div>
-                                {postDetails?.likes > 0 && <p>Liked by {postDetails?.likes} people </p>}
-                                {postDetails?.comments > 0 && <p>Liked by {postDetails?.comments} people </p>}
+                                {postDetails?.likes > 0 && <p>{postDetails?.likes} likes </p>}
+                                {postDetails?.comments > 0 && <p> {postDetails?.comments} comments </p>}
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     );
 };
 

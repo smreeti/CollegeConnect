@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faComment, faHeart, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom'
 import PostDetailComponent from "./PostDetailComponent.jsx";
+import defaultProfileImage from "../../public/assets/defaultProfileImage.png";
 
 export default class ProfileComponent extends React.Component {
 
@@ -75,28 +76,30 @@ export default class ProfileComponent extends React.Component {
   render() {
     const { userProfileDetails: { posts, userDetail } } = this.state;
     const { isLiked, likes, isUserPostOpen, followers } = this.state;
+    const hasProfilePicture = userDetail?.profilePicture;
+
 
     return (
       <main>
         <Header />
         <div className="">
           <div className="mt-5">
-            <div className="d-flex align-items-center border rounded-3 border-2 mt-5" style={{ background: '#f4f49f' }}>
+            <div className="d-flex align-items-center border rounded-3 border-2 mt-5" style={{ background: 'linear-gradient(to right, #f0c27b, #ffe47a)' }}>
               <div className="creator_block">
-                {userDetail?.profilePicture ?
-                  (<img alt="photographer Image" className="creator_image" src={userDetail?.profilePicture} />) :
-                  <img alt="photographer Image" className="creator_image" src="../../assets/defaultProfile.png" />
+                {hasProfilePicture ?
+                  (<img alt="photographer Image" className="creator_image" src={userDetail?.profilePicture} onError={(e) => { e.target.onerror = null; e.target.src = defaultProfileImage }} />) :
+                  (<img alt="No Image" className="creator_image" src={defaultProfileImage} />)
                 }
               </div>
 
               <div className="container_button py-3">
-                <div className="sync">
+                <div className="sync mb-lg-2 mb-1">
                   <div className="creator_desc">{userDetail?.firstName + " " + userDetail?.lastName} </div>
                   <Link>
-                    <div className="creator_details first_text">100 Followers</div>
+                    <div className="creator_details text-dark first_text" >100 Followers</div>
                   </Link>
                   <Link>
-                    <div className="creator_details t_layout">
+                    <div className="creator_details text-dark t_layout" style={{ textDecoration: 'none' }}>
                       {followers.map((follower) => (
                         <li key={follower.id}>
                           <span>{follower.username}</span>
@@ -108,7 +111,7 @@ export default class ProfileComponent extends React.Component {
                   <div className="desc">Hey Community! I am a professional photographer and I love to capture the real-life moments. Please follow to not miss my latest uploads.</div>
                 </div>
                 <Link to="/edit">
-                  <input type="button" value="Edit profile" className="edit_profile_button p-1" />
+                  <input type="button" value="Edit profile" className="edit_profile_button p-2" />
                 </Link>
               </div>
             </div>
