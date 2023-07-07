@@ -53,7 +53,7 @@ const PostDetailComponent = (props) => {
                                         <img alt="photographer Image" className="creator_image_post" src={userDetail?.profilePicture} />
                                     </div>
                                     <small className='d-flex'>
-                                        {postDetails?.postedBy?.username}
+                                        <span>{postDetails?.postedBy?.username}</span>
                                     </small>
                                 </div><br />
                                 <div className="d-flex">
@@ -61,8 +61,8 @@ const PostDetailComponent = (props) => {
                                         <img alt="photographer Image" className="creator_image_post" src={userDetail?.profilePicture} />
                                     </div>
                                     <small>
-                                        {postDetails?.postedBy?.username}:
-                                        <span className='user-caption ps-1 mb-0'>
+                                        <span>{postDetails?.postedBy?.username}:</span>
+                                        <span className='user-caption ps-2 fw-light'>
                                             {postDetails?.caption}
                                         </span>
                                     </small>
