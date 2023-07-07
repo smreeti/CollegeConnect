@@ -30,15 +30,18 @@ const {
   API_TO_FETCH_USER_DETAILS,
   API_TO_EDIT_PROFILE_PHOTO,
   API_TO_EDIT_PROFILE,
+  API_TO_FETCH_POST_DETAILS,
   // API_TO_VIEW_FOLLOWERS,
 } = require("../utils/APIRequestUrl.js");
 
 const { setSuccessResponse } = require("../utils/Response.js");
-const { fetchAllPosts } = require("../controllers/postController.js");
+const { fetchAllPosts, fetchPostDetails } = require("../controllers/postController.js");
 const {
   editProfilePhoto,
   editProfile,
 } = require("../controllers/userController.js");
+
+
 
 router.get(API_TO_FETCH_COLLEGE_INFO, fetchCollegeList);
 router.post(API_TO_SIGNUP_USER, signupUser);
@@ -66,5 +69,6 @@ router.post(API_TO_EDIT_PROFILE_PHOTO, authMiddleware, editProfilePhoto);
 router.post(API_TO_EDIT_PROFILE, authMiddleware, editProfile);
 
 // router.post(API_TO_VIEW_FOLLOWERS, authMiddleware);
+router.post(API_TO_FETCH_POST_DETAILS, authMiddleware, fetchPostDetails);
 
 module.exports = router;

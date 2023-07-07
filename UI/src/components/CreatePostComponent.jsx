@@ -11,8 +11,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { API_TO_SAVE_POST } from "../../utils/APIRequestUrl.js";
 
-
-
 const CreatePostComponent = () => {
   const [post, setPost] = useState({
     caption: "",
@@ -24,8 +22,6 @@ const CreatePostComponent = () => {
   const [serverErrors, setServerErrors] = useState([]);
 
   const createPostModal = useRef(null);
-
-  
 
   useEffect(() => {
     M.Modal.init(createPostModal.current);
@@ -130,7 +126,7 @@ const CreatePostComponent = () => {
 
   return (
     <>
-      <div id="createPostModal" className="modal modcen" ref={createPostModal}>
+      <div id="createPostModal" className="modal" ref={createPostModal}>
         <div className="modal-dialog">
           <div className="modal-content">
             <div className="modal-header">

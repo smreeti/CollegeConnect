@@ -62,4 +62,20 @@ const fetchUserPosts = async (loggedInUser) => {
     }
 }
 
-module.exports = { savePost, fetchAllPosts, fetchUserPosts };
+const fetchPostDetails = async (req, res) => {
+    const { _id } = req.body;
+    try {
+        const postDetails = await Post.find({
+            _id
+        }).populate({
+            path: 'postedBy',
+            select: 'username'
+        }).select("imageUrl likes comments caption createdDate")
+
+        return setSuccessResponse(res, "Posts fetched successfully", { postDetails });
+    } catch (error) {
+        return setErrorResponse(res, HttpStatus.INTERNAL_SERVER_ERROR, error);
+    }
+}
+
+module.exports = { savePost, fetchAllPosts, fetchUserPosts, fetchPostDetails };
