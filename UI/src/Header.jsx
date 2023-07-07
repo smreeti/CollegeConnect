@@ -50,7 +50,7 @@ export default function Header() {
 
         <li className='tabmenu'>
           <FontAwesomeIcon className='icons' icon={faHome} />
-          <Link to="/home"> Home </Link>
+          <Link className='reshead' to="/home"> Home </Link>
         </li>
 
         <li className='tabmenu'>
@@ -67,12 +67,12 @@ export default function Header() {
           <Link onClick={() => {
             toggleMenu(); // Close the menu when Create Post is clicked
             openCreatePostModal(); // Open the Create Post modal
-          }} data-target="createPostModal" className="modal-trigger">Create Post</Link>
+          }} data-target="createPostModal" className="modal-trigger reshead">Create Post</Link>
         </li>
 
         <li className='tabmenu'>
           <FontAwesomeIcon className='icons' icon={faInfo} />
-          <Link to="/about"> About Us </Link>
+          <Link className='reshead' to="/about"> About Us </Link>
         </li>
 
         <li className="heightli tabmenu">
@@ -88,7 +88,7 @@ export default function Header() {
                     alt="Profile"
                   />
                 )}
-                <span id="profileName">
+                <span className='reshead' id="profileName">
                   {loggedInUser?.firstName + " " + loggedInUser?.lastName}
                 </span>
               </Dropdown.Toggle>
@@ -96,14 +96,14 @@ export default function Header() {
               <Dropdown.Menu className="test">
                 <Dropdown.Item className="custom-item">
                   <FontAwesomeIcon className="icons" icon={faUser} />
-                  <Link to="/profile" onClick={closeMenu}>
+                  <Link className='reshead' to="/profile" onClick={closeMenu}>
                     Profile
                   </Link>
                 </Dropdown.Item>
 
                 <Dropdown.Item>
                   <FontAwesomeIcon className="icons" icon={faSignOutAlt} />
-                  <Link to="/logout" onClick={closeMenu}>
+                  <Link className='reshead' to="/logout" onClick={closeMenu}>
                     Logout
                   </Link>
                 </Dropdown.Item>

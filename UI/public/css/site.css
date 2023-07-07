@@ -122,7 +122,8 @@ body {
 }
 
 .edituserimg {
-  width: 250px;
+  max-width: 100%;
+  height: auto;
 }
 
 .imgmargin {
@@ -999,11 +1000,19 @@ footer #footer {
 
 @media screen and (min-width: 370px) and (max-width: 1000px) {
 
+  .edituserimg {
+    max-width: 80%;
+  }
+
+  .aboutimg{
+    max-width: 80%;
+  }
+
 
   .labelset {
     margin-left: 12px;
   }
-
+  
   /*responsive modal start */
   .modal-content {
     position: relative;
@@ -1431,6 +1440,11 @@ footer p {
   max-width: 1600px !important;
 }
 
+.aboutimg{
+  max-width: 100%;
+  height: auto;
+}
+
 .midimg {
   width: 90%;
   margin: 0 auto;
@@ -1525,6 +1539,17 @@ footer p {
 }
 
 @media screen and (max-width: 700px) {
+
+  .edituserimg {
+    max-width: 60%;
+
+  }
+
+  .aboutimg{
+    max-width: 60%;
+  }
+
+
 
   .labelset {
     margin-left: 12px;
@@ -2011,3 +2036,18 @@ footer p {
 
 
 }
+
+@media only screen and (min-width: 700px) and (max-width: 755px) {
+
+  .tabmenu{
+    font-size: 10px !important;
+  }
+
+  .reshead{
+    font-size: 10px !important;
+  }
+
+
+
+}
+

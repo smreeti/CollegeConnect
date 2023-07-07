@@ -308,7 +308,7 @@ export default class EditUserComponent extends React.Component {
                                         <img
                                             src="../../assets/waterloo.jpg"
                                             alt="Additional Info"
-                                            className="img-fluid"
+                                            className="img-fluid aboutimg"
                                         />
                                     </div>
                                 </div>
