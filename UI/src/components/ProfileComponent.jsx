@@ -100,8 +100,11 @@ export default class ProfileComponent extends React.Component {
                         </li>
                       ))}1000 Following</div>
                   </Link>
+
                   <div className="creator_details t_layout">{posts?.length} POSTS</div>
                   <div className="desc">Hey Community! I am a professional photographer and I love to capture the real-life moments. Please follow to not miss my latest uploads.</div>
+                  <Link to="/edit">Edit Profile</Link>
+
                 </div>
               </div>
             </div>
