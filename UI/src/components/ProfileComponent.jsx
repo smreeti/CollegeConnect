@@ -4,7 +4,7 @@ import Header from "../Header.jsx";
 import { API_TO_FETCH_PROFILE_DETAILS, API_TO_VIEW_FOLLOWERS } from "../../utils/APIRequestUrl.js";
 import fetchData from "../../utils/FetchAPI.js";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faComment, faHeart, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faComment, faHeart, faTimes, faCog  } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom'
 import PostDetailComponent from "./PostDetailComponent.jsx";
 import defaultProfileImage from "../../public/assets/defaultProfileImage.png";
@@ -82,39 +82,44 @@ export default class ProfileComponent extends React.Component {
     return (
       <main>
         <Header />
-        <div className="">
-          <div className="mt-5">
-            <div className="d-flex align-items-center border rounded-3 border-2 mt-5" style={{ background: 'linear-gradient(to right, #f0c27b, #ffe47a)' }}>
-              <div className="creator_block">
-                {hasProfilePicture ?
-                  (<img alt="photographer Image" className="creator_image" src={userDetail?.profilePicture} onError={(e) => { e.target.onerror = null; e.target.src = defaultProfileImage }} />) :
-                  (<img alt="No Image" className="creator_image" src={defaultProfileImage} />)
-                }
-              </div>
+        <div className="mt-5">
+  <div className="headtest">
+    <div className="d-flex align-items-center  topcontainer">
+      <div className="creator_block">
+        <img alt="photographer Image" className="creator_image" src="../../assets/elevated.jpg" />
+      </div>
 
-              <div className="container_button py-3">
-                <div className="sync mb-lg-2 mb-1">
-                  <div className="creator_desc">{userDetail?.firstName + " " + userDetail?.lastName} </div>
-                  <Link>
-                    <div className="creator_details text-dark first_text" >100 Followers</div>
-                  </Link>
-                  <Link>
-                    <div className="creator_details text-dark t_layout" style={{ textDecoration: 'none' }}>
-                      {followers.map((follower) => (
-                        <li key={follower.id}>
-                          <span>{follower.username}</span>
-                        </li>
-                      ))}1000 Following</div>
-                  </Link>
-
-                  <div className="creator_details t_layout">{posts?.length} POSTS</div>
-                  <div className="desc">Hey Community! I am a professional photographer and I love to capture the real-life moments. Please follow to not miss my latest uploads.</div>
-                </div>
-                <Link to="/edit">
-                  <input type="button" value="Edit profile" className="edit_profile_button p-2" />
-                </Link>
-              </div>
-            </div>
+      <div className="container_button">
+        <div className="sync">
+          <div className="d-flex align-items-center justify-content-start">
+            <div className="creator_desc">{userDetail?.firstName + " " + userDetail?.lastName}</div>
+            <button className="editbutton">  <Link className="edpr" to="/edit">Edit Profile</Link>
+          
+              
+            </button>
+            <FontAwesomeIcon icon={faCog} className="setting-icon" />
+          </div>
+          <div className="creator_details first_text">
+            <span className="bolding">100</span> Followers
+          </div>
+          <div className="creator_details t_layout">
+            {followers.map((follower) => (
+              <li key={follower.id}>
+                <span>{follower.username}</span>
+              </li>
+            ))}
+            <span className="bolding">1000</span> Following
+          </div>
+          <div className="creator_details t_layout">
+            <span className="bolding">{posts?.length}</span> POSTS
+          </div>
+          <div className="desc">
+            Hey Community! I am a professional photographer and I love to capture the real-life moments. Please follow to not miss my latest uploads.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
 
             {posts?.length == 0 ? (
@@ -125,24 +130,29 @@ export default class ProfileComponent extends React.Component {
               </div>
             ) :
               <>
-                <div className="d-flex mt-md-4 mt-3">
+
+            <div className="d-flex mt-md-4 mt-3">
                   <hr className="hr w-50" />
                   <small className="px-3 small">POST</small>
                   <hr className="hr w-50" />
                 </div>
-                <div className="image_grid mt-5 user_details_container">
+
+
+
+                <div className="profileimage_grid mt-5 user_details_container">
                   {posts?.length > 0 && (
                     posts.map((post) => (
                       <Link onClick={() => this.handleImageClick(post)} data-target="openUserPost" className="modal-trigger">
                         <div className="images" key={post.id}>
                           <img alt="captured images" className="p_img" src={post.imageUrl} />
+                          <p>{post.caption}</p>
                           <div className="text">
                             <div>
-                              <FontAwesomeIcon icon={faHeart} className='me-3' color={isLiked ? 'red' : 'gray'}
+                              <FontAwesomeIcon  icon={faHeart} className='me-3 ' color={isLiked ? 'red' : 'gray'}
                                 onClick={this.likedIcon} />
                               {likes > 0 ? <small className='fs-6 fw-lighter'><p>{this.state.likes}</p></small> : null}
                             </div>
-                            <FontAwesomeIcon icon={faComment} />
+                            <FontAwesomeIcon  icon={faComment} />
                           </div>
                         </div>
                       </Link>
@@ -151,7 +161,6 @@ export default class ProfileComponent extends React.Component {
               </>
             }
           </div>
-        </div>
 
         {isUserPostOpen &&
           (<PostDetailComponent

@@ -3,6 +3,81 @@ body {
   margin: 0 auto;
 }
 
+
+/*Profilepage updates*/
+
+.profileimage_grid{
+column-count: 3;
+-webkit-column-width: 33%;
+-moz-column-width: 33%;
+column-width: 33%;
+/* padding: 0 12px; */
+position: relative;
+gap: 20px;
+}
+
+.topcontainer{
+  max-width: 80%;
+  margin: 0 auto;
+  padding: 0 2rem;
+  margin-top: 6rem ;
+  border: 0 !important;
+}
+
+.editbutton{
+  text-decoration: none;
+  margin-left: 2rem !important;
+  background-color: #FAFAFA !important;
+
+  font-weight: 600 !important;
+  
+  line-height: 1.8 !important;
+  border: 1px solid #DBDBDB !important;
+  border-radius: 0.3rem !important;
+  padding: 0 2.4rem !important;
+  margin-left: 2rem !important;
+  display: inline-block !important;
+  /* font: inherit; */
+ 
+
+  width: fit-content !important;
+  color: inherit !important;
+  /* padding: 0; */
+  cursor: pointer !important;
+  color: black !important;
+  height: 30px !important;
+  font-size: 15px;
+  margin-top: 20px !important;
+}
+
+.setting-icon{
+  margin-top: 20px;
+}
+
+.edpr{
+  text-decoration: none !important;
+  color: black;
+}
+
+.bolding{
+  font-weight: 600;
+}
+
+.headtest{
+  margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+
+
+/*Profilepage updates ends*/
+
+
+
 /*Edit profile start*/
 
 .suguser {
@@ -991,6 +1066,14 @@ footer #footer {
     margin-left: 12px;
   }
 
+  .edpr{
+    font-size: 10px !important;
+  }
+
+  .editbutton{
+    line-height: 0.9 !important;
+  }
+
   /*responsive modal start */
   .modal-content {
     position: relative;
@@ -1503,6 +1586,31 @@ footer p {
 }
 
 @media screen and (max-width: 700px) {
+
+  .creator_desc{
+    margin-top: 20px;
+  }
+
+  .editbutton{
+    line-height: 0.9 !important;
+  }
+
+  .edpr{
+    font-size: 12px;
+  }
+
+  .p_img{
+    height: 250px !important;
+    object-fit: cover;
+  }
+
+
+  .topcontainer{
+    margin-top: 0 !important;
+    max-width: 100%;
+    padding: 0 !important;
+  }
+
   .labelset {
     margin-left: 12px;
   }
@@ -1612,6 +1720,7 @@ footer p {
   color: #212121;
   font-weight: bold;
   text-align: center;
+ 
 }
 
 .creator_details {
@@ -1733,7 +1842,7 @@ footer p {
   }
 
   .user_details_container {
-    background: #f5f5f5;
+    background: white;
   }
 
   .image_mainblock {
@@ -1806,6 +1915,7 @@ footer p {
     color: #212121;
     font-weight: bold;
     text-align: left;
+    margin-top: 20px !important;
   }
 
   .creator_details {
@@ -1935,6 +2045,27 @@ footer p {
 }
 
 @media screen and (min-width: 250px) and (max-width: 420px) {
+
+  .container_button button{
+    margin-right: 0 !important;
+  }
+
+  .creator_block{
+    height: 200px;
+  }
+
+  .editbutton{
+    line-height: 0.9 !important;
+  }
+
+  .edpr{
+    font-size: 10px;
+  }
+
+  .p_img{
+    height: 150px !important;
+  }
+
   .labelset {
     margin-left: 12px;
   }
@@ -2003,9 +2134,64 @@ footer p {
   height: 30px;
   border: 2px solid #e3e3e3;
   border-radius: 50%;
+
+
 }
 
+@media only screen and (min-width: 701px) and (max-width: 1024px)
+{
+
+  .images{
+    background-size: cover;
+    background-position: center;
+  }
+
+  .p_img{
+    max-width: 100%;
+  height: 300px;
+  }
+
+  .menu li{
+    font-size: 10px;
+  }
+
+  .menu a{
+    font-size: 10px;
+  }
+
+  #profileName{
+    font-size: 10px;
+  }
+
+
+
+.topcontainer {
+  max-width: 100%;
+  padding: 0 !important;    
+  margin: 0 auto;  
+
+  border: 0 !important;}
+
+  .creator_desc{
+    margin-top: 20px;
+  }
+
+}
+
+
 @media only screen and (min-width: 768px) and (max-width: 1024px) {
+
+  /*profilepageedit*/
+
+
+
+  
+
+  /* Profilepageeditend*/ 
+
+
+
+
   .labelset {
     margin-left: 12px;
   }
