@@ -4,7 +4,7 @@ import Header from "../Header.jsx";
 import { API_TO_FETCH_PROFILE_DETAILS, API_TO_VIEW_FOLLOWERS } from "../../utils/APIRequestUrl.js";
 import fetchData from "../../utils/FetchAPI.js";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faComment, faHeart, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faComment, faHeart, faTimes, faCog  } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom'
 import PostDetailComponent from "./PostDetailComponent.jsx";
 
@@ -61,16 +61,16 @@ export default class ProfileComponent extends React.Component {
     })
   };
 
-  // async fetchFollowers() {
-  //   try {
-  //     const data = await fetchData(API_TO_VIEW_FOLLOWERS, "POST");
-  //     this.setState({
-  //       userDetail: data.body
-  //     });
-  //   } catch (error) {
-  //     console.log("Error:", error);
-  //   }
-  // }
+  async fetchFollowers() {
+    try {
+      const data = await fetchData(API_TO_VIEW_FOLLOWERS, "POST");
+      this.setState({
+        userDetail: data.body
+      });
+    } catch (error) {
+      console.log("Error:", error);
+    }
+  }
 
   render() {
     const { userProfileDetails: { posts, userDetail } } = this.state;
@@ -79,35 +79,45 @@ export default class ProfileComponent extends React.Component {
     return (
       <main>
         <Header />
-        <div className="">
-          <div className="mt-5">
-            <div className="d-flex align-items-center border rounded-3 border-2 mt-5" style={{ background: '#f4f49f' }}>
-              <div className="creator_block">
-                <img alt="photographer Image" className="creator_image" src="../../assets/elevated.jpg" />
-              </div>
+      
+        <div className="mt-5">
+  <div className="headtest">
+    <div className="d-flex align-items-center  topcontainer">
+      <div className="creator_block">
+        <img alt="photographer Image" className="creator_image" src="../../assets/elevated.jpg" />
+      </div>
 
-              <div className="container_button">
-                <div className="sync">
-                  <div className="creator_desc">{userDetail?.firstName + " " + userDetail?.lastName}</div>
-                  <Link>
-                    <div className="creator_details first_text">100 Followers</div>
-                  </Link>
-                  <Link>
-                    <div className="creator_details t_layout">
-                      {followers.map((follower) => (
-                        <li key={follower.id}>
-                          <span>{follower.username}</span>
-                        </li>
-                      ))}1000 Following</div>
-                  </Link>
-
-                  <div className="creator_details t_layout">{posts?.length} POSTS</div>
-                  <div className="desc">Hey Community! I am a professional photographer and I love to capture the real-life moments. Please follow to not miss my latest uploads.</div>
-                  <Link to="/edit">Edit Profile</Link>
-
-                </div>
-              </div>
-            </div>
+      <div className="container_button">
+        <div className="sync">
+          <div className="d-flex align-items-center justify-content-start">
+            <div className="creator_desc">{userDetail?.firstName + " " + userDetail?.lastName}</div>
+            <button className="editbutton">  <Link className="edpr" to="/edit">Edit Profile</Link>
+          
+              
+            </button>
+            <FontAwesomeIcon icon={faCog} className="setting-icon" />
+          </div>
+          <div className="creator_details first_text">
+            <span className="bolding">100</span> Followers
+          </div>
+          <div className="creator_details t_layout">
+            {followers.map((follower) => (
+              <li key={follower.id}>
+                <span>{follower.username}</span>
+              </li>
+            ))}
+            <span className="bolding">1000</span> Following
+          </div>
+          <div className="creator_details t_layout">
+            <span className="bolding">{posts?.length}</span> POSTS
+          </div>
+          <div className="desc">
+            Hey Community! I am a professional photographer and I love to capture the real-life moments. Please follow to not miss my latest uploads.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
 
             {posts?.length == 0 ? (
@@ -127,11 +137,11 @@ export default class ProfileComponent extends React.Component {
                           <p>{post.caption}</p>
                           <div className="text">
                             <div>
-                              <FontAwesomeIcon icon={faHeart} className='me-3' color={isLiked ? 'red' : 'gray'}
+                              <FontAwesomeIcon  icon={faHeart} className='me-3 ' color={isLiked ? 'red' : 'gray'}
                                 onClick={this.likedIcon} />
                               {likes > 0 ? <small className='fs-6 fw-lighter'><p>{this.state.likes}</p></small> : null}
                             </div>
-                            <FontAwesomeIcon icon={faComment} />
+                            <FontAwesomeIcon  icon={faComment} />
                           </div>
                         </div>
                       </Link>
@@ -140,7 +150,7 @@ export default class ProfileComponent extends React.Component {
               </>
             }
           </div>
-        </div>
+      
 
         {isUserPostOpen &&
           (<PostDetailComponent

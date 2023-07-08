@@ -3,6 +3,68 @@ body {
   margin: 0 auto;
 }
 
+/*Profile page start*/
+.topcontainer{
+  max-width: 80%;
+  margin: 0 auto;
+  padding: 0 2rem;
+  margin-top: 6rem !important;
+  border: 0 !important;
+}
+
+.editbutton{
+  text-decoration: none;
+  margin-left: 2rem !important;
+  background-color: #FAFAFA !important;
+
+  font-weight: 600 !important;
+  
+  line-height: 1.8 !important;
+  border: 1px solid #DBDBDB !important;
+  border-radius: 0.3rem !important;
+  padding: 0 2.4rem !important;
+  margin-left: 2rem !important;
+  display: inline-block !important;
+  /* font: inherit; */
+ 
+
+  width: fit-content !important;
+  color: inherit !important;
+  /* padding: 0; */
+  cursor: pointer !important;
+  color: black !important;
+  height: 30px !important;
+  font-size: 15px;
+  margin-top: 20px !important;
+}
+
+.setting-icon{
+  margin-top: 20px;
+}
+
+.edpr{
+  text-decoration: none !important;
+  color: black;
+}
+
+.bolding{
+  font-weight: 600;
+}
+
+.headtest{
+  margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+
+
+/*profile page end*/
+
+
 /*Edit profile start*/
 
 .suguser {
@@ -1591,6 +1653,7 @@ footer p {
 .sync {
   float: left;
   font-family: cursive;
+
 }
 
 .creator_desc {
@@ -1598,7 +1661,7 @@ footer p {
   font-size: 15px;
   color: #212121;
   margin-top: 20px;
-  font-weight: bold;
+  font-weight: 300 !important;
   text-align: center;
 }
 
@@ -1651,6 +1714,8 @@ footer p {
   font-size: x-small;
 }
 
+
+
 .image_grid {
   -webkit-column-count: 3;
   -moz-column-count: 3;
@@ -1660,6 +1725,7 @@ footer p {
   column-width: 33%;
   padding: 0 12px;
   position: relative;
+  background: white !important;
 }
 
 .image_grid .images:hover {
@@ -1770,11 +1836,12 @@ footer p {
   .sync {
     float: left;
     font-family: cursive;
+    margin-left: 20px;
   }
 
   .creator_desc {
     margin-top: 5%;
-    font-size: 20px;
+    font-size: 30px;
     color: #212121;
     margin-top: 20px;
     font-weight: bold;
