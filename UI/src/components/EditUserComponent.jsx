@@ -141,7 +141,7 @@ export default class EditUserComponent extends React.Component {
                         <div className="container rounded bg-white mb-5 spacing">
                             <div className="row">
                                 <div className="col-md-3 border-right">
-                                    <div className="d-flex flex-column align-items-center text-center p-3 py-5">
+                                    <div className="d-flex flex-column align-items-center text-center p-3 py-5 resimdiv">
                                         {profilePicture === "default" ? (
                                             <img
                                                 className="edituserimg"
@@ -163,7 +163,7 @@ export default class EditUserComponent extends React.Component {
                                                 data-target="editProfilePicModal"
                                                 className="modalcenter modal-trigger change-profile-photo-link modalcenter"
                                             >
-                                                Change profile photo
+                                               <span className="change"> Change profile photo</span>
                                             </Link>
                                         </div>
                                     </div>
