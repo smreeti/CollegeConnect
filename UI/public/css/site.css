@@ -3,8 +3,23 @@ body {
   margin: 0 auto;
 }
 
+.resimdiv{
+  max-width: 100%; /* Set the maximum width of the container to 100% */
+  height: auto;
+}
+
+.resimdiv img{
+  max-width: 100%; /* Set the maximum width of the container to 100% */
+  height: auto;
+}
+
+@media screen {
+  
+}
 
 /*Profilepage updates*/
+
+
 
 .profileimage_grid{
 column-count: 3;
@@ -2137,9 +2152,21 @@ footer p {
 
 
 }
+@media only screen and (min-width: 768px) and (max-width: 1203px){
+  .change-profile-photo-link{
+    padding: 0 !important;
+  }
+
+  .change{
+    font-size: 12px;
+  }
+}
+
 
 @media only screen and (min-width: 701px) and (max-width: 1024px)
 {
+
+
 
   .images{
     background-size: cover;
