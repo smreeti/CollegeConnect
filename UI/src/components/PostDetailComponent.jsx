@@ -13,8 +13,10 @@ const PostDetailComponent = (props) => {
     useEffect(() => {
         fetchPostDetails();
         M.Modal.init(openUserPost.current);
-    }, []);
-
+        return () => {
+            setPostDetails({});
+        };
+    }, [props]);
 
     const cancelPostDetailModal = () => {
         const modalInstance = M.Modal.getInstance(openUserPost.current);
@@ -40,6 +42,7 @@ const PostDetailComponent = (props) => {
                     <div className="modal-header">
                         <FontAwesomeIcon icon={faTimes} className="close" onClick={cancelPostDetailModal} />
                     </div>
+
                     <div className="modal-body" style={{ overflow: 'auto' }}>
                         <div className="d-flex justify-content-between">
                             <div className="col-md-7">
