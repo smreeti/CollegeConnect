@@ -45,12 +45,12 @@ export default class HomeComponent extends React.Component {
         return (
             <>
                 <Header />
-                <div style={{ background: '#F5F5DC' }}>
+                <div style={{ background: '#F5F5DC', marginTop: '3rem' }}>
 
                     {posts.length > 0 ? (
                         posts.map((post) => (
-                            <div className='mt-5' key={post._id}>
-                                <div className='col-lg-4 col-md-8 col-10 mx-auto card mt-5 px-0'>
+                            <div className='py-1' key={post._id}>
+                                <div className='col-lg-4 col-md-8 col-10 mx-auto card my-3 px-0'>
                                     <div className="card-header px-2">
                                         <p className='my-0 d-flex align-items-center text-fluid'>
                                             <FontAwesomeIcon icon={faUser} className='me-md-2 me-1' />
@@ -58,9 +58,9 @@ export default class HomeComponent extends React.Component {
                                         </p>
                                     </div>
 
-                                    <div style={{ height: '500px' }}>
+                                    <div style={{ padding: '8px 0', maxHeight: '400px' }}>
                                         <Link>
-                                            <img src={post.imageUrl} alt="Post" className='card-img-top' style={{ maxHeight: '100%', maxWidth: '100%' }} />
+                                            <img src={post.imageUrl} alt="Post" className='card-img-top' style={{ maxHeight: '400px', maxWidth: '100%', objectFit: 'contain' }} />
                                         </Link>
 
                                     </div>

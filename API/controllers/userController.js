@@ -51,7 +51,7 @@ const fetchUserMinDetails = async (loggedInUser) => {
     try {
         const userDetail = await User.findOne({
             _id: loggedInUser._id
-        }).select("firstName lastName username profilePicture");
+        }).select("firstName lastName username profilePicture bio");
 
         return userDetail;
     } catch (error) {
@@ -82,11 +82,11 @@ const editProfilePhoto = async (req, res) => {
         if (errors.length > 0)
             return setErrorResponse(res, HttpStatus.BAD_REQUEST, errors);
 
-        await User.findByIdAndUpdate(loggedInUser._id, {
+        const user = await User.findByIdAndUpdate(loggedInUser._id, {
             profilePicture: imageUrl
-        });
+        }, { new: true });
 
-        return setSuccessResponse(res, { message: "Profile picture saved successfully" });
+        return setSuccessResponse(res, { message: "Profile picture saved successfully" }, user);
     } catch (error) {
         return setErrorResponse(res, HttpStatus.INTERNAL_SERVER_ERROR, error);
     }

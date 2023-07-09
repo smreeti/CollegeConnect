@@ -84,6 +84,7 @@ const EditProfilePhotoComponent = () => {
     try {
       const data = await fetchData(API_TO_EDIT_PROFILE_PHOTO, "POST", post);
       if (!data.error) {
+        await updateLocalStorage(data.body);
         cancelModal();
         console.log("Post saved successfully");
       } else {
@@ -97,6 +98,11 @@ const EditProfilePhotoComponent = () => {
       setIsLoading(false);
     }
   };
+
+  const updateLocalStorage = async (user) => {
+    localStorage.removeItem("user");
+    localStorage.setItem("user", JSON.stringify(user));
+  }
 
   const cancelModal = () => {
     setPost({

@@ -40,26 +40,19 @@ const PostDetailComponent = (props) => {
             <div className="modal-dialog modal-lg">
                 <div className="modal-content">
                     <div className="modal-header">
+                        <p></p>
                         <FontAwesomeIcon icon={faTimes} className="close" onClick={cancelPostDetailModal} />
                     </div>
 
                     <div className="modal-body" style={{ overflow: 'auto' }}>
-                        <div className="d-flex justify-content-between">
+                        <div className="d-flex justify-content-between post-detail-container">
                             <div className="col-md-7">
                                 <div className="image-wrapper" style={{ height: '300px', overflow: 'hidden' }}>
                                     <img src={postDetails?.imageUrl} alt="Selected" className='img-fluid' />
                                 </div>
                             </div>
                             <div className="col-md-5 ps-1">
-                                <div className="d-flex">
-                                    <div className="creator_block_post">
-                                        <img alt="photographer Image" className="creator_image_post" src={userDetail?.profilePicture} />
-                                    </div>
-                                    <small className='d-flex'>
-                                        <span>{postDetails?.postedBy?.username}</span>
-                                    </small>
-                                </div><br />
-                                <div className="d-flex">
+                                <div className="d-flex mt-2">
                                     <div className="creator_block_post">
                                         <img alt="photographer Image" className="creator_image_post" src={userDetail?.profilePicture} />
                                     </div>
@@ -71,12 +64,13 @@ const PostDetailComponent = (props) => {
                                     </small>
                                 </div>
                                 <p></p>
-                                <div className="d-flex flex-wrap">
-                                    <FontAwesomeIcon icon={faHeart} className='me-3' />
-                                    <FontAwesomeIcon icon={faComment} />
+                                <div className="d-flex flex-wrap post-details-stats">
+                                    <div><FontAwesomeIcon icon={faHeart} onClick={() => { console.log('like') }} /> {<span>{postDetails?.likes} likes </span>}</div>
+                                    <div><FontAwesomeIcon icon={faComment} />{<span> {postDetails?.comments} comments </span>}</div>
                                 </div>
-                                {postDetails?.likes > 0 && <p>{postDetails?.likes} likes </p>}
-                                {postDetails?.comments > 0 && <p> {postDetails?.comments} comments </p>}
+
+                                <textarea className='mt-2 post-comment' placeholder='Enter your comment'></textarea>
+                                <button onClick={() => { }}>Comment</button>
                             </div>
                         </div>
                     </div>
