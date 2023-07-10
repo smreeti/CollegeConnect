@@ -91,6 +91,10 @@ const fetchPostDetails = async (req, res) => {
   }
 };
 
+const fetchPostById = async (postId) => {
+  return await Post.findById(postId);
+}
+
 const likePost = async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
@@ -108,10 +112,12 @@ const likePost = async (req, res) => {
     res.status(500).send("Server Error");
   }
 };
+
 module.exports = {
   savePost,
   fetchAllPosts,
   fetchUserPosts,
   fetchPostDetails,
   likePost,
+  fetchPostById
 };

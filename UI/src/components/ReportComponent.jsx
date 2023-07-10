@@ -11,11 +11,12 @@ const ReportComponent = (props) => {
     const [showReportBody, setShowReportBody] = useState(false);
     const [isReportClicked, setReportClicked] = useState(false);
     const [isReportPostSuccess, setReportPostSuccess] = useState(false);
+    const [description, setDescription] = useState('');
+    const [errors, setErrors] = useState('');
 
     useEffect(() => {
         M.Modal.init(reportModal.current);
     }, [props]);
-
 
     const cancelModal = () => {
         const modalInstance = M.Modal.getInstance(reportModal.current);
@@ -33,22 +34,42 @@ const ReportComponent = (props) => {
     }
 
     const reportPost = async () => {
+        const { selectedPostId } = props;
         setReportClicked(true);
 
-        const { selectedPostId } = props;
+        let formErrors = handleReportPostForm();
+        if (Object.keys(formErrors).length > 0) {
+            setFormErrors(formErrors);
+        } else {
+            const reportData = {
+                selectedPostId,
+                description
+            };
 
-        try {
-            const data = await fetchData(API_TO_REPORT_POST, "POST", { selectedPostId });
-
-            // if (!data.error) {
-            setShowReportBody(false);
-            setReportPostSuccess(true);
-            // }
-
-        } catch (error) {
-            console.log("Error:", error);
+            const data = await fetchData(API_TO_REPORT_POST, "POST", reportData);
+            if (!data.error) {
+                setShowReportBody(false);
+                setReportPostSuccess(true);
+            }
         }
     }
+
+    const handleReportPostForm = () => {
+        let formErrors = {};
+        if (!description)
+            formErrors["description"] = "Please provide description";
+
+        return formErrors;
+    }
+
+    const handleOnChange = (event) => {
+        const { value } = event.target;
+        setDescription(value);
+    };
+
+    const setFormErrors = (formErrors) => {
+        setErrors(formErrors);
+    };
 
     return (
         <div id="reportModal" className="modal" ref={reportModal} >
@@ -67,9 +88,19 @@ const ReportComponent = (props) => {
                         {
                             showReportBody ? (
                                 <>
-                                    <textarea className='report_desc' placeholder=' Enter your description'></textarea>
+                                    <textarea
+                                        value={description}
+                                        onChange={handleOnChange}
+                                        className="report_desc"
+                                        name="description"
+                                        placeholder=' Enter your description'
+                                    ></textarea>
+                                    <p className="required errormsg errpad1">
+                                        {errors["description"]}
+                                    </p>
+
                                     <div className='mt-3'>
-                                        <button onClick={reportPost} >Comment</button>
+                                        <button onClick={reportPost}>Report</button>
                                         <Link onClick={goBack} style={{ marginLeft: '10px' }}>Go Back</Link>
                                     </div>
                                 </>

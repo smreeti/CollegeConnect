@@ -67,7 +67,7 @@ export default class HomeComponent extends React.Component {
                 <Header />
                 <div style={{ background: '#F5F5DC', marginTop: '3rem' }}>
 
-                    {posts.length > 0 ? (
+                    {posts && posts.length > 0 ? (
                         posts.map((post) => (
                             <div className='py-1' key={post._id}>
                                 <div className='col-lg-4 col-md-8 col-10 mx-auto card my-3 px-0'>

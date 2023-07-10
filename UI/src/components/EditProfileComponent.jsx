@@ -6,7 +6,7 @@ import EditProfilePhotoComponent from "./EditProfilePhotoComponent.jsx";
 import { Link } from "react-router-dom";
 import { handleEditFormValidation } from "../../utils/validation";
 
-export default class EditUserComponent extends React.Component {
+export default class EditProfileComponent extends React.Component {
     constructor() {
         super();
         this.state = {
@@ -163,7 +163,7 @@ export default class EditUserComponent extends React.Component {
                                                 data-target="editProfilePicModal"
                                                 className="modalcenter modal-trigger change-profile-photo-link modalcenter"
                                             >
-                                               <span className="change"> Change profile photo</span>
+                                                <span className="change"> Change profile photo</span>
                                             </Link>
                                         </div>
                                     </div>
