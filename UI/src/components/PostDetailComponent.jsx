@@ -8,7 +8,7 @@ import { faTimes, faHeart, faComment } from '@fortawesome/free-solid-svg-icons';
 const PostDetailComponent = (props) => {
     const openUserPost = useRef(null);
     const [postDetails, setPostDetails] = useState({});
-    const { userDetail } = props;
+    const { userDetail, isNotificationDetail } = props;
 
     useEffect(() => {
         fetchPostDetails();
@@ -65,6 +65,7 @@ const PostDetailComponent = (props) => {
                                     </small>
                                 </div>
                                 <p></p>
+                              
                                 <div className="d-flex flex-wrap post-details-stats">
                                     <div><FontAwesomeIcon icon={faHeart}
                                         onClick={() => { console.log('like') }} />
@@ -73,8 +74,13 @@ const PostDetailComponent = (props) => {
                                         {postDetails?.comments} comments </span>}</div>
                                 </div>
 
-                                <textarea className='mt-2 post-comment' placeholder='Enter your comment'></textarea>
-                                <button onClick={() => { }}>Comment</button>
+                                {!isNotificationDetail && (
+                                    <>
+                                        <textarea className='mt-2 post-comment' placeholder='Enter your comment'></textarea>
+                                        <button onClick={() => { }}>Comment</button>
+                                    </>
+                                )
+                                }
                             </div>
                         </div>
                     </div>

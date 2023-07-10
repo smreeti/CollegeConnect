@@ -5,10 +5,14 @@ import { API_TO_FETCH_NOTIFICATIONS } from "../../utils/APIRequestUrl.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInfo } from "@fortawesome/free-solid-svg-icons";
 import LoaderComponent from "./LoaderComponent.jsx";
+import PostDetailComponent from "./PostDetailComponent.jsx";
 
 const NotificationsComponent = () => {
     const [notifications, setNotifications] = useState([]);
     const [isLoading, setIsLoading] = useState('');
+    const [selectedPostId, setSelectedPostId] = useState('');
+    const [userDetail, setUserDetail] = useState('');
+    const [isPostDetailModalOpen, setPostDetailOpen] = useState(false);
 
     useEffect(() => {
         fetchUserNotifications();
@@ -31,6 +35,12 @@ const NotificationsComponent = () => {
         const options = { day: "numeric", month: "short", year: "numeric" };
         return new Date(dateString).toLocaleDateString(undefined, options);
     };
+
+    const openPostDetailModal = (notifications) => {
+        setPostDetailOpen(true);
+        setSelectedPostId(notifications.post);
+        setUserDetail(notifications.post.postedBy);
+    }
 
     return (
         <>
@@ -64,7 +74,7 @@ const NotificationsComponent = () => {
                                                 <FontAwesomeIcon
                                                     icon={faInfo}
                                                     className="icons modal-trigger"
-                                                    // onClick={() => openPostDetailModal(notification)}
+                                                    onClick={() => openPostDetailModal(notification)}
                                                     data-target="openUserPost"
                                                 />
 
@@ -82,6 +92,14 @@ const NotificationsComponent = () => {
                         )
                     )
                 }
+
+                {isPostDetailModalOpen &&
+                    (<PostDetailComponent
+                        selectedPostId={selectedPostId}
+                        userDetail={userDetail}
+                        isNotificationDetail={true}
+                    />
+                    )}
             </div>
         </>
     );
