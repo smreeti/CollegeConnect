@@ -101,10 +101,20 @@ const handleRejectPostReports = async (req, res) => {
     const { postReportsId, remarks } = req.body;
 
     try {
-        await PostReports.findByIdAndUpdate(postReportsId, {
+        const postReports = await PostReports.findByIdAndUpdate(postReportsId, {
             status: REJECTED,
             remarks
         }, { new: true });
+
+        const userNotificationObj = {
+            remarks,
+            subject: "Post Report Rejected",
+            post: postReports.post,
+            user: postReports.reportedBy
+        }
+
+        await saveUserNotification(userNotificationObj);
+
         return setSuccessResponse(res, "Post Report rejected successfully");
     } catch (error) {
         return setErrorResponse(res, HttpStatus.INTERNAL_SERVER_ERROR, error);

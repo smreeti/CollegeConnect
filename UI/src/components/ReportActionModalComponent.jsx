@@ -21,6 +21,7 @@ const ReportActionModalComponent = (props) => {
     const cancelModal = () => {
         const modalInstance = M.Modal.getInstance(reportModal.current);
         modalInstance.close();
+        setRemarks('');
     };
 
     const confirmAction = async () => {
@@ -76,7 +77,7 @@ const ReportActionModalComponent = (props) => {
                 <div className="modal-dialog">
                     <div className="modal-content">
                         <div className="modal-header">
-                            <p></p>
+                            <h4 className="modal-title">Confirm {action} ?</h4>
                             <FontAwesomeIcon
                                 icon={faTimes}
                                 className="close"

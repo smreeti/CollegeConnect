@@ -76,7 +76,7 @@ const ReportModalComponent = (props) => {
             <div className="modal-dialog">
                 <div className="modal-content">
                     <div className="modal-header">
-                        <p></p>
+                        <h4 className="modal-title">Report Post</h4>
                         <FontAwesomeIcon
                             icon={faTimes}
                             className="close"
