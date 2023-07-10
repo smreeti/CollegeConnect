@@ -39,11 +39,14 @@ const {
   API_TO_LIKE_POST,
   API_TO_REPORT_POST,
   API_TO_FETCH_POST_REPORTS,
+  API_TO_APPROVE_POST_REPORTS,
+  API_TO_REJECT_POST_REPORTS,
   // API_TO_VIEW_FOLLOWERS,
 } = require("../utils/APIRequestUrl.js");
 
 const { setSuccessResponse } = require("../utils/Response.js");
-const { fetchPostReports } = require("../controllers/reportPostController.js");
+const { fetchPostReports, handleApprovePostReports, handleRejectPostReports } = require("../controllers/reportPostController.js");
+const Post = require("../models/Post.js");
 
 router.get(API_TO_FETCH_COLLEGE_INFO, fetchCollegeList);
 router.post(API_TO_SIGNUP_USER, signupUser);
@@ -74,6 +77,9 @@ router.post(API_TO_FETCH_POST_DETAILS, authMiddleware, fetchPostDetails);
 
 router.post(API_TO_REPORT_POST, authMiddleware, reportPost);
 router.get(API_TO_FETCH_POST_REPORTS, authMiddleware, fetchPostReports);
+
+router.post(API_TO_APPROVE_POST_REPORTS, authMiddleware, handleApprovePostReports);
+router.post(API_TO_REJECT_POST_REPORTS, authMiddleware, handleRejectPostReports);
 
 // router.post(API_TO_VIEW_FOLLOWERS, authMiddleware);
 // router.put(API_TO_LIKE_POST, authMiddleware, likePost);

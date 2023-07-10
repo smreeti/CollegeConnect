@@ -21,8 +21,11 @@ const API_TO_EDIT_PROFILE_PHOTO = "/editProfilePhoto";
 const API_TO_EDIT_PROFILE = "/editProfile";
 
 const API_TO_FETCH_POST_DETAILS = "/postDetails";
+
 const API_TO_REPORT_POST = "/reportPost";
 const API_TO_FETCH_POST_REPORTS = "/fetchPostReports";
+const API_TO_APPROVE_POST_REPORTS = "/approvePostReports";
+const API_TO_REJECT_POST_REPORTS = "/rejectPostReports";
 
 const API_TO_LIKE_POST = "/like/:id";
 
@@ -43,5 +46,7 @@ module.exports = {
   API_TO_FETCH_POST_DETAILS,
   API_TO_REPORT_POST,
   API_TO_LIKE_POST,
-  API_TO_FETCH_POST_REPORTS
+  API_TO_FETCH_POST_REPORTS,
+  API_TO_APPROVE_POST_REPORTS,
+  API_TO_REJECT_POST_REPORTS
 };
