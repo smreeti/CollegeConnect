@@ -27,6 +27,8 @@ const API_TO_EDIT_PROFILE = BASE_SERVER_URL + "/editProfile";
 
 const API_TO_FETCH_POST_DETAILS = BASE_SERVER_URL + "/postDetails";
 
+const API_TO_REPORT_POST = BASE_SERVER_URL + "/reportPost";
+
 const API_TO_LIKE_POST = BASE_SERVER_URL + "/like/:id";
 
 export {
@@ -44,5 +46,6 @@ export {
   API_TO_EDIT_PROFILE_PHOTO,
   API_TO_EDIT_PROFILE,
   API_TO_FETCH_POST_DETAILS,
+  API_TO_REPORT_POST,
   API_TO_LIKE_POST,
 };

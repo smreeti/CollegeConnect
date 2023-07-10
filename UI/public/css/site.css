@@ -1998,8 +1998,24 @@ footer p {
   max-height: 100px;
 }
 
-.img-fluid{
+.img-fluid {
   width: 100% !important;
+}
+
+.report_desc {
+  width: 100%;
+  min-height: 100px;
+}
+
+.success-check {
+  background-color: green;
+  color: white;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  margin: auto;
 }
 
 @media (max-width: 700px) {

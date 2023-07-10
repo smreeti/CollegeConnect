@@ -17,7 +17,8 @@ export default class HomeComponent extends React.Component {
             posts: [],
             iconColor: "silver",
             isReportModalOpen: false,
-            isLoading: false
+            isLoading: false,
+            selectedPostId: ''
         };
     }
 
@@ -46,10 +47,11 @@ export default class HomeComponent extends React.Component {
         }
     }
 
-    openReportModal = () => {
-        this.setState({
-            isReportModalOpen: true
-        })
+    openReportModal = (postId) => {
+        this.setState(prevState => ({
+            isReportModalOpen: !prevState.isReportModalOpen,
+            selectedPostId: postId
+        }));
     }
 
     setIsLoading() {
@@ -74,29 +76,37 @@ export default class HomeComponent extends React.Component {
                                             <FontAwesomeIcon icon={faUser} className='me-md-2 me-1' />
                                             <Link>{post.postedBy.username}</Link>
 
-                                            <FontAwesomeIcon icon={faEllipsisH} className="ms-auto modal-trigger" data-target="reportModal" onClick={this.openReportModal} />
+                                            <FontAwesomeIcon icon={faEllipsisH}
+                                                className="ms-auto modal-trigger"
+                                                data-target="reportModal"
+                                                onClick={() => this.openReportModal(post?._id)} />
                                         </p>
                                     </div>
 
                                     <div style={{ padding: '8px 0', maxHeight: '400px' }}>
                                         <Link>
-                                            <img src={post.imageUrl} alt="Post" className='card-img-top' style={{ maxHeight: '400px', maxWidth: '100%', objectFit: 'contain' }} />
+                                            <img src={post.imageUrl} alt="Post" className='card-img-top'
+                                                style={{ maxHeight: '400px', maxWidth: '100%', objectFit: 'contain' }} />
                                         </Link>
 
                                     </div>
                                     <div className='card-body'>
                                         <div className="me-auto">
                                             <div className="d-flex flex-wrap">
-                                                <FontAwesomeIcon icon={faHeart} className='me-3' color={iconColor} onClick={this.likedIcon} />
+                                                <FontAwesomeIcon icon={faHeart} className='me-3'
+                                                    color={iconColor} onClick={this.likedIcon} />
                                                 <FontAwesomeIcon icon={faComment} />
                                             </div>
                                             {post.likes > 0 ? <small className='fs-6 fw-lighter'>Liked by {post.likes} people</small> : null}
                                         </div>
                                         <div className="d-flex flex-wrap ">
-                                            <p className='fw-bold my-1 me-1 text-wrap'>{post.postedBy.username} </p> <p className='fw-light my-1'> {post.caption}</p>
+                                            <p className='fw-bold my-1 me-1 text-wrap'>{post.postedBy.username} </p>
+                                            <p className='fw-light my-1'> {post.caption}</p>
                                         </div>
                                         <div className="d-flex fs-6">
-                                            <small><FontAwesomeIcon icon={faUser} className='me-1' /> <input type="text" className='border-0' placeholder='Add a commment...' /></small>
+                                            <small><FontAwesomeIcon icon={faUser} className='me-1' />
+                                                <input type="text" className='border-0' placeholder='Add a commment...' />
+                                            </small>
                                         </div>
                                         <Link>
                                             <div>
@@ -134,7 +144,10 @@ export default class HomeComponent extends React.Component {
                     }
                 </div>
 
-                {this.state.isReportModalOpen && <ReportComponent />}
+                {this.state?.isReportModalOpen &&
+                    <ReportComponent
+                        selectedPostId={this.state.selectedPostId}
+                    />}
             </>
         );
     }
