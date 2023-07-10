@@ -1,8 +1,9 @@
 const PostReports = require("../models/PostReports.js");
 const HttpStatus = require("../utils/HttpStatus");
-const { PENDING, APPROVED, REJECTED } = require("../utils/ReportStatus.js");
+const { PENDING, APPROVED, REJECTED, BLOCKED } = require("../utils/ReportStatus.js");
 const { setSuccessResponse, setErrorResponse } = require("../utils/Response");
-const { fetchPostById } = require("./postController");
+const { fetchPostById, updatePostStatus } = require("./postController");
+const { saveUserNotification } = require("./userNotificationController.js");
 
 const reportPost = async (req, res) => {
 
@@ -65,24 +66,44 @@ const fetchPostReportsById = async (collegeId) => {
 }
 
 const handleApprovePostReports = async (req, res) => {
-    const { postReportsId } = req.body;
+    const { postReportsId, remarks } = req.body;
 
     try {
-        await PostReports.findByIdAndUpdate(postReportsId, {
-            status: APPROVED
-        }, { new: true });
+        const postReports = await PostReports.findByIdAndUpdate(postReportsId, {
+            status: APPROVED,
+            remarks
+        }, { new: true }).populate('post');
+
+        await updateUserPosts(postReports);
+
         return setSuccessResponse(res, "Post Report approved successfully");
     } catch (error) {
         return setErrorResponse(res, HttpStatus.INTERNAL_SERVER_ERROR, error);
     }
 }
 
+const updateUserPosts = async (postReports) => {
+
+    const { description, post } = postReports;
+    await updatePostStatus(post._id, BLOCKED, description);
+
+    const userNotificationObj = {
+        remarks: description,
+        subject: "Post Removed",
+        post: post,
+        user: post.postedBy
+    }
+
+    await saveUserNotification(userNotificationObj);
+}
+
 const handleRejectPostReports = async (req, res) => {
-    const { postReportsId } = req.body;
+    const { postReportsId, remarks } = req.body;
 
     try {
         await PostReports.findByIdAndUpdate(postReportsId, {
-            status: REJECTED
+            status: REJECTED,
+            remarks
         }, { new: true });
         return setSuccessResponse(res, "Post Report rejected successfully");
     } catch (error) {

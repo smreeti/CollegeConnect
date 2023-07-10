@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from "react";
 import Header from "../Header.jsx";
 import fetchData from "../../utils/FetchAPI";
-import { API_TO_APPROVE_POST_REPORTS, API_TO_FETCH_POST_REPORTS, API_TO_REJECT_POST_REPORTS } from "../../utils/APIRequestUrl.js";
+import { API_TO_FETCH_POST_REPORTS } from "../../utils/APIRequestUrl.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInfo, faCheck, faTimes } from "@fortawesome/free-solid-svg-icons";
 import PostDetailComponent from "./PostDetailComponent.jsx";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import ReportActionModalComponent from "./ReportActionModalComponent.jsx";
 
 const ReportComponent = () => {
     const [activeTab, setActiveTab] = useState("postReports");
     const [postReports, setPostReports] = useState([]);
     const [isPostDetailOpen, setPostDetailOpen] = useState(false);
+    const [isReportActionModalOpen, setReportActionModalOpen] = useState(false);
+    const [action, setAction] = useState('');
     const [selectedPostId, setSelectedPostId] = useState('');
     const [userDetail, setUserDetail] = useState('');
     const [isLoading, setIsLoading] = useState('');
@@ -56,39 +57,20 @@ const ReportComponent = () => {
     }
 
     const handleApprove = async (reportId) => {
-        try {
-            const data = await fetchData(API_TO_APPROVE_POST_REPORTS, "POST", {
-                postReportsId: reportId
-            });
-
-            if (!data.error) {
-                fetchPostReports();
-                toast.success("Post report approved successfully!");
-            }
-        } catch (err) {
-            console.log(err);
-        }
+        setReportActionModalOpen(true);
+        setAction('APPROVE');
+        setSelectedPostId(reportId);
     };
 
     const handleReject = async (reportId) => {
-        try {
-            const data = await fetchData(API_TO_REJECT_POST_REPORTS, "POST", {
-                postReportsId: reportId
-            });
-
-            if (!data.error) {
-                fetchPostReports();
-                toast.error("Post report rejected successfully!");
-            }
-        } catch (err) {
-            console.log(err);
-        }
+        setReportActionModalOpen(true);
+        setAction('REJECT');
+        setSelectedPostId(reportId);
     };
 
     return (
         <>
             <Header />
-            <ToastContainer />
             <div className="mt-5">
                 <ul className="nav nav-tabs">
                     <li className="nav-item">
@@ -151,14 +133,16 @@ const ReportComponent = () => {
                                                                 data-target="openUserPost"
                                                             />
                                                             <button
-                                                                className="btn btn-success"
+                                                                className="btn btn-success modal-trigger"
                                                                 onClick={() => handleApprove(report._id)}
+                                                                data-target="reportActionModal"
                                                             >
                                                                 <FontAwesomeIcon icon={faCheck} />
                                                             </button>
                                                             <button
-                                                                className="btn btn-danger"
+                                                                className="btn btn-danger modal-trigger"
                                                                 onClick={() => handleReject(report._id)}
+                                                                data-target="reportActionModal"
                                                             >
                                                                 <FontAwesomeIcon icon={faTimes} />
                                                             </button>
@@ -191,6 +175,14 @@ const ReportComponent = () => {
                         selectedPostId={selectedPostId}
                         userDetail={userDetail}
                     />
+                    )}
+
+                {isReportActionModalOpen &&
+                    (
+                        <ReportActionModalComponent
+                            selectedPostId={selectedPostId}
+                            action={action}
+                        />
                     )}
             </div>
         </>

@@ -51,7 +51,7 @@ const PostDetailComponent = (props) => {
                                     <img src={postDetails?.imageUrl} alt="Selected" className='img-fluid' />
                                 </div>
                             </div>
-                            <div className="col-md-5 ps-1">
+                            <div className="col-md-5 ps-3">
                                 <div className="d-flex mt-2">
                                     <div className="creator_block_post">
                                         <img alt="photographer Image" className="creator_image_post"

@@ -61,6 +61,7 @@ const fetchUserPosts = async (loggedInUser) => {
     const posts = await Post.find({
       postedBy: loggedInUser,
       isCollegePost: "N",
+      status: "ACTIVE"
     })
       .select("imageUrl likes comments")
       .sort({ createdDate: -1 });
@@ -80,6 +81,7 @@ const fetchPostDetails = async (req, res) => {
       .populate({
         path: "postedBy",
         select: "username",
+        status: "ACTIVE"
       })
       .select("imageUrl likes comments caption createdDate");
 
@@ -113,11 +115,18 @@ const likePost = async (req, res) => {
   }
 };
 
+const updatePostStatus = async (postId, status, remarks) => {
+  await Post.findByIdAndUpdate(postId, {
+    status, remarks
+  }, { new: true });
+}
+
 module.exports = {
   savePost,
   fetchAllPosts,
   fetchUserPosts,
   fetchPostDetails,
   likePost,
-  fetchPostById
+  fetchPostById,
+  updatePostStatus
 };

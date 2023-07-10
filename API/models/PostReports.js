@@ -24,6 +24,9 @@ const PostReportsSchema = new Schema({
     reportedDate: {
         type: Date,
         default: Date.now
+    },
+    remarks: {
+        type: String
     }
 });
 

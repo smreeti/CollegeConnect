@@ -27,6 +27,13 @@ const PostSchema = new Schema({
     },
     isCollegePost: {
         type: String
+    },
+    status: {
+        type: String,
+        default: "ACTIVE"
+    },
+    remarks:{
+        type: String  
     }
 });
 
