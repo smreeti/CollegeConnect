@@ -14,6 +14,7 @@ import CreatePostComponent from './components/CreatePostComponent.jsx';
 import SearchUserComponent from './components/SearchUserComponent.jsx';
 import EditProfileComponent from './components/EditProfileComponent.jsx';
 import ReportComponent from './components/ReportComponent.jsx';
+import NotificationsComponent from './components/NotificationsComponent.jsx';
 
 export default function AppRoutes() {
   const navigate = useNavigate();
@@ -61,6 +62,7 @@ export default function AppRoutes() {
       <Route path="/edit" element={<EditProfileComponent />} />
 
       <Route path="/reports" element={<ReportComponent />} />
+      <Route path='/notifications' element={<NotificationsComponent />} />
 
       <Route path="/logout" element={<LogoutComponent />} />
       <Route path="*" element={<NotFound />} />

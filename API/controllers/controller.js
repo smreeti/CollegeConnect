@@ -14,10 +14,16 @@ const {
   fetchUserDetails,
   editProfilePhoto,
   editProfile } = require('./userController.js')
-  
+
 const { fetchProfileDetails } = require('./profileController.js')
 
-const { reportPost } = require("../controllers/reportPostController.js");
+const { reportPost,
+  fetchPostReports,
+  handleApprovePostReports,
+  handleRejectPostReports
+} = require("../controllers/reportPostController.js");
+
+const { fetchUserNotifications } = require("../controllers/userNotificationController.js");
 
 module.exports = {
   signupUser,
@@ -36,5 +42,10 @@ module.exports = {
   fetchPostDetails,
   editProfilePhoto,
   editProfile,
-  reportPost
+  reportPost,
+  fetchPostReports,
+  handleApprovePostReports,
+  handleRejectPostReports,
+  fetchUserNotifications
+
 };

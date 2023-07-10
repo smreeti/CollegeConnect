@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getLoggedInUser } from '../utils/Auth';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome, faUser, faInfo, faSignOutAlt, faSearch, faFileImage, faFlag } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faUser, faInfo, faSignOutAlt, faSearch, faFileImage, faFlag, faBell } from '@fortawesome/free-solid-svg-icons';
 import SearchUserComponent from './components/SearchUserComponent.jsx';
 import { Dropdown } from "react-bootstrap";
 import CreatePostComponent from './components/CreatePostComponent.jsx';
@@ -80,6 +80,11 @@ export default function Header() {
             </li>
           )
         }
+
+        <li className='tabmenu'>
+          <FontAwesomeIcon className='icons' icon={faBell} />
+          <Link to="/notifications"> Notifications</Link>
+        </li>
 
         <li className='tabmenu'>
           <FontAwesomeIcon className='icons' icon={faInfo} />
