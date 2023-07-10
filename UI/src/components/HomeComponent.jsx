@@ -7,7 +7,7 @@ import Header from '../Header.jsx';
 import fetchData from "../../utils/FetchAPI.js";
 import { API_TO_FETCH_ALL_POSTS } from '../../utils/APIRequestUrl.js';
 import { Link } from 'react-router-dom';
-import ReportComponent from './ReportComponent.jsx';
+import ReportModalComponent from './ReportModalComponent.jsx';
 
 export default class HomeComponent extends React.Component {
 
@@ -145,7 +145,7 @@ export default class HomeComponent extends React.Component {
                 </div>
 
                 {this.state?.isReportModalOpen &&
-                    <ReportComponent
+                    <ReportModalComponent
                         selectedPostId={this.state.selectedPostId}
                     />}
             </>

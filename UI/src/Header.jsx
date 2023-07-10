@@ -2,13 +2,15 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getLoggedInUser } from '../utils/Auth';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome, faUser, faInfo, faSignOutAlt, faSearch, faFileImage } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faUser, faInfo, faSignOutAlt, faSearch, faFileImage, faFlag } from '@fortawesome/free-solid-svg-icons';
 import SearchUserComponent from './components/SearchUserComponent.jsx';
 import { Dropdown } from "react-bootstrap";
 import CreatePostComponent from './components/CreatePostComponent.jsx';
+import UserType from '../utils/UserTypeConstants';
 
 export default function Header() {
   const loggedInUser = getLoggedInUser();
+  console.log(loggedInUser);
 
   const [isMenuOpen, setIsMenuOpen] = useState(false); // State to track the menu open/close state
   const [isSearchModalOpen, setIsSearchModalOpen] = useState(false);
@@ -70,6 +72,16 @@ export default function Header() {
           }} data-target="createPostModal" className="modal-trigger">Create Post</Link>
         </li>
 
+        {
+          loggedInUser.userTypeId.code == UserType.ADMIN &&
+          (
+            <li className='tabmenu'>
+              <FontAwesomeIcon className='icons' icon={faFlag} />
+              <Link to="/reports"> Reports </Link>
+            </li>
+          )
+        }
+
         <li className='tabmenu'>
           <FontAwesomeIcon className='icons' icon={faInfo} />
           <Link to="/about"> About Us </Link>
@@ -80,7 +92,7 @@ export default function Header() {
             <Dropdown className="iconimg">
               <Dropdown.Toggle variant="secondary" id="profile-dropdown">
                 {loggedInUser?.profilePicture === "default" ? (
-                  <img id="prfimg" src="/assets/defaultProfileImage.png" alt="Profile" />
+                  <img id="prfimg" src="/assets/profile.png" alt="Profile" />
                 ) : (
                   <img
                     id="prfimg"

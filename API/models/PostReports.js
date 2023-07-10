@@ -14,6 +14,10 @@ const PostReportsSchema = new Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "Post"
     },
+    collegeInfoId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "CollegeInfo"
+    },
     status: {
         type: String
     },

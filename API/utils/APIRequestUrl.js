@@ -22,6 +22,7 @@ const API_TO_EDIT_PROFILE = "/editProfile";
 
 const API_TO_FETCH_POST_DETAILS = "/postDetails";
 const API_TO_REPORT_POST = "/reportPost";
+const API_TO_FETCH_POST_REPORTS = "/fetchPostReports";
 
 const API_TO_LIKE_POST = "/like/:id";
 
@@ -42,4 +43,5 @@ module.exports = {
   API_TO_FETCH_POST_DETAILS,
   API_TO_REPORT_POST,
   API_TO_LIKE_POST,
+  API_TO_FETCH_POST_REPORTS
 };

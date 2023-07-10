@@ -7,6 +7,8 @@ const { fetchPostById } = require("./postController");
 const reportPost = async (req, res) => {
 
     const { selectedPostId, description } = req.body;
+    const loggedInUser = req.user;
+
     try {
         const errors = await validateReportRequest(selectedPostId, description);
         if (errors.length > 0)
@@ -17,9 +19,10 @@ const reportPost = async (req, res) => {
         if (selectedPost) {
             await PostReports.create({
                 description,
-                reportedBy: req.user,
+                reportedBy: loggedInUser,
                 post: selectedPost,
-                status: PENDING
+                status: PENDING,
+                collegeInfoId: loggedInUser.collegeInfoId
             })
             return setSuccessResponse(res, "Post reported successfully");
         } else

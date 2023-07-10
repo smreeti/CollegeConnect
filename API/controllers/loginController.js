@@ -24,7 +24,7 @@ const login = async (req, res) => {
             { mobileNumber: username },
             { username: username }
         ]
-    });
+    }).populate('userTypeId');
 
     if (user) {
         let passwordMatch = await bcrypt.compare(password, user.password);

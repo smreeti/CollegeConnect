@@ -11,4 +11,8 @@ const fetchCollegeList = async (req, res) => {
     }
 };
 
-module.exports = { fetchCollegeList };
+const fetchCollegeById = async (collegeInfoId) => {
+    await CollegeInfo.findById(collegeInfoId);
+}
+
+module.exports = { fetchCollegeList, fetchCollegeById };

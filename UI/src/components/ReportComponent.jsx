@@ -1,128 +1,65 @@
-import React, { useRef, useEffect, useState } from "react";
-import M from "materialize-css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheck, faTimes } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom";
-import { API_TO_REPORT_POST } from "../../utils/APIRequestUrl";
+import React, { useState } from "react";
+import Header from "../Header.jsx";
 import fetchData from "../../utils/FetchAPI";
+import { API_TO_FETCH_POST_REPORTS } from "../../utils/APIRequestUrl.js";
 
-const ReportComponent = (props) => {
-    const reportModal = useRef(null);
-    const [showReportBody, setShowReportBody] = useState(false);
-    const [isReportClicked, setReportClicked] = useState(false);
-    const [isReportPostSuccess, setReportPostSuccess] = useState(false);
-    const [description, setDescription] = useState('');
-    const [errors, setErrors] = useState('');
+const ReportComponent = () => {
+    const [activeTab, setActiveTab] = useState("postReports");
+    const [postReports, setPostReports] = useState([]);
 
-    useEffect(() => {
-        M.Modal.init(reportModal.current);
-    }, [props]);
+    const POST_REPORTS = "postReports";
+    const PROFILE_REPORTS = "profileReports";
 
-    const cancelModal = () => {
-        const modalInstance = M.Modal.getInstance(reportModal.current);
-        modalInstance.close();
-    };
+    const handleTabClick = (tab) => {
+        setActiveTab(tab);
 
-    const handleReportPost = (event) => {
-        event.preventDefault();
-        setShowReportBody(true);
-    }
-
-    const goBack = (event) => {
-        event.preventDefault();
-        setShowReportBody(false);
-    }
-
-    const reportPost = async () => {
-        const { selectedPostId } = props;
-        setReportClicked(true);
-
-        let formErrors = handleReportPostForm();
-        if (Object.keys(formErrors).length > 0) {
-            setFormErrors(formErrors);
-        } else {
-            const reportData = {
-                selectedPostId,
-                description
-            };
-
-            const data = await fetchData(API_TO_REPORT_POST, "POST", reportData);
-            if (!data.error) {
-                setShowReportBody(false);
-                setReportPostSuccess(true);
-            }
+        if (tab == POST_REPORTS) {
+            const postReports = fetchData(API_TO_FETCH_POST_REPORTS, "");
+            setPostReports(postReports);
         }
-    }
-
-    const handleReportPostForm = () => {
-        let formErrors = {};
-        if (!description)
-            formErrors["description"] = "Please provide description";
-
-        return formErrors;
-    }
-
-    const handleOnChange = (event) => {
-        const { value } = event.target;
-        setDescription(value);
-    };
-
-    const setFormErrors = (formErrors) => {
-        setErrors(formErrors);
     };
 
     return (
-        <div id="reportModal" className="modal" ref={reportModal} >
-            <div className="modal-dialog">
-                <div className="modal-content">
-                    <div className="modal-header">
-                        <p></p>
-                        <FontAwesomeIcon
-                            icon={faTimes}
-                            className="close"
-                            onClick={cancelModal}
-                        />
-                    </div>
+        <>
+            <Header />
+            <div className="mt-5">
+                <ul className="nav nav-tabs">
+                    <li className="nav-item">
+                        <button
+                            className={`nav-link ${activeTab === POST_REPORTS ? "active" : ""}`}
+                            onClick={() => handleTabClick(POST_REPORTS)}
+                        >
+                            Post Reports
+                        </button>
+                    </li>
 
-                    <div className="modal-body">
-                        {
-                            showReportBody ? (
-                                <>
-                                    <textarea
-                                        value={description}
-                                        onChange={handleOnChange}
-                                        className="report_desc"
-                                        name="description"
-                                        placeholder=' Enter your description'
-                                    ></textarea>
-                                    <p className="required errormsg errpad1">
-                                        {errors["description"]}
-                                    </p>
+                    <li className="nav-item">
+                        <button
+                            className={`nav-link ${activeTab === PROFILE_REPORTS ? "active" : ""}`}
+                            onClick={() => handleTabClick(PROFILE_REPORTS)}
+                        >
+                            Profile Reports
+                        </button>
+                    </li>
+                </ul>
 
-                                    <div className='mt-3'>
-                                        <button onClick={reportPost}>Report</button>
-                                        <Link onClick={goBack} style={{ marginLeft: '10px' }}>Go Back</Link>
-                                    </div>
-                                </>
-                            ) :
-                                !isReportClicked && <Link onClick={handleReportPost}>Report</Link>
-                        }
+                <div className="tab-content mt-3">
+                    {activeTab === POST_REPORTS && (
+                        <div className="tab-pane active">
+                            <p>Reports tab content</p>
+                        </div>
+                    )}
 
-                        {isReportPostSuccess &&
-                            <>
-                                <FontAwesomeIcon
-                                    icon={faCheck}
-                                    className="success-check"
-                                />
-                                <b><p className="text-center">Thanks for reporting this ad </p></b>
-                                <p>We will review this post to determine whether it violates our Policies. Thanks for helping us keep CollegeConnect safe.</p>
-                            </>
-                        }
-                    </div>
+                    {activeTab === PROFILE_REPORTS && (
+                        <div className="tab-pane active">
+                            <p>History tab content</p>
+                        </div>
+                    )}
+                    {/* Add more tab content as needed */}
                 </div>
             </div>
-        </div>
+        </>
     );
-}
+};
 
 export default ReportComponent;

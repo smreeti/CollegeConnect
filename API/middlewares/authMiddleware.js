@@ -19,7 +19,9 @@ module.exports = (req, res, next) => {
             return setErrorResponse(res, HttpStatus.UNAUTHORIZED, "You must be logged in");
 
         const { _id } = payload;
-        User.findById(_id).populate('userTypeId')
+        User.findById(_id)
+            .populate('userTypeId')
+            .populate('collegeInfoId')
             .then(existingUser => {
                 existingUser.password = undefined; //so that password is not exposed.
                 req.user = existingUser;
