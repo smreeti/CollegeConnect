@@ -1655,6 +1655,7 @@ footer p {
 
 .icons {
   width: auto;
+  cursor: pointer;
 }
 
 .user_details_container,
@@ -2017,6 +2018,25 @@ footer p {
   display: flex;
   justify-content: center;
   margin: auto;
+}
+
+.no-reports-message {
+  background-color: #e3e3e3;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  margin: auto;
+  justify-content: center;
+}
+
+.reports-table {
+  padding: 0 10px;
+}
+
+.report_actions {
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
 
 @media (max-width: 700px) {

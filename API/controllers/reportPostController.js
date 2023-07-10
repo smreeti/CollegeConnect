@@ -1,6 +1,6 @@
 const PostReports = require("../models/PostReports.js");
 const HttpStatus = require("../utils/HttpStatus");
-const { PENDING } = require("../utils/ReportStatus.js");
+const { PENDING, APPROVED, REJECTED } = require("../utils/ReportStatus.js");
 const { setSuccessResponse, setErrorResponse } = require("../utils/Response");
 const { fetchPostById } = require("./postController");
 
@@ -44,4 +44,50 @@ const validateReportRequest = async (selectedPostId, description) => {
     return errors;
 }
 
-module.exports = { reportPost };
+const fetchPostReports = async (req, res) => {
+    const loggedInUser = req.user;
+
+    try {
+        const postReports = await fetchPostReportsById(loggedInUser.collegeInfoId._id);
+        return setSuccessResponse(res, "Post Reports fetched successfully", postReports);
+    } catch (error) {
+        return setErrorResponse(res, HttpStatus.INTERNAL_SERVER_ERROR, error);
+    }
+}
+
+const fetchPostReportsById = async (collegeId) => {
+    return await PostReports.find({
+        status: PENDING,
+        collegeInfoId: collegeId
+    })
+        .populate('reportedBy')
+        .populate('post')
+}
+
+const handleApprovePostReports = async (req, res) => {
+    const { postReportsId } = req.body;
+
+    try {
+        await PostReports.findByIdAndUpdate(postReportsId, {
+            status: APPROVED
+        }, { new: true });
+        return setSuccessResponse(res, "Post Report approved successfully");
+    } catch (error) {
+        return setErrorResponse(res, HttpStatus.INTERNAL_SERVER_ERROR, error);
+    }
+}
+
+const handleRejectPostReports = async (req, res) => {
+    const { postReportsId } = req.body;
+
+    try {
+        await PostReports.findByIdAndUpdate(postReportsId, {
+            status: REJECTED
+        }, { new: true });
+        return setSuccessResponse(res, "Post Report rejected successfully");
+    } catch (error) {
+        return setErrorResponse(res, HttpStatus.INTERNAL_SERVER_ERROR, error);
+    }
+}
+
+module.exports = { reportPost, fetchPostReports, handleApprovePostReports, handleRejectPostReports };

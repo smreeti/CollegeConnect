@@ -54,7 +54,8 @@ const PostDetailComponent = (props) => {
                             <div className="col-md-5 ps-1">
                                 <div className="d-flex mt-2">
                                     <div className="creator_block_post">
-                                        <img alt="photographer Image" className="creator_image_post" src={userDetail?.profilePicture} />
+                                        <img alt="photographer Image" className="creator_image_post"
+                                            src={userDetail?.profilePicture} />
                                     </div>
                                     <small>
                                         <span>{postDetails?.postedBy?.username}:</span>
@@ -65,8 +66,11 @@ const PostDetailComponent = (props) => {
                                 </div>
                                 <p></p>
                                 <div className="d-flex flex-wrap post-details-stats">
-                                    <div><FontAwesomeIcon icon={faHeart} onClick={() => { console.log('like') }} /> {<span>{postDetails?.likes} likes </span>}</div>
-                                    <div><FontAwesomeIcon icon={faComment} />{<span> {postDetails?.comments} comments </span>}</div>
+                                    <div><FontAwesomeIcon icon={faHeart}
+                                        onClick={() => { console.log('like') }} />
+                                        {<span>{postDetails?.likes} likes </span>}</div>
+                                    <div><FontAwesomeIcon icon={faComment} />{<span>
+                                        {postDetails?.comments} comments </span>}</div>
                                 </div>
 
                                 <textarea className='mt-2 post-comment' placeholder='Enter your comment'></textarea>

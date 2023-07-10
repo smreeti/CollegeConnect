@@ -10,7 +10,6 @@ import UserType from '../utils/UserTypeConstants';
 
 export default function Header() {
   const loggedInUser = getLoggedInUser();
-  console.log(loggedInUser);
 
   const [isMenuOpen, setIsMenuOpen] = useState(false); // State to track the menu open/close state
   const [isSearchModalOpen, setIsSearchModalOpen] = useState(false);
