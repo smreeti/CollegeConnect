@@ -43,7 +43,7 @@ const NotificationsComponent = () => {
                     ) :
 
                     (notifications.length > 0 ? (
-                        <div className="table-responsive notifications-table">
+                        <div className="table-responsive reports-table">
                             <table className="table table-bordered">
                                 <thead>
                                     <tr>
@@ -77,7 +77,7 @@ const NotificationsComponent = () => {
                     ) :
                         (
                             <h2>
-                                <p className="no-notifications-message text-center">No Notification(s) yet!</p>
+                                <p className="no-message text-center mt-3">No Notification(s) yet!</p>
                             </h2>
                         )
                     )

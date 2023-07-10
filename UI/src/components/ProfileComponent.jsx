@@ -125,19 +125,20 @@ export default class ProfileComponent extends React.Component {
             </div>
           </div>
 
+          <div className="d-flex mt-md-4 mt-3">
+            <hr className="hr w-50" />
+            <small className="px-3 small">POSTS</small>
+            <hr className="hr w-50" />
+          </div>
+
           {posts?.length == 0 ? (
             <div className="user_details_container d-flex justify-content-center align-items-center profile_no_post" >
-              <p className="text-center">
-                "No post(s) yet."
-              </p>
+              <h2 className="text-center no-message">
+                No post(s) yet.
+              </h2>
             </div>
           ) :
             <>
-              <div className="d-flex mt-md-4 mt-3">
-                <hr className="hr w-50" />
-                <small className="px-3 small">POSTS</small>
-                <hr className="hr w-50" />
-              </div>
 
               <div className="profileimage_grid mt-5 user_details_container">
                 {posts?.length > 0 && (

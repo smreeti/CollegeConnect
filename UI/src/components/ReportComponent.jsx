@@ -155,7 +155,7 @@ const ReportComponent = () => {
                                 ) :
                                     (
                                         <h2>
-                                            <p className="no-reports-message text-center">No Post Report(s) to review yet!</p>
+                                            <p className="no-message text-center">No Post Report(s) to review yet!</p>
                                         </h2>
                                     )
                                 )

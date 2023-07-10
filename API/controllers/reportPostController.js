@@ -74,7 +74,7 @@ const handleApprovePostReports = async (req, res) => {
             remarks
         }, { new: true }).populate('post');
 
-        await updateUserPosts(postReports);
+        await updateUserPosts(postReports, remarks);
 
         return setSuccessResponse(res, "Post Report approved successfully");
     } catch (error) {
@@ -82,13 +82,13 @@ const handleApprovePostReports = async (req, res) => {
     }
 }
 
-const updateUserPosts = async (postReports) => {
+const updateUserPosts = async (postReports, remarks) => {
 
     const { description, post } = postReports;
     await updatePostStatus(post._id, BLOCKED, description);
 
     const userNotificationObj = {
-        remarks: description,
+        remarks,
         subject: "Post Removed",
         post: post,
         user: post.postedBy

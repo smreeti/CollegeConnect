@@ -39,6 +39,7 @@ const fetchAllPosts = async (req, res) => {
     const posts = await Post.find({
       postedBy: { $in: followingUsers },
       isCollegePost: "Y",
+      status: "ACTIVE"
     })
       .populate("postedBy")
       .sort({ createdDate: -1 });
@@ -60,7 +61,6 @@ const fetchUserPosts = async (loggedInUser) => {
   try {
     const posts = await Post.find({
       postedBy: loggedInUser,
-      isCollegePost: "N",
       status: "ACTIVE"
     })
       .select("imageUrl likes comments")
