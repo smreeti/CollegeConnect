@@ -1,12 +1,13 @@
 import React from 'react';
 import { formatDistanceToNow } from 'date-fns';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faComment, faHeart, faFaceMeh, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faComment, faHeart, faFaceMeh, faUser, faEllipsisH } from '@fortawesome/free-solid-svg-icons';
 
 import Header from '../Header.jsx';
 import fetchData from "../../utils/FetchAPI.js";
 import { API_TO_FETCH_ALL_POSTS } from '../../utils/APIRequestUrl.js';
 import { Link } from 'react-router-dom';
+import ReportComponent from './ReportComponent.jsx';
 
 export default class HomeComponent extends React.Component {
 
@@ -15,6 +16,8 @@ export default class HomeComponent extends React.Component {
         this.state = {
             posts: [],
             iconColor: "silver",
+            isReportModalOpen: false,
+            isLoading: false
         };
     }
 
@@ -30,18 +33,33 @@ export default class HomeComponent extends React.Component {
 
     async fetchAllPosts() {
         try {
+            this.setIsLoading();
+
             const data = await fetchData(API_TO_FETCH_ALL_POSTS, "POST");
             this.setState({
                 posts: data.body
             })
         } catch (error) {
             console.log("Error:", error);
+        } finally {
+            this.setIsLoading();
         }
     }
 
+    openReportModal = () => {
+        this.setState({
+            isReportModalOpen: true
+        })
+    }
+
+    setIsLoading() {
+        this.setState(prevState => ({
+            isLoading: !prevState.isLoading
+        }));
+    }
+
     render() {
-        const { posts } = this.state;
-        const { iconColor } = this.state;
+        const { posts, isLoading, iconColor } = this.state;
         return (
             <>
                 <Header />
@@ -55,6 +73,8 @@ export default class HomeComponent extends React.Component {
                                         <p className='my-0 d-flex align-items-center text-fluid'>
                                             <FontAwesomeIcon icon={faUser} className='me-md-2 me-1' />
                                             <Link>{post.postedBy.username}</Link>
+
+                                            <FontAwesomeIcon icon={faEllipsisH} className="ms-auto modal-trigger" data-target="reportModal" onClick={this.openReportModal} />
                                         </p>
                                     </div>
 
@@ -91,29 +111,30 @@ export default class HomeComponent extends React.Component {
                             </div>
                         ))
                     ) : (
-                        <div className="main-container" style={{ background: '#F5F5DC' }}>
-                            <div className="col-lg-6 col-12 p-3 px-md-5 py-md-4 card">
-                                <div className="text-center">
-                                    {/* <Link to='/'>
-                                        <img className="login-logo" src="../../assets/logo.png" />
-                                    </Link> */}
-                                    <p className='mt-md-5 mt-2'>
-                                        <FontAwesomeIcon icon={faFaceMeh} size='3x' color='#008080' />
+                        isLoading ? <div className="loader">Loading...</div> : (
+                            <div className="main-container" style={{ background: '#F5F5DC' }}>
+                                <div className="col-lg-6 col-12 p-3 px-md-5 py-md-4 card">
+                                    <div className="text-center">
+                                        <p className='mt-md-5 mt-2'>
+                                            <FontAwesomeIcon icon={faFaceMeh} size='3x' color='#008080' />
 
-                                    </p>
-                                    <h2 className="fs-2" style={{ color: '#008080' }}>
-                                        Sorry No Post Yet!
-                                    </h2>
-                                    <Link className="mt-md-4 mt-3" >
-                                        <small>Follow others to see their posts</small>
-                                    </Link>
+                                        </p>
+                                        <h2 className="fs-2" style={{ color: '#008080' }}>
+                                            Sorry No Post Yet!
+                                        </h2>
+                                        <Link className="mt-md-4 mt-3" >
+                                            <small>Follow others to see their posts</small>
+                                        </Link>
+                                    </div>
+
                                 </div>
-
                             </div>
-                        </div>
+                        )
                     )
                     }
                 </div>
+
+                {this.state.isReportModalOpen && <ReportComponent />}
             </>
         );
     }
