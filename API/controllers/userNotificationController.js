@@ -16,7 +16,12 @@ const fetchUserNotifications = async (req, res) => {
     try {
         const userNotifications = await UserNotification.find({
             user: req.user
-        }).populate('post');
+        })
+            .populate({
+                path: 'post',
+                populate: { path: 'postedBy' }
+            })
+            .sort({ notificationDate: -1 });
         return setSuccessResponse(res, "Notifications fetched", userNotifications);
     } catch (error) {
         return setErrorResponse(res, HttpStatus.INTERNAL_SERVER_ERROR, error);

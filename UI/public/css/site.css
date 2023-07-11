@@ -1997,6 +1997,7 @@ footer p {
 .post-comment {
   min-height: 100px;
   max-height: 100px;
+  width: 100%;
 }
 
 .img-fluid {
@@ -2037,6 +2038,21 @@ footer p {
   display: flex;
   align-items: center;
   gap: 5px;
+}
+
+.post-detail-caption {
+  word-break: break-all;
+}
+
+.report-container {
+  min-height: 93vh;
+  padding-top: 4rem !important;
+}
+
+.home-main-container{
+   background: #F5F5DC;
+   margin-top: 3rem;
+   min-height: 93vh;
 }
 
 @media (max-width: 700px) {

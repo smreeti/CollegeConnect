@@ -65,7 +65,7 @@ export default class HomeComponent extends React.Component {
         return (
             <>
                 <Header />
-                <div style={{ background: '#F5F5DC', marginTop: '3rem' }}>
+                <div className='home-main-container'>
 
                     {posts && posts.length > 0 ? (
                         posts.map((post) => (

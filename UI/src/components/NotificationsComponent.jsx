@@ -3,7 +3,7 @@ import Header from "../Header.jsx";
 import fetchData from "../../utils/FetchAPI";
 import { API_TO_FETCH_NOTIFICATIONS } from "../../utils/APIRequestUrl.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faInfo } from "@fortawesome/free-solid-svg-icons";
+import { faInfo, faBellSlash } from "@fortawesome/free-solid-svg-icons";
 import LoaderComponent from "./LoaderComponent.jsx";
 import PostDetailComponent from "./PostDetailComponent.jsx";
 
@@ -45,14 +45,14 @@ const NotificationsComponent = () => {
     return (
         <>
             <Header />
-            <div className="mt-5">
 
-                {isLoading ?
-                    (
-                        <LoaderComponent />
-                    ) :
+            {isLoading ?
+                (
+                    <LoaderComponent />
+                ) :
 
-                    (notifications.length > 0 ? (
+                (notifications.length > 0 ? (
+                    <div className="report-container">
                         <div className="table-responsive reports-table">
                             <table className="table table-bordered">
                                 <thead>
@@ -84,23 +84,34 @@ const NotificationsComponent = () => {
                                 </tbody>
                             </table>
                         </div>
-                    ) :
-                        (
-                            <h2>
-                                <p className="no-message text-center mt-3">No Notification(s) yet!</p>
-                            </h2>
-                        )
-                    )
-                }
+                    </div>
+                ) :
+                    (
+                        <div className="main-container" style={{ background: '#F5F5DC' }}>
+                            <div className="col-lg-6 col-12 p-2 px-md-5 py-md-4 card">
+                                <div className="text-center">
+                                    <p className='mt-md-5 mt-2'>
+                                        <FontAwesomeIcon icon={faBellSlash} size='3x' color='#008080' />
 
-                {isPostDetailModalOpen &&
-                    (<PostDetailComponent
-                        selectedPostId={selectedPostId}
-                        userDetail={userDetail}
-                        isNotificationDetail={true}
-                    />
-                    )}
-            </div>
+                                    </p>
+                                    <h2 className="fs-2" style={{ color: '#008080' }}>
+                                        No new Notification(s)!
+                                    </h2>
+                                </div>
+
+                            </div>
+                        </div>
+                    )
+                )
+            }
+
+            {isPostDetailModalOpen &&
+                (<PostDetailComponent
+                    selectedPostId={selectedPostId}
+                    userDetail={userDetail}
+                    isNotificationDetail={true}
+                />
+                )}
         </>
     );
 };

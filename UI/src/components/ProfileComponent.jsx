@@ -4,7 +4,7 @@ import Header from "../Header.jsx";
 import { API_TO_FETCH_PROFILE_DETAILS, API_TO_VIEW_FOLLOWERS } from "../../utils/APIRequestUrl.js";
 import fetchData from "../../utils/FetchAPI.js";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faComment, faHeart, faCog } from '@fortawesome/free-solid-svg-icons';
+import { faComment, faHeart, faCog, faFileImage } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom'
 import PostDetailComponent from "./PostDetailComponent.jsx";
 
@@ -132,10 +132,22 @@ export default class ProfileComponent extends React.Component {
           </div>
 
           {posts?.length == 0 ? (
-            <div className="user_details_container d-flex justify-content-center align-items-center profile_no_post" >
-              <h2 className="text-center no-message">
-                No post(s) yet.
-              </h2>
+            <div className="main-container" style={{ background: '#F5F5DC' }}>
+              <div className="col-lg-6 col-12 p-3 px-md-5 py-md-4 card">
+                <div className="text-center">
+                  <p className='mt-md-5 mt-2'>
+                    <FontAwesomeIcon icon={faFileImage} size='3x' color='#008080' />
+
+                  </p>
+                  <h2 className="fs-2" style={{ color: '#008080' }}>
+                    Sorry No Post Yet!
+                  </h2>
+                  <div className="mt-md-2 mt-2" >
+                    <small>Create Posts to view them in your profile</small>
+                  </div>
+                </div>
+
+              </div>
             </div>
           ) :
             <>
@@ -148,12 +160,12 @@ export default class ProfileComponent extends React.Component {
                         <img alt="captured images" className="p_img" src={post.imageUrl} />
                         <p>{post.caption}</p>
                         <div className="text">
-                          <div>
+                          {/* <div>
                             <FontAwesomeIcon icon={faHeart} className='me-3 ' color={isLiked ? 'red' : 'gray'}
                               onClick={this.likedIcon} />
                             {likes > 0 ? <small className='fs-6 fw-lighter'><p>{this.state.likes}</p></small> : null}
                           </div>
-                          <FontAwesomeIcon icon={faComment} />
+                          <FontAwesomeIcon icon={faComment} /> */}
                         </div>
                       </div>
                     </Link>

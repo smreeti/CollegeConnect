@@ -3,9 +3,11 @@ import Header from "../Header.jsx";
 import fetchData from "../../utils/FetchAPI";
 import { API_TO_FETCH_POST_REPORTS } from "../../utils/APIRequestUrl.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faInfo, faCheck, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { faInfo, faCheck, faTimes, faFlag } from "@fortawesome/free-solid-svg-icons";
 import PostDetailComponent from "./PostDetailComponent.jsx";
 import ReportActionModalComponent from "./ReportActionModalComponent.jsx";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ReportComponent = () => {
     const [activeTab, setActiveTab] = useState("postReports");
@@ -70,8 +72,9 @@ const ReportComponent = () => {
 
     return (
         <>
+            <ToastContainer />
             <Header />
-            <div className="mt-5">
+            <div className="report-container">
                 <ul className="nav nav-tabs">
                     <li className="nav-item">
                         <button
@@ -92,8 +95,8 @@ const ReportComponent = () => {
                     </li>
                 </ul>
 
-                <div className="tab-content mt-3">
-                    {activeTab === POST_REPORTS && (
+                {activeTab === POST_REPORTS && (
+                    <div className="tab-content mt-2">
                         <div className="tab-pane active">
                             {isLoading ?
                                 (
@@ -154,21 +157,32 @@ const ReportComponent = () => {
                                     </div>
                                 ) :
                                     (
-                                        <h2>
-                                            <p className="no-message text-center">No Post Report(s) to review yet!</p>
-                                        </h2>
+                                        <div className="main-container" style={{ background: '#F5F5DC' }}>
+                                            <div className="col-lg-6 col-12 p-2 px-md-5 py-md-4 card">
+                                                <div className="text-center">
+                                                    <p className='mt-md-5 mt-2'>
+                                                        <FontAwesomeIcon icon={faFlag} size='3x' color='#008080' />
+
+                                                    </p>
+                                                    <h2 className="fs-2" style={{ color: '#008080' }}>
+                                                        No Post Report(s) to review yet !
+                                                    </h2>
+                                                </div>
+
+                                            </div>
+                                        </div>
                                     )
                                 )
                             }
                         </div>
-                    )}
+                    </div>
+                )}
 
-                    {activeTab === PROFILE_REPORTS && (
-                        <div className="tab-pane active">
-                            <p>Profile Reports tab content</p>
-                        </div>
-                    )}
-                </div>
+                {activeTab === PROFILE_REPORTS && (
+                    <div className="tab-pane active">
+                        <p>Profile Reports tab content</p>
+                    </div>
+                )}
 
                 {isPostDetailOpen &&
                     (<PostDetailComponent

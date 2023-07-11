@@ -49,7 +49,9 @@ const ReportActionModalComponent = (props) => {
             }
 
             cancelModal();
-            window.location.reload();
+            setTimeout(() => {
+                window.location.reload();
+            }, 2000);
         }
     }
 
@@ -72,8 +74,8 @@ const ReportActionModalComponent = (props) => {
 
     return (
         <>
-            <ToastContainer />
             <div id="reportActionModal" className="modal" ref={reportModal} >
+                <ToastContainer />
                 <div className="modal-dialog">
                     <div className="modal-content">
                         <div className="modal-header">
