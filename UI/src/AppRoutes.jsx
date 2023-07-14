@@ -55,7 +55,7 @@ export default function AppRoutes() {
       <Route path="/resetPassword" element={<ResetPasswordComponent />} />
       <Route path="/emailSent" element={<EmailSentComponent />} />
       <Route path="/updatePassword/:id" element={<UpdatePasswordComponent />} />
-      <Route path="/profile" element={<ProfileComponent />} />
+      <Route path="/profile/:id" element={<ProfileComponent />} />
 
       <Route path="/createPost" element={<CreatePostComponent />} />
       <Route path="/search" element={<SearchUserComponent />} />

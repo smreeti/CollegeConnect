@@ -112,7 +112,9 @@ export default function Header() {
               <Dropdown.Menu className="test">
                 <Dropdown.Item className="custom-item">
                   <FontAwesomeIcon className="icons" icon={faUser} />
-                  <Link to="/profile" onClick={closeMenu}>
+                  <Link
+                    to={`/profile/${loggedInUser._id}`}
+                    onClick={closeMenu}>
                     Profile
                   </Link>
                 </Dropdown.Item>

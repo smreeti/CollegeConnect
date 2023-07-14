@@ -57,10 +57,10 @@ const fetchAllPosts = async (req, res) => {
   }
 };
 
-const fetchUserPosts = async (loggedInUser) => {
+const fetchUserPosts = async (id) => {
   try {
     const posts = await Post.find({
-      postedBy: loggedInUser,
+      postedBy: id,
       status: "ACTIVE"
     })
       .select("imageUrl likes comments")

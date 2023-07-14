@@ -74,7 +74,7 @@ export default class HomeComponent extends React.Component {
                                     <div className="card-header px-2">
                                         <p className='my-0 d-flex align-items-center text-fluid'>
                                             <FontAwesomeIcon icon={faUser} className='me-md-2 me-1' />
-                                            <Link>{post.postedBy.username}</Link>
+                                            <Link to={`/profile/${post.postedBy._id}`}>{post.postedBy.username}</Link>
 
                                             <FontAwesomeIcon icon={faEllipsisH}
                                                 className="ms-auto modal-trigger"

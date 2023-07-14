@@ -47,11 +47,10 @@ const searchUserByUsername = async (req, res) => {
     }
 }
 
-const fetchUserMinDetails = async (loggedInUser) => {
+const fetchUserMinDetails = async (id) => {
     try {
-        const userDetail = await User.findOne({
-            _id: loggedInUser._id
-        }).select("firstName lastName username profilePicture bio");
+        const userDetail = await User.findById(id)
+            .select("firstName lastName username profilePicture bio");
 
         return userDetail;
     } catch (error) {

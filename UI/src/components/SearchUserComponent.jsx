@@ -7,19 +7,18 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 
 const SearchUserComponent = () => {
-
-    const searchModal = useRef(null)
-    const [search, setSearch] = useState('')
-    const [userDetails, setUserDetails] = useState([])
+    const searchModal = useRef(null);
+    const [search, setSearch] = useState('');
+    const [userDetails, setUserDetails] = useState([]);
 
     useEffect(() => {
-        M.Modal.init(searchModal.current)
-    }, [])
+        M.Modal.init(searchModal.current);
+    }, []);
 
     const searchUsers = async (username) => {
         if (!username) {
-            setSearch('')
-            setUserDetails([]); // Clear the user details if the username is empty
+            setSearch('');
+            setUserDetails([]);
             return;
         }
 
@@ -30,12 +29,12 @@ const SearchUserComponent = () => {
         } catch (error) {
             console.log("Error:", error);
         }
-    }
+    };
 
     const closeSearchModal = () => {
         M.Modal.getInstance(searchModal.current).close();
         setSearch('');
-    }
+    };
 
     return (
         <>
@@ -61,21 +60,36 @@ const SearchUserComponent = () => {
 
                     <ul className="collection">
                         {userDetails?.length > 0 && search ? (
-                            userDetails.map(userDetail => {
-                                return <Link key={userDetail._id} onClick={() => closeSearchModal}>
+                            userDetails.map((userDetail) => {
+                                return (
                                     <li className="collection-item" key={userDetail._id}>
-                                        <img className="profilePic"
-                                            src={userDetail.profilePicture == "default" ? "assets/profile.png" : userDetail.profilePicture} />
-                                        {userDetail.username}
+                                        <img
+                                            className="profilePic"
+                                            src={
+                                                userDetail.profilePicture === "default"
+                                                    ? "assets/profile.png"
+                                                    : userDetail.profilePicture
+                                            }
+                                            alt="Profile"
+                                        />
+                                        <Link
+                                            key={userDetail._id}
+                                            to={`/profile/${userDetail._id}`}
+                                            onClick={closeSearchModal}
+                                        >
+                                            {userDetail.username}
+                                        </Link>
                                     </li>
-                                </Link>
+                                );
                             })
-                        ) : (search ? "No user(s) found" : "")}
+                        ) : search ? (
+                            <li className="collection-item">No user(s) found</li>
+                        ) : null}
                     </ul>
                 </div>
             </div>
         </>
-    )
-}
+    );
+};
 
 export default SearchUserComponent;
