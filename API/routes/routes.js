@@ -23,7 +23,8 @@ const {
   handleApprovePostReports,
   handleRejectPostReports,
   fetchUserNotifications,
-  saveComments
+  saveComments,
+  fetchPostComments
 } = require("../controllers/controller.js");
 
 const {
@@ -48,6 +49,7 @@ const {
   API_TO_REJECT_POST_REPORTS,
   API_TO_FETCH_NOTIFICATIONS,
   API_TO_SAVE_COMMENTS,
+  API_TO_FETCH_COMMENTS,
   // API_TO_VIEW_FOLLOWERS,
 } = require("../utils/APIRequestUrl.js");
 
@@ -89,6 +91,7 @@ router.post(API_TO_REJECT_POST_REPORTS, authMiddleware, handleRejectPostReports)
 router.get(API_TO_FETCH_NOTIFICATIONS, authMiddleware, fetchUserNotifications);
 
 router.post(API_TO_SAVE_COMMENTS, authMiddleware, saveComments);
+router.post(API_TO_FETCH_POST_COMMENTS, authMiddleware, fetchPostComments);
 
 // router.post(API_TO_VIEW_FOLLOWERS, authMiddleware);
 // router.put(API_TO_LIKE_POST, authMiddleware, likePost);

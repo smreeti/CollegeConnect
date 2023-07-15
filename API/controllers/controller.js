@@ -25,7 +25,7 @@ const { reportPost,
 
 const { fetchUserNotifications } = require("../controllers/userNotificationController.js");
 
-const { saveComments } = require("../controllers/commentsController.js");
+const { saveComments, fetchPostComments } = require("../controllers/commentsController.js");
 
 module.exports = {
   signupUser,
@@ -49,5 +49,6 @@ module.exports = {
   handleApprovePostReports,
   handleRejectPostReports,
   fetchUserNotifications,
-  saveComments
+  saveComments,
+  fetchPostComments
 };

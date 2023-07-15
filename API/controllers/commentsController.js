@@ -9,14 +9,6 @@ const saveComments = async (req, res) => {
 
     const post = await fetchPostById(postId);
 
-    console.log(comment)
-    console.log(postId)
-    console.log(user)
-    console.log(post)
-
-
-
-
     if (post) {
         await PostComments.create({
             comment,
@@ -29,4 +21,23 @@ const saveComments = async (req, res) => {
     }
 }
 
-module.exports = { saveComments };
+const fetchPostComments = async (req, res) => {
+    const { postId } = req.body;
+
+    const postComments = await PostComments.find({
+        post: postId
+    })
+        .populate({
+            path: "commentedBy",
+            select: "username"
+        })
+        .select("comment createdDate")
+        .sort({ createdDate: -1 });
+
+    if (postComments)
+        return setSuccessResponse(res, "Post comments fetched", postComments);
+    else
+        return setErrorResponse(res, HttpStatus.NOT_FOUND, "Comments empty");
+}
+
+module.exports = { saveComments, fetchPostComments };
