@@ -18,7 +18,7 @@ export default class HomeComponent extends React.Component {
             iconColor: "silver",
             isReportModalOpen: false,
             isLoading: false,
-            selectedPostId: ''
+            selectedPostId: '',
             isLiked: false,
             likes: 0
         };
