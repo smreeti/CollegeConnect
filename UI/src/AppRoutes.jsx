@@ -12,7 +12,9 @@ import LogoutComponent from './components/LogoutComponent.jsx';
 import ProfileComponent from './components/ProfileComponent.jsx';
 import CreatePostComponent from './components/CreatePostComponent.jsx';
 import SearchUserComponent from './components/SearchUserComponent.jsx';
-import EditUserComponent from './components/EditUserComponent.jsx';
+import EditProfileComponent from './components/EditProfileComponent.jsx';
+import ReportComponent from './components/ReportComponent.jsx';
+import NotificationsComponent from './components/NotificationsComponent.jsx';
 
 export default function AppRoutes() {
   const navigate = useNavigate();
@@ -53,11 +55,14 @@ export default function AppRoutes() {
       <Route path="/resetPassword" element={<ResetPasswordComponent />} />
       <Route path="/emailSent" element={<EmailSentComponent />} />
       <Route path="/updatePassword/:id" element={<UpdatePasswordComponent />} />
-      <Route path="/profile" element={<ProfileComponent />} />
+      <Route path="/profile/:id" element={<ProfileComponent />} />
 
       <Route path="/createPost" element={<CreatePostComponent />} />
       <Route path="/search" element={<SearchUserComponent />} />
-      <Route path="/edit" element={<EditUserComponent />} />
+      <Route path="/edit" element={<EditProfileComponent />} />
+
+      <Route path="/reports" element={<ReportComponent />} />
+      <Route path='/notifications' element={<NotificationsComponent />} />
 
       <Route path="/logout" element={<LogoutComponent />} />
       <Route path="*" element={<NotFound />} />

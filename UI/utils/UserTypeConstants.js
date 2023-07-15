@@ -1,5 +1,5 @@
 const UserType = {
-    ADMIN: 'ADMIN',
+    ADMIN: 'SUPER_ADMIN',
     REGULAR_USER: 'REGULAR_USER'
 };
 

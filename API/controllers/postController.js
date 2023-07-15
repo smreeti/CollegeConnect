@@ -39,6 +39,7 @@ const fetchAllPosts = async (req, res) => {
     const posts = await Post.find({
       postedBy: { $in: followingUsers },
       isCollegePost: "Y",
+      status: "ACTIVE",
     })
       .populate("postedBy")
       .sort({ createdDate: -1 });
@@ -56,11 +57,11 @@ const fetchAllPosts = async (req, res) => {
   }
 };
 
-const fetchUserPosts = async (loggedInUser) => {
+const fetchUserPosts = async (id) => {
   try {
     const posts = await Post.find({
-      postedBy: loggedInUser,
-      isCollegePost: "N",
+      postedBy: id,
+      status: "ACTIVE",
     })
       .select("imageUrl likes comments")
       .sort({ createdDate: -1 });
@@ -80,6 +81,7 @@ const fetchPostDetails = async (req, res) => {
       .populate({
         path: "postedBy",
         select: "username",
+        status: "ACTIVE",
       })
       .select("imageUrl likes comments caption createdDate");
 
@@ -91,9 +93,45 @@ const fetchPostDetails = async (req, res) => {
   }
 };
 
+const fetchPostById = async (postId) => {
+  return await Post.findById(postId);
+};
+
+const likePost = async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.id);
+    if (
+      post.likes.filter((like) => like.user.toString() === req.user.id).length >
+      0
+    ) {
+      return res.status(400).json({ msg: "Post already liked" });
+    }
+    post.likes.unshift({ user: req.user.id });
+    await post.save();
+    response.json(post.likes);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+};
+
+const updatePostStatus = async (postId, status, remarks) => {
+  await Post.findByIdAndUpdate(
+    postId,
+    {
+      status,
+      remarks,
+    },
+    { new: true }
+  );
+};
+
 module.exports = {
   savePost,
   fetchAllPosts,
   fetchUserPosts,
   fetchPostDetails,
+  likePost,
+  fetchPostById,
+  updatePostStatus,
 };

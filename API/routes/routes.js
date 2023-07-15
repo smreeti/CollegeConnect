@@ -10,10 +10,19 @@ const {
   resetPassword,
   updatePassword,
   verifyRefreshToken,
-  savePost,
   searchUserByUsername,
-  fetchProfileDetails,
   fetchUserDetails,
+  fetchProfileDetails,
+  savePost,
+  fetchAllPosts,
+  fetchPostDetails,
+  editProfilePhoto,
+  editProfile,
+  reportPost,
+  fetchPostReports,
+  handleApprovePostReports,
+  handleRejectPostReports,
+  fetchUserNotifications,
 } = require("../controllers/controller.js");
 
 const {
@@ -32,6 +41,11 @@ const {
   API_TO_EDIT_PROFILE,
   API_TO_FETCH_POST_DETAILS,
   API_TO_LIKE_UNLIKE_POST,
+  API_TO_REPORT_POST,
+  API_TO_FETCH_POST_REPORTS,
+  API_TO_APPROVE_POST_REPORTS,
+  API_TO_REJECT_POST_REPORTS,
+  API_TO_FETCH_NOTIFICATIONS,
   // API_TO_VIEW_FOLLOWERS,
 } = require("../utils/APIRequestUrl.js");
 
@@ -72,9 +86,25 @@ router.post(API_TO_EDIT_PROFILE_PHOTO, authMiddleware, editProfilePhoto);
 
 router.post(API_TO_EDIT_PROFILE, authMiddleware, editProfile);
 
-// router.post(API_TO_VIEW_FOLLOWERS, authMiddleware);
 router.post(API_TO_FETCH_POST_DETAILS, authMiddleware, fetchPostDetails);
 
-router.put(API_TO_LIKE_UNLIKE_POST, authMiddleware, likeUnlikePost);
+router.post(API_TO_REPORT_POST, authMiddleware, reportPost);
+router.get(API_TO_FETCH_POST_REPORTS, authMiddleware, fetchPostReports);
+
+router.post(
+  API_TO_APPROVE_POST_REPORTS,
+  authMiddleware,
+  handleApprovePostReports
+);
+router.post(
+  API_TO_REJECT_POST_REPORTS,
+  authMiddleware,
+  handleRejectPostReports
+);
+
+router.get(API_TO_FETCH_NOTIFICATIONS, authMiddleware, fetchUserNotifications);
+
+// router.post(API_TO_VIEW_FOLLOWERS, authMiddleware);
+// router.put(API_TO_LIKE_UNLIKE_POST, authMiddleware, likeUnlikePost);
 
 module.exports = router;

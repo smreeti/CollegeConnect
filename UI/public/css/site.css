@@ -87,8 +87,6 @@ body {
   vertical-align: baseline;
 }
 
-
-
 /*Profilepage updates ends*/
 
 
@@ -1655,6 +1653,7 @@ footer p {
 
 .icons {
   width: auto;
+  cursor: pointer;
 }
 
 .user_details_container,
@@ -1996,10 +1995,62 @@ footer p {
 .post-comment {
   min-height: 100px;
   max-height: 100px;
+  width: 100%;
 }
 
-.img-fluid{
+.img-fluid {
   width: 100% !important;
+}
+
+.report_desc {
+  width: 100%;
+  min-height: 100px;
+  padding-left: 3px;
+}
+
+.success-check {
+  background-color: green;
+  color: white;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  margin: auto;
+}
+
+.no-message {
+  background-color: #e3e3e3;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  margin: auto;
+  justify-content: center;
+}
+
+.reports-table {
+  padding: 0 10px;
+}
+
+.report_actions {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.post-detail-caption {
+  word-break: break-all;
+}
+
+.report-container {
+  min-height: 93vh;
+  padding-top: 4rem !important;
+}
+
+.home-main-container{
+   background: #F5F5DC;
+   margin-top: 3rem;
+   min-height: 93vh;
 }
 
 @media (max-width: 700px) {
