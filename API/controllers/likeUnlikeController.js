@@ -5,31 +5,30 @@ const {
   setErrorResponse,
 } = require("../utils/Response.js");
 
-//return setSuccessResponse(res, "Posts fetched successfully", {
-//     postDetails,
-// });
-
 const likeUnlikePost = async (req, res) => {
   try {
-    const post = await Post.findById(req.params.id);
-    if (
-      post.likes.filter((like) => like.user.toString() === req.user.id).length >
-      0
-    ) {
+    const post = await Post.findById(req.body.id);
+    console.log("Post controller", post);
+    const hasLike = post.likes.filter((like) => {
+      return like.user.toString() === req.user.id;
+    });
+
+    if (hasLike.length > 0) {
+      console.log("The length", hasLike.length);
       const removeLike = post.likes
         .map((like) => like.user.toString())
         .indexOf(req.user.id);
+      console.log(removeLike);
       post.likes.splice(removeLike, 1);
       await post.save();
-      response.json(post.likes);
-      return setSuccessResponse(res, "Post has been liked", {
+      return setSuccessResponse(res, "Post has been unliked", {
         post,
       });
     } else {
       post.likes.unshift({ user: req.user.id });
       await post.save();
-      response.json(post.likes);
-      return setSuccessResponse(res, "Post has been unliked", {
+      console.log(post);
+      return setSuccessResponse(res, "Post has been liked", {
         post,
       });
     }

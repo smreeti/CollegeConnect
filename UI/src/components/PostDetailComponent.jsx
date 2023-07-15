@@ -1,13 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react';
 import M from 'materialize-css';
 import fetchData from '../../utils/FetchAPI';
-import { API_TO_FETCH_POST_DETAILS, API_TO_FETCH_PROFILE_DETAILS } from '../../utils/APIRequestUrl';
+import { API_TO_FETCH_POST_DETAILS, API_TO_FETCH_PROFILE_DETAILS, API_TO_LIKE_UNLIKE_POST } from '../../utils/APIRequestUrl';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes, faHeart, faComment } from '@fortawesome/free-solid-svg-icons';
 
 const PostDetailComponent = (props) => {
     const openUserPost = useRef(null);
     const [postDetails, setPostDetails] = useState({});
+    const [likePost, setLikes] = useState({});
     const { userDetail } = props;
 
     useEffect(() => {
@@ -15,6 +16,7 @@ const PostDetailComponent = (props) => {
         M.Modal.init(openUserPost.current);
         return () => {
             setPostDetails({});
+            setLikes({});
         };
     }, [props]);
 
@@ -31,6 +33,17 @@ const PostDetailComponent = (props) => {
 
             setPostDetails(data.body.postDetails[0]);
         } catch (error) {
+            console.log('Error:', error);
+        }
+    };
+
+    const isLiked = async () => {
+        const { selectedPostId } = props;
+        try {
+            const data = await fetchData(API_TO_LIKE_UNLIKE_POST, 'POST', { _id: selectedPostId });
+            setLikes(data.body.likePost[0]);
+        }
+        catch (error) {
             console.log('Error:', error);
         }
     };
@@ -65,7 +78,7 @@ const PostDetailComponent = (props) => {
                                 </div>
                                 <p></p>
                                 <div className="d-flex flex-wrap post-details-stats">
-                                    <div><FontAwesomeIcon icon={faHeart} onClick={() => { console.log('like') }} /> {<span>{postDetails?.likes} likes </span>}</div>
+                                    <div><FontAwesomeIcon icon={faHeart} onClick={() => { console.log('like') }} /> {<span>{likePost?.likes} likes </span>}</div>
                                     <div><FontAwesomeIcon icon={faComment} />{<span> {postDetails?.comments} comments </span>}</div>
                                 </div>
 
