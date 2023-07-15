@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import M from 'materialize-css';
 import fetchData from '../../utils/FetchAPI';
-import { API_TO_FETCH_POST_DETAILS } from '../../utils/APIRequestUrl';
+import { API_TO_FETCH_POST_DETAILS, API_TO_SAVE_COMMENTS } from '../../utils/APIRequestUrl';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes, faHeart, faComment } from '@fortawesome/free-solid-svg-icons';
 
@@ -9,6 +9,8 @@ const PostDetailComponent = (props) => {
     const openUserPost = useRef(null);
     const [postDetails, setPostDetails] = useState({});
     const { userDetail, isNotificationDetail } = props;
+    const [comment, setComment] = useState('');
+    const [error, setError] = useState('');
 
     useEffect(() => {
         fetchPostDetails();
@@ -34,6 +36,37 @@ const PostDetailComponent = (props) => {
             console.log('Error:', error);
         }
     };
+
+    const handleOnChange = (event) => {
+        const { value } = event.target;
+        setComment(value);
+    };
+
+    const validatePostComment = () => {
+        let formErrors = {};
+
+        if (!comment) {
+            formErrors["comment"] = "Please provide comment";
+            setError(formErrors);
+        }
+    }
+
+    const saveComment = async () => {
+        validatePostComment();
+        if (Object.keys(error).length <= 0) {
+            const commentObj = {
+                comment,
+                postId: postDetails._id
+            }
+
+            try {
+                await fetchData(API_TO_SAVE_COMMENTS, 'POST', commentObj);
+                setComment('');
+            } catch (error) {
+                console.log('Error', error);
+            }
+        }
+    }
 
     return (
         <div id="openUserPost" className="modal" ref={openUserPost}>
@@ -77,8 +110,16 @@ const PostDetailComponent = (props) => {
 
                                 {!isNotificationDetail && (
                                     <>
-                                        <textarea className='mt-2 post-comment' placeholder='Enter your comment'></textarea>
-                                        <button onClick={() => { }}>Comment</button>
+                                        <textarea
+                                            className='mt-2 post-comment'
+                                            placeholder='Enter your comment'
+                                            value={comment}
+                                            onChange={handleOnChange}
+                                            name="comment"></textarea>
+                                        <p className="required errormsg errpad1">
+                                            {error["comment"]}
+                                        </p>
+                                        <button onClick={saveComment}>Comment</button>
                                     </>
                                 )
                                 }
