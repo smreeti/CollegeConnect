@@ -8,9 +8,9 @@ import fetchData from "../../utils/FetchAPI.js";
 import { API_TO_FETCH_ALL_POSTS } from '../../utils/APIRequestUrl.js';
 import { Link } from 'react-router-dom';
 import ReportModalComponent from './ReportModalComponent.jsx';
+import PostDetailComponent from './PostDetailComponent.jsx';
 
 export default class HomeComponent extends React.Component {
-
     constructor() {
         super();
         this.state = {
@@ -18,7 +18,9 @@ export default class HomeComponent extends React.Component {
             iconColor: "silver",
             isReportModalOpen: false,
             isLoading: false,
-            selectedPostId: ''
+            selectedPostId: '',
+            isUserPostOpen: false,
+            userDetail: ''
         };
     }
 
@@ -60,6 +62,15 @@ export default class HomeComponent extends React.Component {
         }));
     }
 
+    handleImageClick = (post) => {
+        const { _id, postedBy } = post;
+        this.setState({
+            isUserPostOpen: true,
+            selectedPostId: _id,
+            userDetail: postedBy
+        });
+    };
+
     render() {
         const { posts, isLoading, iconColor } = this.state;
         return (
@@ -85,34 +96,50 @@ export default class HomeComponent extends React.Component {
 
                                     <div style={{ padding: '8px 0', maxHeight: '400px' }}>
                                         <Link>
-                                            <img src={post.imageUrl} alt="Post" className='card-img-top'
-                                                style={{ maxHeight: '400px', maxWidth: '100%', objectFit: 'contain' }} />
+                                            <img src={post.imageUrl} alt="Post"
+                                                className='card-img-top modal-trigger'
+                                                data-target="openUserPost"
+                                                style={{ maxHeight: '400px', maxWidth: '100%', objectFit: 'contain' }}
+                                                onClick={() => this.handleImageClick(post)} />
                                         </Link>
-
                                     </div>
+
                                     <div className='card-body'>
                                         <div className="me-auto">
                                             <div className="d-flex flex-wrap">
                                                 <FontAwesomeIcon icon={faHeart} className='me-3'
                                                     color={iconColor} onClick={this.likedIcon} />
-                                                <FontAwesomeIcon icon={faComment} />
+
+                                                <FontAwesomeIcon icon={faComment}
+                                                    className='modal-trigger'
+                                                    onClick={() => this.handleImageClick(post)}
+                                                    data-target="openUserPost" />
                                             </div>
                                             {post.likes > 0 ? <small className='fs-6 fw-lighter'>Liked by {post.likes} people</small> : null}
                                         </div>
+
                                         <div className="d-flex flex-wrap ">
                                             <p className='fw-bold my-1 me-1 text-wrap'>{post.postedBy.username} </p>
                                             <p className='fw-light my-1'> {post.caption}</p>
                                         </div>
-                                        <div className="d-flex fs-6">
+
+                                        {/* <div className="d-flex fs-6">
                                             <small><FontAwesomeIcon icon={faUser} className='me-1' />
-                                                <input type="text" className='border-0' placeholder='Add a commment...' />
+                                                <input type="text"
+                                                    className='border-0'
+                                                    placeholder='Add a commment...' />
                                             </small>
-                                        </div>
-                                        <Link>
+                                        </div> */}
+
+                                        <Link
+                                            className='modal-trigger'
+                                            onClick={() => this.handleImageClick(post)}
+                                            data-target="openUserPost">
                                             <div>
                                                 {post.comments > 0 && <small>View {post.comments} comments</small>}
                                             </div>
                                         </Link>
+
                                         <small>
                                             {formatDistanceToNow(new Date(post.createdDate), { addSuffix: true })}
                                         </small>
@@ -121,25 +148,32 @@ export default class HomeComponent extends React.Component {
                             </div>
                         ))
                     ) : (
-                        isLoading ? <div className="loader">Loading...</div> : (
-                            <div className="main-container" style={{ background: '#F5F5DC' }}>
-                                <div className="col-lg-6 col-12 p-3 px-md-5 py-md-4 card">
-                                    <div className="text-center">
-                                        <p className='mt-md-5 mt-2'>
-                                            <FontAwesomeIcon icon={faFaceMeh} size='3x' color='#008080' />
-
-                                        </p>
-                                        <h2 className="fs-2" style={{ color: '#008080' }}>
-                                            Sorry No Post Yet!
-                                        </h2>
-                                        <Link className="mt-md-4 mt-3" >
-                                            <small>Follow others to see their posts</small>
-                                        </Link>
-                                    </div>
-
+                        isLoading ?
+                            <div className="text-center">
+                                <div className="spinner-border" role="status">
+                                    <span className="sr-only">Loading...</span>
                                 </div>
+                                <p>Loading post...</p>
                             </div>
-                        )
+                            : (
+                                <div className="main-container" style={{ background: '#F5F5DC' }}>
+                                    <div className="col-lg-6 col-12 p-3 px-md-5 py-md-4 card">
+                                        <div className="text-center">
+                                            <p className='mt-md-5 mt-2'>
+                                                <FontAwesomeIcon icon={faFaceMeh} size='3x' color='#008080' />
+
+                                            </p>
+                                            <h2 className="fs-2" style={{ color: '#008080' }}>
+                                                Sorry No Post Yet!
+                                            </h2>
+                                            <Link className="mt-md-4 mt-3" >
+                                                <small>Follow others to see their posts</small>
+                                            </Link>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            )
                     )
                     }
                 </div>
@@ -148,6 +182,13 @@ export default class HomeComponent extends React.Component {
                     <ReportModalComponent
                         selectedPostId={this.state.selectedPostId}
                     />}
+
+                {this.state?.isUserPostOpen && (
+                    <PostDetailComponent
+                        selectedPostId={this.state.selectedPostId}
+                        userDetail={this.state.userDetail}
+                    />
+                )}
             </>
         );
     }

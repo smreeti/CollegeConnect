@@ -1,13 +1,13 @@
+const Post = require("../models/Post");
 const PostComments = require("../models/PostComments");
 const HttpStatus = require("../utils/HttpStatus");
 const { setErrorResponse, setSuccessResponse } = require("../utils/Response");
-const { fetchPostById } = require("./postController");
 
 const saveComments = async (req, res) => {
     const { comment, postId } = req.body;
     const user = req.user;
 
-    const post = await fetchPostById(postId);
+    const post = await Post.findById(postId);
 
     if (post) {
         await PostComments.create({
@@ -15,29 +15,31 @@ const saveComments = async (req, res) => {
             commentedBy: user,
             post
         });
+
+        await updatePostCommentCount(postId);
         return setSuccessResponse(res, HttpStatus.CREATED, "Comment added successfully.");
     } else {
         return setErrorResponse(res, HttpStatus.NOT_FOUND, "Post not found.");
     }
 }
 
-const fetchPostComments = async (req, res) => {
-    const { postId } = req.body;
+const updatePostCommentCount = async (postId) => {
+    await Post.findByIdAndUpdate(postId, {
+        $inc: { comments: 1 }
+    });
+}
 
+const fetchPostComments = async (postId) => {
     const postComments = await PostComments.find({
         post: postId
     })
         .populate({
             path: "commentedBy",
-            select: "username"
+            select: "username profilePicture"
         })
-        .select("comment createdDate")
-        .sort({ createdDate: -1 });
+        .select("comment createdDate");
 
-    if (postComments)
-        return setSuccessResponse(res, "Post comments fetched", postComments);
-    else
-        return setErrorResponse(res, HttpStatus.NOT_FOUND, "Comments empty");
+    return postComments;
 }
 
 module.exports = { saveComments, fetchPostComments };

@@ -8,6 +8,7 @@ import { faTimes, faHeart, faComment } from '@fortawesome/free-solid-svg-icons';
 const PostDetailComponent = (props) => {
     const openUserPost = useRef(null);
     const [postDetails, setPostDetails] = useState({});
+    const [postComments, setPostComments] = useState([]);
     const { userDetail, isNotificationDetail } = props;
     const [comment, setComment] = useState('');
     const [error, setError] = useState('');
@@ -27,11 +28,13 @@ const PostDetailComponent = (props) => {
 
     const fetchPostDetails = async () => {
         const { selectedPostId } = props;
+        setPostComments('');
 
         try {
             const data = await fetchData(API_TO_FETCH_POST_DETAILS, 'POST', { _id: selectedPostId });
 
             setPostDetails(data.body.postDetails[0]);
+            setPostComments(prevComments => [...prevComments, ...data.body.postComments]);
         } catch (error) {
             console.log('Error:', error);
         }
@@ -49,7 +52,7 @@ const PostDetailComponent = (props) => {
             formErrors["comment"] = "Please provide comment";
             setError(formErrors);
         }
-    }
+    };
 
     const saveComment = async () => {
         validatePostComment();
@@ -57,16 +60,18 @@ const PostDetailComponent = (props) => {
             const commentObj = {
                 comment,
                 postId: postDetails._id
-            }
+            };
 
             try {
                 await fetchData(API_TO_SAVE_COMMENTS, 'POST', commentObj);
                 setComment('');
+                setPostComments('');
+                fetchPostDetails();
             } catch (error) {
                 console.log('Error', error);
             }
         }
-    }
+    };
 
     return (
         <div id="openUserPost" className="modal" ref={openUserPost}>
@@ -87,11 +92,10 @@ const PostDetailComponent = (props) => {
                             <div className="col-md-5">
                                 <div className="d-flex mt-2 post-detail-caption">
                                     <div className="creator_block_post">
-                                        <img alt="photographer Image" className="creator_image_post"
-                                            src={userDetail?.profilePicture} />
+                                        <img alt="photographer Image" className="creator_image_post" src={userDetail?.profilePicture} />
                                     </div>
                                     <small>
-                                        <span>{postDetails?.postedBy?.username}:</span>
+                                        <span className='username'>{postDetails?.postedBy?.username}:</span>
                                         <span className='user-caption ps-2 fw-light'>
                                             {postDetails?.caption}
                                         </span>
@@ -100,13 +104,28 @@ const PostDetailComponent = (props) => {
                                 <p></p>
 
                                 <div className="d-flex flex-wrap post-details-stats">
-                                    <div><FontAwesomeIcon icon={faHeart}
-                                        onClick={() => { console.log('like') }} />
-                                        {<span className='p-1'>{postDetails?.likes} likes </span>}</div>
+                                    <div>
+                                        <FontAwesomeIcon icon={faHeart} onClick={() => { console.log('like') }} />
+                                        <span className='p-1'>{postDetails?.likes} likes</span>
+                                    </div>
 
-                                    <div><FontAwesomeIcon icon={faComment} />
-                                        {<span className='p-2'>{postDetails?.comments} comments </span>}</div>
+                                    <div>
+                                        <FontAwesomeIcon icon={faComment} />
+                                        <span className='p-2'>{postDetails?.comments} comments</span>
+                                    </div>
                                 </div>
+
+                                {postComments.length > 0 && (
+                                    <div className="comments-container">
+                                        {postComments.map(postComment => (
+                                            <div key={postComment._id} className="comment">
+                                                <img className="creator_image_post" src={postComment.commentedBy.profilePicture} alt="Profile" />
+                                                <span className="username">{postComment.commentedBy.username + " "}</span>
+                                                <span>{postComment.comment}</span>
+                                            </div>
+                                        ))}
+                                    </div>
+                                )}
 
                                 {!isNotificationDetail && (
                                     <>
@@ -115,20 +134,20 @@ const PostDetailComponent = (props) => {
                                             placeholder='Enter your comment'
                                             value={comment}
                                             onChange={handleOnChange}
-                                            name="comment"></textarea>
+                                            name="comment"
+                                        ></textarea>
                                         <p className="required errormsg errpad1">
                                             {error["comment"]}
                                         </p>
                                         <button onClick={saveComment}>Comment</button>
                                     </>
-                                )
-                                }
+                                )}
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div >
+        </div>
     );
 };
 
