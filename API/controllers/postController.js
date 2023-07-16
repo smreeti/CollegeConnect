@@ -5,6 +5,7 @@ const {
   setErrorResponse,
 } = require("../utils/Response.js");
 const { validateImage } = require("../utils/ValidationUtil");
+const { fetchPostComments } = require("./commentsController");
 const { fetchFollowingUsers } = require("./userFollowingController");
 
 const savePost = async (req, res) => {
@@ -85,9 +86,13 @@ const fetchPostDetails = async (req, res) => {
       })
       .select("imageUrl likes comments caption createdDate");
 
+    const postComments = await fetchPostComments(_id);
+
     return setSuccessResponse(res, "Posts fetched successfully", {
       postDetails,
+      postComments
     });
+
   } catch (error) {
     return setErrorResponse(res, HttpStatus.INTERNAL_SERVER_ERROR, error);
   }

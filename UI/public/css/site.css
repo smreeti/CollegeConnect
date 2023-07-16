@@ -184,6 +184,10 @@ body {
   margin-bottom: 1.5rem;
 }
 
+.username {
+  font-weight: bold;
+}
+
 .usernamespace {
   margin-top: 1rem;
 }
@@ -341,7 +345,6 @@ body {
 
 .modal-content span {
   font-size: 16px;
-  font-weight: bold;
   margin-bottom: 5px;
 }
 
@@ -2047,10 +2050,10 @@ footer p {
   padding-top: 4rem !important;
 }
 
-.home-main-container{
-   background: #F5F5DC;
-   margin-top: 3rem;
-   min-height: 93vh;
+.home-main-container {
+  background: #F5F5DC;
+  margin-top: 3rem;
+  min-height: 93vh;
 }
 
 @media (max-width: 700px) {

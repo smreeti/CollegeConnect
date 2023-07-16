@@ -28,6 +28,9 @@ const API_TO_REJECT_POST_REPORTS = "/rejectPostReports";
 
 const API_TO_FETCH_NOTIFICATIONS = "/fetchNotifications";
 
+const API_TO_SAVE_COMMENTS = "/saveComments";
+const API_TO_FETCH_POST_COMMENTS = "/fetchPostComments";
+
 const API_TO_LIKE_POST = "/like/:id";
 
 const API_TO_LIKE_UNLIKE_POST = "/like/:id";
@@ -53,4 +56,6 @@ module.exports = {
   API_TO_APPROVE_POST_REPORTS,
   API_TO_REJECT_POST_REPORTS,
   API_TO_FETCH_NOTIFICATIONS,
+  API_TO_SAVE_COMMENTS,
+  API_TO_FETCH_POST_COMMENTS,
 };

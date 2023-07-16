@@ -128,13 +128,16 @@ const ProfileComponent = () => {
                   <div className="images" >
                     <img alt="captured images" className="p_img" src={post.imageUrl} />
                     <p>{post.caption}</p>
+
                     <div className="text">
-                      {/* <div>
+                      <div>
                         <FontAwesomeIcon icon={faHeart} className='me-3 ' color={isLiked ? 'red' : 'gray'}
                           onClick={likedIcon} />
                         {likes > 0 ? <small className='fs-6 fw-lighter'><p>{likes}</p></small> : null}
                       </div>
-                      <FontAwesomeIcon icon={faComment} /> */}
+                      <FontAwesomeIcon icon={faComment} />
+                      {post.comments > 0 ? <small className='fs-6 fw-lighter'><p>{post.comments}</p></small> : null}
+
                     </div>
                   </div>
                 </Link>

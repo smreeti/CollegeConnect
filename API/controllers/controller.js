@@ -31,6 +31,14 @@ const {
 const {
   fetchUserNotifications,
 } = require("../controllers/userNotificationController.js");
+const {
+  fetchUserNotifications,
+} = require("../controllers/userNotificationController.js");
+
+const {
+  saveComments,
+  fetchPostComments,
+} = require("../controllers/commentsController.js");
 
 module.exports = {
   signupUser,
