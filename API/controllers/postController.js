@@ -90,9 +90,8 @@ const fetchPostDetails = async (req, res) => {
 
     return setSuccessResponse(res, "Posts fetched successfully", {
       postDetails,
-      postComments
+      postComments,
     });
-
   } catch (error) {
     return setErrorResponse(res, HttpStatus.INTERNAL_SERVER_ERROR, error);
   }
@@ -100,24 +99,6 @@ const fetchPostDetails = async (req, res) => {
 
 const fetchPostById = async (postId) => {
   return await Post.findById(postId);
-};
-
-const likePost = async (req, res) => {
-  try {
-    const post = await Post.findById(req.params.id);
-    if (
-      post.likes.filter((like) => like.user.toString() === req.user.id).length >
-      0
-    ) {
-      return res.status(400).json({ msg: "Post already liked" });
-    }
-    post.likes.unshift({ user: req.user.id });
-    await post.save();
-    response.json(post.likes);
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).send("Server Error");
-  }
 };
 
 const updatePostStatus = async (postId, status, remarks) => {
@@ -136,7 +117,6 @@ module.exports = {
   fetchAllPosts,
   fetchUserPosts,
   fetchPostDetails,
-  likePost,
   fetchPostById,
   updatePostStatus,
 };

@@ -9,6 +9,8 @@ import { API_TO_FETCH_ALL_POSTS, API_TO_LIKE_UNLIKE_POST } from '../../utils/API
 import { Link } from 'react-router-dom';
 import ReportModalComponent from './ReportModalComponent.jsx';
 import PostDetailComponent from './PostDetailComponent.jsx';
+import PostLikesComponent from './PostLikesComponent.jsx';
+
 
 export default class HomeComponent extends React.Component {
     constructor() {
@@ -20,7 +22,8 @@ export default class HomeComponent extends React.Component {
             isLoading: false,
             selectedPostId: '',
             isUserPostOpen: false,
-            userDetail: ''
+            userDetail: '',
+            isLikesModalOpen: false,
         };
     }
 
@@ -85,23 +88,35 @@ export default class HomeComponent extends React.Component {
     }
 
     handleImageClick = (post) => {
-        const { _id, postedBy } = post;
+        const { _id } = post;
         this.setState({
             isUserPostOpen: true,
             selectedPostId: _id,
-            userDetail: postedBy
         });
     };
 
+    OpenModalLikes = (post) => {
+        // const { _id, postedBy } = post;
+        // this.setState({
+        //     isLikesModalOpen: true,
+        //     selectedPostId: post.likes,
+        // });
+
+        this.setState(prevState => ({
+            isLikesModalOpen: { ...prevState.isLikesModalOpen, isLikesModalOpen: true },
+            selectedPostId: post.likes
+        }));
+
+        // console.log(this.state.isLikesModalOpen);
+    }
+
     render() {
         const { posts, isLoading, iconColor } = this.state;
-        console.log(this.state.posts, "New list");
 
         return (
             <>
                 <Header />
                 <div className='home-main-container'>
-
                     {posts && posts.length > 0 ? (
                         posts.map((post) => (
                             <div className='py-1' key={post._id}>
@@ -143,8 +158,10 @@ export default class HomeComponent extends React.Component {
                                                         data-target="openUserPost" />
                                                 </Link>
                                             </div>
-                                            {post.likes.length > 1 && <small className='fs-6 fw-lighter'> {post.likes.length} likes</small>}
-                                            {post.likes.length == 1 && <small className='fs-6 fw-lighter'> {post.likes.length} like</small>}
+                                            <Link onClick={() => this.OpenModalLikes(post)} data-target="postLikesModal" className='modal-trigger'>
+                                                {post.likes.length > 1 && <small className='fs-6 fw-lighter modal-trigger'> {post.likes.length} likes</small>}
+                                                {post.likes.length == 1 && <small className='fs-6 fw-lighter'> {post.likes.length} like</small>}
+                                            </Link>
 
                                         </div>
 
@@ -213,10 +230,15 @@ export default class HomeComponent extends React.Component {
                         selectedPostId={this.state.selectedPostId}
                     />}
 
-                {this.state?.isUserPostOpen && (
+                {(this.state?.isUserPostOpen) && (
                     <PostDetailComponent
                         selectedPostId={this.state.selectedPostId}
                         userDetail={this.state.userDetail}
+                    />
+                )}
+                {(this.state?.isLikesModalOpen) && (
+                    <PostLikesComponent
+                        selectedPostId={this.state.selectedPostId}
                     />
                 )}
             </>

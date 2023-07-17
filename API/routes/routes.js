@@ -50,11 +50,15 @@ const {
   API_TO_FETCH_NOTIFICATIONS,
   API_TO_SAVE_COMMENTS,
   API_TO_FETCH_POST_COMMENTS,
+  API_TO_FETCH_POST_LIKES,
   // API_TO_VIEW_FOLLOWERS,
 } = require("../utils/APIRequestUrl.js");
 
 const { setSuccessResponse } = require("../utils/Response.js");
-const { likeUnlikePost } = require("../controllers/likeUnlikeController.js");
+const {
+  likeUnlikePost,
+  fetchPostLikes,
+} = require("../controllers/likeUnlikeController.js");
 
 router.get(API_TO_FETCH_COLLEGE_INFO, fetchCollegeList);
 router.post(API_TO_SIGNUP_USER, signupUser);
@@ -103,6 +107,8 @@ router.post(API_TO_SAVE_COMMENTS, authMiddleware, saveComments);
 router.post(API_TO_FETCH_POST_COMMENTS, authMiddleware, fetchPostComments);
 
 router.put(API_TO_LIKE_UNLIKE_POST, authMiddleware, likeUnlikePost);
+
+router.post(API_TO_FETCH_POST_LIKES, authMiddleware, fetchPostLikes);
 
 // router.post(API_TO_VIEW_FOLLOWERS, authMiddleware);
 // router.put(API_TO_LIKE_POST, authMiddleware, likePost);

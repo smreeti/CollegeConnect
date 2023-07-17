@@ -33,6 +33,8 @@ const API_TO_FETCH_POST_COMMENTS = "/fetchPostComments";
 
 const API_TO_LIKE_UNLIKE_POST = "/like/:id";
 
+const API_TO_FETCH_POST_LIKES = "/fetchPostLikes";
+
 module.exports = {
   API_TO_FETCH_COLLEGE_INFO,
   API_TO_SIGNUP_USER,
@@ -56,4 +58,5 @@ module.exports = {
   API_TO_FETCH_NOTIFICATIONS,
   API_TO_SAVE_COMMENTS,
   API_TO_FETCH_POST_COMMENTS,
+  API_TO_FETCH_POST_LIKES,
 };

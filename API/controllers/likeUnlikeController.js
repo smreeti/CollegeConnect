@@ -1,4 +1,6 @@
 const Post = require("../models/Post");
+const User = require("../models/User");
+
 const HttpStatus = require("../utils/HttpStatus.js");
 const {
   setSuccessResponse,
@@ -8,17 +10,14 @@ const {
 const likeUnlikePost = async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
-    console.log("Post controller", post);
     const hasLike = post.likes.filter((like) => {
       return like.user?.toString() === req.user.id;
     });
 
     if (hasLike.length > 0) {
-      console.log("The length", hasLike.length);
       const removeLike = post.likes
         .map((like) => like.user.toString())
         .indexOf(req.user.id);
-      console.log(removeLike);
       post.likes.splice(removeLike, 1);
       await post.save();
       return setSuccessResponse(res, "Post has been unliked", {
@@ -27,7 +26,6 @@ const likeUnlikePost = async (req, res) => {
     } else {
       post.likes.unshift({ user: req.user.id });
       await post.save();
-      console.log(post);
       return setSuccessResponse(res, "Post has been liked", {
         post,
       });
@@ -37,6 +35,25 @@ const likeUnlikePost = async (req, res) => {
   }
 };
 
+const fetchPostLikes = async (req, res) => {
+  const { _id } = req.body;
+  console.log(req.body, "Like's user id");
+  try {
+    const result = _id.map((a) => a.user);
+    const postLikes = await User.find({ _id: result }).select("username");
+    console.log("Like:", postLikes);
+
+    return setSuccessResponse(res, "Posts fetched successfully", {
+      postLikes,
+    });
+  } catch (error) {
+    return setErrorResponse(res, HttpStatus.INTERNAL_SERVER_ERROR, error);
+  }
+
+  // const likedUsernames = post.likes.map((like) => like.user.username);
+};
+
 module.exports = {
   likeUnlikePost,
+  fetchPostLikes,
 };

@@ -21,6 +21,7 @@ const PostDetailComponent = (props) => {
         };
     }, [props]);
 
+
     const cancelPostDetailModal = () => {
         const modalInstance = M.Modal.getInstance(openUserPost.current);
         modalInstance.close();
@@ -31,7 +32,7 @@ const PostDetailComponent = (props) => {
         setPostComments('');
         try {
             const data = await fetchData(API_TO_FETCH_POST_DETAILS, 'POST', { _id: selectedPostId });
-            console.log(data, "post");
+            console.log(data.body.postDetails[0], "post");
             setPostDetails(data.body.postDetails[0]);
             setPostComments(prevComments => [...prevComments, ...data.body.postComments]);
         } catch (error) {
@@ -47,20 +48,14 @@ const PostDetailComponent = (props) => {
     const fetchLikesCount = async (postId) => {
         try {
             const data = await fetchData(API_TO_LIKE_UNLIKE_POST + `/${postId}`, "PUT");
-
-            console.log(data.body, "likes");
             if (data) {
                 const newList = data.body.post;
-                let tempPosts = setPostDetails({})
-                // setPostDetails({
-                //     ...postDetails,
-
-                // })
-                // console.log(data.body.postDetails);
-                // const updatedPosts = posts.map((post) =>
-                //     post._id === postId ? { ...post, likes: newList.likes } : post
-                // );
-                // setPosts(updatedPosts);
+                let tempPost = { ...postDetails };
+                let postIndex = tempPost.findIndex((post) => post._id === postId);
+                activePost.likes = newList.likes;
+                tempPost[postIndex] = activePost
+                setPostDetails(tempPost);
+                console.log(tempPost, "postin");
             }
         } catch (error) {
             console.error('Error here:', error);
@@ -100,6 +95,7 @@ const PostDetailComponent = (props) => {
         }
     };
 
+
     return (
         <div id="openUserPost" className="modal" ref={openUserPost}>
             <div className="modal-dialog modal-lg">
@@ -113,13 +109,21 @@ const PostDetailComponent = (props) => {
                         <div className="d-flex justify-content-between post-detail-container">
                             <div className="col-md-6 mr-2">
                                 <div className="image-wrapper mb-2" style={{ maxHeight: '300px', overflow: 'hidden' }}>
+
                                     <img src={postDetails?.imageUrl} alt="Selected" className='img-fluid' />
                                 </div>
                             </div>
                             <div className="col-md-5">
                                 <div className="d-flex mt-2 post-detail-caption">
                                     <div className="creator_block_post">
-                                        <img alt="photographer Image" className="creator_image_post" src={userDetail?.profilePicture} />
+                                        {userDetail?.profilePicture === "default" ? (
+                                            <img className="creator_image_post" src="/assets/defaultProfileImage.png" alt="Profile" />
+                                        ) : (
+                                            <img
+                                                className="creator_image_post" src={userDetail?.profilePicture}
+                                                alt="Profile"
+                                            />
+                                        )}
                                     </div>
                                     <small>
                                         <span className='username'>{postDetails?.postedBy?.username}:</span>
@@ -132,8 +136,10 @@ const PostDetailComponent = (props) => {
 
                                 <div className="d-flex flex-wrap post-details-stats">
                                     <div>
+                                        {postDetails?.likes?.user}
                                         <FontAwesomeIcon icon={faHeart} onClick={isLiked} />
-                                        <span className='p-1'>{postDetails?.likes} likes</span>
+                                        {postDetails?.likes?.length > 1 && <span className='p-1'>{postDetails?.likes?.length} likes</span>}
+                                        {postDetails?.likes?.length <= 1 && <span className='p-1'>{postDetails?.likes?.length} like</span>}
                                     </div>
 
                                     <div>
