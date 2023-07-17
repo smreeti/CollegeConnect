@@ -15,7 +15,7 @@ export default class HomeComponent extends React.Component {
         super();
         this.state = {
             posts: [],
-            iconColor: "silver",
+            iconColor: "",
             isReportModalOpen: false,
             isLoading: false,
             selectedPostId: '',
@@ -25,19 +25,15 @@ export default class HomeComponent extends React.Component {
     }
 
 
-    likedIcon = (postId) => {
-        const { iconColor, likes } = this.state;
-
-        if (iconColor === "silver") {
-            this.setState({ iconColor: 'red', isLiked: true });
-        }
-
-        else {
-            this.setState({ iconColor: 'silver', isLiked: false })
-        }
+    likePost = (postId) => {
         this.fetchLikesCount(postId);
     };
 
+    isLiked = (likes) => {
+        let currentUser = JSON.parse(localStorage.getItem('user'));
+        let isFound = likes.findIndex(user => user.user === currentUser._id);
+        return isFound > -1;
+    }
 
     componentDidMount() {
         this.fetchAllPosts();
@@ -46,13 +42,10 @@ export default class HomeComponent extends React.Component {
     async fetchAllPosts() {
         try {
             this.setIsLoading();
-
             const data = await fetchData(API_TO_FETCH_ALL_POSTS, "POST");
-            console.log("The data", data.body);
             this.setState({
                 posts: data.body
             })
-            console.log(this.state.posts);
         } catch (error) {
             console.log("Error:", error);
         } finally {
@@ -75,18 +68,16 @@ export default class HomeComponent extends React.Component {
 
     async fetchLikesCount(postId) {
         try {
-            const data = await fetchData(API_TO_LIKE_UNLIKE_POST, "PUT", { id: postId });
+            const data = await fetchData(API_TO_LIKE_UNLIKE_POST + `/${postId}`, "PUT");
+            console.log(data.body);
             if (data) {
-                const newList = Object.values(data.body);
-                console.log(newList, "New list");
-
-                if (newList) {
-                    this.setState({
-                        posts: newList
-                    })
-                }
-                console.log("Check the posts", this.state.posts);
-
+                const newList = data.body.post;
+                let tempPosts = [...this.state.posts];
+                let postIndex = tempPosts.findIndex(post => post._id === postId);
+                let activePost = tempPosts[postIndex];
+                activePost.likes = newList.likes
+                tempPosts[postIndex] = activePost
+                this.setState({ posts: tempPosts });
             }
         } catch (error) {
             console.error('Error here:', error);
@@ -104,6 +95,8 @@ export default class HomeComponent extends React.Component {
 
     render() {
         const { posts, isLoading, iconColor } = this.state;
+        console.log(this.state.posts, "New list");
+
         return (
             <>
                 <Header />
@@ -138,9 +131,9 @@ export default class HomeComponent extends React.Component {
                                     <div className='card-body'>
                                         <div className="me-auto">
                                             <div className="d-flex flex-wrap">
-                                                <Link onClick={() => this.likedIcon(post._id)}>
+                                                <Link onClick={() => this.likePost(post._id)}>
                                                     <FontAwesomeIcon icon={faHeart} className='me-3'
-                                                        color={iconColor} />
+                                                        color={this.isLiked(post.likes) ? "red" : "silver"} />
                                                 </Link>
                                                 <Link>
 
@@ -150,7 +143,9 @@ export default class HomeComponent extends React.Component {
                                                         data-target="openUserPost" />
                                                 </Link>
                                             </div>
-                                            {post.likes.length > 0 ? <small className='fs-6 fw-lighter'>Liked by {post.likes.length} people</small> : null}
+                                            {post.likes.length > 1 && <small className='fs-6 fw-lighter'> {post.likes.length} likes</small>}
+                                            {post.likes.length == 1 && <small className='fs-6 fw-lighter'> {post.likes.length} like</small>}
+
                                         </div>
 
                                         <div className="d-flex flex-wrap ">
@@ -171,7 +166,6 @@ export default class HomeComponent extends React.Component {
                                             onClick={() => this.handleImageClick(post)}
                                             data-target="openUserPost">
                                             <div>
-                                                {post._id}
                                                 {post.comments > 0 && <small>View {post.comments} comments</small>}
                                             </div>
                                         </Link>

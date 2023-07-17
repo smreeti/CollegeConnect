@@ -18,7 +18,6 @@ const PostDetailComponent = (props) => {
         M.Modal.init(openUserPost.current);
         return () => {
             setPostDetails({});
-            setLikes({});
         };
     }, [props]);
 
@@ -30,10 +29,9 @@ const PostDetailComponent = (props) => {
     const fetchPostDetails = async () => {
         const { selectedPostId } = props;
         setPostComments('');
-
         try {
             const data = await fetchData(API_TO_FETCH_POST_DETAILS, 'POST', { _id: selectedPostId });
-
+            console.log(data, "post");
             setPostDetails(data.body.postDetails[0]);
             setPostComments(prevComments => [...prevComments, ...data.body.postComments]);
         } catch (error) {
@@ -43,14 +41,31 @@ const PostDetailComponent = (props) => {
 
     const isLiked = async () => {
         const { selectedPostId } = props;
-        try {
-            const data = await fetchData(API_TO_LIKE_UNLIKE_POST, 'POST', { _id: selectedPostId });
-            setLikes(data.body.likePost[0]);
-        }
-        catch (error) {
-            console.log('Error:', error);
-        }
+        fetchLikesCount(selectedPostId);
     };
+
+    const fetchLikesCount = async (postId) => {
+        try {
+            const data = await fetchData(API_TO_LIKE_UNLIKE_POST + `/${postId}`, "PUT");
+
+            console.log(data.body, "likes");
+            if (data) {
+                const newList = data.body.post;
+                let tempPosts = setPostDetails({})
+                // setPostDetails({
+                //     ...postDetails,
+
+                // })
+                // console.log(data.body.postDetails);
+                // const updatedPosts = posts.map((post) =>
+                //     post._id === postId ? { ...post, likes: newList.likes } : post
+                // );
+                // setPosts(updatedPosts);
+            }
+        } catch (error) {
+            console.error('Error here:', error);
+        }
+    }
 
     const handleOnChange = (event) => {
         const { value } = event.target;
@@ -117,7 +132,7 @@ const PostDetailComponent = (props) => {
 
                                 <div className="d-flex flex-wrap post-details-stats">
                                     <div>
-                                        <FontAwesomeIcon icon={faHeart} onClick={() => { console.log('like') }} />
+                                        <FontAwesomeIcon icon={faHeart} onClick={isLiked} />
                                         <span className='p-1'>{postDetails?.likes} likes</span>
                                     </div>
 

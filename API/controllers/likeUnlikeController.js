@@ -7,10 +7,10 @@ const {
 
 const likeUnlikePost = async (req, res) => {
   try {
-    const post = await Post.findById(req.body.id);
+    const post = await Post.findById(req.params.id);
     console.log("Post controller", post);
     const hasLike = post.likes.filter((like) => {
-      return like.user.toString() === req.user.id;
+      return like.user?.toString() === req.user.id;
     });
 
     if (hasLike.length > 0) {
@@ -33,7 +33,6 @@ const likeUnlikePost = async (req, res) => {
       });
     }
   } catch (err) {
-    console.error(err.message);
     return setErrorResponse(res, HttpStatus.INTERNAL_SERVER_ERROR, err);
   }
 };
