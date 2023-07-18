@@ -26,7 +26,6 @@ const PostLikesComponent = (props) => {
         console.log(selectedPostId, "postLikes");
         try {
             const data = await fetchData(API_TO_FETCH_POST_LIKES, "POST", { _id: selectedPostId });
-            console.log(data.body.postLikes, "The list");
             setLikesList(data.body.postLikes);
         } catch (error) {
             console.log("Error:", error);

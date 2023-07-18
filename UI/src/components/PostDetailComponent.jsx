@@ -12,6 +12,7 @@ import {
     faComment,
     faThin,
 } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 
 const PostDetailComponent = (props) => {
     const openUserPost = useRef(null);
@@ -20,6 +21,7 @@ const PostDetailComponent = (props) => {
     const { userDetail, isNotificationDetail } = props;
     const [comment, setComment] = useState("");
     const [error, setError] = useState("");
+    const [isPostLiked, setIsPostLiked] = useState(false);
 
     useEffect(() => {
         fetchPostDetails();
@@ -43,35 +45,39 @@ const PostDetailComponent = (props) => {
             const data = await fetchData(API_TO_FETCH_POST_DETAILS, "POST", {
                 _id: selectedPostId,
             });
-            console.log(data.body.postDetails[0], "post");
             setPostDetails(data.body.postDetails[0]);
-
-            console.log("cdcsd", data);
             setPostComments((prevComments) => [
                 ...prevComments,
                 ...data.body.postComments,
             ]);
+            const hasUserLiked = isLiked(data.body.postDetails[0].likes);
+            setIsPostLiked(hasUserLiked);
         } catch (error) {
             console.log("Error:", error);
         }
     };
 
-    const isLiked = async () => {
-        const { selectedPostId } = props;
-        fetchLikesCount(selectedPostId);
+    const likePost = async (postId) => {
+        await fetchLikesCount(postId);
     };
+
+    const isLiked = (likes) => {
+        let currentUser = JSON.parse(localStorage.getItem('user'));
+        let isFound = likes.findIndex(user => user.user === currentUser._id);
+        return isFound > -1;
+    }
 
     const fetchLikesCount = async (postId) => {
         try {
             const data = await fetchData(API_TO_LIKE_UNLIKE_POST + `/${postId}`, "PUT");
             if (data) {
                 const newList = data.body.post;
-                let tempPost = { ...postDetails };
+                let tempPost = [{ ...postDetails }];
                 let postIndex = tempPost.findIndex((post) => post._id === postId);
+                let activePost = tempPost[postIndex];
                 activePost.likes = newList.likes;
                 tempPost[postIndex] = activePost
-                setPostDetails(tempPost);
-                console.log(tempPost, "postin");
+                setPostDetails(tempPost[0]);
             }
         } catch (error) {
             console.error('Error here:', error);
@@ -110,7 +116,6 @@ const PostDetailComponent = (props) => {
             }
         }
     };
-
 
     return (
         <div id="openUserPost" className="modal modalmobilecen" ref={openUserPost}>
@@ -205,13 +210,13 @@ const PostDetailComponent = (props) => {
                                         <div className="d-flex flex-wrap post-details-stats likecontainer hrmargin">
                                             <div className="likecomment">
                                                 <div>
-                                                    <FontAwesomeIcon
-                                                        icon={faHeart}
-                                                        onClick={() => {
-                                                            console.log("like");
-                                                        }}
-                                                    />
-                                                    <span className="p-1 fonting">{postDetails?.likes} likes</span>
+                                                    <Link onClick={() => { likePost(postDetails._id) }}>
+                                                        <FontAwesomeIcon
+                                                            icon={faHeart}
+                                                            color={isPostLiked ? "red" : "silver"}
+                                                        />
+                                                    </Link>
+                                                    <span className="p-1 fonting">{postDetails?.likes?.length} likes</span>
                                                 </div>
 
                                                 <div>

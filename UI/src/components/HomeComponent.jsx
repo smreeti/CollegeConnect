@@ -33,8 +33,12 @@ export default class HomeComponent extends React.Component {
     };
 
     isLiked = (likes) => {
+        console.log(likes, "likes");
+
         let currentUser = JSON.parse(localStorage.getItem('user'));
+
         let isFound = likes.findIndex(user => user.user === currentUser._id);
+
         return isFound > -1;
     }
 
@@ -72,7 +76,6 @@ export default class HomeComponent extends React.Component {
     async fetchLikesCount(postId) {
         try {
             const data = await fetchData(API_TO_LIKE_UNLIKE_POST + `/${postId}`, "PUT");
-            console.log(data.body);
             if (data) {
                 const newList = data.body.post;
                 let tempPosts = [...this.state.posts];
@@ -92,22 +95,16 @@ export default class HomeComponent extends React.Component {
         this.setState({
             isUserPostOpen: true,
             selectedPostId: _id,
+            userDetail: post.postedBy,
         });
     };
 
     OpenModalLikes = (post) => {
-        // const { _id, postedBy } = post;
-        // this.setState({
-        //     isLikesModalOpen: true,
-        //     selectedPostId: post.likes,
-        // });
-
         this.setState(prevState => ({
             isLikesModalOpen: { ...prevState.isLikesModalOpen, isLikesModalOpen: true },
-            selectedPostId: post.likes
+            selectedPostId: post.likes,
+            userDetail: post.postedBy,
         }));
-
-        // console.log(this.state.isLikesModalOpen);
     }
 
     render() {
@@ -239,6 +236,7 @@ export default class HomeComponent extends React.Component {
                 {(this.state?.isLikesModalOpen) && (
                     <PostLikesComponent
                         selectedPostId={this.state.selectedPostId}
+                        userDetail={this.state.userDetail}
                     />
                 )}
             </>
