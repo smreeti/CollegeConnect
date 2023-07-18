@@ -120,11 +120,20 @@ const PostDetailComponent = (props) => {
                 <div className="d-flex mt-2 post-detail-caption">
 
                   <div className="creator_block_post">
-                    <img
-                      alt="photographer Image"
-                      className="creator_image_post"
-                      src={userDetail?.profilePicture}
-                    />
+                    {userDetail?.profilePicture ===
+                      "default" ? (
+                      <img
+                        className="creator_image_post"
+                        src="/assets/profile.png"
+                        alt="profile Image"
+                      />
+                    ) : (
+                      <img
+                        className="creator_image_post"
+                        src={userDetail?.profilePicture}
+                        alt="Profile Image"
+                      />
+                    )}
                   </div>
                   <small>
                     <span className="username fonting">
