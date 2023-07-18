@@ -118,7 +118,7 @@ const PostDetailComponent = (props) => {
               </div>
               <div className="col-md-5 datamodal">
                 <div className="d-flex mt-2 post-detail-caption">
-                  
+
                   <div className="creator_block_post">
                     <img
                       alt="photographer Image"
@@ -136,14 +136,13 @@ const PostDetailComponent = (props) => {
                   </small>
                 </div>
                 <hr></hr>
-                <p></p>
 
-                {postComments.length > 0 && (
-                  <div className="comments-container">
-                    {postComments.map((postComment) => (
+                <div className="comments-container">
+                  {postComments.length > 0 && (
+                    postComments.map((postComment) => (
                       <div key={postComment._id} className="comment">
                         {postComment.commentedBy.profilePicture ===
-                        "default" ? (
+                          "default" ? (
                           <img
                             className="creator_image_post"
                             src="/assets/profile.png"
@@ -164,52 +163,52 @@ const PostDetailComponent = (props) => {
                           {postComment.comment}
                         </span>
                       </div>
-                    ))}
-                  </div>
-                )}
-
-<div className="container-wrapper">
-
-                <div className="divcontainer">
-                  <div className="d-flex flex-wrap post-details-stats likecontainer hrmargin">
-                    <div className="likecomment">
-                      <div>
-                        <FontAwesomeIcon
-                          icon={faHeart}
-                          onClick={() => {
-                            console.log("like");
-                          }}
-                        />
-                        <span className="p-1 fonting">{postDetails?.likes} likes</span>
-                      </div>
-
-                      <div>
-                        <FontAwesomeIcon icon={faComment} />
-                        <span className="p-2 fonting">
-                          {postDetails?.comments} comments
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                  <hr className="hrpad"></hr>
-                  {!isNotificationDetail && (
-                    <>
-                      <textarea
-                        className="mt-2 post-comment commentbox"
-                        placeholder="Enter your comment"
-                        value={comment}
-                        onChange={handleOnChange}
-                        name="comment"
-                      ></textarea>
-                      <p className="required errormsg errpad1">
-                        {error["comment"]}
-                      </p>
-                      <button className="btncomment" onClick={saveComment}>
-                        Post
-                      </button>
-                    </>
+                    ))
                   )}
                 </div>
+
+                <div className="container-wrapper">
+
+                  <div className="divcontainer">
+                    <div className="d-flex flex-wrap post-details-stats likecontainer hrmargin">
+                      <div className="likecomment">
+                        <div>
+                          <FontAwesomeIcon
+                            icon={faHeart}
+                            onClick={() => {
+                              console.log("like");
+                            }}
+                          />
+                          <span className="p-1 fonting">{postDetails?.likes} likes</span>
+                        </div>
+
+                        <div>
+                          <FontAwesomeIcon icon={faComment} />
+                          <span className="p-2 fonting">
+                            {postDetails?.comments} comments
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    <hr className="hrpad"></hr>
+                    {!isNotificationDetail && (
+                      <>
+                        <textarea
+                          className="mt-2 post-comment commentbox"
+                          placeholder="Enter your comment"
+                          value={comment}
+                          onChange={handleOnChange}
+                          name="comment"
+                        ></textarea>
+                        <p className="required errormsg errpad1">
+                          {error["comment"]}
+                        </p>
+                        <button className="btncomment" onClick={saveComment}>
+                          Post
+                        </button>
+                      </>
+                    )}
+                  </div>
 
                 </div>
               </div>
