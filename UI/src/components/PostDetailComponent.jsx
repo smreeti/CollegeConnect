@@ -92,7 +92,7 @@ const PostDetailComponent = (props) => {
   return (
     <div id="openUserPost" className="modal modalmobilecen" ref={openUserPost}>
       <div className="modal-dialog modal-lg modalwidth">
-        <div className="modal-content modalwidth modaldesc">
+        <div className="modal-content modalwidth modaldesc ">
           <div className="modal-header">
             <p></p>
             <FontAwesomeIcon
@@ -118,6 +118,7 @@ const PostDetailComponent = (props) => {
               </div>
               <div className="col-md-5 datamodal">
                 <div className="d-flex mt-2 post-detail-caption">
+                  
                   <div className="creator_block_post">
                     <img
                       alt="photographer Image"
@@ -134,6 +135,7 @@ const PostDetailComponent = (props) => {
                     </span>
                   </small>
                 </div>
+                <hr></hr>
                 <p></p>
 
                 {postComments.length > 0 && (
