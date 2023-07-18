@@ -159,7 +159,7 @@ export default class HomeComponent extends React.Component {
                                                 </Link>
                                             </div>
                                             <Link onClick={() => this.OpenModalLikes(post)} data-target="postLikesModal" className='modal-trigger'>
-                                                {post.likes.length > 1 && <small className='fs-6 fw-lighter modal-trigger'> {post.likes.length} likes</small>}
+                                                {post.likes.length > 1 && <small className='fs-6 fw-lighter'> {post.likes.length} likes</small>}
                                                 {post.likes.length == 1 && <small className='fs-6 fw-lighter'> {post.likes.length} like</small>}
                                             </Link>
 

@@ -48,14 +48,9 @@ const searchUserByUsername = async (req, res) => {
 }
 
 const fetchUserMinDetails = async (id) => {
-    try {
-        const userDetail = await User.findById(id)
-            .select("firstName lastName username profilePicture bio");
-
-        return userDetail;
-    } catch (error) {
-        return setErrorResponse(res, HttpStatus.INTERNAL_SERVER_ERROR, error);
-    }
+    const userDetail = await User.findById(id)
+        .select("firstName lastName username profilePicture bio");
+    return userDetail;
 }
 
 const fetchUserDetails = async (req, res) => {
