@@ -12,6 +12,7 @@ import {
   faComment,
   faThin,
 } from "@fortawesome/free-solid-svg-icons";
+import { formatDistanceToNow } from 'date-fns';
 
 const PostDetailComponent = (props) => {
   const openUserPost = useRef(null);
@@ -170,6 +171,9 @@ const PostDetailComponent = (props) => {
                         </span>
                         <span className="commentmain fonting">
                           {postComment.comment}
+                        </span><br />
+                        <span>
+                          {formatDistanceToNow(new Date(postComment.createdDate), { addSuffix: true })}
                         </span>
                       </div>
                     ))
