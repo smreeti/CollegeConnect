@@ -135,12 +135,12 @@ export default class HomeComponent extends React.Component {
                                             className='modal-trigger'
                                             onClick={() => this.handleImageClick(post)}
                                             data-target="openUserPost">
-                                            <div>
+                                            <div className='comment'>
                                                 {post.comments > 0 && <small>View {post.comments} comments</small>}
                                             </div>
                                         </Link>
 
-                                        <small>
+                                        <small className='comment'>
                                             {formatDistanceToNow(new Date(post.createdDate), { addSuffix: true })}
                                         </small>
                                     </div>

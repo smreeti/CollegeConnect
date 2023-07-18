@@ -3,6 +3,111 @@ body {
   margin: 0 auto;
 }
 
+/*comment design*/
+
+.container-wrapper {
+  position: fixed;
+    bottom: 0;
+    margin-bottom: 90px;
+}
+
+.comments-container {
+  max-height: 220px; /* Set a fixed height for the scrollable container */
+  overflow-y: scroll; /* Add a vertical scrollbar when content overflows */
+  /* Add other styles if needed */
+}
+
+.comment{
+  color: #939393;
+  margin-top: 16px;
+}
+
+.username{
+  padding-left: 12px;
+  color: black;
+}
+
+.commentmain{
+  color: black  ;
+}
+
+#openUserPost{
+  overflow: hidden;
+}
+
+.modaldesc{
+  padding: 0 !important;
+  max-height: 600px;
+}
+
+.imgdivbig{
+  max-height: 700px !important;
+  overflow: hidden;
+ 
+}
+
+.commentbox{
+  font-size: 12px;
+  /* text-align: center; */
+  /* line-height: 49px; */
+  margin-top: 0px;
+  padding-left: 10px;
+}
+
+
+.imgmodal{
+  height: 512px !important;
+  object-fit: cover;
+}
+
+.modalbodypad{
+  padding: 0 !important;
+}
+
+.hrmargin{
+  margin-top: 30%;
+  border-top: 1px solid #DBDBDB
+}
+.hrpad{
+  margin-top: 0.5rem !important;
+}
+
+.likecomment{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 0.5rem;
+  gap: 20px;
+}
+
+
+.imgbox{
+  width: 58% !important;
+}
+
+.divcontainer{
+  width: 500px;
+}
+
+.datamodal{
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.btncomment{
+  height: 40px;
+  font-size: 12px;
+}
+
+.modalwidth{
+  max-width: 90% !important;
+  display: flex;
+  justify-content: center;
+  margin-top: 3.5%;
+}
+
+/*comment design*/
+
 .resimdiv {
   max-width: 100%;
   /* Set the maximum width of the container to 100% */
@@ -290,9 +395,9 @@ body {
 
 .modal-content {
   background-color: #fff;
-  margin: 100px auto;
+  /* margin: 100px auto; */
   padding: 20px;
-  border-radius: 12px;
+  border-radius: 0px !important;
   max-width: 600px;
   width: 90%;
 }
@@ -1077,7 +1182,81 @@ footer #footer {
   padding-bottom: 10px;
 }
 
+@media screen and (min-width: 360px) and (max-width:370px) {
+
+  .container-wrapper {
+    position: relative;
+    bottom: 0;
+    margin-bottom: 0px;
+}
+
+.modal-dialog{
+  width: 300px;
+}
+
+.hrmargin{
+  margin-top: 10px !important;
+}
+
+.divcontainer {
+  width: auto;
+}
+
+.modalmobilecen{
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+}
+
+.imgbox {
+  width: 100% !important;
+}
+
+.modalwidth{
+  max-width: 100% !important;
+}
+
+.imgmodal {
+  height: 312px !important;
+  object-fit: cover;
+}
+
+}
+
 @media screen and (min-width: 370px) and (max-width: 1000px) {
+
+  .container-wrapper {
+    position: relative;
+    bottom: 0;
+    margin-bottom: 0px;
+}
+
+.divcontainer {
+  width: auto;
+}
+
+.modalmobilecen{
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+}
+
+.imgbox {
+  width: 100% !important;
+}
+
+.modalwidth{
+  max-width: 100% !important;
+}
+
+.imgmodal {
+  height: 312px !important;
+}
+
+.hrmargin{
+  margin-top: 10%;
+}
+
   .labelset {
     margin-left: 12px;
   }
@@ -1153,6 +1332,35 @@ footer #footer {
 }
 
 @media screen and (min-width: 1024px) and (max-width: 1080px) {
+
+  .imgbox {
+    width: 100% !important;
+}
+.modalmobilecen{
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.container-wrapper {
+  position: inherit;
+  bottom: 0;
+  margin-bottom: 90px;
+}
+
+.hrmargin{
+  margin-top: 10%;
+}
+
+.divcontainer{
+  width: auto;
+}
+
+.hrmargin{
+  margin-top: 5%;
+}
+
   .labelset {
     margin-left: 12px;
   }
@@ -1996,8 +2204,8 @@ footer p {
 }
 
 .post-comment {
-  min-height: 100px;
-  max-height: 100px;
+  min-height: 50px;
+  max-height: 50px;
   width: 100%;
 }
 
@@ -2151,6 +2359,57 @@ footer p {
 
 @media screen and (min-width: 250px) and (max-width: 420px) {
 
+  .hrmargin{
+    margin-top: 10px !important;
+  }
+
+  .modalmobilecen{
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .imgmodal{
+    height: auto !important;
+  }
+
+  .modalmobilecen{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  } 
+
+  .modal-dialog{
+    margin: 0 !important;
+  }
+
+  .modalwidth{
+    max-width: 100% !important;
+  }
+
+  .container-wrapper{
+    position: relative;
+    bottom: 0;
+    margin-bottom: 0px;
+  }
+
+  .divcontainer {
+    width: auto;
+}
+
+.imgbox {
+  width: 100% !important;
+}
+
+.fonting{
+  font-size: 11px !important;
+}
+
+.imgdivbig{
+  max-height: 450px;
+}
+
   .container_button button {
     margin-right: 0 !important;
   }
@@ -2244,6 +2503,24 @@ footer p {
 }
 
 @media only screen and (min-width: 768px) and (max-width: 1203px) {
+
+  .ipadset{
+    flex-direction: column;
+  }
+
+  .modal-dialog {
+    width: 90% !important;
+  }
+
+  .datamodal{
+    width: 100% !important;
+  }
+
+  .img-fluid {
+    max-width: 100%;
+    height: auto !important;
+}
+
   .change-profile-photo-link {
     padding: 0 !important;
   }
@@ -2331,5 +2608,51 @@ footer p {
 @media (max-width: 768px) {
   .edit_profile_button {
     margin: auto;
+  }
+}
+
+@media (max-width:1280px) {
+  /* .container-wrapper{
+    margin-bottom: 180px;
+  } */
+
+  .modalmobilecen{
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .divcontainer {
+    width: 100%;
+}
+  
+}
+
+@media only screen and (min-width: 1203px) and (max-width:1666px) {
+  .divcontainer{
+    width: 100%;
+  }
+
+  .hrmargin{
+    margin-top: 10% !important;
+  }
+
+  .container-wrapper{
+    position: inherit;
+  }
+  
+}
+
+@media only screen and (min-width: 1001px) and (max-width:1200px){
+  .container-wrapper{
+    position: inherit;
+  }
+
+  .hrmargin{
+    margin-top: 10%;
+  }
+
+  .imgbox{
+    width: 100% !important;
   }
 }
