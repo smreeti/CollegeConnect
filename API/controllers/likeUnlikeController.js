@@ -40,7 +40,7 @@ const fetchPostLikes = async (req, res) => {
   console.log(req.body, "Like's user id");
   try {
     const result = _id.map((a) => a.user);
-    const postLikes = await User.find({ _id: result }).select("username");
+    const postLikes = await User.find({ _id: result });
     console.log("Like:", postLikes);
 
     return setSuccessResponse(res, "Posts fetched successfully", {

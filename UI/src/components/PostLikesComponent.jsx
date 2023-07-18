@@ -38,21 +38,45 @@ const PostLikesComponent = (props) => {
         <>
             <div id="postLikesModal" className="modal" ref={postLikesModal}>
                 <div className="modal-content">
-                    <div className="modal-close">
-                        <FontAwesomeIcon
-                            icon={faTimes}
-                            className="close"
-                            onClick={closeModal}
-                        />
+                    <div className="modal-header">
+                        <div className="modal-title ">
+                            <h5 className='text-center'>Liked by</h5>
+                        </div>
+                        <div className="modal-close">
+                            <FontAwesomeIcon
+                                icon={faTimes}
+                                className="close"
+                                onClick={closeModal}
+                            />
+                        </div>
                     </div>
+                    <div className="modal-body">
+                        {likesList.map(likesData => (
+                            <ul className="collection">
 
-                    {likesList.map(likesData => (
-                        <ul className="collection">
-                            <span>{likesData?.username}</span>
-                        </ul>
-                    ))}
+                                <li className='d-flex'>
+                                    <div className="creator_block_post">
+                                        {likesData?.profilePicture === "default" ? (
+                                            <img className="creator_image_post" src="/assets/defaultProfileImage.png" alt="Profile" />
+                                        ) : (
+                                            <img
+                                                className="creator_image_post" src={likesData?.profilePicture}
+                                                alt="Profile"
+                                            />
+                                        )}
+                                    </div>
+                                    <small>
+                                        <span className='username'>{likesData?.username}</span>
+                                    </small>
+                                    <button className='btn btn-primary ms-auto btn-sm'>Follow</button>
+                                </li>
+                            </ul>
+
+                        ))}
+
+                    </div>
                 </div>
-            </div>
+            </div >
         </>
     );
 };
