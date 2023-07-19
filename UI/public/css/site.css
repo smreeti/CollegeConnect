@@ -9,7 +9,10 @@ body {
   position: fixed;
   bottom: 0;
   margin-bottom: 90px;
+  width: 30%;
 }
+
+
 
 .comments-container {
   max-height: 220px;
@@ -142,9 +145,6 @@ body {
   height: auto;
 }
 
-@media screen {}
-
-/*Profilepage updates*/
 
 
 
@@ -1251,6 +1251,11 @@ footer #footer {
     position: relative;
     bottom: 0;
     margin-bottom: 0px;
+    width: 100%;
+  }
+
+  .hrmargin{
+    margin-top: 2% !important;
   }
 
   .divcontainer {
@@ -2390,6 +2395,10 @@ hr {
     margin-top: 10px !important;
   }
 
+  .container-wrapper{
+    width: 100%;
+  }
+
   .modalmobilecen {
     display: flex !important;
     justify-content: center;
@@ -2655,24 +2664,31 @@ hr {
 
 }
 
-@media only screen and (min-width: 1203px) and (max-width:1666px) {
+@media only screen and (min-width: 1201px) and (max-width:1666px) {
   .divcontainer {
     width: 100%;
   }
 
-  .hrmargin {
-    margin-top: 10% !important;
+  .hrmargin{
+    margin-top: 2% !important;
   }
+  
 
-  .container-wrapper {
+
+  /* .container-wrapper{
     position: inherit;
-  }
+  } */
+
+
+
+
 
 }
 
 @media only screen and (min-width: 1001px) and (max-width:1200px) {
   .container-wrapper {
     position: inherit;
+    width: 100%;
   }
 
   .hrmargin {
@@ -2681,5 +2697,21 @@ hr {
 
   .imgbox {
     width: 100% !important;
+  }
+}
+
+
+
+@media only screen and (min-width: 1201px) and (max-width: 1203px){
+  .container-wrapper {
+    position: unset !important;
+    width: 100%;
+    
+  }
+
+  .imgbox{
+
+      width: 100% !important;
+ 
   }
 }
