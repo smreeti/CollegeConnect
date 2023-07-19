@@ -238,9 +238,9 @@ const PostDetailComponent = (props) => {
                                                             color={isPostLiked ? "red" : "silver"}
                                                         />
                                                     </span>
-                                                    <span onClick={() => OpenModalLikes(postDetails)} data-target="postLikesModal" className='modal-trigger'>
-                                                        <span className="p-1 fonting">{postDetails?.likes?.length} likes</span>
-                                                    </span>
+                                                    <Link onClick={() => OpenModalLikes(postDetails)} data-target="postLikesModal" className='modal-trigger'>
+                                                        {postDetails?.likes?.length > 1 && <small className='fs-6 fw-lighter'> {postDetails?.likes?.length} likes</small>}
+                                                        {postDetails?.likes?.length == 1 && <small className='fs-6 fw-lighter'> {postDetails?.likes?.length} like</small>}                                                    </Link>
                                                 </div>
 
                                                 <div>
