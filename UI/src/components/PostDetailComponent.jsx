@@ -13,15 +13,20 @@ import {
     faThin,
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
+import PostLikesComponent from './PostLikesComponent.jsx';
+
 
 const PostDetailComponent = (props) => {
     const openUserPost = useRef(null);
     const [postDetails, setPostDetails] = useState({});
     const [postComments, setPostComments] = useState([]);
-    const { userDetail, isNotificationDetail } = props;
+    const { userDetail, isNotificationDetail, onClose } = props;
     const [comment, setComment] = useState("");
     const [error, setError] = useState("");
     const [isPostLiked, setIsPostLiked] = useState(false);
+    const [isLikesModalOpen, setIsLikesModalOpen] = useState(false);
+    const [selectedPostDetailId, setSelectedPostDetailId] = useState("");
+    const [modalData, setModalData] = useState('');
 
     useEffect(() => {
         fetchPostDetails();
@@ -36,6 +41,7 @@ const PostDetailComponent = (props) => {
     const cancelPostDetailModal = () => {
         const modalInstance = M.Modal.getInstance(openUserPost.current);
         modalInstance.close();
+        onClose(postDetails);
     };
 
     const fetchPostDetails = async () => {
@@ -52,6 +58,7 @@ const PostDetailComponent = (props) => {
             ]);
             const hasUserLiked = isLiked(data.body.postDetails[0].likes);
             setIsPostLiked(hasUserLiked);
+            console.log(hasUserLiked);
         } catch (error) {
             console.log("Error:", error);
         }
@@ -78,10 +85,22 @@ const PostDetailComponent = (props) => {
                 activePost.likes = newList.likes;
                 tempPost[postIndex] = activePost
                 setPostDetails(tempPost[0]);
+                const hasUserLiked = isLiked(tempPost[0].likes);
+                setIsPostLiked(hasUserLiked);
+                console.log(hasUserLiked, "here");
             }
         } catch (error) {
             console.error('Error here:', error);
         }
+    }
+
+    const OpenModalLikes = (post) => {
+        post = [post];
+        cancelPostDetailModal();
+        setTimeout(() => {
+            setIsLikesModalOpen(true);
+            setSelectedPostDetailId(post[0].likes);
+        }, 1000);
     }
 
     const handleOnChange = (event) => {
@@ -205,18 +224,19 @@ const PostDetailComponent = (props) => {
                                 </div>
 
                                 <div className="container-wrapper">
-
                                     <div className="divcontainer">
                                         <div className="d-flex flex-wrap post-details-stats likecontainer hrmargin">
                                             <div className="likecomment">
                                                 <div>
-                                                    <Link onClick={() => { likePost(postDetails._id) }}>
+                                                    <span onClick={() => { likePost(postDetails._id) }}>
                                                         <FontAwesomeIcon
                                                             icon={faHeart}
                                                             color={isPostLiked ? "red" : "silver"}
                                                         />
-                                                    </Link>
-                                                    <span className="p-1 fonting">{postDetails?.likes?.length} likes</span>
+                                                    </span>
+                                                    <span onClick={() => OpenModalLikes(postDetails)} data-target="postLikesModal" className='modal-trigger'>
+                                                        <span className="p-1 fonting">{postDetails?.likes?.length} likes</span>
+                                                    </span>
                                                 </div>
 
                                                 <div>
@@ -253,6 +273,11 @@ const PostDetailComponent = (props) => {
                     </div>
                 </div >
             </div >
+            {isLikesModalOpen && (
+                <PostLikesComponent
+                    selectedPostId={selectedPostDetailId}
+                />
+            )}
         </div >
     );
 };

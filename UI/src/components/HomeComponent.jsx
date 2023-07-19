@@ -24,6 +24,8 @@ export default class HomeComponent extends React.Component {
             isUserPostOpen: false,
             userDetail: '',
             isLikesModalOpen: false,
+            isPostLiked: false,
+            isData: '',
         };
     }
 
@@ -53,6 +55,9 @@ export default class HomeComponent extends React.Component {
             this.setState({
                 posts: data.body
             })
+            const hasUserLiked = this.isLiked(data.body.posts[0].likes);
+            this.setState({ isPostLiked: hasUserLiked })
+
         } catch (error) {
             console.log("Error:", error);
         } finally {
@@ -99,16 +104,24 @@ export default class HomeComponent extends React.Component {
         });
     };
 
+    handleModalClose = (updatePostData) => {
+        let actualPostData = [...this.state.posts]
+        let postIndex = actualPostData.findIndex(post => post._id === updatePostData._id);
+        let activePost = actualPostData[postIndex];
+        activePost.likes = updatePostData.likes
+        actualPostData[postIndex] = activePost
+        this.setState({ posts: actualPostData });
+    }
+
     OpenModalLikes = (post) => {
         this.setState(prevState => ({
             isLikesModalOpen: { ...prevState.isLikesModalOpen, isLikesModalOpen: true },
             selectedPostId: post.likes,
-            userDetail: post.postedBy,
         }));
     }
 
     render() {
-        const { posts, isLoading, iconColor } = this.state;
+        const { posts, isLoading, isData } = this.state;
 
         return (
             <>
@@ -231,12 +244,12 @@ export default class HomeComponent extends React.Component {
                     <PostDetailComponent
                         selectedPostId={this.state.selectedPostId}
                         userDetail={this.state.userDetail}
+                        onClose={this.handleModalClose}
                     />
                 )}
                 {(this.state?.isLikesModalOpen) && (
                     <PostLikesComponent
                         selectedPostId={this.state.selectedPostId}
-                        userDetail={this.state.userDetail}
                     />
                 )}
             </>
