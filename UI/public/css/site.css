@@ -12,7 +12,11 @@ body {
   width: 30%;
 }
 
-
+.modalmobilecen {
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+}
 
 .comments-container {
   max-height: 220px;
@@ -129,7 +133,7 @@ body {
   max-width: 90% !important;
   display: flex;
   justify-content: center;
-  margin-top: 3.5%;
+  margin-top: 1.5%;
 }
 
 /*comment design*/
@@ -1213,6 +1217,16 @@ footer #footer {
     margin-bottom: 0px;
   }
 
+  .btncomment{
+    height: 10px;
+    font-size: 12px;
+    padding-bottom: 20px;
+    /* margin-bottom: 10px; */
+    margin-bottom: 20px;
+    line-height: 10px;
+  }
+  
+
   .modalbodypad{
     overflow: auto !important;
   }
@@ -1255,6 +1269,15 @@ footer #footer {
   .modalbodypad {
   
     overflow: auto !important;
+  }
+
+  .btncomment{
+    height: 10px;
+    font-size: 12px;
+    padding-bottom: 20px;
+    /* margin-bottom: 10px; */
+    margin-bottom: 20px;
+    line-height: 10px;
   }
   
 
@@ -1378,6 +1401,14 @@ footer #footer {
   .modalbodypad {
     padding: 0 !important;
     overflow: auto;
+  }
+  .btncomment{
+    height: 10px;
+    font-size: 12px;
+    padding-bottom: 20px;
+    /* margin-bottom: 10px; */
+    margin-bottom: 20px;
+    line-height: 10px;
   }
   
 
@@ -2412,6 +2443,16 @@ hr {
     margin-top: 10px !important;
   }
 
+  .btncomment{
+    height: 10px;
+    font-size: 12px;
+    padding-bottom: 20px;
+    /* margin-bottom: 10px; */
+    margin-bottom: 20px;
+    line-height: 10px;
+  }
+  
+
   .modalbodypad{
     overflow: auto !important;
   }
@@ -2590,7 +2631,9 @@ hr {
 
 @media only screen and (min-width: 701px) and (max-width: 1024px) {
 
-
+  .container-wrapper{
+    margin-bottom: 0;
+  }
 
   .images {
     background-size: cover;
@@ -2718,6 +2761,16 @@ hr {
     width: 100%;
   }
 
+  .btncomment{
+    height: 10px;
+    font-size: 12px;
+    padding-bottom: 20px;
+    /* margin-bottom: 10px; */
+    margin-bottom: 20px;
+    line-height: 10px;
+  }
+  
+
   .hrmargin{
     margin-top: 2% !important;
   }
@@ -2743,9 +2796,24 @@ hr {
 
 @media only screen and (min-width: 1201px) and (max-width: 1203px){
   .container-wrapper {
-    position: fixed !important;
-    width: 100%;
     
+    width: 100%;
+    margin-bottom: 0 !important;
+    
+  }
+
+  .btncomment{
+    height: 10px;
+    font-size: 12px;
+    padding-bottom: 20px;
+    /* margin-bottom: 10px; */
+    margin-bottom: 20px;
+    line-height: 10px;
+  }
+
+
+  .modalbodypad{
+    overflow: auto !important;
   }
 
   .imgbox{
