@@ -4,7 +4,8 @@ import fetchData from "../../utils/FetchAPI";
 import {
     API_TO_DELETE_COMMENT,
     API_TO_DELETE_POST,
-    API_TO_FETCH_POST_DETAILS, API_TO_LIKE_UNLIKE_POST,
+    API_TO_FETCH_POST_DETAILS,
+    API_TO_LIKE_UNLIKE_POST,
     API_TO_SAVE_COMMENTS,
 } from "../../utils/APIRequestUrl";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -12,7 +13,8 @@ import {
     faTimes,
     faHeart,
     faComment,
-    faEllipsisH
+    faEllipsisH,
+    faL
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import PostLikesComponent from './PostLikesComponent.jsx';
@@ -30,9 +32,9 @@ const PostDetailComponent = (props) => {
     const [isPostLiked, setIsPostLiked] = useState(false);
     const [isLikesModalOpen, setIsLikesModalOpen] = useState(false);
     const [selectedPostDetailId, setSelectedPostDetailId] = useState("");
-    const [modalData, setModalData] = useState('');
-    const [isDeleteCommentDropdownVisible, setisDeleteCommentDropdownVisible] = useState(false);
+    const [modalData, setModalData] = useState({ postId: '', postCommentId: '' });
     const [isPostDropdownVisible, setPostDropdownVisible] = useState(false);
+    const [isDeleteCommentDropdownVisible, setisDeleteCommentDropdownVisible] = useState(false);
     const loggedInUser = getLoggedInUser();
 
     useEffect(() => {
@@ -123,8 +125,8 @@ const PostDetailComponent = (props) => {
     };
 
     const saveComment = async () => {
-        validatePostComment();
-        if (Object.keys(error).length < 0) {
+        await validatePostComment();
+        if (Object.keys(error).length <= 0) {
             const commentObj = {
                 comment,
                 postId: postDetails._id,
@@ -141,8 +143,15 @@ const PostDetailComponent = (props) => {
         }
     };
 
-    const toggleCommentDropdown = () => {
-        setisDeleteCommentDropdownVisible((prevState) => !prevState);
+    const toggleCommentDropdown = (postId, postCommentId) => {
+        setisDeleteCommentDropdownVisible((prevState) => {
+            if (!prevState) {
+                setModalData({ postId, postCommentId });
+            } else {
+                setModalData({ postId: '', postCommentId: '' });
+            }
+            return !prevState;
+        });
     };
 
     const togglePostDropdown = () => {
@@ -266,12 +275,12 @@ const PostDetailComponent = (props) => {
                                                         <span>
                                                             <FontAwesomeIcon icon={faEllipsisH}
                                                                 className=""
-                                                                onClick={toggleCommentDropdown}
+                                                                onClick={() => toggleCommentDropdown(postDetails._id, postComment._id)}
                                                             />
                                                         </span>
                                                     }
 
-                                                    {isDeleteCommentDropdownVisible && (
+                                                    {isDeleteCommentDropdownVisible && modalData.postId === postDetails._id && modalData.postCommentId === postComment._id && (
                                                         <span onClick={() => deleteComment(postDetails._id, postComment._id)} style={{ cursor: 'pointer' }}>Delete</span>
                                                     )}
 
@@ -333,14 +342,14 @@ const PostDetailComponent = (props) => {
                             </div>
                         </div>
                     </div>
-                </div >
-            </div >
+                </div>
+            </div>
             {isLikesModalOpen && (
                 <PostLikesComponent
                     selectedPostId={selectedPostDetailId}
                 />
             )}
-        </div >
+        </div>
     );
 };
 
