@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from "react";
 import M from "materialize-css";
 import fetchData from "../../utils/FetchAPI";
 import {
+    API_TO_DELETE_COMMENT,
+    API_TO_DELETE_POST,
     API_TO_FETCH_POST_DETAILS, API_TO_LIKE_UNLIKE_POST,
     API_TO_SAVE_COMMENTS,
 } from "../../utils/APIRequestUrl";
@@ -10,12 +12,13 @@ import {
     faTimes,
     faHeart,
     faComment,
-    faThin,
+    faEllipsisH
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import PostLikesComponent from './PostLikesComponent.jsx';
 
 import { formatDistanceToNow } from 'date-fns';
+import { getLoggedInUser } from "../../utils/Auth";
 
 const PostDetailComponent = (props) => {
     const openUserPost = useRef(null);
@@ -28,6 +31,9 @@ const PostDetailComponent = (props) => {
     const [isLikesModalOpen, setIsLikesModalOpen] = useState(false);
     const [selectedPostDetailId, setSelectedPostDetailId] = useState("");
     const [modalData, setModalData] = useState('');
+    const [isDeleteCommentDropdownVisible, setisDeleteCommentDropdownVisible] = useState(false);
+    const [isPostDropdownVisible, setPostDropdownVisible] = useState(false);
+    const loggedInUser = getLoggedInUser();
 
     useEffect(() => {
         fetchPostDetails();
@@ -118,7 +124,7 @@ const PostDetailComponent = (props) => {
 
     const saveComment = async () => {
         validatePostComment();
-        if (Object.keys(error).length <= 0) {
+        if (Object.keys(error).length < 0) {
             const commentObj = {
                 comment,
                 postId: postDetails._id,
@@ -134,6 +140,28 @@ const PostDetailComponent = (props) => {
             }
         }
     };
+
+    const toggleCommentDropdown = () => {
+        setisDeleteCommentDropdownVisible((prevState) => !prevState);
+    };
+
+    const togglePostDropdown = () => {
+        setPostDropdownVisible((prevState) => !prevState);
+    }
+
+    const deleteComment = async (postId, postCommentId) => {
+        const deleteCommentObj = {
+            postId, postCommentId
+        };
+        await fetchData(API_TO_DELETE_COMMENT, "POST", deleteCommentObj);
+        fetchPostDetails();
+    }
+
+    const deletePost = async (postId) => {
+        await fetchData(API_TO_DELETE_POST + `/${postId}`, "POST");
+        cancelPostDetailModal();
+        window.location.reload();
+    }
 
     return (
         <div id="openUserPost" className="modal modalmobilecen" ref={openUserPost}>
@@ -183,15 +211,30 @@ const PostDetailComponent = (props) => {
                                     </div>
                                     <small>
                                         <span className="username fonting">
-                                            {postDetails?.postedBy?.username}:
+                                            {postDetails?.postedBy?.username}
                                         </span>
                                         <span className="user-caption ps-2 fw-light fonting">
                                             {postDetails?.caption}
                                         </span>
                                     </small>
-                                </div>
-                                <hr></hr>
 
+                                    {
+                                        (postDetails?.postedBy?._id === loggedInUser._id) &&
+                                        <span>
+                                            <FontAwesomeIcon icon={faEllipsisH}
+                                                className=""
+                                                onClick={togglePostDropdown}
+                                            />
+                                        </span>
+                                    }
+
+                                    {isPostDropdownVisible && (
+                                        <span onClick={() => deletePost(postDetails._id)} style={{ cursor: 'pointer' }}>Delete</span>
+                                    )}
+
+                                </div>
+
+                                <hr></hr>
                                 <div className="comments-container">
                                     {postComments.length > 0 && (
                                         postComments.map((postComment) => (
@@ -216,6 +259,22 @@ const PostDetailComponent = (props) => {
                                                 </span>
                                                 <span className="commentmain fonting">
                                                     {postComment.comment}
+
+                                                    {
+                                                        (loggedInUser._id === postComment.commentedBy._id
+                                                            || postDetails.postedBy._id === loggedInUser._id) &&
+                                                        <span>
+                                                            <FontAwesomeIcon icon={faEllipsisH}
+                                                                className=""
+                                                                onClick={toggleCommentDropdown}
+                                                            />
+                                                        </span>
+                                                    }
+
+                                                    {isDeleteCommentDropdownVisible && (
+                                                        <span onClick={() => deleteComment(postDetails._id, postComment._id)} style={{ cursor: 'pointer' }}>Delete</span>
+                                                    )}
+
                                                 </span><br />
                                                 <span>
                                                     {formatDistanceToNow(new Date(postComment.createdDate), { addSuffix: true })}

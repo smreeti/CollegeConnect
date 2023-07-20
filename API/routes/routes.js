@@ -25,6 +25,8 @@ const {
   fetchUserNotifications,
   saveComments,
   fetchPostComments,
+  deleteComment,
+  deletePost,
 } = require("../controllers/controller.js");
 
 const {
@@ -51,6 +53,8 @@ const {
   API_TO_SAVE_COMMENTS,
   API_TO_FETCH_POST_COMMENTS,
   API_TO_FETCH_POST_LIKES,
+  API_TO_DELETE_COMMENT,
+  API_TO_DELETE_POST,
   // API_TO_VIEW_FOLLOWERS,
 } = require("../utils/APIRequestUrl.js");
 
@@ -76,6 +80,7 @@ router.post("/protected", authMiddleware, (req, res) => {
 
 router.post(API_TO_SAVE_POST, authMiddleware, savePost);
 router.post(API_TO_FETCH_ALL_POSTS, authMiddleware, fetchAllPosts);
+router.post(API_TO_DELETE_POST, authMiddleware, deletePost);
 
 router.post(API_TO_SEARCH_USERS, authMiddleware, searchUserByUsername);
 router.post(API_TO_FETCH_PROFILE_DETAILS, authMiddleware, fetchProfileDetails);
@@ -105,6 +110,7 @@ router.get(API_TO_FETCH_NOTIFICATIONS, authMiddleware, fetchUserNotifications);
 
 router.post(API_TO_SAVE_COMMENTS, authMiddleware, saveComments);
 router.post(API_TO_FETCH_POST_COMMENTS, authMiddleware, fetchPostComments);
+router.post(API_TO_DELETE_COMMENT, authMiddleware, deleteComment);
 
 router.put(API_TO_LIKE_UNLIKE_POST, authMiddleware, likeUnlikePost);
 
