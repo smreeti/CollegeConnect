@@ -172,12 +172,13 @@ const ProfileComponent = () => {
                       <div>
                         <FontAwesomeIcon icon={faHeart} className='me-3 ' color={isLiked(post.likes) ? "red" : "silver"}
                           onClick={() => likePost(post._id)} />
-                        {post?.likes?.length > 0 ? <small className='fs-6 fw-lighter text-white'><p>{post?.likes?.length}</p></small> : <small className='fs-6 fw-lighter text-white'><p>{post?.likes?.length}</p></small>}
+                        {post?.likes?.length > 0 ? <small className='fs-6 fw-lighter text-white'><p>{post?.likes?.length}</p></small>
+                          : <small className='fs-6 fw-lighter text-white'><p>{post?.likes?.length}</p></small>}
                       </div>
 
                       <div>
                         <FontAwesomeIcon icon={faComment} />
-                        {post.comments > 0 ? <small className='fs-6 fw-lighter'><p>{post.comments}</p></small> : null}
+                        <small className='fs-6 fw-lighter'><p>{post.comments}</p></small>
                       </div>
                     </div>
                   </div>

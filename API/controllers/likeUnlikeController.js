@@ -37,11 +37,9 @@ const likeUnlikePost = async (req, res) => {
 
 const fetchPostLikes = async (req, res) => {
   const { _id } = req.body;
-  console.log(req.body, "Like's user id");
   try {
     const result = _id.map((a) => a.user);
     const postLikes = await User.find({ _id: result });
-    console.log("Like:", postLikes);
 
     return setSuccessResponse(res, "Posts fetched successfully", {
       postLikes,
@@ -49,8 +47,6 @@ const fetchPostLikes = async (req, res) => {
   } catch (error) {
     return setErrorResponse(res, HttpStatus.INTERNAL_SERVER_ERROR, error);
   }
-
-  // const likedUsernames = post.likes.map((like) => like.user.username);
 };
 
 module.exports = {
