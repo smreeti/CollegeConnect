@@ -185,7 +185,7 @@ const ProfileComponent = () => {
 
                       <div>
                         <FontAwesomeIcon icon={faComment} />
-                        {post.comments > 0 ? <small className='fs-6 fw-lighter'><p>{post.comments}</p></small> : null}
+                        <small className='fs-6 fw-lighter'><p>{post.comments}</p></small>
                       </div>
                     </div>
                   </div>

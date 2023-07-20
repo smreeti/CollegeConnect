@@ -10,6 +10,7 @@ const {
   savePost,
   fetchAllPosts,
   fetchPostDetails,
+  deletePost
 } = require("./postController.js");
 
 const {
@@ -35,6 +36,7 @@ const {
 const {
   saveComments,
   fetchPostComments,
+  deleteComment,
 } = require("../controllers/commentsController.js");
 
 module.exports = {
@@ -62,4 +64,6 @@ module.exports = {
   fetchUserNotifications,
   saveComments,
   fetchPostComments,
+  deleteComment,
+  deletePost
 };

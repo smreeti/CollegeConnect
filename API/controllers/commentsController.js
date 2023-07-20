@@ -42,4 +42,13 @@ const fetchPostComments = async (postId) => {
     return postComments;
 }
 
-module.exports = { saveComments, fetchPostComments };
+const deleteComment = async (req, res) => {
+    const { postCommentId, postId } = req.body;
+    await PostComments.findByIdAndDelete(postCommentId);
+    await Post.findByIdAndUpdate(postId, {
+        $inc: { comments: -1 }
+    });
+    return setSuccessResponse(res, "Comment deleted");
+}
+
+module.exports = { saveComments, fetchPostComments, deleteComment };

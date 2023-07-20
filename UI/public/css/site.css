@@ -12,6 +12,7 @@ body {
 }
 
 .comments-container {
+  min-height: 50px;
   max-height: 220px;
   /* Set a fixed height for the scrollable container */
   overflow-y: scroll;
@@ -84,7 +85,7 @@ body {
 }
 
 .hrmargin {
-  margin-top: 30%;
+  margin-top: 4%;
   border-top: 1px solid #dbdbdb;
 }
 
@@ -584,7 +585,6 @@ button[type="submit"]:hover {
 .capdiv {
   display: flex;
   justify-content: center;
-  /* margin-top: 5%; */
 }
 
 .caption::placeholder {
@@ -1286,7 +1286,7 @@ footer #footer {
   }
 
   .hrmargin {
-    margin-top: 10%;
+    margin-top: 4%;
   }
 
   .labelset {
@@ -1381,15 +1381,11 @@ footer #footer {
   }
 
   .hrmargin {
-    margin-top: 10%;
+    margin-top: 4%;
   }
 
   .divcontainer {
     width: auto;
-  }
-
-  .hrmargin {
-    margin-top: 5%;
   }
 
   .labelset {
@@ -1993,13 +1989,12 @@ hr {
 }
 
 .p_img {
-  height: 380px;
+  height: 350px;
   width: 100%;
   object-fit: cover;
   opacity: 1;
   display: block;
   width: 100%;
-  height: auto;
   transition: 0.5s ease;
   backface-visibility: hidden;
 }
@@ -2616,10 +2611,6 @@ hr {
     width: 100%;
   }
 
-  .hrmargin {
-    margin-top: 10% !important;
-  }
-
   .container-wrapper {
     position: inherit;
   }
@@ -2628,10 +2619,6 @@ hr {
 @media only screen and (min-width: 1001px) and (max-width: 1200px) {
   .container-wrapper {
     position: inherit;
-  }
-
-  .hrmargin {
-    margin-top: 10%;
   }
 
   .imgbox {

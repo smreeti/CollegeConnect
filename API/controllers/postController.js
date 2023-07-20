@@ -112,6 +112,11 @@ const updatePostStatus = async (postId, status, remarks) => {
   );
 };
 
+const deletePost = async (req, res) => {
+  await Post.findByIdAndDelete(req.params.id);
+  return setSuccessResponse(res, "Post deleted");
+}
+
 module.exports = {
   savePost,
   fetchAllPosts,
@@ -119,4 +124,5 @@ module.exports = {
   fetchPostDetails,
   fetchPostById,
   updatePostStatus,
+  deletePost
 };
