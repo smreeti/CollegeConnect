@@ -1851,6 +1851,8 @@ hr {
 
   .editbutton {
     line-height: 0.9 !important;
+    margin-top: 0px !important;
+    margin-left: 2px !important;
   }
 
   .edpr {
@@ -2099,7 +2101,7 @@ hr {
   .container_button {
     height: 200px;
     margin: 0 auto;
-    width: 50%;
+    width: 70%;
   }
 
   .container_button button {
@@ -2190,8 +2192,7 @@ hr {
 
 .user_details_bio_container {
   display: flex;
-  gap: 20px;
-  margin: 8px 0;
+  justify-content: space-between;
   font-size: 13px;
 }
 
@@ -2320,9 +2321,10 @@ hr {
   }
 
   .editbutton {
-    height: 40px !important;
+    height: 30px !important;
     padding: 0 !important;
-    width: 105px !important;
+    width: 40% !important;
+    margin-top: 15px !important;
   }
 
   .post-detail-container {

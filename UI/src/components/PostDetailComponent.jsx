@@ -21,7 +21,7 @@ const PostDetailComponent = (props) => {
     const openUserPost = useRef(null);
     const [postDetails, setPostDetails] = useState({});
     const [postComments, setPostComments] = useState([]);
-    const { userDetail, isNotificationDetail, onClose } = props;
+    const { userDetail, isNotificationDetail, onClose, OpenLikesModal } = props;
     const [comment, setComment] = useState("");
     const [error, setError] = useState("");
     const [isPostLiked, setIsPostLiked] = useState(false);
@@ -94,12 +94,8 @@ const PostDetailComponent = (props) => {
     }
 
     const OpenModalLikes = (post) => {
-        post = [post];
         cancelPostDetailModal();
-        setTimeout(() => {
-            setIsLikesModalOpen(true);
-            setSelectedPostDetailId(post[0].likes);
-        }, 1000);
+        OpenLikesModal(post);
     }
 
     const handleOnChange = (event) => {
@@ -277,9 +273,7 @@ const PostDetailComponent = (props) => {
                 </div >
             </div >
             {isLikesModalOpen && (
-                <PostLikesComponent
-                    selectedPostId={selectedPostDetailId}
-                />
+                <PostLikesComponent />
             )}
         </div >
     );

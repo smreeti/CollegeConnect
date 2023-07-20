@@ -239,6 +239,7 @@ export default class HomeComponent extends React.Component {
                         selectedPostId={this.state.selectedPostId}
                         userDetail={this.state.userDetail}
                         onClose={this.handleModalClose}
+                        OpenLikesModal={this.OpenModalLikes}
                     />
                 )}
                 {(this.state?.isLikesModalOpen) && (

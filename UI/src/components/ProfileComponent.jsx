@@ -14,7 +14,7 @@ const ProfileComponent = () => {
   const [likes, setLikes] = useState(0);
   // const [isLiked, setIsLiked] = useState(false);
   const [isUserPostOpen, setIsUserPostOpen] = useState(false);
-  const [selectedPostId, setSelectedPostId] = useState(null);
+  const [selectedPostId, setSelectedPostId] = useState("");
   const [userProfileDetails, setUserProfileDetails] = useState({});
   const [userDetails, setUserDetails] = useState([]);
   const [posts, setPosts] = useState([]);
@@ -56,6 +56,11 @@ const ProfileComponent = () => {
     let currentUser = JSON.parse(localStorage.getItem('user'));
     let isFound = likes.findIndex(user => user.user === currentUser._id);
     return isFound > -1;
+  }
+
+  const OpenModalLikes = (post) => {
+    setIsLikesModalOpen(true);
+    setSelectedPostId(post.likes)
   }
 
   const handleImageClick = (post) => {
@@ -109,17 +114,18 @@ const ProfileComponent = () => {
                 />
               )}
             </div>
-            <div className="container_button">
+            <div className="container_button d-flex justify-content-center ">
               <div className="sync">
-                <div className="d-flex">
-                  <div className="creator_desc">{userDetails?.firstName + " " + userDetails?.lastName}</div>
+                {console.log(userDetails)}
+                <div className="d-flex justify-content-between">
+                  <div className="creator_desc text-nowrap">{userDetails?.firstName + " " + userDetails?.lastName}</div>
                   <button className="editbutton">
                     <Link className="edpr" to="/edit">
                       <FontAwesomeIcon icon={faCog} /> Edit Profile
                     </Link>
                   </button>
                 </div>
-                <div className="user_details_bio_container">
+                <div className="user_details_bio_container mt-md-5 mt-4">
                   <div>
                     <span className="bolding">100</span> Followers
                   </div>
@@ -172,7 +178,9 @@ const ProfileComponent = () => {
                       <div>
                         <FontAwesomeIcon icon={faHeart} className='me-3 ' color={isLiked(post.likes) ? "red" : "silver"}
                           onClick={() => likePost(post._id)} />
-                        {post?.likes?.length > 0 ? <small className='fs-6 fw-lighter text-white'><p>{post?.likes?.length}</p></small> : <small className='fs-6 fw-lighter text-white'><p>{post?.likes?.length}</p></small>}
+                        <Link onClick={() => OpenModalLikes(post)}>
+                          {post?.likes?.length > 0 ? <small className='fs-6 fw-lighter text-white'><p>{post?.likes?.length}</p></small> : <small className='fs-6 fw-lighter text-white'><p>{post?.likes?.length}</p></small>}
+                        </Link>
                       </div>
 
                       <div>
@@ -193,11 +201,12 @@ const ProfileComponent = () => {
           selectedPostId={selectedPostId}
           userDetail={userDetails}
           onClose={handleModalClose}
+          OpenLikesModal={OpenModalLikes}
         />
       )}
       {isLikesModalOpen && (
         <PostLikesComponent
-          selectedPostId={selectedPostDetailId}
+          selectedPostId={selectedPostId}
         />
       )}
     </main>
