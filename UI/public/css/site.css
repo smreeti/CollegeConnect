@@ -1938,7 +1938,7 @@ hr {
 .container_button {
   height: auto;
   margin: 0 auto;
-  width: 50%;
+  width: 50% !important;
   text-align: center;
 }
 
