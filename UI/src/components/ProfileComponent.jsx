@@ -95,7 +95,7 @@ const ProfileComponent = () => {
   return (
     <main>
       <Header />
-      <div className="mt-5">
+      <div className="mt-5" style={{ minHeight: "90vh" }}>
         <div className="headtest">
           <div className="d-flex align-items-center  topcontainer">
             <div className="creator_block">
@@ -111,7 +111,7 @@ const ProfileComponent = () => {
             </div>
             <div className="container_button">
               <div className="sync">
-                <div className="d-flex align-items-center justify-content-start">
+                <div className="d-flex">
                   <div className="creator_desc">{userDetails?.firstName + " " + userDetails?.lastName}</div>
                   <button className="editbutton">
                     <Link className="edpr" to="/edit">

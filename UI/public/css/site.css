@@ -2319,11 +2319,6 @@ hr {
     font-size: 1rem;
   }
 
-  .user_details_bio_container {
-    flex-direction: column;
-    gap: 4px;
-  }
-
   .editbutton {
     height: 40px !important;
     padding: 0 !important;
@@ -2416,6 +2411,9 @@ hr {
 
   .creator_block {
     height: 200px;
+    display: flex !important;
+    align-items: center;
+    margin-left: 5%;
   }
 
   .editbutton {
