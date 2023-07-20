@@ -59,7 +59,6 @@ const PostDetailComponent = (props) => {
             ]);
             const hasUserLiked = isLiked(data.body.postDetails[0].likes);
             setIsPostLiked(hasUserLiked);
-            console.log(hasUserLiked);
         } catch (error) {
             console.log("Error:", error);
         }
@@ -88,7 +87,6 @@ const PostDetailComponent = (props) => {
                 setPostDetails(tempPost[0]);
                 const hasUserLiked = isLiked(tempPost[0].likes);
                 setIsPostLiked(hasUserLiked);
-                console.log(hasUserLiked, "here");
             }
         } catch (error) {
             console.error('Error here:', error);
@@ -238,9 +236,10 @@ const PostDetailComponent = (props) => {
                                                             color={isPostLiked ? "red" : "silver"}
                                                         />
                                                     </span>
-                                                    <Link onClick={() => OpenModalLikes(postDetails)} data-target="postLikesModal" className='modal-trigger'>
+                                                    <span onClick={() => OpenModalLikes(postDetails)} data-target="postLikesModal" className='modal-trigger text-black'>
                                                         {postDetails?.likes?.length > 1 && <small className='fs-6 fw-lighter'> {postDetails?.likes?.length} likes</small>}
-                                                        {postDetails?.likes?.length == 1 && <small className='fs-6 fw-lighter'> {postDetails?.likes?.length} like</small>}                                                    </Link>
+                                                        {(postDetails?.likes?.length == 1 || postDetails?.likes?.length == 0) && <small className='fs-6 fw-lighter'> {postDetails?.likes?.length} like</small>}
+                                                    </span>
                                                 </div>
 
                                                 <div>

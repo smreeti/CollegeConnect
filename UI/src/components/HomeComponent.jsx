@@ -29,18 +29,13 @@ export default class HomeComponent extends React.Component {
         };
     }
 
-
     likePost = (postId) => {
         this.fetchLikesCount(postId);
     };
 
     isLiked = (likes) => {
-        console.log(likes, "likes");
-
         let currentUser = JSON.parse(localStorage.getItem('user'));
-
         let isFound = likes.findIndex(user => user.user === currentUser._id);
-
         return isFound > -1;
     }
 
@@ -122,7 +117,6 @@ export default class HomeComponent extends React.Component {
 
     render() {
         const { posts, isLoading, isData } = this.state;
-
         return (
             <>
                 <Header />

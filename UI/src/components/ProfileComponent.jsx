@@ -6,17 +6,21 @@ import fetchData from "../../utils/FetchAPI.js";
 import PostDetailComponent from "./PostDetailComponent.jsx";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faComment, faHeart, faCog, faFileImage } from '@fortawesome/free-solid-svg-icons';
-import { API_TO_FETCH_PROFILE_DETAILS, API_TO_VIEW_FOLLOWERS } from "../../utils/APIRequestUrl.js";
+import { API_TO_FETCH_PROFILE_DETAILS, API_TO_VIEW_FOLLOWERS, API_TO_LIKE_UNLIKE_POST } from "../../utils/APIRequestUrl.js";
+import PostLikesComponent from './PostLikesComponent.jsx';
+
 
 const ProfileComponent = () => {
   const [likes, setLikes] = useState(0);
-  const [isLiked, setIsLiked] = useState(false);
+  // const [isLiked, setIsLiked] = useState(false);
   const [isUserPostOpen, setIsUserPostOpen] = useState(false);
   const [selectedPostId, setSelectedPostId] = useState(null);
   const [userProfileDetails, setUserProfileDetails] = useState({});
   const [userDetails, setUserDetails] = useState([]);
   const [posts, setPosts] = useState([]);
-
+  const [isPostLiked, setIsPostLiked] = useState(false);
+  const [isLikesModalOpen, setIsLikesModalOpen] = useState(false);
+  const [selectedPostDetailId, setSelectedPostDetailId] = useState("");
   const [followers, setFollowers] = useState([]);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { id } = useParams();
@@ -36,20 +40,57 @@ const ProfileComponent = () => {
       setUserProfileDetails(data.body);
       setUserDetails(userProfileDetails.userDetail);
       setPosts(userProfileDetails.posts);
+      const hasUserLiked = isLiked(data.body.posts[0].likes);
+      setIsPostLiked(hasUserLiked);
+
     } catch (error) {
       console.log("Error:", error);
     }
   };
 
-  const likedIcon = () => {
-    setLikes(isLiked ? likes - 1 : likes + 1);
-    setIsLiked(!isLiked);
+  const likePost = async (postId) => {
+    await fetchLikesCount(postId);
   };
+
+  const isLiked = (likes) => {
+    let currentUser = JSON.parse(localStorage.getItem('user'));
+    let isFound = likes.findIndex(user => user.user === currentUser._id);
+    return isFound > -1;
+  }
 
   const handleImageClick = (post) => {
     setIsUserPostOpen(true);
     setSelectedPostId(post._id);
   };
+
+  const fetchLikesCount = async (postId) => {
+    try {
+      const data = await fetchData(API_TO_LIKE_UNLIKE_POST + `/${postId}`, "PUT");
+      if (data) {
+        const newList = data.body;
+        let tempPost = [{ ...userProfileDetails }];
+        let postIndex = tempPost.findIndex((post) => post._id === postId);
+        let activePost = tempPost[postIndex];
+        activePost.likes = newList.likes;
+        tempPost[postIndex] = activePost
+        setUserProfileDetails(tempPost[0]);
+        const hasUserLiked = isLiked(tempPost[0].likes);
+        setIsPostLiked(hasUserLiked);
+      }
+    } catch (error) {
+      console.error('Error here:', error);
+    }
+  }
+
+
+  const handleModalClose = (updatePostData) => {
+    let actualPostData = [...posts]
+    let postIndex = actualPostData.findIndex(post => post._id === updatePostData._id);
+    let activePost = actualPostData[postIndex];
+    activePost.likes = updatePostData.likes
+    actualPostData[postIndex] = activePost
+    setPosts(actualPostData)
+  }
 
   return (
     <main>
@@ -125,19 +166,19 @@ const ProfileComponent = () => {
                   data-target="openUserPost"
                   className="modal-trigger" key={post._id}
                 >
-                  <div className="images" >
+                  <div className="images bg-dark" >
                     <img alt="captured images" className="p_img" src={post.imageUrl} />
-                    <p>{post.caption}</p>
-
-                    <div className="text">
+                    <div className="text d-flex">
                       <div>
-                        <FontAwesomeIcon icon={faHeart} className='me-3 ' color={isLiked ? 'red' : 'gray'}
-                          onClick={likedIcon} />
-                        {likes > 0 ? <small className='fs-6 fw-lighter'><p>{likes}</p></small> : null}
+                        <FontAwesomeIcon icon={faHeart} className='me-3 ' color={isLiked(post.likes) ? "red" : "silver"}
+                          onClick={() => likePost(post._id)} />
+                        {post?.likes?.length > 0 ? <small className='fs-6 fw-lighter text-white'><p>{post?.likes?.length}</p></small> : <small className='fs-6 fw-lighter text-white'><p>{post?.likes?.length}</p></small>}
                       </div>
-                      <FontAwesomeIcon icon={faComment} />
-                      {post.comments > 0 ? <small className='fs-6 fw-lighter'><p>{post.comments}</p></small> : null}
 
+                      <div>
+                        <FontAwesomeIcon icon={faComment} />
+                        {post.comments > 0 ? <small className='fs-6 fw-lighter'><p>{post.comments}</p></small> : null}
+                      </div>
                     </div>
                   </div>
                 </Link>
@@ -151,6 +192,12 @@ const ProfileComponent = () => {
         <PostDetailComponent
           selectedPostId={selectedPostId}
           userDetail={userDetails}
+          onClose={handleModalClose}
+        />
+      )}
+      {isLikesModalOpen && (
+        <PostLikesComponent
+          selectedPostId={selectedPostDetailId}
         />
       )}
     </main>

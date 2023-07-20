@@ -1,5 +1,4 @@
 import React, { useRef, useEffect, useState } from 'react'
-import { Link } from 'react-router-dom';
 import M from 'materialize-css'
 import fetchData from '../../utils/FetchAPI'
 import { API_TO_FETCH_POST_LIKES } from '../../utils/APIRequestUrl'
@@ -23,10 +22,8 @@ const PostLikesComponent = (props) => {
 
     const fetchPostLikes = async () => {
         const { selectedPostId } = props;
-        console.log(selectedPostId, "postLikes");
         try {
             const data = await fetchData(API_TO_FETCH_POST_LIKES, "POST", { _id: selectedPostId });
-            console.log(data.body.postLikes);
             setLikesList(data.body.postLikes);
         } catch (error) {
             console.log("Error:", error);
@@ -36,8 +33,8 @@ const PostLikesComponent = (props) => {
     return (
         <>
             <div id="postLikesModal" className="modal" ref={postLikesModal}>
-                <div className="modal-likes-dialog mx-auto modal-lg modalwidth">
-                    <div className="modal-content modalwidth modaldesc ">
+                <div className="modal-likes-dialog mx-auto my-auto modal-md ">
+                    <div className="modal-content mx-auto my-auto modaldesc ">
                         <div className="modal-header">
                             <div className="modal-title ">
                                 <h5 className='text-center'>Liked by</h5>
@@ -66,7 +63,6 @@ const PostLikesComponent = (props) => {
                                             )}
                                         </div>
                                         <small>
-                                            {console.log(likesData, "the data")}
                                             <span className='username'>{likesData?.username}</span>
                                         </small>
                                         <button className='btn btn-primary ms-auto btn-sm'>Follow</button>
