@@ -86,6 +86,7 @@ body {
 
 .modalbodypad {
   padding: 0 !important;
+  overflow: hidden !important;
 }
 
 .hrmargin {
@@ -523,7 +524,7 @@ button[type="submit"]:hover {
 
 .modal-content {
   width: 495px;
-  height: auto;
+  height: 500px;
 }
 
 .modal-close {
@@ -1212,6 +1213,10 @@ footer #footer {
     margin-bottom: 0px;
   }
 
+  .modalbodypad{
+    overflow: auto !important;
+  }
+
   .modal-dialog {
     width: 300px;
   }
@@ -1246,6 +1251,12 @@ footer #footer {
 }
 
 @media screen and (min-width: 370px) and (max-width: 1000px) {
+
+  .modalbodypad {
+  
+    overflow: auto !important;
+  }
+  
 
   .container-wrapper {
     position: relative;
@@ -1363,6 +1374,12 @@ footer #footer {
   .imgbox {
     width: 100% !important;
   }
+
+  .modalbodypad {
+    padding: 0 !important;
+    overflow: auto;
+  }
+  
 
   .modalmobilecen {
     display: flex !important;
@@ -2395,6 +2412,10 @@ hr {
     margin-top: 10px !important;
   }
 
+  .modalbodypad{
+    overflow: auto !important;
+  }
+
   .container-wrapper{
     width: 100%;
   }
@@ -2664,10 +2685,16 @@ hr {
 
 }
 
-@media only screen and (min-width: 1201px) and (max-width:1666px) {
+@media only screen and (min-width: 1201px) and (max-width:2000px) {
   .divcontainer {
     width: 100%;
   }
+
+  .container-wrapper {
+    position: inherit;
+    width: 100%;
+  }
+
 
   .hrmargin{
     margin-top: 2% !important;
@@ -2691,9 +2718,21 @@ hr {
     width: 100%;
   }
 
-  .hrmargin {
-    margin-top: 10%;
+  .hrmargin{
+    margin-top: 2% !important;
   }
+
+  .container-wrapper{
+    margin-bottom: 0 !important;
+  }
+
+  .modalbodypad{
+    overflow: auto !important;
+  }
+
+  /* .hrmargin {
+    margin-top: 10%;
+  } */
 
   .imgbox {
     width: 100% !important;
@@ -2704,7 +2743,7 @@ hr {
 
 @media only screen and (min-width: 1201px) and (max-width: 1203px){
   .container-wrapper {
-    position: unset !important;
+    position: fixed !important;
     width: 100%;
     
   }
@@ -2714,4 +2753,30 @@ hr {
       width: 100% !important;
  
   }
+}
+
+@media only screen and (min-width: 1280px) and (max-width:1281px){
+  .container-wrapper{
+    position: fixed;
+    margin-bottom: 150px;
+  }
+  .divcontainer{
+    width: 30%;
+  }
+}
+
+@media only screen and (min-width: 2005px) and (max-width:2500px) {
+  
+  .divcontainer{
+    margin-bottom: 80px !important;
+  }
+
+
+
+}
+
+@media  screen and (min-width:1413px) and (max-width:1414px){
+  .container-wrapper{
+    margin-bottom: 10px;
+  }  
 }
