@@ -36,8 +36,9 @@ const API_TO_LIKE_UNLIKE_POST = "/like/:id";
 const API_TO_FETCH_POST_LIKES = "/fetchPostLikes";
 
 const API_TO_DELETE_COMMENT = "/deleteComment";
-const API_TO_DELETE_POST =  "/deletePost/:id";
+const API_TO_DELETE_POST = "/deletePost/:id";
 
+const API_TO_FOLLOW_USER = "/follow";
 
 module.exports = {
   API_TO_FETCH_COLLEGE_INFO,
@@ -64,5 +65,6 @@ module.exports = {
   API_TO_FETCH_POST_COMMENTS,
   API_TO_FETCH_POST_LIKES,
   API_TO_DELETE_COMMENT,
-  API_TO_DELETE_POST
+  API_TO_DELETE_POST,
+  API_TO_FOLLOW_USER
 };

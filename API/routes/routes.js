@@ -55,6 +55,7 @@ const {
   API_TO_FETCH_POST_LIKES,
   API_TO_DELETE_COMMENT,
   API_TO_DELETE_POST,
+  API_TO_FOLLOW_USER,
   // API_TO_VIEW_FOLLOWERS,
 } = require("../utils/APIRequestUrl.js");
 
@@ -63,6 +64,7 @@ const {
   likeUnlikePost,
   fetchPostLikes,
 } = require("../controllers/likeUnlikeController.js");
+const { followUser } = require("../controllers/userFollowingController.js");
 
 router.get(API_TO_FETCH_COLLEGE_INFO, fetchCollegeList);
 router.post(API_TO_SIGNUP_USER, signupUser);
@@ -116,6 +118,7 @@ router.put(API_TO_LIKE_UNLIKE_POST, authMiddleware, likeUnlikePost);
 
 router.post(API_TO_FETCH_POST_LIKES, authMiddleware, fetchPostLikes);
 
+router.post(API_TO_FOLLOW_USER, authMiddleware, followUser);
 // router.post(API_TO_VIEW_FOLLOWERS, authMiddleware);
 // router.put(API_TO_LIKE_POST, authMiddleware, likePost);
 module.exports = router;

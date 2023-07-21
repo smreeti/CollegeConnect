@@ -6,8 +6,9 @@ import fetchData from "../../utils/FetchAPI.js";
 import PostDetailComponent from "./PostDetailComponent.jsx";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faComment, faHeart, faCog, faFileImage } from '@fortawesome/free-solid-svg-icons';
-import { API_TO_FETCH_PROFILE_DETAILS, API_TO_VIEW_FOLLOWERS, API_TO_LIKE_UNLIKE_POST } from "../../utils/APIRequestUrl.js";
+import { API_TO_FETCH_PROFILE_DETAILS, API_TO_VIEW_FOLLOWERS, API_TO_LIKE_UNLIKE_POST, API_TO_FOLLOW, API_TO_FOLLOW_USER } from "../../utils/APIRequestUrl.js";
 import PostLikesComponent from './PostLikesComponent.jsx';
+import { getLoggedInUser } from "../../utils/Auth.js";
 
 
 const ProfileComponent = () => {
@@ -23,6 +24,8 @@ const ProfileComponent = () => {
   const [selectedPostDetailId, setSelectedPostDetailId] = useState("");
   const [followers, setFollowers] = useState([]);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const loggedInUser = getLoggedInUser();
+  const [followStatus, setFollowStatus] = useState('Follow');
   const { id } = useParams();
 
   useEffect(() => {
@@ -87,7 +90,6 @@ const ProfileComponent = () => {
     }
   }
 
-
   const handleModalClose = (updatePostData) => {
     let actualPostData = [...posts]
     let postIndex = actualPostData.findIndex(post => post._id === updatePostData._id);
@@ -95,6 +97,17 @@ const ProfileComponent = () => {
     activePost.likes = updatePostData.likes
     actualPostData[postIndex] = activePost
     setPosts(actualPostData)
+  }
+
+  const followUser = async () => {
+    const followObj = {
+      followingUserId: id
+    }
+    try {
+      await fetchData(API_TO_FOLLOW_USER, "POST", followObj);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (
@@ -123,6 +136,15 @@ const ProfileComponent = () => {
                       <FontAwesomeIcon icon={faCog} /> Edit Profile
                     </Link>
                   </button>
+
+                  {
+                    (loggedInUser._id != id &&
+                      < button onClick={() => followUser()}>
+                        Follow
+                      </button>
+                    )
+                  }
+
                 </div>
                 <div className="user_details_bio_container mt-md-5 mt-4">
                   <div>
@@ -195,20 +217,24 @@ const ProfileComponent = () => {
         )}
       </div>
 
-      {isUserPostOpen && (
-        <PostDetailComponent
-          selectedPostId={selectedPostId}
-          userDetail={userDetails}
-          onClose={handleModalClose}
-          OpenLikesModal={OpenModalLikes}
-        />
-      )}
-      {isLikesModalOpen && (
-        <PostLikesComponent
-          selectedPostId={selectedPostId}
-        />
-      )}
-    </main>
+      {
+        isUserPostOpen && (
+          <PostDetailComponent
+            selectedPostId={selectedPostId}
+            userDetail={userDetails}
+            onClose={handleModalClose}
+            OpenLikesModal={OpenModalLikes}
+          />
+        )
+      }
+      {
+        isLikesModalOpen && (
+          <PostLikesComponent
+            selectedPostId={selectedPostId}
+          />
+        )
+      }
+    </main >
   );
 };
 
