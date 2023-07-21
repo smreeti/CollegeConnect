@@ -11,6 +11,32 @@ body {
   margin-bottom: 90px;
 }
 
+.deletecomment{
+  color: white;
+}
+
+.dropdown-item:hover{
+  background-color: #212121 !important;
+}
+
+
+.dots{
+margin-left: 10px;
+}
+
+.deletebutton{
+  color: white !important;
+}
+
+.threedots{
+  float: right;
+  display: flow-root;
+}
+
+.deletebutton:hover{
+  color: red;
+}
+
 .comments-container {
   min-height: 50px;
   max-height: 220px;
@@ -140,8 +166,7 @@ body {
   height: auto;
 }
 
-@media screen {
-}
+
 
 /*Profilepage updates*/
 .profileimage_grid {
@@ -624,6 +649,12 @@ button[type="submit"]:hover {
   background-color: #212121;
   min-width: 130px;
   margin-top: 2px;
+  text-align: center;
+  
+}
+
+.clock{
+  font-size: 13px !important;
 }
 
 .iconimg {
@@ -1220,6 +1251,14 @@ footer #footer {
     margin-bottom: 0px;
   }
 
+  .btncomment{
+       margin-bottom: 20px;
+  }
+
+  .clock{
+    font-size: 11px !important;
+  }
+
   .modal-dialog {
     width: 300px;
   }
@@ -1261,6 +1300,24 @@ footer #footer {
     position: relative;
     bottom: 0;
     margin-bottom: 0px;
+  }
+
+  .btncomment{
+    margin-bottom: 20px;
+}
+
+
+  .clock{
+    font-size: 11px !important;
+  }
+  .dropdown-menu.show{
+    min-width: 30px;
+    height: auto;
+    text-align: center;
+  } 
+
+  .deletecomment{
+    font-size: 10px !important;
   }
 
   .divcontainer {
@@ -1368,6 +1425,14 @@ footer #footer {
     width: 100% !important;
   }
 
+  .btncomment{
+    margin-bottom: 20px;
+}
+
+  .clock{
+    font-size: 11px !important;
+  }
+
   .modalmobilecen {
     display: flex !important;
     justify-content: center;
@@ -1466,6 +1531,13 @@ footer #footer {
     margin-left: 12px;
   }
 
+  .btncomment{
+    margin-bottom: 20px;
+}
+
+  .clock{
+    font-size: 11px !important;
+  }
   #main-login-container {
     justify-content: center;
     grid-template-columns: 1fr 1fr;
@@ -1849,6 +1921,18 @@ hr {
     margin-top: 20px;
   }
 
+
+
+  .btncomment{
+    margin-bottom: 20px;
+}
+
+
+
+  .clock{
+    font-size: 11px !important;
+  }
+
   .editbutton {
     line-height: 0.9 !important;
     margin-top: 0px !important;
@@ -2064,6 +2148,13 @@ hr {
     margin-left: 12px;
   }
 
+  .btncomment{
+    margin-bottom: 20px;
+}
+
+  .clock{
+    font-size: 11px !important;
+  }
   .user_details_container {
     background: white;
   }
@@ -2266,6 +2357,14 @@ hr {
     margin-left: 12px;
   }
 
+  .btncomment{
+    margin-bottom: 20px;
+}
+
+  .clock{
+    font-size: 11px !important;
+  }
+
   .menu {
     position: absolute;
     top: 0;
@@ -2337,6 +2436,14 @@ hr {
     -moz-column-count: 2;
     column-count: 2;
   }
+
+  .btncomment{
+    margin-bottom: 20px;
+}
+}
+
+.clock{
+  font-size: 11px !important;
 }
 
 @media (max-width: 480px) {
@@ -2348,11 +2455,33 @@ hr {
     -moz-column-width: 100%;
     column-width: 100%;
   }
+
+  .btncomment{
+    margin-bottom: 20px;
+}
+
+  .clock{
+    font-size: 11px !important;
+  }
 }
 
 @media screen and (min-width: 250px) and (max-width: 420px) {
   .hrmargin {
     margin-top: 10px !important;
+  }
+
+  .clock{
+    font-size: 11px !important;
+  }
+
+  .dropdown-menu.show{
+    min-width: 30px;
+    height: auto;
+    text-align: center;
+  } 
+
+  .deletecomment{
+    font-size: 10px !important;
   }
 
   .modalmobilecen {
@@ -2490,6 +2619,10 @@ hr {
   .std {
     font-size: 1rem;
   }
+
+  .btncomment{
+    margin-bottom: 20px;
+}
 }
 
 .profilePic {
@@ -2502,6 +2635,8 @@ hr {
 @media only screen and (min-width: 768px) and (max-width: 1203px) {
   .ipadset {
     flex-direction: column;
+  }.clock{
+    font-size: 11px !important;
   }
 
   .modal-dialog {
@@ -2527,12 +2662,20 @@ hr {
   .change {
     font-size: 12px;
   }
+
+  .btncomment{
+    margin-bottom: 20px;
+}
 }
 
 @media only screen and (min-width: 701px) and (max-width: 1024px) {
   .images {
     background-size: cover;
     background-position: center;
+  }
+
+  .clock{
+    font-size: 11px !important;
   }
 
   .p_img {
@@ -2563,6 +2706,10 @@ hr {
   .creator_desc {
     margin-top: 20px;
   }
+
+  .btncomment{
+    margin-bottom: 20px;
+}
 }
 
 @media only screen and (min-width: 768px) and (max-width: 1024px) {
@@ -2572,6 +2719,10 @@ hr {
 
   .labelset {
     margin-left: 12px;
+  }
+
+  .clock{
+    font-size: 11px !important;
   }
 
   .namespacing {
@@ -2586,19 +2737,31 @@ hr {
   .menu a {
     padding-left: 0px !important;
   }
+  .btncomment{
+    margin-bottom: 20px;
+}
 }
 
 @media (max-width: 768px) {
   .edit_profile_button {
     margin: auto;
   }
+
+  .clock{
+    font-size: 11px !important;
+  }
+  .btncomment{
+    margin-bottom: 20px;
+}
 }
 
 @media (max-width: 1280px) {
   /* .container-wrapper{
     margin-bottom: 180px;
   } */
-
+  .clock{
+    font-size: 11px !important;
+  }
   .modalmobilecen {
     display: flex !important;
     justify-content: center;
@@ -2608,24 +2771,45 @@ hr {
   .divcontainer {
     width: 100%;
   }
+  .btncomment{
+    margin-bottom: 20px;
+}
 }
 
 @media only screen and (min-width: 1203px) and (max-width: 1666px) {
   .divcontainer {
     width: 100%;
   }
+  .clock{
+    font-size: 11px !important;
+  }
 
   .container-wrapper {
     position: inherit;
   }
+  .btncomment{
+    margin-bottom: 20px;
+}
 }
 
 @media only screen and (min-width: 1001px) and (max-width: 1200px) {
   .container-wrapper {
     position: inherit;
   }
+  .clock{
+    font-size: 11px !important;
+  }
 
   .imgbox {
     width: 100% !important;
+  }
+  .btncomment{
+    margin-bottom: 20px;
+}
+}
+
+@media only screen and (min-width: 1668px) and (max-width: 2000px) {
+  .container-wrapper{
+    position: relative;
   }
 }
