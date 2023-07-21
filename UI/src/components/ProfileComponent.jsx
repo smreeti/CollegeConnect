@@ -116,7 +116,6 @@ const ProfileComponent = () => {
             </div>
             <div className="container_button d-flex justify-content-center ">
               <div className="sync">
-                {console.log(userDetails)}
                 <div className="d-flex justify-content-between">
                   <div className="creator_desc text-nowrap">{userDetails?.firstName + " " + userDetails?.lastName}</div>
                   <button className="editbutton">
