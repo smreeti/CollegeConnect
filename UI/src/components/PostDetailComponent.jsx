@@ -50,7 +50,7 @@ const PostDetailComponent = (props) => {
     const cancelPostDetailModal = () => {
         const modalInstance = M.Modal.getInstance(openUserPost.current);
         modalInstance.close();
-        onClose(postDetails);
+        // onClose(postDetails);
     };
 
     const fetchPostDetails = async () => {
@@ -104,6 +104,9 @@ const PostDetailComponent = (props) => {
 
     const OpenModalLikes = (post) => {
         cancelPostDetailModal();
+        if (cancelPostDetailModal) {
+            console.log("Closed");
+        }
         OpenLikesModal(post);
     }
 
@@ -301,11 +304,12 @@ const PostDetailComponent = (props) => {
                                                             color={isPostLiked ? "red" : "silver"}
                                                         />
                                                     </span>
-                                                    <span onClick={() => OpenModalLikes(postDetails)} data-target="postLikesModal" className='modal-trigger text-primary'>
-                                                        {postDetails?.likes?.length > 1 && <small className='fs-6 fw-lighter link text-red'> {postDetails?.likes?.length} likes</small>}
-                                                        {(postDetails?.likes?.length == 1 || postDetails?.likes?.length == 0)
-                                                            && <small className='fs-6 fw-lighter link'> {postDetails?.likes?.length} like</small>}
-                                                    </span>
+
+                                                    {postDetails?.likes?.length == 0 ?
+                                                        <small className='fs-6 fw-lighter'> {postDetails?.likes?.length} like</small>
+                                                        : <span onClick={() => OpenModalLikes(postDetails)} data-target="postLikesModal" className='modal-trigger text-primary'>
+                                                            <small className='fs-6 fw-lighter link'> {postDetails?.likes?.length} {postDetails?.likes?.length == 1 ? 'like' : 'likes'}</small>
+                                                        </span>}
                                                 </div>
 
                                                 <div>
@@ -343,7 +347,7 @@ const PostDetailComponent = (props) => {
                 </div>
             </div>
             {isLikesModalOpen && (
-                <PostLikesComponent />
+                <PostLikesComponent closePostDetailModal={cancelPostDetailModal()} />
             )}
         </div>
     );
