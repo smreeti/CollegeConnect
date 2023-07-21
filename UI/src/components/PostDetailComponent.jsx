@@ -60,12 +60,13 @@ const PostDetailComponent = (props) => {
             const data = await fetchData(API_TO_FETCH_POST_DETAILS, "POST", {
                 _id: selectedPostId,
             });
+
             setPostDetails(data.body.postDetails[0]);
             setPostComments((prevComments) => [
                 ...prevComments,
                 ...data.body.postComments,
             ]);
-            const hasUserLiked = isLiked(data.body.postDetails[0].likes);
+            const hasUserLiked = isLiked(data.body?.postDetails[0]?.likes);
             setIsPostLiked(hasUserLiked);
         } catch (error) {
             console.log("Error:", error);
@@ -78,14 +79,14 @@ const PostDetailComponent = (props) => {
 
     const isLiked = (likes) => {
         let currentUser = JSON.parse(localStorage.getItem('user'));
-        let isFound = likes.findIndex(user => user.user === currentUser._id);
+        let isFound = likes?.findIndex(user => user.user === currentUser._id);
         return isFound > -1;
     }
 
     const fetchLikesCount = async (postId) => {
         try {
             const data = await fetchData(API_TO_LIKE_UNLIKE_POST + `/${postId}`, "PUT");
-            if (data) {
+            if (data && data.body && data.body.post) {
                 const newList = data.body.post;
                 let tempPost = [{ ...postDetails }];
                 let postIndex = tempPost.findIndex((post) => post._id === postId);
@@ -93,7 +94,7 @@ const PostDetailComponent = (props) => {
                 activePost.likes = newList.likes;
                 tempPost[postIndex] = activePost
                 setPostDetails(tempPost[0]);
-                const hasUserLiked = isLiked(tempPost[0].likes);
+                const hasUserLiked = isLiked(tempPost[0]?.likes);
                 setIsPostLiked(hasUserLiked);
             }
         } catch (error) {
@@ -102,7 +103,6 @@ const PostDetailComponent = (props) => {
     }
 
     const OpenModalLikes = (post) => {
-        cancelPostDetailModal();
         OpenLikesModal(post);
     }
 
@@ -300,9 +300,10 @@ const PostDetailComponent = (props) => {
                                                             color={isPostLiked ? "red" : "silver"}
                                                         />
                                                     </span>
-                                                    <span onClick={() => OpenModalLikes(postDetails)} data-target="postLikesModal" className='modal-trigger text-black'>
-                                                        {postDetails?.likes?.length > 1 && <small className='fs-6 fw-lighter'> {postDetails?.likes?.length} likes</small>}
-                                                        {(postDetails?.likes?.length == 1 || postDetails?.likes?.length == 0) && <small className='fs-6 fw-lighter'> {postDetails?.likes?.length} like</small>}
+                                                    <span onClick={() => OpenModalLikes(postDetails)} data-target="postLikesModal" className='modal-trigger text-primary'>
+                                                        {postDetails?.likes?.length > 1 && <small className='fs-6 fw-lighter link text-red'> {postDetails?.likes?.length} likes</small>}
+                                                        {(postDetails?.likes?.length == 1 || postDetails?.likes?.length == 0)
+                                                            && <small className='fs-6 fw-lighter link'> {postDetails?.likes?.length} like</small>}
                                                     </span>
                                                 </div>
 

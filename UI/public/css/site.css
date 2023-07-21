@@ -1605,6 +1605,10 @@ footer {
   background-repeat: no-repeat;
 }
 
+.link{
+  cursor: pointer;
+}
+
 @keyframes slide {
   0% {
     background: url(../assets/newimg/excited-friends-watching-video-mobile-phone.jpg),

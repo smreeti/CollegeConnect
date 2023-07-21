@@ -35,7 +35,7 @@ export default class HomeComponent extends React.Component {
 
     isLiked = (likes) => {
         let currentUser = JSON.parse(localStorage.getItem('user'));
-        let isFound = likes.findIndex(user => user.user === currentUser._id);
+        let isFound = likes?.findIndex(user => user.user === currentUser._id);
         return isFound > -1;
     }
 
@@ -47,10 +47,11 @@ export default class HomeComponent extends React.Component {
         try {
             this.setIsLoading();
             const data = await fetchData(API_TO_FETCH_ALL_POSTS, "POST");
+            const posts = data.body.posts || [];
             this.setState({
                 posts: data.body
             })
-            const hasUserLiked = this.isLiked(data.body.posts[0].likes);
+            const hasUserLiked = this.isLiked(posts[0]?.likes);
             this.setState({ isPostLiked: hasUserLiked })
 
         } catch (error) {
