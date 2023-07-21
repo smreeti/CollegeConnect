@@ -33,8 +33,8 @@ const PostLikesComponent = (props) => {
     return (
         <>
             <div id="postLikesModal" className="modal" ref={postLikesModal}>
-                <div className="modal-likes-dialog mx-auto my-auto modal-md ">
-                    <div className="modal-content mx-auto my-auto modaldesc ">
+                <div className="modal-likes-dialog mx-auto modal-md mt-5 ">
+                    <div className="modal-content mx-auto modaldesc ">
                         <div className="modal-header">
                             <div className="modal-title ">
                                 <h5 className='text-center'>Liked by</h5>

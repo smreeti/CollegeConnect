@@ -162,10 +162,11 @@ export default class HomeComponent extends React.Component {
                                                         data-target="openUserPost" />
                                                 </Link>
                                             </div>
-                                            <Link onClick={() => this.OpenModalLikes(post)} data-target="postLikesModal" className='modal-trigger'>
-                                                {post.likes.length > 1 && <small className='fs-6 fw-lighter'> {post.likes.length} likes</small>}
-                                                {post.likes.length == 1 && <small className='fs-6 fw-lighter'> {post.likes.length} like</small>}
-                                            </Link>
+                                            {post.likes.length == 0 ? <small className='fs-6 fw-lighter'> {post.likes.length} like</small> :
+                                                <Link onClick={() => this.OpenModalLikes(post)} data-target="postLikesModal" className='modal-trigger' style={{ pointerEvents: post.likes.length === 0 ? "none" : "auto" }}>
+                                                    {post.likes.length > 1 && <small className='fs-6 fw-lighter'> {post.likes.length} likes</small>}
+                                                    {post.likes.length == 1 && <small className='fs-6 fw-lighter'> {post.likes.length} like</small>}
+                                                </Link>}
 
                                         </div>
 
