@@ -103,6 +103,7 @@ const PostDetailComponent = (props) => {
     }
 
     const OpenModalLikes = (post) => {
+        cancelPostDetailModal();
         OpenLikesModal(post);
     }
 
