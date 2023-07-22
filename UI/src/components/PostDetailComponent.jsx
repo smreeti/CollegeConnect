@@ -231,28 +231,13 @@ const PostDetailComponent = (props) => {
                                         </span>
                                     </small>
 
-                                    {/* {
-                                        (postDetails?.postedBy?._id === loggedInUser._id) &&
-                                      
-                                        <span>
-                                            
-                                            <FontAwesomeIcon icon={faEllipsisH}
-                                                className=""
-                                                onClick={togglePostDropdown}
-                                            />
-                                        </span>
-                                    }
-
-                                    {isPostDropdownVisible && (
-                                        <span onClick={() => deletePost(postDetails._id)} style={{ cursor: 'pointer' }}>Delete</span>
-                                    )} */}
 
                                     {postDetails?.postedBy?._id === loggedInUser._id && (
-                                        <Dropdown>
+                                        <Dropdown className="threedots">
                                             <Dropdown.Toggle
                                                 as={FontAwesomeIcon}
                                                 icon={faEllipsisH}
-                                                className="dots"
+                                                className=""
                                                 onClick={togglePostDropdown}
                                             />
 
@@ -269,9 +254,6 @@ const PostDetailComponent = (props) => {
                                             </Dropdown.Menu>
                                         </Dropdown>
                                     )}
-
-
-
                                 </div>
 
                                 <hr></hr>
