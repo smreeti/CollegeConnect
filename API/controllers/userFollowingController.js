@@ -17,11 +17,38 @@ const followUser = async (req, res) => {
                 userId: loggedInUser,
                 followingUserId: user
             });
+
+            await incrementUserFollowingCount(loggedInUser._id); //increment following count for the logged in user
+            await incrementUserFollowerCount(user._id); //logged in user is following other user so increment the other users followers count
             return setSuccessResponse(res, "Successfully followed: " + user.username);
         }
     } catch (e) {
         return setErrorResponse(res, "Something went wrong");
     }
+}
+
+const incrementUserFollowingCount = async (userId) => {
+    await User.findByIdAndUpdate(userId, {
+        $inc: { following: 1 }
+    });
+}
+
+const incrementUserFollowerCount = async (userId) => {
+    await User.findByIdAndUpdate(userId, {
+        $inc: { followers: 1 }
+    });
+}
+
+const decrementUserFollowingCount = async (userId) => {
+    await User.findByIdAndUpdate(userId, {
+        $inc: { following: -1 }
+    });
+}
+
+const decrementUserFollowerCount = async (userId) => {
+    await User.findByIdAndUpdate(userId, {
+        $inc: { followers: -1 }
+    });
 }
 
 const checkIfFollowing = async (userId, followingUserId) => {
@@ -36,7 +63,6 @@ const unfollowUser = async (req, res) => {
     const loggedInUser = req.user;
     const followingUserId = req.params.followingUserId;
 
-    console.log(req.params);
     try {
         const followingUser = await User.findById(followingUserId);
         if (followingUser) {
@@ -45,13 +71,22 @@ const unfollowUser = async (req, res) => {
                 followingUserId: followingUser
             };
             await UserFollowing.findOneAndDelete(query);
+
+            await decrementUserFollowingCount(loggedInUser._id); //decrement following count for the logged in user
+            await decrementUserFollowerCount(followingUser._id); //logged in user is unfollowing other user so decrement the other users followers count
         }
 
         return setSuccessResponse(res, "Successfully unfollowed: " + followingUser.username);
     } catch (e) {
         return setErrorResponse(res, "Something went wrong");
     }
-
 }
 
-module.exports = { fetchFollowingUsers, followUser, checkIfFollowing, unfollowUser };
+module.exports = {
+    fetchFollowingUsers,
+    followUser,
+    checkIfFollowing,
+    unfollowUser,
+    incrementUserFollowingCount,
+    incrementUserFollowerCount
+};

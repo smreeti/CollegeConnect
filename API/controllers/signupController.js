@@ -60,6 +60,9 @@ const followCollegeAdmin = async (userId, collegeInfoId) => {
       userId,
       followingUserId: adminUser
     })
+
+    await incrementUserFollowingCount(userId); //increment following count for the user
+    await incrementUserFollowerCount(adminUser._id); // user is following superadmin so increment the superadmin followers count
   }
 }
 

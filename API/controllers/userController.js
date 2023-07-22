@@ -49,7 +49,7 @@ const searchUserByUsername = async (req, res) => {
 
 const fetchUserMinDetails = async (id) => {
     const userDetail = await User.findById(id)
-        .select("firstName lastName username profilePicture bio");
+        .select("firstName lastName username profilePicture bio followers following");
     return userDetail;
 }
 

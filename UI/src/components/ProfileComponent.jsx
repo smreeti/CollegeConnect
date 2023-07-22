@@ -161,10 +161,10 @@ const ProfileComponent = () => {
                 </div>
                 <div className="user_details_bio_container mt-4">
                   <div>
-                    <span className="bolding">100</span> Followers
+                    <span className="bolding">{userDetails?.followers}</span> Followers
                   </div>
                   <div>
-                    <span className="bolding">1000</span> Following
+                    <span className="bolding">{userDetails?.following}</span> Following
                   </div>
                   <div>
                     <span className="bolding">{posts?.length}</span> POSTS
