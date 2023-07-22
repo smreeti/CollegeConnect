@@ -100,7 +100,7 @@ const ProfileComponent = () => {
   return (
     <main>
       <Header />
-      <div className="mt-5" style={{ minHeight: "90vh" }}>
+      <div className="mt-5" style={{ minHeight: "93vh" }}>
         <div className="headtest">
           <div className="d-flex align-items-center  topcontainer">
             <div className="creator_block">

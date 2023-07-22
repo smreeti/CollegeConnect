@@ -66,7 +66,7 @@ const PostDetailComponent = (props) => {
                 ...prevComments,
                 ...data.body.postComments,
             ]);
-            const hasUserLiked = isLiked(data.body?.postDetails[0]?.likes);
+            const hasUserLiked = isLiked(data.body.postDetails[0]?.likes);
             setIsPostLiked(hasUserLiked);
         } catch (error) {
             console.log("Error:", error);
