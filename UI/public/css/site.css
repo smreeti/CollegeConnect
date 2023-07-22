@@ -11,29 +11,30 @@ body {
   margin-bottom: 90px;
 }
 
-.deletecomment{
+.deletecomment {
   color: white;
 }
 
-.dropdown-item:hover{
+.dropdown-item:hover {
   background-color: #212121 !important;
 }
 
 
-.dots{
-margin-left: 10px;
+.dots {
+  margin-left: 10px;
 }
 
-.deletebutton{
+.deletebutton {
   color: white !important;
 }
 
-.threedots{
+.threedots {
   float: right;
   display: flow-root;
+  padding-right: 10px;
 }
 
-.deletebutton:hover{
+.deletebutton:hover {
   color: red;
 }
 
@@ -650,10 +651,10 @@ button[type="submit"]:hover {
   min-width: 130px;
   margin-top: 2px;
   text-align: center;
-  
+
 }
 
-.clock{
+.clock {
   font-size: 13px !important;
 }
 
@@ -691,7 +692,7 @@ button[type="submit"]:hover {
   padding: 0;
 }
 
-.menu > li {
+.menu>li {
   margin: 0 1rem;
   overflow: hidden;
 }
@@ -732,16 +733,16 @@ button[type="submit"]:hover {
   margin-top: 8px;
 }
 
-#menu-toggle:checked + .menu-button-container .menu-button::before {
+#menu-toggle:checked+.menu-button-container .menu-button::before {
   margin-top: 0px;
   transform: rotate(405deg);
 }
 
-#menu-toggle:checked + .menu-button-container .menu-button {
+#menu-toggle:checked+.menu-button-container .menu-button {
   background: rgba(255, 255, 255, 0);
 }
 
-#menu-toggle:checked + .menu-button-container .menu-button::after {
+#menu-toggle:checked+.menu-button-container .menu-button::after {
   margin-top: 0px;
   transform: rotate(-405deg);
 }
@@ -925,7 +926,7 @@ button {
   height: 45px;
 }
 
-.row > * {
+.row>* {
   padding-left: 0px !important;
 }
 
@@ -1013,7 +1014,7 @@ h2 {
   /* gap: 20px; */
 }
 
-.menu > li {
+.menu>li {
   margin: 0 1rem;
   overflow: hidden;
   font-size: 15px;
@@ -1060,7 +1061,7 @@ footer li {
   min-height: 32px;
 }
 
-footer > p {
+footer>p {
   text-align: center;
   padding: 30px 0;
 }
@@ -1234,7 +1235,7 @@ footer #footer {
   color: #1da1f2;
 }
 
-.post-image > img {
+.post-image>img {
   width: 30%;
 }
 
@@ -1251,11 +1252,11 @@ footer #footer {
     margin-bottom: 0px;
   }
 
-  .btncomment{
-       margin-bottom: 20px;
+  .btncomment {
+    margin-bottom: 20px;
   }
 
-  .clock{
+  .clock {
     font-size: 11px !important;
   }
 
@@ -1275,11 +1276,11 @@ footer #footer {
     width: auto;
   }
 
-  .modalmobilecen {
+  /* .modalmobilecen {
     display: flex !important;
     justify-content: center;
     align-items: center;
-  }
+  } */
 
   .imgbox {
     width: 100% !important;
@@ -1302,21 +1303,22 @@ footer #footer {
     margin-bottom: 0px;
   }
 
-  .btncomment{
+  .btncomment {
     margin-bottom: 20px;
-}
+  }
 
 
-  .clock{
+  .clock {
     font-size: 11px !important;
   }
-  .dropdown-menu.show{
+
+  .dropdown-menu.show {
     min-width: 30px;
     height: auto;
     text-align: center;
-  } 
+  }
 
-  .deletecomment{
+  .deletecomment {
     font-size: 10px !important;
   }
 
@@ -1324,11 +1326,11 @@ footer #footer {
     width: auto;
   }
 
-  .modalmobilecen {
+  /* .modalmobilecen {
     display: flex !important;
     justify-content: center;
     align-items: center;
-  }
+  } */
 
   .imgbox {
     width: 100% !important;
@@ -1371,7 +1373,7 @@ footer #footer {
     border: var(--bs-modal-border-width) solid var(--bs-modal-border-color);
     border-radius: var(--bs-modal-border-radius);
     outline: 0;
-    height: 500px;
+    /* height: 500px; */
   }
 
   #resrevtest {
@@ -1425,19 +1427,19 @@ footer #footer {
     width: 100% !important;
   }
 
-  .btncomment{
+  .btncomment {
     margin-bottom: 20px;
-}
+  }
 
-  .clock{
+  .clock {
     font-size: 11px !important;
   }
 
-  .modalmobilecen {
+  /* .modalmobilecen {
     display: flex !important;
     justify-content: center;
     align-items: center;
-  }
+  } */
 
   .container-wrapper {
     position: inherit;
@@ -1515,7 +1517,7 @@ footer #footer {
   align-items: center;
 }
 
-#login-image > img {
+#login-image>img {
   display: none;
 }
 
@@ -1531,13 +1533,14 @@ footer #footer {
     margin-left: 12px;
   }
 
-  .btncomment{
+  .btncomment {
     margin-bottom: 20px;
-}
+  }
 
-  .clock{
+  .clock {
     font-size: 11px !important;
   }
+
   #main-login-container {
     justify-content: center;
     grid-template-columns: 1fr 1fr;
@@ -1546,7 +1549,7 @@ footer #footer {
     grid-template-rows: auto;
   }
 
-  #login-image > img {
+  #login-image>img {
     width: 100%;
     height: 100%;
     max-width: 100%;
@@ -1677,7 +1680,7 @@ footer {
   background-repeat: no-repeat;
 }
 
-.link{
+.link {
   cursor: pointer;
 }
 
@@ -1901,7 +1904,7 @@ hr {
   display: none;
 }
 
-.sub-menu-toggle + label:before {
+.sub-menu-toggle+label:before {
   content: "▼";
   display: inline-block;
   margin-right: 5px;
@@ -1923,13 +1926,13 @@ hr {
 
 
 
-  .btncomment{
+  .btncomment {
     margin-bottom: 20px;
-}
+  }
 
 
 
-  .clock{
+  .clock {
     font-size: 11px !important;
   }
 
@@ -2112,11 +2115,11 @@ hr {
   font-size: 10px;
 }
 
-.hobbies_container > .see_more {
+.hobbies_container>.see_more {
   text-align: center;
 }
 
-.users_container > .see_more {
+.users_container>.see_more {
   text-align: center;
 }
 
@@ -2148,13 +2151,14 @@ hr {
     margin-left: 12px;
   }
 
-  .btncomment{
+  .btncomment {
     margin-bottom: 20px;
-}
+  }
 
-  .clock{
+  .clock {
     font-size: 11px !important;
   }
+
   .user_details_container {
     background: white;
   }
@@ -2357,11 +2361,11 @@ hr {
     margin-left: 12px;
   }
 
-  .btncomment{
+  .btncomment {
     margin-bottom: 20px;
-}
+  }
 
-  .clock{
+  .clock {
     font-size: 11px !important;
   }
 
@@ -2378,7 +2382,7 @@ hr {
     background-color: #212121;
   }
 
-  #menu-toggle ~ .menu li {
+  #menu-toggle~.menu li {
     height: 0;
     margin: 0;
     padding: 0;
@@ -2386,7 +2390,7 @@ hr {
     transition: height 400ms cubic-bezier(0.23, 1, 0.32, 1);
   }
 
-  #menu-toggle:checked ~ .menu li {
+  #menu-toggle:checked~.menu li {
     /* border: 1px solid rgba(255, 255, 255, 0.096); */
     height: 2.5em;
     padding: 0.5em;
@@ -2400,7 +2404,7 @@ hr {
     height: 150px !important;
   } */
 
-  .menu > li {
+  .menu>li {
     display: flex;
     justify-content: center;
     margin: 0;
@@ -2410,7 +2414,7 @@ hr {
     background-color: #212121;
   }
 
-  .menu > li:not(:last-child) {
+  .menu>li:not(:last-child) {
     border-bottom: 1px solid #444;
   }
 
@@ -2437,12 +2441,12 @@ hr {
     column-count: 2;
   }
 
-  .btncomment{
+  .btncomment {
     margin-bottom: 20px;
-}
+  }
 }
 
-.clock{
+.clock {
   font-size: 11px !important;
 }
 
@@ -2456,11 +2460,11 @@ hr {
     column-width: 100%;
   }
 
-  .btncomment{
+  .btncomment {
     margin-bottom: 20px;
-}
+  }
 
-  .clock{
+  .clock {
     font-size: 11px !important;
   }
 }
@@ -2470,36 +2474,22 @@ hr {
     margin-top: 10px !important;
   }
 
-  .clock{
-    font-size: 11px !important;
-  }
-
-  .dropdown-menu.show{
-    min-width: 30px;
-    height: auto;
-    text-align: center;
-  } 
-
-  .deletecomment{
-    font-size: 10px !important;
-  }
-
   .modalmobilecen {
     display: flex !important;
     justify-content: center;
     align-items: center;
   }
 
-  .imgmodal {
+  */ .imgmodal {
     height: auto !important;
   }
 
-  .modalmobilecen {
+  /* .modalmobilecen {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-  }
+  } */
 
   .modal-dialog {
     margin: 0 !important;
@@ -2620,9 +2610,9 @@ hr {
     font-size: 1rem;
   }
 
-  .btncomment{
+  .btncomment {
     margin-bottom: 20px;
-}
+  }
 }
 
 .profilePic {
@@ -2635,7 +2625,9 @@ hr {
 @media only screen and (min-width: 768px) and (max-width: 1203px) {
   .ipadset {
     flex-direction: column;
-  }.clock{
+  }
+
+  .clock {
     font-size: 11px !important;
   }
 
@@ -2646,6 +2638,7 @@ hr {
   .modal-likes-dialog {
     width: 50% !important;
   }
+
   .datamodal {
     width: 100% !important;
   }
@@ -2663,9 +2656,9 @@ hr {
     font-size: 12px;
   }
 
-  .btncomment{
+  .btncomment {
     margin-bottom: 20px;
-}
+  }
 }
 
 @media only screen and (min-width: 701px) and (max-width: 1024px) {
@@ -2674,7 +2667,7 @@ hr {
     background-position: center;
   }
 
-  .clock{
+  .clock {
     font-size: 11px !important;
   }
 
@@ -2707,9 +2700,9 @@ hr {
     margin-top: 20px;
   }
 
-  .btncomment{
+  .btncomment {
     margin-bottom: 20px;
-}
+  }
 }
 
 @media only screen and (min-width: 768px) and (max-width: 1024px) {
@@ -2721,7 +2714,7 @@ hr {
     margin-left: 12px;
   }
 
-  .clock{
+  .clock {
     font-size: 11px !important;
   }
 
@@ -2737,9 +2730,10 @@ hr {
   .menu a {
     padding-left: 0px !important;
   }
-  .btncomment{
+
+  .btncomment {
     margin-bottom: 20px;
-}
+  }
 }
 
 @media (max-width: 768px) {
@@ -2747,69 +2741,71 @@ hr {
     margin: auto;
   }
 
-  .clock{
+  .clock {
     font-size: 11px !important;
   }
-  .btncomment{
+
+  .btncomment {
     margin-bottom: 20px;
-}
+  }
 }
 
 @media (max-width: 1280px) {
+
   /* .container-wrapper{
     margin-bottom: 180px;
   } */
-  .clock{
+  .clock {
     font-size: 11px !important;
-  }
-  .modalmobilecen {
-    display: flex !important;
-    justify-content: center;
-    align-items: center;
   }
 
   .divcontainer {
     width: 100%;
   }
-  .btncomment{
+
+  .btncomment {
     margin-bottom: 20px;
-}
+  }
 }
 
 @media only screen and (min-width: 1203px) and (max-width: 1666px) {
   .divcontainer {
     width: 100%;
   }
-  .clock{
+
+  .clock {
     font-size: 11px !important;
   }
 
   .container-wrapper {
     position: inherit;
   }
-  .btncomment{
+
+  .btncomment {
     margin-bottom: 20px;
-}
+  }
 }
 
 @media only screen and (min-width: 1001px) and (max-width: 1200px) {
   .container-wrapper {
     position: inherit;
   }
-  .clock{
+
+  .clock {
     font-size: 11px !important;
   }
 
   .imgbox {
     width: 100% !important;
   }
-  .btncomment{
+
+  .btncomment {
     margin-bottom: 20px;
-}
+  }
 }
 
 @media only screen and (min-width: 1668px) and (max-width: 2000px) {
-  .container-wrapper{
+  .container-wrapper {
     position: relative;
   }
 }

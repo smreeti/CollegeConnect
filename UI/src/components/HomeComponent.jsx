@@ -35,7 +35,7 @@ export default class HomeComponent extends React.Component {
 
     isLiked = (likes) => {
         let currentUser = JSON.parse(localStorage.getItem('user'));
-        let isFound = likes?.findIndex(user => user.user === currentUser._id);
+        let isFound = likes.findIndex(user => user.user === currentUser._id);
         return isFound > -1;
     }
 
@@ -47,12 +47,14 @@ export default class HomeComponent extends React.Component {
         try {
             this.setIsLoading();
             const data = await fetchData(API_TO_FETCH_ALL_POSTS, "POST");
-            const posts = data.body.posts || [];
             this.setState({
                 posts: data.body
             })
-            const hasUserLiked = this.isLiked(posts[0]?.likes);
-            this.setState({ isPostLiked: hasUserLiked })
+
+            if (data.body && data.body.posts) {
+                const hasUserLiked = this.isLiked(data.body.posts[0].likes);
+                this.setState({ isPostLiked: hasUserLiked })
+            }
 
         } catch (error) {
             console.log("Error:", error);
@@ -163,10 +165,11 @@ export default class HomeComponent extends React.Component {
                                                         data-target="openUserPost" />
                                                 </Link>
                                             </div>
-                                            <Link onClick={() => this.OpenModalLikes(post)} data-target="postLikesModal" className='modal-trigger'>
-                                                {post.likes.length > 1 && <small className='fs-6 fw-lighter'> {post.likes.length} likes</small>}
-                                                {post.likes.length == 1 && <small className='fs-6 fw-lighter'> {post.likes.length} like</small>}
-                                            </Link>
+                                            {post.likes.length == 0 ? <small className='fs-6 fw-lighter'> {post.likes.length} like</small> :
+                                                <Link onClick={() => this.OpenModalLikes(post)} data-target="postLikesModal" className='modal-trigger' style={{ pointerEvents: post.likes.length === 0 ? "none" : "auto" }}>
+                                                    {post.likes.length > 1 && <small className='fs-6 fw-lighter'> {post.likes.length} likes</small>}
+                                                    {post.likes.length == 1 && <small className='fs-6 fw-lighter'> {post.likes.length} like</small>}
+                                                </Link>}
 
                                         </div>
 

@@ -54,7 +54,7 @@ const PostDetailComponent = (props) => {
     const cancelPostDetailModal = () => {
         const modalInstance = M.Modal.getInstance(openUserPost.current);
         modalInstance.close();
-        onClose(postDetails);
+        // onClose(postDetails);
     };
 
     const fetchPostDetails = async () => {
@@ -70,7 +70,7 @@ const PostDetailComponent = (props) => {
                 ...prevComments,
                 ...data.body.postComments,
             ]);
-            const hasUserLiked = isLiked(data.body?.postDetails[0]?.likes);
+            const hasUserLiked = isLiked(data.body.postDetails[0]?.likes);
             setIsPostLiked(hasUserLiked);
         } catch (error) {
             console.log("Error:", error);
@@ -108,6 +108,9 @@ const PostDetailComponent = (props) => {
 
     const OpenModalLikes = (post) => {
         cancelPostDetailModal();
+        if (cancelPostDetailModal) {
+            console.log("Closed");
+        }
         OpenLikesModal(post);
     }
 
@@ -244,30 +247,30 @@ const PostDetailComponent = (props) => {
                                         <span onClick={() => deletePost(postDetails._id)} style={{ cursor: 'pointer' }}>Delete</span>
                                     )} */}
 
-{postDetails?.postedBy?._id === loggedInUser._id && (
-        <Dropdown>
-          <Dropdown.Toggle
-            as={FontAwesomeIcon}
-            icon={faEllipsisH}
-            className="dots"
-            onClick={togglePostDropdown}
-          />
+                                    {postDetails?.postedBy?._id === loggedInUser._id && (
+                                        <Dropdown>
+                                            <Dropdown.Toggle
+                                                as={FontAwesomeIcon}
+                                                icon={faEllipsisH}
+                                                className="dots"
+                                                onClick={togglePostDropdown}
+                                            />
 
-          <Dropdown.Menu show={isPostDropdownVisible}  >
-            <Dropdown.Item>
-              <span
-              className="deletecomment"
-                onClick={() => deletePost(postDetails._id)}
-                style={{ cursor: 'pointer' }}
-              >
-                Delete
-              </span>
-            </Dropdown.Item>
-          </Dropdown.Menu>
-        </Dropdown>
-      )}
+                                            <Dropdown.Menu show={isPostDropdownVisible}  >
+                                                <Dropdown.Item>
+                                                    <span
+                                                        className="deletecomment"
+                                                        onClick={() => deletePost(postDetails._id)}
+                                                        style={{ cursor: 'pointer' }}
+                                                    >
+                                                        Delete
+                                                    </span>
+                                                </Dropdown.Item>
+                                            </Dropdown.Menu>
+                                        </Dropdown>
+                                    )}
 
-                
+
 
                                 </div>
 
@@ -298,35 +301,35 @@ const PostDetailComponent = (props) => {
                                                     {postComment.comment}
 
                                                     {(loggedInUser._id === postComment.commentedBy._id || postDetails.postedBy._id === loggedInUser._id) && (
-        <Dropdown className="threedots">
-          <Dropdown.Toggle
-            as={FontAwesomeIcon}
-            icon={faEllipsisH}
-            className=""
-            onClick={() => toggleCommentDropdown(postDetails._id, postComment._id)}
-          />
-          {isDeleteCommentDropdownVisible && modalData.postId === postDetails._id && modalData.postCommentId === postComment._id && (
-            <Dropdown.Menu show={isDeleteCommentDropdownVisible}>
-              <Dropdown.Item>
-                <span
-                className="deletecomment"
-                  onClick={() => deleteComment(postDetails._id, postComment._id)}
-                  style={{ cursor: 'pointer' }}
-                >
-                  Delete
-                </span>
-              </Dropdown.Item>
-            </Dropdown.Menu>
-          )}
-        </Dropdown>
-      )}
+                                                        <Dropdown className="threedots">
+                                                            <Dropdown.Toggle
+                                                                as={FontAwesomeIcon}
+                                                                icon={faEllipsisH}
+                                                                className=""
+                                                                onClick={() => toggleCommentDropdown(postDetails._id, postComment._id)}
+                                                            />
+                                                            {isDeleteCommentDropdownVisible && modalData.postId === postDetails._id && modalData.postCommentId === postComment._id && (
+                                                                <Dropdown.Menu show={isDeleteCommentDropdownVisible}>
+                                                                    <Dropdown.Item>
+                                                                        <span
+                                                                            className="deletecomment"
+                                                                            onClick={() => deleteComment(postDetails._id, postComment._id)}
+                                                                            style={{ cursor: 'pointer' }}
+                                                                        >
+                                                                            Delete
+                                                                        </span>
+                                                                    </Dropdown.Item>
+                                                                </Dropdown.Menu>
+                                                            )}
+                                                        </Dropdown>
+                                                    )}
 
                                                 </span><br />
 
                                                 <p className="timestamp">
-                                               
-                                                <FontAwesomeIcon className="clock" icon={faClock} /> <span className="clock"> {' '} {formatDistanceToNow(new Date(postComment.createdDate), { addSuffix: true })}
-                                                </span>
+
+                                                    <FontAwesomeIcon className="clock" icon={faClock} /> <span className="clock"> {' '} {formatDistanceToNow(new Date(postComment.createdDate), { addSuffix: true })}
+                                                    </span>
                                                 </p>
                                             </div>
                                         ))
@@ -344,11 +347,12 @@ const PostDetailComponent = (props) => {
                                                             color={isPostLiked ? "red" : "silver"}
                                                         />
                                                     </span>
-                                                    <span onClick={() => OpenModalLikes(postDetails)} data-target="postLikesModal" className='modal-trigger text-primary'>
-                                                        {postDetails?.likes?.length > 1 && <small className='fs-6 fw-lighter link text-red'> {postDetails?.likes?.length} likes</small>}
-                                                        {(postDetails?.likes?.length == 1 || postDetails?.likes?.length == 0)
-                                                            && <small className='fs-6 fw-lighter link'> {postDetails?.likes?.length} like</small>}
-                                                    </span>
+
+                                                    {postDetails?.likes?.length == 0 ?
+                                                        <small className='fs-6 fw-lighter'> {postDetails?.likes?.length} like</small>
+                                                        : <span onClick={() => OpenModalLikes(postDetails)} data-target="postLikesModal" className='modal-trigger text-primary'>
+                                                            <small className='fs-6 fw-lighter link'> {postDetails?.likes?.length} {postDetails?.likes?.length == 1 ? 'like' : 'likes'}</small>
+                                                        </span>}
                                                 </div>
 
                                                 <div>
@@ -386,7 +390,7 @@ const PostDetailComponent = (props) => {
                 </div>
             </div>
             {isLikesModalOpen && (
-                <PostLikesComponent />
+                <PostLikesComponent closePostDetailModal={cancelPostDetailModal()} />
             )}
         </div>
     );
