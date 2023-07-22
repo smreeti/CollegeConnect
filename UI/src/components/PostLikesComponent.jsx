@@ -24,7 +24,14 @@ const PostLikesComponent = (props) => {
         const { selectedPostId } = props;
         try {
             const data = await fetchData(API_TO_FETCH_POST_LIKES, "POST", { _id: selectedPostId });
-            setLikesList(data.body?.postLikes);
+
+            if (data.body && data.body.postLikes) {
+                setLikesList(data.body.postLikes);
+            } else {
+                setLikesList([]);
+            }
+
+            // setLikesList(data.body.postLikes);
         } catch (error) {
             console.log("Error:", error);
         }
@@ -49,7 +56,7 @@ const PostLikesComponent = (props) => {
                         </div>
                         <div className="modal-body">
                             {likesList.map(likesData => (
-                                <ul className="collection" key = {likesData._id}>
+                                <ul className="collection" key={likesData._id}>
 
                                     <li className='d-flex'>
                                         <div className="creator_block_post">

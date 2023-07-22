@@ -50,8 +50,11 @@ export default class HomeComponent extends React.Component {
             this.setState({
                 posts: data.body
             })
-            const hasUserLiked = this.isLiked(data.body.posts[0].likes);
-            this.setState({ isPostLiked: hasUserLiked })
+
+            if (data.body && data.body.posts) {
+                const hasUserLiked = this.isLiked(data.body.posts[0].likes);
+                this.setState({ isPostLiked: hasUserLiked })
+            }
 
         } catch (error) {
             console.log("Error:", error);

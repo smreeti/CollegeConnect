@@ -22,6 +22,10 @@ import PostLikesComponent from './PostLikesComponent.jsx';
 import { formatDistanceToNow } from 'date-fns';
 import { getLoggedInUser } from "../../utils/Auth";
 
+import { Dropdown } from "react-bootstrap";
+import { faClock } from '@fortawesome/free-solid-svg-icons';
+
+
 const PostDetailComponent = (props) => {
     const openUserPost = useRef(null);
     const [postDetails, setPostDetails] = useState({});
@@ -66,7 +70,7 @@ const PostDetailComponent = (props) => {
                 ...prevComments,
                 ...data.body.postComments,
             ]);
-            const hasUserLiked = isLiked(data.body?.postDetails[0]?.likes);
+            const hasUserLiked = isLiked(data.body.postDetails[0]?.likes);
             setIsPostLiked(hasUserLiked);
         } catch (error) {
             console.log("Error:", error);
@@ -227,20 +231,29 @@ const PostDetailComponent = (props) => {
                                         </span>
                                     </small>
 
-                                    {
-                                        (postDetails?.postedBy?._id === loggedInUser._id) &&
-                                        <span>
-                                            <FontAwesomeIcon icon={faEllipsisH}
+
+                                    {postDetails?.postedBy?._id === loggedInUser._id && (
+                                        <Dropdown className="threedots">
+                                            <Dropdown.Toggle
+                                                as={FontAwesomeIcon}
+                                                icon={faEllipsisH}
                                                 className=""
                                                 onClick={togglePostDropdown}
                                             />
-                                        </span>
-                                    }
 
-                                    {isPostDropdownVisible && (
-                                        <span onClick={() => deletePost(postDetails._id)} style={{ cursor: 'pointer' }}>Delete</span>
+                                            <Dropdown.Menu show={isPostDropdownVisible}  >
+                                                <Dropdown.Item>
+                                                    <span
+                                                        className="deletecomment"
+                                                        onClick={() => deletePost(postDetails._id)}
+                                                        style={{ cursor: 'pointer' }}
+                                                    >
+                                                        Delete
+                                                    </span>
+                                                </Dropdown.Item>
+                                            </Dropdown.Menu>
+                                        </Dropdown>
                                     )}
-
                                 </div>
 
                                 <hr></hr>
@@ -269,25 +282,37 @@ const PostDetailComponent = (props) => {
                                                 <span className="commentmain fonting">
                                                     {postComment.comment}
 
-                                                    {
-                                                        (loggedInUser._id === postComment.commentedBy._id
-                                                            || postDetails.postedBy._id === loggedInUser._id) &&
-                                                        <span>
-                                                            <FontAwesomeIcon icon={faEllipsisH}
+                                                    {(loggedInUser._id === postComment.commentedBy._id || postDetails.postedBy._id === loggedInUser._id) && (
+                                                        <Dropdown className="threedots">
+                                                            <Dropdown.Toggle
+                                                                as={FontAwesomeIcon}
+                                                                icon={faEllipsisH}
                                                                 className=""
                                                                 onClick={() => toggleCommentDropdown(postDetails._id, postComment._id)}
                                                             />
-                                                        </span>
-                                                    }
-
-                                                    {isDeleteCommentDropdownVisible && modalData.postId === postDetails._id && modalData.postCommentId === postComment._id && (
-                                                        <span onClick={() => deleteComment(postDetails._id, postComment._id)} style={{ cursor: 'pointer' }}>Delete</span>
+                                                            {isDeleteCommentDropdownVisible && modalData.postId === postDetails._id && modalData.postCommentId === postComment._id && (
+                                                                <Dropdown.Menu show={isDeleteCommentDropdownVisible}>
+                                                                    <Dropdown.Item>
+                                                                        <span
+                                                                            className="deletecomment"
+                                                                            onClick={() => deleteComment(postDetails._id, postComment._id)}
+                                                                            style={{ cursor: 'pointer' }}
+                                                                        >
+                                                                            Delete
+                                                                        </span>
+                                                                    </Dropdown.Item>
+                                                                </Dropdown.Menu>
+                                                            )}
+                                                        </Dropdown>
                                                     )}
 
                                                 </span><br />
-                                                <span>
-                                                    {formatDistanceToNow(new Date(postComment.createdDate), { addSuffix: true })}
-                                                </span>
+
+                                                <p className="timestamp">
+
+                                                    <FontAwesomeIcon className="clock" icon={faClock} /> <span className="clock"> {' '} {formatDistanceToNow(new Date(postComment.createdDate), { addSuffix: true })}
+                                                    </span>
+                                                </p>
                                             </div>
                                         ))
                                     )}
