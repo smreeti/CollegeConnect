@@ -27,6 +27,11 @@ const {
   fetchPostComments,
   deleteComment,
   deletePost,
+  likeUnlikePost,
+  fetchPostLikes,
+  followUser,
+   unfollowUser,
+   fetchFollowingUsersList
 } = require("../controllers/controller.js");
 
 const {
@@ -61,11 +66,6 @@ const {
 } = require("../utils/APIRequestUrl.js");
 
 const { setSuccessResponse } = require("../utils/Response.js");
-const {
-  likeUnlikePost,
-  fetchPostLikes,
-} = require("../controllers/likeUnlikeController.js");
-const { followUser, unfollowUser } = require("../controllers/userFollowingController.js");
 
 router.get(API_TO_FETCH_COLLEGE_INFO, fetchCollegeList);
 router.post(API_TO_SIGNUP_USER, signupUser);

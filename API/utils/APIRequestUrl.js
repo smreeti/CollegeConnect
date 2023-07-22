@@ -41,6 +41,10 @@ const API_TO_DELETE_POST = "/deletePost/:id";
 const API_TO_FOLLOW_USER = "/follow";
 const API_TO_UNFOLLOW_USER = "/unfollow/:followingUserId";
 
+const API_TO_FETCH_FOLLOWING_USERS = "/followingUsers/:userId";
+
+const API_TO_FETCH_FOLLOWERS = "/followers/:userId";
+
 module.exports = {
   API_TO_FETCH_COLLEGE_INFO,
   API_TO_SIGNUP_USER,
@@ -68,5 +72,7 @@ module.exports = {
   API_TO_DELETE_COMMENT,
   API_TO_DELETE_POST,
   API_TO_FOLLOW_USER,
-  API_TO_UNFOLLOW_USER
+  API_TO_UNFOLLOW_USER,
+  API_TO_FETCH_FOLLOWING_USERS,
+  API_TO_FETCH_FOLLOWERS
 };

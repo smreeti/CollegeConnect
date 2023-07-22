@@ -82,11 +82,22 @@ const unfollowUser = async (req, res) => {
     }
 }
 
+const fetchFollowingUsersList = async (req, res) => {
+
+    try {
+        const followingUsers = fetchFollowingUsers(req.params.userId);
+        return setSuccessResponse(res, "Successfully fetched following users: ", followingUsers);
+    } catch (e) {
+        return setErrorResponse(res, "Something went wrong");
+    }
+}
+
 module.exports = {
     fetchFollowingUsers,
     followUser,
     checkIfFollowing,
     unfollowUser,
     incrementUserFollowingCount,
-    incrementUserFollowerCount
+    incrementUserFollowerCount,
+    fetchFollowingUsersList
 };
