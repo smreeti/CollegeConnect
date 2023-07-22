@@ -15,7 +15,7 @@ const followUser = async (req, res) => {
         if (user) {
             await UserFollowing.create({
                 userId: loggedInUser,
-                followingUserId: loggedInUser
+                followingUserId: user
             });
             return setSuccessResponse(res, "Successfully followed: " + user.username);
         }
@@ -24,4 +24,12 @@ const followUser = async (req, res) => {
     }
 }
 
-module.exports = { fetchFollowingUsers, followUser };
+const checkIfFollowing = async (userId, followingUserId) => {
+    const result = await UserFollowing.findOne({
+        userId: userId,
+        followingUserId: followingUserId
+    });
+    return result !== null;
+};
+
+module.exports = { fetchFollowingUsers, followUser, checkIfFollowing };

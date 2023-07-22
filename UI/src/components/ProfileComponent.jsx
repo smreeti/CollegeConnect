@@ -139,9 +139,17 @@ const ProfileComponent = () => {
 
                   {
                     (loggedInUser._id != id &&
-                      < button onClick={() => followUser()}>
-                        Follow
-                      </button>
+                      (
+                        userProfileDetails.isFollowing ? (
+                          <button onClick={() => followUser()}>
+                            UnFollow
+                          </button>
+                        ) :
+                          (<button onClick={() => followUser()}>
+                            Follow
+                          </button>
+                          )
+                      )
                     )
                   }
 
