@@ -32,4 +32,26 @@ const checkIfFollowing = async (userId, followingUserId) => {
     return result !== null;
 };
 
-module.exports = { fetchFollowingUsers, followUser, checkIfFollowing };
+const unfollowUser = async (req, res) => {
+    const loggedInUser = req.user;
+    const followingUserId = req.params.followingUserId;
+
+    console.log(req.params);
+    try {
+        const followingUser = await User.findById(followingUserId);
+        if (followingUser) {
+            const query = {
+                userId: loggedInUser,
+                followingUserId: followingUser
+            };
+            await UserFollowing.findOneAndDelete(query);
+        }
+
+        return setSuccessResponse(res, "Successfully unfollowed: " + followingUser.username);
+    } catch (e) {
+        return setErrorResponse(res, "Something went wrong");
+    }
+
+}
+
+module.exports = { fetchFollowingUsers, followUser, checkIfFollowing, unfollowUser };

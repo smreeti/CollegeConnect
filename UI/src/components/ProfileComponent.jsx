@@ -6,7 +6,7 @@ import fetchData from "../../utils/FetchAPI.js";
 import PostDetailComponent from "./PostDetailComponent.jsx";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faComment, faHeart, faCog, faFileImage } from '@fortawesome/free-solid-svg-icons';
-import { API_TO_FETCH_PROFILE_DETAILS, API_TO_VIEW_FOLLOWERS, API_TO_LIKE_UNLIKE_POST, API_TO_FOLLOW, API_TO_FOLLOW_USER } from "../../utils/APIRequestUrl.js";
+import { API_TO_FETCH_PROFILE_DETAILS, API_TO_VIEW_FOLLOWERS, API_TO_LIKE_UNLIKE_POST, API_TO_FOLLOW, API_TO_FOLLOW_USER, API_TO_UNFOLLOW_USER } from "../../utils/APIRequestUrl.js";
 import PostLikesComponent from './PostLikesComponent.jsx';
 import { getLoggedInUser } from "../../utils/Auth.js";
 
@@ -25,7 +25,6 @@ const ProfileComponent = () => {
   const [followers, setFollowers] = useState([]);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const loggedInUser = getLoggedInUser();
-  const [followStatus, setFollowStatus] = useState('Follow');
   const { id } = useParams();
 
   useEffect(() => {
@@ -110,6 +109,14 @@ const ProfileComponent = () => {
     }
   }
 
+  const unFollowUser = async () => {
+    try {
+      await fetchData(API_TO_UNFOLLOW_USER + `/${id}`, "POST");
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <main>
       <Header />
@@ -145,7 +152,7 @@ const ProfileComponent = () => {
                             UnFollow
                           </button>
                         ) :
-                          (<button onClick={() => followUser()}>
+                          (<button onClick={() => unFollowUser()}>
                             Follow
                           </button>
                           )
