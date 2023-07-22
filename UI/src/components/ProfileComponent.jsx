@@ -98,24 +98,30 @@ const ProfileComponent = () => {
     setPosts(actualPostData)
   }
 
-  const followUser = async () => {
+  const followUser = async (e) => {
+    e.preventDefault();
     const followObj = {
       followingUserId: id
     }
     try {
       await fetchData(API_TO_FOLLOW_USER, "POST", followObj);
+      await fetchUserProfileDetails();
     } catch (error) {
       console.log(error);
     }
   }
 
-  const unFollowUser = async () => {
+  const unFollowUser = async (e) => {
+    e.preventDefault();
     try {
       await fetchData(API_TO_UNFOLLOW_USER + `/${id}`, "POST");
+      await fetchUserProfileDetails();
     } catch (error) {
       console.log(error);
     }
   }
+
+  const { isFollowing } = userProfileDetails;
 
   return (
     <main>
@@ -145,23 +151,15 @@ const ProfileComponent = () => {
                   </button>
 
                   {
-                    (loggedInUser._id != id &&
-                      (
-                        userProfileDetails.isFollowing ? (
-                          <button onClick={() => followUser()}>
-                            UnFollow
-                          </button>
-                        ) :
-                          (<button onClick={() => unFollowUser()}>
-                            Follow
-                          </button>
-                          )
-                      )
+                    loggedInUser._id !== id && (
+                      <button onClick={isFollowing ? unFollowUser : followUser} className="editbutton">
+                        {isFollowing ? 'Unfollow' : 'Follow'}
+                      </button>
                     )
                   }
 
                 </div>
-                <div className="user_details_bio_container mt-md-5 mt-4">
+                <div className="user_details_bio_container mt-4">
                   <div>
                     <span className="bolding">100</span> Followers
                   </div>
