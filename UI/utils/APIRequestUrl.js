@@ -47,8 +47,8 @@ const API_TO_DELETE_POST = BASE_SERVER_URL + "/deletePost";
 const API_TO_FOLLOW_USER = BASE_SERVER_URL + "/follow";
 const API_TO_UNFOLLOW_USER = BASE_SERVER_URL + "/unfollow";
 
-const API_TO_FETCH_FOLLOWING_USERS = BASE_SERVER_URL + "/followingUsers/:userId";
-const API_TO_FETCH_FOLLOWERS = BASE_SERVER_URL + "/followers/:userId";
+const API_TO_FETCH_FOLLOWING_USERS = BASE_SERVER_URL + "/followingUsers";
+const API_TO_FETCH_FOLLOWERS = BASE_SERVER_URL + "/followers";
 
 export {
   API_TO_FETCH_COLLEGE_INFO,

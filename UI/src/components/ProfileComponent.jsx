@@ -6,14 +6,12 @@ import fetchData from "../../utils/FetchAPI.js";
 import PostDetailComponent from "./PostDetailComponent.jsx";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faComment, faHeart, faCog, faFileImage } from '@fortawesome/free-solid-svg-icons';
-import { API_TO_FETCH_PROFILE_DETAILS, API_TO_VIEW_FOLLOWERS, API_TO_LIKE_UNLIKE_POST, API_TO_FOLLOW, API_TO_FOLLOW_USER, API_TO_UNFOLLOW_USER } from "../../utils/APIRequestUrl.js";
+import { API_TO_FETCH_PROFILE_DETAILS, API_TO_VIEW_FOLLOWERS, API_TO_LIKE_UNLIKE_POST, API_TO_FOLLOW, API_TO_FOLLOW_USER, API_TO_UNFOLLOW_USER, API_TO_FETCH_FOLLOWING_USERS, API_TO_FETCH_FOLLOWERS } from "../../utils/APIRequestUrl.js";
 import PostLikesComponent from './PostLikesComponent.jsx';
 import { getLoggedInUser } from "../../utils/Auth.js";
 
 
 const ProfileComponent = () => {
-  const [likes, setLikes] = useState(0);
-  // const [isLiked, setIsLiked] = useState(false);
   const [isUserPostOpen, setIsUserPostOpen] = useState(false);
   const [selectedPostId, setSelectedPostId] = useState("");
   const [userProfileDetails, setUserProfileDetails] = useState({});
@@ -21,9 +19,6 @@ const ProfileComponent = () => {
   const [posts, setPosts] = useState([]);
   const [isPostLiked, setIsPostLiked] = useState(false);
   const [isLikesModalOpen, setIsLikesModalOpen] = useState(false);
-  const [selectedPostDetailId, setSelectedPostDetailId] = useState("");
-  const [followers, setFollowers] = useState([]);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const loggedInUser = getLoggedInUser();
   const { id } = useParams();
 
@@ -121,6 +116,22 @@ const ProfileComponent = () => {
     }
   }
 
+  const fetchFOllowingUsers = async () => {
+    try {
+      await fetchData(API_TO_FETCH_FOLLOWING_USERS + `/${id}`, "POST");
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  const fetchFollowers = async () => {
+    try {
+      await fetchData(API_TO_FETCH_FOLLOWERS + `/${id}`, "POST");
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   const { isFollowing } = userProfileDetails;
 
   return (
@@ -157,17 +168,23 @@ const ProfileComponent = () => {
                       </button>
                     )
                   }
-
                 </div>
                 <div className="user_details_bio_container mt-4">
                   <div>
-                    <span className="bolding">{userDetails?.followers}</span> Followers
+                    <span onClick={fetchFollowers} className="link">
+                      <span className="bolding" >{userDetails?.followers}</span> Followers
+                    </span>
                   </div>
+
                   <div>
-                    <span className="bolding">{userDetails?.following}</span> Following
+                    <span onClick={fetchFOllowingUsers} className="link">
+                      <span className="bolding">
+                        {userDetails?.following} </span>Following
+                    </span>
                   </div>
+
                   <div>
-                    <span className="bolding">{posts?.length}</span> POSTS
+                    <span className="bolding">{posts?.length} </span>POSTS
                   </div>
                 </div>
                 <div className="desc">

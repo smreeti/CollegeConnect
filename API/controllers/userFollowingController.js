@@ -83,10 +83,28 @@ const unfollowUser = async (req, res) => {
 }
 
 const fetchFollowingUsersList = async (req, res) => {
-
     try {
-        const followingUsers = fetchFollowingUsers(req.params.userId);
-        return setSuccessResponse(res, "Successfully fetched following users: ", followingUsers);
+        const followingUsers = await UserFollowing.find(
+            { userId: req.params.userId, status: 'Y' })
+            .populate({
+                path: "followingUserId",
+                select: "username profilePicture"
+            });
+        return setSuccessResponse(res, "Successfully fetched following users: ", { followingUsers });
+    } catch (e) {
+        return setErrorResponse(res, "Something went wrong");
+    }
+}
+
+const fetchFollowersUsersList = async (req, res) => {
+    try {
+        const followers = await UserFollowing.find(
+            { followingUserId: req.params.userId, status: 'Y' })
+            .populate({
+                path: "userId",
+                select: "username profilePicture"
+            });
+        return setSuccessResponse(res, "Successfully fetched followers: ", { followers });
     } catch (e) {
         return setErrorResponse(res, "Something went wrong");
     }
@@ -99,5 +117,6 @@ module.exports = {
     unfollowUser,
     incrementUserFollowingCount,
     incrementUserFollowerCount,
-    fetchFollowingUsersList
+    fetchFollowingUsersList,
+    fetchFollowersUsersList
 };

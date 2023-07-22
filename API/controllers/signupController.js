@@ -10,6 +10,7 @@ const {
 const { validateUser } = require("../utils/ValidationUtil.js");
 const { fetchAdminUser } = require("./userController.js");
 const UserFollowing = require("../models/UserFollowing.js");
+const { incrementUserFollowingCount, incrementUserFollowerCount } = require("./userFollowingController.js");
 
 const signupUser = async (req, res) => {
   const {

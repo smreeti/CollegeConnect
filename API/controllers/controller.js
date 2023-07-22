@@ -48,7 +48,8 @@ const {
 const {
   followUser,
   unfollowUser,
-  fetchFollowingUsersList
+  fetchFollowingUsersList,
+  fetchFollowersUsersList
 } = require("../controllers/userFollowingController.js");
 
 module.exports = {
@@ -82,5 +83,6 @@ module.exports = {
   fetchPostLikes,
   followUser,
   unfollowUser,
-  fetchFollowingUsersList
+  fetchFollowingUsersList,
+  fetchFollowersUsersList
 };
