@@ -233,7 +233,7 @@ const PostDetailComponent = (props) => {
 
 
                                     {postDetails?.postedBy?._id === loggedInUser._id && (
-                                        <Dropdown className="threedots">
+                                        <Dropdown className="threedots link">
                                             <Dropdown.Toggle
                                                 as={FontAwesomeIcon}
                                                 icon={faEllipsisH}
@@ -283,7 +283,7 @@ const PostDetailComponent = (props) => {
                                                     {postComment.comment}
 
                                                     {(loggedInUser._id === postComment.commentedBy._id || postDetails.postedBy._id === loggedInUser._id) && (
-                                                        <Dropdown className="threedots">
+                                                        <Dropdown className="threedots link">
                                                             <Dropdown.Toggle
                                                                 as={FontAwesomeIcon}
                                                                 icon={faEllipsisH}
