@@ -45,6 +45,8 @@ const API_TO_FETCH_FOLLOWING_USERS = "/followingUsers/:userId";
 
 const API_TO_FETCH_FOLLOWERS = "/followers/:userId";
 
+const API_TO_REPORT_COMMENT = "/reportComment";
+
 module.exports = {
   API_TO_FETCH_COLLEGE_INFO,
   API_TO_SIGNUP_USER,
@@ -74,5 +76,6 @@ module.exports = {
   API_TO_FOLLOW_USER,
   API_TO_UNFOLLOW_USER,
   API_TO_FETCH_FOLLOWING_USERS,
-  API_TO_FETCH_FOLLOWERS
+  API_TO_FETCH_FOLLOWERS,
+  API_TO_REPORT_COMMENT
 };

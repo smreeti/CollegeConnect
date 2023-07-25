@@ -32,7 +32,8 @@ const {
   followUser,
    unfollowUser,
    fetchFollowingUsersList,
-   fetchFollowersUsersList
+   fetchFollowersUsersList,
+   reportComment
 } = require("../controllers/controller.js");
 
 const {
@@ -65,6 +66,7 @@ const {
   API_TO_UNFOLLOW_USER,
   API_TO_FETCH_FOLLOWING_USERS,
   API_TO_FETCH_FOLLOWERS,
+  API_TO_REPORT_COMMENT,
 } = require("../utils/APIRequestUrl.js");
 
 const { setSuccessResponse } = require("../utils/Response.js");
@@ -126,5 +128,7 @@ router.post(API_TO_UNFOLLOW_USER, authMiddleware, unfollowUser);
 
 router.post(API_TO_FETCH_FOLLOWING_USERS, authMiddleware, fetchFollowingUsersList);
 router.post(API_TO_FETCH_FOLLOWERS, authMiddleware, fetchFollowersUsersList);
+
+router.post(API_TO_REPORT_COMMENT, authMiddleware, reportComment);
 
 module.exports = router;
