@@ -17,6 +17,13 @@ const PostCommentsSchema = new Schema({
     createdDate: {
         type: Date,
         default: Date.now
+    },
+    status: {
+        type: String,
+        default: "ACTIVE",
+    },
+    remarks: {
+        type: String,
     }
 });
 

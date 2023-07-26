@@ -33,7 +33,8 @@ const {
 <<<<<<< HEAD
   unfollowUser,
   fetchFollowingUsersList,
-  fetchFollowersUsersList
+  fetchFollowersUsersList,
+  reportComment
 =======
    unfollowUser,
    fetchFollowingUsersList,
@@ -74,6 +75,8 @@ const {
   API_TO_FETCH_FOLLOWERS,
 <<<<<<< HEAD
   API_TO_REMOVE_FOLLOWERS,
+  API_TO_APPROVE_COMMENT_REPORTS,
+  API_TO_REJECT_COMMENT_REPORTS,
 =======
   API_TO_REPORT_COMMENT,
 >>>>>>> comments-report-sm
@@ -81,6 +84,7 @@ const {
 
 const { setSuccessResponse } = require("../utils/Response.js");
 const { removeFollower } = require("../controllers/userFollowingController.js");
+const { fetchCommentReports, handleApproveCommentReports, handleRejectCommentReports } = require("../controllers/reportCommentController.js");
 
 router.get(API_TO_FETCH_COLLEGE_INFO, fetchCollegeList);
 router.post(API_TO_SIGNUP_USER, signupUser);
@@ -141,7 +145,19 @@ router.post(API_TO_FETCH_FOLLOWING_USERS, authMiddleware, fetchFollowingUsersLis
 router.post(API_TO_FETCH_FOLLOWERS, authMiddleware, fetchFollowersUsersList);
 router.post(API_TO_REMOVE_FOLLOWERS, authMiddleware, removeFollower);
 
-
 router.post(API_TO_REPORT_COMMENT, authMiddleware, reportComment);
+router.get(API_TO_FETCH_COMMENT_REPORTS, authMiddleware, fetchCommentReports);
+
+router.post(
+  API_TO_APPROVE_COMMENT_REPORTS,
+  authMiddleware,
+  handleApproveCommentReports
+);
+
+router.post(
+  API_TO_REJECT_COMMENT_REPORTS,
+  authMiddleware,
+  handleRejectCommentReports
+);
 
 module.exports = router;

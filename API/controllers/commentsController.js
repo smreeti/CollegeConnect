@@ -31,7 +31,8 @@ const updatePostCommentCount = async (postId) => {
 
 const fetchPostComments = async (postId) => {
     const postComments = await PostComments.find({
-        post: postId
+        post: postId,
+        status: 'ACTIVE'
     })
         .populate({
             path: "commentedBy",
