@@ -39,7 +39,6 @@ const {
   deleteComment,
 } = require("../controllers/commentsController.js");
 
-
 const {
   likeUnlikePost,
   fetchPostLikes,
@@ -51,6 +50,8 @@ const {
   fetchFollowingUsersList,
   fetchFollowersUsersList
 } = require("../controllers/userFollowingController.js");
+
+const { reportComment } = require("../controllers/reportCommentController.js");
 
 module.exports = {
   signupUser,
@@ -84,5 +85,6 @@ module.exports = {
   followUser,
   unfollowUser,
   fetchFollowingUsersList,
-  fetchFollowersUsersList
+  fetchFollowersUsersList,
+  reportComment
 };

@@ -30,9 +30,16 @@ const {
   likeUnlikePost,
   fetchPostLikes,
   followUser,
+<<<<<<< HEAD
   unfollowUser,
   fetchFollowingUsersList,
   fetchFollowersUsersList
+=======
+   unfollowUser,
+   fetchFollowingUsersList,
+   fetchFollowersUsersList,
+   reportComment
+>>>>>>> comments-report-sm
 } = require("../controllers/controller.js");
 
 const {
@@ -65,7 +72,11 @@ const {
   API_TO_UNFOLLOW_USER,
   API_TO_FETCH_FOLLOWING_USERS,
   API_TO_FETCH_FOLLOWERS,
+<<<<<<< HEAD
   API_TO_REMOVE_FOLLOWERS,
+=======
+  API_TO_REPORT_COMMENT,
+>>>>>>> comments-report-sm
 } = require("../utils/APIRequestUrl.js");
 
 const { setSuccessResponse } = require("../utils/Response.js");
@@ -130,5 +141,7 @@ router.post(API_TO_FETCH_FOLLOWING_USERS, authMiddleware, fetchFollowingUsersLis
 router.post(API_TO_FETCH_FOLLOWERS, authMiddleware, fetchFollowersUsersList);
 router.post(API_TO_REMOVE_FOLLOWERS, authMiddleware, removeFollower);
 
+
+router.post(API_TO_REPORT_COMMENT, authMiddleware, reportComment);
 
 module.exports = router;
