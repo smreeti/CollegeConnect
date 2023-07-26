@@ -30,17 +30,10 @@ const {
   likeUnlikePost,
   fetchPostLikes,
   followUser,
-<<<<<<< HEAD
   unfollowUser,
   fetchFollowingUsersList,
   fetchFollowersUsersList,
   reportComment
-=======
-   unfollowUser,
-   fetchFollowingUsersList,
-   fetchFollowersUsersList,
-   reportComment
->>>>>>> comments-report-sm
 } = require("../controllers/controller.js");
 
 const {
@@ -73,13 +66,11 @@ const {
   API_TO_UNFOLLOW_USER,
   API_TO_FETCH_FOLLOWING_USERS,
   API_TO_FETCH_FOLLOWERS,
-<<<<<<< HEAD
   API_TO_REMOVE_FOLLOWERS,
+  API_TO_REPORT_COMMENT,
   API_TO_APPROVE_COMMENT_REPORTS,
   API_TO_REJECT_COMMENT_REPORTS,
-=======
-  API_TO_REPORT_COMMENT,
->>>>>>> comments-report-sm
+  API_TO_FETCH_COMMENT_REPORTS,
 } = require("../utils/APIRequestUrl.js");
 
 const { setSuccessResponse } = require("../utils/Response.js");
