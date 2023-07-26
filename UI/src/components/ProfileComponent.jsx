@@ -25,7 +25,8 @@ const ProfileComponent = () => {
   const [isLikesModalOpen, setIsLikesModalOpen] = useState(false);
   const [isFollowerModalOpen, setIsFollowerModalOpen] = useState(false);
   const [isFollowingModalOpen, setIsFollowingModalOpen] = useState(false);
-  const [isFollowship, setFollowship] = useState([]);
+  const [isFollowers, setFollowers] = useState([]);
+  const [isFollowingUsers, setFollowingUsers] = useState([]);
   const loggedInUser = getLoggedInUser();
   const { id } = useParams();
 
@@ -131,8 +132,8 @@ const ProfileComponent = () => {
   const fetchFOllowingUsers = async () => {
     try {
       const data = await fetchData(API_TO_FETCH_FOLLOWING_USERS + `/${id}`, "POST");
-      console.log(data.body);
-      // setFollowship(data.body)
+      console.log(data.body.followingUsers);
+      setFollowingUsers(data.body.followingUsers)
     } catch (error) {
       console.log(error);
     }
@@ -141,7 +142,9 @@ const ProfileComponent = () => {
   const fetchFollowers = async () => {
     try {
       const data = await fetchData(API_TO_FETCH_FOLLOWERS + `/${id}`, "POST");
-      setFollowship(data.body.followers);
+      console.log(data.body.followers);
+
+      setFollowers(data.body.followers);
     } catch (error) {
       console.log(error);
     }
@@ -200,7 +203,7 @@ const ProfileComponent = () => {
                   </div>
 
                   <div>
-                    <span onClick={() => openFollowingsModal()} className="link">
+                    <span onClick={() => openFollowingsModal()} data-target="userFollowingModal" className='modal-trigger link'>
                       <span className="bolding">
                         {userDetails?.following} </span>Following
                     </span>
@@ -289,12 +292,12 @@ const ProfileComponent = () => {
       }
       {
         isFollowerModalOpen && (
-          <FollowerModalComponent followers={isFollowship} />
+          <FollowerModalComponent followship={isFollowers} />
         )
       }
       {
         isFollowingModalOpen && (
-          <FollowingModalComponent followers={isFollowship} />
+          <FollowingModalComponent followship={isFollowingUsers} />
         )
       }
     </main >

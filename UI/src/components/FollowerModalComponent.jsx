@@ -1,14 +1,12 @@
 import React, { useRef, useEffect, useState } from 'react'
 import M from 'materialize-css'
-import fetchData from '../../utils/FetchAPI'
-import { API_TO_FETCH_FOLLOWERS } from '../../utils/APIRequestUrl'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 
 const FollowerModalComponent = (props) => {
     const userFollowersModal = useRef(null);
     const [followersList, setFollowersList] = useState([]);
-    const { followers } = props;
+    const { followship } = props;
 
     useEffect(() => {
         M.Modal.init(userFollowersModal.current);
@@ -24,7 +22,7 @@ const FollowerModalComponent = (props) => {
     };
 
     const fetchFollowers = () => {
-        setFollowersList(followers);
+        setFollowersList(followship);
     };
 
     return (
@@ -54,7 +52,7 @@ const FollowerModalComponent = (props) => {
                                                 <img className="creator_image_post" src="/assets/defaultProfileImage.png" alt="Profile" />
                                             ) : (
                                                 <img
-                                                    className="creator_image_post" src={followersData?.profilePicture}
+                                                    className="creator_image_post" src={followersData?.userId?.profilePicture}
                                                     alt="Profile"
                                                 />
                                             )}
