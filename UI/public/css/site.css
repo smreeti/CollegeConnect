@@ -85,8 +85,13 @@ body {
 }
 
 .username {
-  padding-left: 12px;
+  padding-left: 10px;
   color: black;
+}
+
+.fullName {
+  padding-left: 10px;
+  color: #786f6f;
 }
 
 .commentmain {
@@ -366,6 +371,10 @@ body {
 
 .username {
   font-weight: bold;
+}
+
+.username a {
+  color: black !important;
 }
 
 .usernamespace {
@@ -827,6 +836,11 @@ button[type="submit"]:hover {
   justify-content: center;
 }
 
+.user-modal-details {
+  display: flex;
+  flex-direction: column;
+}
+
 .banimg {
   height: 100%;
   max-width: 100%;
@@ -1259,7 +1273,17 @@ footer #footer {
 .collection-item {
   display: flex;
   gap: 10px;
-  padding-bottom: 10px;
+  padding-bottom: 5px;
+}
+
+h5 {
+  margin-bottom: 0px !important;
+}
+
+.follow-modalbtn {
+  align-self: center;
+  text-align: right;
+  flex-grow: 1;
 }
 
 @media screen and (min-width: 360px) and (max-width: 370px) {

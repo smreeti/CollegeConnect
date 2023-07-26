@@ -6,14 +6,18 @@ import fetchData from "../../utils/FetchAPI.js";
 import PostDetailComponent from "./PostDetailComponent.jsx";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faComment, faHeart, faCog, faFileImage } from '@fortawesome/free-solid-svg-icons';
-import { API_TO_FETCH_PROFILE_DETAILS, API_TO_VIEW_FOLLOWERS, API_TO_LIKE_UNLIKE_POST, API_TO_FOLLOW, API_TO_FOLLOW_USER, API_TO_UNFOLLOW_USER, API_TO_FETCH_FOLLOWING_USERS, API_TO_FETCH_FOLLOWERS } from "../../utils/APIRequestUrl.js";
+import {
+  API_TO_FETCH_PROFILE_DETAILS,
+  API_TO_LIKE_UNLIKE_POST,
+  API_TO_FOLLOW_USER,
+  API_TO_UNFOLLOW_USER
+}
+  from "../../utils/APIRequestUrl.js";
 import PostLikesComponent from './PostLikesComponent.jsx';
 import FollowerModalComponent from "./FollowerModalComponent.jsx";
 import FollowingModalComponent from "./FollowingModalComponent.jsx";
 
 import { getLoggedInUser } from "../../utils/Auth.js";
-// import { fetchFollowingUsers } from "../../../API/controllers/userFollowingController.js";
-
 
 const ProfileComponent = () => {
   const [isUserPostOpen, setIsUserPostOpen] = useState(false);
@@ -21,12 +25,9 @@ const ProfileComponent = () => {
   const [userProfileDetails, setUserProfileDetails] = useState({});
   const [userDetails, setUserDetails] = useState([]);
   const [posts, setPosts] = useState([]);
-  const [isPostLiked, setIsPostLiked] = useState(false);
   const [isLikesModalOpen, setIsLikesModalOpen] = useState(false);
   const [isFollowerModalOpen, setIsFollowerModalOpen] = useState(false);
   const [isFollowingModalOpen, setIsFollowingModalOpen] = useState(false);
-  const [isFollowers, setFollowers] = useState([]);
-  const [isFollowingUsers, setFollowingUsers] = useState([]);
   const loggedInUser = getLoggedInUser();
   const { id } = useParams();
 
@@ -38,11 +39,6 @@ const ProfileComponent = () => {
     setUserDetails(userProfileDetails.userDetail);
     setPosts(userProfileDetails.posts);
   }, [userProfileDetails]);
-
-  useEffect(() => {
-    fetchFollowers();
-    fetchFOllowingUsers();
-  }, []);
 
   const fetchUserProfileDetails = async () => {
     try {
@@ -124,24 +120,6 @@ const ProfileComponent = () => {
     try {
       await fetchData(API_TO_UNFOLLOW_USER + `/${id}`, "POST");
       await fetchUserProfileDetails();
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  const fetchFOllowingUsers = async () => {
-    try {
-      const data = await fetchData(API_TO_FETCH_FOLLOWING_USERS + `/${id}`, "POST");
-      setFollowingUsers(data.body.followingUsers)
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  const fetchFollowers = async () => {
-    try {
-      const data = await fetchData(API_TO_FETCH_FOLLOWERS + `/${id}`, "POST");
-      setFollowers(data.body.followers);
     } catch (error) {
       console.log(error);
     }
@@ -253,7 +231,9 @@ const ProfileComponent = () => {
                         <FontAwesomeIcon icon={faHeart} className='me-3 ' color={isLiked(post.likes) ? "red" : "silver"}
                           onClick={() => likePost(post._id)} />
                         <Link onClick={() => OpenModalLikes(post)}>
-                          {post?.likes?.length > 0 ? <small className='fs-6 fw-lighter text-white'><p>{post?.likes?.length}</p></small> : <small className='fs-6 fw-lighter text-white'><p>{post?.likes?.length}</p></small>}
+                          {post?.likes?.length > 0 ?
+                            <small className='fs-6 fw-lighter text-white'><p>{post?.likes?.length}</p></small>
+                            : <small className='fs-6 fw-lighter text-white'><p>{post?.likes?.length}</p></small>}
                         </Link>
                       </div>
 
@@ -289,14 +269,12 @@ const ProfileComponent = () => {
       }
       {
         isFollowerModalOpen && (
-          <FollowerModalComponent followship={isFollowers} />
+          <FollowerModalComponent id={id} />
         )
       }
       {
         isFollowingModalOpen && (
-          <FollowingModalComponent
-            followship={isFollowingUsers}
-            userDetail={userDetails} />
+          <FollowingModalComponent id={id} />
         )
       }
     </main >

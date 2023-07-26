@@ -30,9 +30,9 @@ const {
   likeUnlikePost,
   fetchPostLikes,
   followUser,
-   unfollowUser,
-   fetchFollowingUsersList,
-   fetchFollowersUsersList
+  unfollowUser,
+  fetchFollowingUsersList,
+  fetchFollowersUsersList
 } = require("../controllers/controller.js");
 
 const {
@@ -65,9 +65,11 @@ const {
   API_TO_UNFOLLOW_USER,
   API_TO_FETCH_FOLLOWING_USERS,
   API_TO_FETCH_FOLLOWERS,
+  API_TO_REMOVE_FOLLOWERS,
 } = require("../utils/APIRequestUrl.js");
 
 const { setSuccessResponse } = require("../utils/Response.js");
+const { removeFollower } = require("../controllers/userFollowingController.js");
 
 router.get(API_TO_FETCH_COLLEGE_INFO, fetchCollegeList);
 router.post(API_TO_SIGNUP_USER, signupUser);
@@ -126,5 +128,7 @@ router.post(API_TO_UNFOLLOW_USER, authMiddleware, unfollowUser);
 
 router.post(API_TO_FETCH_FOLLOWING_USERS, authMiddleware, fetchFollowingUsersList);
 router.post(API_TO_FETCH_FOLLOWERS, authMiddleware, fetchFollowersUsersList);
+router.post(API_TO_REMOVE_FOLLOWERS, authMiddleware, removeFollower);
+
 
 module.exports = router;

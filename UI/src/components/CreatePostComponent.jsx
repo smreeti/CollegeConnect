@@ -122,6 +122,7 @@ const CreatePostComponent = () => {
 
     const modalInstance = M.Modal.getInstance(createPostModal.current); //close modal
     modalInstance.close();
+    window.location.reload();
   };
 
   return (

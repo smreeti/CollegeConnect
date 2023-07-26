@@ -82,13 +82,40 @@ const unfollowUser = async (req, res) => {
     }
 }
 
+const removeFollower = async (req, res) => {
+    const loggedInUser = req.user;
+    const followerUserId = req.params.followerUserId;
+
+    try {
+        const followerUser = await User.findById(followerUserId);
+
+        if (followerUser) {
+            const query = {
+                userId: followerUser,
+                followingUserId: loggedInUser
+            };
+            await UserFollowing.findOneAndDelete(query);
+
+            await decrementUserFollowingCount(followerUser._id); //decrement following count for the logged in user
+            await decrementUserFollowerCount(loggedInUser._id); //logged in user is unfollowing other user so decrement the other users followers count
+        }
+
+        return setSuccessResponse(res, "Successfully unfollowed: " + loggedInUser.username);
+    } catch (e) {
+        return setErrorResponse(res, "Something went wrong");
+    }
+}
+
 const fetchFollowingUsersList = async (req, res) => {
     try {
         const followingUsers = await UserFollowing.find(
-            { userId: req.params.userId, status: 'Y' })
+            {
+                userId: req.params.userId,
+                status: 'Y'
+            })
             .populate({
                 path: "followingUserId",
-                select: "username profilePicture"
+                select: "username profilePicture firstName lastName"
             });
         return setSuccessResponse(res, "Successfully fetched following users: ", { followingUsers });
     } catch (e) {
@@ -97,12 +124,13 @@ const fetchFollowingUsersList = async (req, res) => {
 }
 
 const fetchFollowersUsersList = async (req, res) => {
+
     try {
         const followers = await UserFollowing.find(
             { followingUserId: req.params.userId, status: 'Y' })
             .populate({
                 path: "userId",
-                select: "username profilePicture"
+                select: "username profilePicture firstName lastName"
             });
         return setSuccessResponse(res, "Successfully fetched followers: ", { followers });
     } catch (e) {
@@ -118,5 +146,6 @@ module.exports = {
     incrementUserFollowingCount,
     incrementUserFollowerCount,
     fetchFollowingUsersList,
-    fetchFollowersUsersList
+    fetchFollowersUsersList,
+    removeFollower
 };

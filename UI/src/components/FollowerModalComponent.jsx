@@ -2,11 +2,16 @@ import React, { useRef, useEffect, useState } from 'react'
 import M from 'materialize-css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
+import { API_TO_FETCH_FOLLOWERS, API_TO_REMOVE_FOLLOWERS } from '../../utils/APIRequestUrl';
+import fetchData from '../../utils/FetchAPI';
+import { getLoggedInUser } from '../../utils/Auth';
+import { Link } from 'react-router-dom';
 
 const FollowerModalComponent = (props) => {
     const userFollowersModal = useRef(null);
     const [followersList, setFollowersList] = useState([]);
-    const { followship } = props;
+    const { id } = props;
+    const loggedInUser = getLoggedInUser();
 
     useEffect(() => {
         M.Modal.init(userFollowersModal.current);
@@ -18,12 +23,28 @@ const FollowerModalComponent = (props) => {
 
     const closeModal = () => {
         const modalInstance = M.Modal.getInstance(userFollowersModal.current);
-        modalInstance.close()
+        modalInstance.close();
+        window.location.reload();
     };
 
-    const fetchFollowers = () => {
-        setFollowersList(followship);
-    };
+    const fetchFollowers = async () => {
+        try {
+            const data = await fetchData(API_TO_FETCH_FOLLOWERS + `/${id}`, "POST");
+            setFollowersList(data.body.followers);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    const removeFollower = async (followerUserId) => {
+        try {
+            const data = await fetchData(API_TO_REMOVE_FOLLOWERS + `/${followerUserId}`, "POST");
+            setFollowersList(data.body.followers);
+            await fetchFollowers();
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     return (
         <>
@@ -59,10 +80,23 @@ const FollowerModalComponent = (props) => {
                                                         />
                                                     )}
                                                 </div>
-                                                <small>
-                                                    <span className='username'>{followersData?.userId?.username}</span>
-                                                </small>
-                                                <button className='btn btn-primary ms-auto btn-sm'>Follow</button>
+                                                <div className="user-modal-details ml-2">
+                                                    <span className="username">
+                                                        <Link to={`/profile/${followersData?.userId?._id}`}>
+                                                            {followersData?.userId?.username}
+                                                        </Link>
+                                                    </span>
+                                                    <span className='fullName'>
+                                                        {followersData?.userId?.firstName + " " + followersData?.userId?.lastName}</span>
+
+                                                </div>
+
+                                                {id === loggedInUser._id && (
+                                                    <div className='follow-modalbtn'>
+                                                        <button onClick={() => removeFollower(followersData.userId._id)}
+                                                            className='btn btn-primary btn-sm'>Remove</button>
+                                                    </div>)
+                                                }
                                             </li>
                                         </ul>
 
