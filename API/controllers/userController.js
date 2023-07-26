@@ -35,7 +35,7 @@ const searchUserByUsername = async (req, res) => {
         const users = await User.find({
             username: { $regex: usernamePattern },
             collegeInfoId: loggedInUser.collegeInfoId
-        }).select("username profilePicture");
+        }).select("username profilePicture firstName lastName");
 
         if (users.length === 0)
             return setErrorResponse(res, HttpStatus.NOT_FOUND, "No user(s) found.");

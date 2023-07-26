@@ -63,22 +63,34 @@ const SearchUserComponent = () => {
                             userDetails.map((userDetail) => {
                                 return (
                                     <li className="collection-item" key={userDetail._id}>
-                                        <img
-                                            className="profilePic"
-                                            src={
-                                                userDetail.profilePicture === "default"
-                                                    ? "assets/profile.png"
-                                                    : userDetail.profilePicture
-                                            }
-                                            alt="Profile"
-                                        />
-                                        <Link
-                                            key={userDetail._id}
-                                            to={`/profile/${userDetail._id}`}
-                                            onClick={closeSearchModal}
-                                        >
-                                            {userDetail.username}
-                                        </Link>
+
+                                        <div className="creator_block_post">
+                                            <img
+                                                className="creator_image_post"
+                                                src={
+                                                    userDetail.profilePicture === "default"
+                                                        ? "assets/profile.png"
+                                                        : userDetail.profilePicture
+                                                }
+                                                alt="Profile"
+                                            />
+                                        </div>
+
+                                        <div className="user-modal-details ml-2">
+                                            <span className="username">
+                                                <Link
+                                                    key={userDetail._id}
+                                                    to={`/profile/${userDetail._id}`}
+                                                    onClick={closeSearchModal}
+                                                >
+                                                    {userDetail.username}
+                                                </Link>
+
+                                            </span>
+                                            <span className='fullName'>
+                                                {userDetail?.firstName + " " + userDetail?.lastName}</span>
+                                        </div>
+
                                     </li>
                                 );
                             })
