@@ -12,7 +12,6 @@ import FollowerModalComponent from "./FollowerModalComponent.jsx";
 import FollowingModalComponent from "./FollowingModalComponent.jsx";
 
 import { getLoggedInUser } from "../../utils/Auth.js";
-// import { fetchFollowingUsers } from "../../../API/controllers/userFollowingController.js";
 
 
 const ProfileComponent = () => {
@@ -29,6 +28,9 @@ const ProfileComponent = () => {
   const [isFollowingUsers, setFollowingUsers] = useState([]);
   const loggedInUser = getLoggedInUser();
   const { id } = useParams();
+  const [isUserProfile, setIsUserProfile] = useState(false);
+  const [currentFollowship, setCurrentFollowship] = useState([]);
+
 
   useEffect(() => {
     fetchUserProfileDetails();
@@ -42,7 +44,7 @@ const ProfileComponent = () => {
   useEffect(() => {
     fetchFollowers();
     fetchFOllowingUsers();
-  }, []);
+  }, [id]);
 
   const fetchUserProfileDetails = async () => {
     try {
@@ -52,7 +54,7 @@ const ProfileComponent = () => {
       setPosts(userProfileDetails.posts);
       const hasUserLiked = isLiked(data.body.posts[0].likes);
       setIsPostLiked(hasUserLiked);
-
+      setIsUserProfile(data.body.userDetail._id === loggedInUser._id);
     } catch (error) {
       console.log("Error:", error);
     }
@@ -133,6 +135,7 @@ const ProfileComponent = () => {
     try {
       const data = await fetchData(API_TO_FETCH_FOLLOWING_USERS + `/${id}`, "POST");
       setFollowingUsers(data.body.followingUsers)
+      setCurrentFollowship(data.body.followingUsers)
     } catch (error) {
       console.log(error);
     }
@@ -295,8 +298,9 @@ const ProfileComponent = () => {
       {
         isFollowingModalOpen && (
           <FollowingModalComponent
-            followship={isFollowingUsers}
-            userDetail={userDetails} />
+            followship={currentFollowship}
+            userDetail={userDetails}
+            isUserProfile={isUserProfile} />
         )
       }
     </main >

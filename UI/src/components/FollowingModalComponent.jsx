@@ -6,17 +6,16 @@ import { faTimes } from "@fortawesome/free-solid-svg-icons";
 const FollowingModalComponent = (props) => {
     const userFollowingModal = useRef(null);
     const [followingUsersList, setFollowingUsersList] = useState([]);
-    const { followship, userDetail } = props;
+    const { followship, isUserProfile } = props;
 
-    const isUserProfile = followship[0].userId === userDetail._id
-
+    console.log(isUserProfile, "btn");
     useEffect(() => {
         M.Modal.init(userFollowingModal.current);
-    }, [props]);
+    }, []);
 
     useEffect(() => {
         fetchFollowingUsers();
-    }, []);
+    }, [followship]);
 
     const closeModal = () => {
         const modalInstance = M.Modal.getInstance(userFollowingModal.current);
