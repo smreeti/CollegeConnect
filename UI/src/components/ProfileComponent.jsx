@@ -132,7 +132,6 @@ const ProfileComponent = () => {
   const fetchFOllowingUsers = async () => {
     try {
       const data = await fetchData(API_TO_FETCH_FOLLOWING_USERS + `/${id}`, "POST");
-      console.log(data.body.followingUsers);
       setFollowingUsers(data.body.followingUsers)
     } catch (error) {
       console.log(error);
@@ -142,8 +141,6 @@ const ProfileComponent = () => {
   const fetchFollowers = async () => {
     try {
       const data = await fetchData(API_TO_FETCH_FOLLOWERS + `/${id}`, "POST");
-      console.log(data.body.followers);
-
       setFollowers(data.body.followers);
     } catch (error) {
       console.log(error);
