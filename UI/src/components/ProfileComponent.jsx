@@ -8,7 +8,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faComment, faHeart, faCog, faFileImage } from '@fortawesome/free-solid-svg-icons';
 import { API_TO_FETCH_PROFILE_DETAILS, API_TO_VIEW_FOLLOWERS, API_TO_LIKE_UNLIKE_POST, API_TO_FOLLOW, API_TO_FOLLOW_USER, API_TO_UNFOLLOW_USER, API_TO_FETCH_FOLLOWING_USERS, API_TO_FETCH_FOLLOWERS } from "../../utils/APIRequestUrl.js";
 import PostLikesComponent from './PostLikesComponent.jsx';
+import FollowerModalComponent from "./FollowerModalComponent.jsx";
+import FollowingModalComponent from "./FollowingModalComponent.jsx";
+
 import { getLoggedInUser } from "../../utils/Auth.js";
+// import { fetchFollowingUsers } from "../../../API/controllers/userFollowingController.js";
 
 
 const ProfileComponent = () => {
@@ -19,6 +23,9 @@ const ProfileComponent = () => {
   const [posts, setPosts] = useState([]);
   const [isPostLiked, setIsPostLiked] = useState(false);
   const [isLikesModalOpen, setIsLikesModalOpen] = useState(false);
+  const [isFollowerModalOpen, setIsFollowerModalOpen] = useState(false);
+  const [isFollowingModalOpen, setIsFollowingModalOpen] = useState(false);
+  const [isFollowship, setFollowship] = useState([]);
   const loggedInUser = getLoggedInUser();
   const { id } = useParams();
 
@@ -30,6 +37,11 @@ const ProfileComponent = () => {
     setUserDetails(userProfileDetails.userDetail);
     setPosts(userProfileDetails.posts);
   }, [userProfileDetails]);
+
+  useEffect(() => {
+    fetchFollowers();
+    fetchFOllowingUsers();
+  }, []);
 
   const fetchUserProfileDetails = async () => {
     try {
@@ -118,7 +130,9 @@ const ProfileComponent = () => {
 
   const fetchFOllowingUsers = async () => {
     try {
-      await fetchData(API_TO_FETCH_FOLLOWING_USERS + `/${id}`, "POST");
+      const data = await fetchData(API_TO_FETCH_FOLLOWING_USERS + `/${id}`, "POST");
+      console.log(data.body);
+      // setFollowship(data.body)
     } catch (error) {
       console.log(error);
     }
@@ -126,10 +140,19 @@ const ProfileComponent = () => {
 
   const fetchFollowers = async () => {
     try {
-      await fetchData(API_TO_FETCH_FOLLOWERS + `/${id}`, "POST");
+      const data = await fetchData(API_TO_FETCH_FOLLOWERS + `/${id}`, "POST");
+      setFollowship(data.body.followers);
     } catch (error) {
       console.log(error);
     }
+  }
+
+  const openFollowerModal = () => {
+    setIsFollowerModalOpen(true);
+  }
+
+  const openFollowingsModal = () => {
+    setIsFollowingModalOpen(true);
   }
 
   const { isFollowing } = userProfileDetails;
@@ -171,13 +194,13 @@ const ProfileComponent = () => {
                 </div>
                 <div className="user_details_bio_container mt-4">
                   <div>
-                    <span onClick={fetchFollowers} className="link">
+                    <span onClick={() => openFollowerModal()} data-target="userFollowersModal" className='modal-trigger link'>
                       <span className="bolding" >{userDetails?.followers}</span> Followers
                     </span>
                   </div>
 
                   <div>
-                    <span onClick={fetchFOllowingUsers} className="link">
+                    <span onClick={() => openFollowingsModal()} className="link">
                       <span className="bolding">
                         {userDetails?.following} </span>Following
                     </span>
@@ -262,6 +285,16 @@ const ProfileComponent = () => {
           <PostLikesComponent
             selectedPostId={selectedPostId}
           />
+        )
+      }
+      {
+        isFollowerModalOpen && (
+          <FollowerModalComponent followers={isFollowship} />
+        )
+      }
+      {
+        isFollowingModalOpen && (
+          <FollowingModalComponent followers={isFollowship} />
         )
       }
     </main >
