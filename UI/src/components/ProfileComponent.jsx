@@ -294,7 +294,9 @@ const ProfileComponent = () => {
       }
       {
         isFollowingModalOpen && (
-          <FollowingModalComponent followship={isFollowingUsers} />
+          <FollowingModalComponent
+            followship={isFollowingUsers}
+            userDetail={userDetails} />
         )
       }
     </main >

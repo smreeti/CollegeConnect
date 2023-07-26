@@ -43,28 +43,35 @@ const FollowerModalComponent = (props) => {
                             </div>
                         </div>
                         <div className="modal-body">
-                            {followersList.map(followersData => (
-                                <ul className="collection" key={followersData._id}>
+                            {followersList?.length > 0 ?
+                                (
+                                    followersList?.map(followersData => (
+                                        <ul className="collection" key={followersData._id}>
 
-                                    <li className='d-flex'>
-                                        <div className="creator_block_post">
-                                            {followersData?.userId?.profilePicture === "default" ? (
-                                                <img className="creator_image_post" src="/assets/defaultProfileImage.png" alt="Profile" />
-                                            ) : (
-                                                <img
-                                                    className="creator_image_post" src={followersData?.userId?.profilePicture}
-                                                    alt="Profile"
-                                                />
-                                            )}
-                                        </div>
-                                        <small>
-                                            <span className='username'>{followersData?.userId?.username}</span>
-                                        </small>
-                                        <button className='btn btn-primary ms-auto btn-sm'>Follow</button>
-                                    </li>
-                                </ul>
+                                            <li className='d-flex'>
+                                                <div className="creator_block_post">
+                                                    {followersData?.userId?.profilePicture === "default" ? (
+                                                        <img className="creator_image_post" src="/assets/defaultProfileImage.png" alt="Profile" />
+                                                    ) : (
+                                                        <img
+                                                            className="creator_image_post" src={followersData?.userId?.profilePicture}
+                                                            alt="Profile"
+                                                        />
+                                                    )}
+                                                </div>
+                                                <small>
+                                                    <span className='username'>{followersData?.userId?.username}</span>
+                                                </small>
+                                                <button className='btn btn-primary ms-auto btn-sm'>Follow</button>
+                                            </li>
+                                        </ul>
 
-                            ))}
+                                    ))
+                                ) :
+                                <div className='text-center'>
+                                    <i className='text-secondary text-center'>No Follower Yet</i>
+                                </div>
+                            }
 
                         </div>
                     </div>

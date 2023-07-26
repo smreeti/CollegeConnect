@@ -6,7 +6,9 @@ import { faTimes } from "@fortawesome/free-solid-svg-icons";
 const FollowingModalComponent = (props) => {
     const userFollowingModal = useRef(null);
     const [followingUsersList, setFollowingUsersList] = useState([]);
-    const { followship } = props;
+    const { followship, userDetail } = props;
+
+    const isUserProfile = followship[0].userId === userDetail._id
 
     useEffect(() => {
         M.Modal.init(userFollowingModal.current);
@@ -43,29 +45,34 @@ const FollowingModalComponent = (props) => {
                             </div>
                         </div>
                         <div className="modal-body">
-                            {followingUsersList.map(followingUser => (
-                                <ul className="collection" key={followingUser._id}>
+                            {followingUsersList?.length > 0 ?
+                                (followingUsersList.map(followingUser => (
+                                    <ul className="collection" key={followingUser._id}>
 
-                                    <li className='d-flex'>
-                                        <div className="creator_block_post">
-                                            {followingUser?.followingUserId?.profilePicture === "default" ? (
-                                                <img className="creator_image_post" src="/assets/defaultProfileImage.png" alt="Profile" />
-                                            ) : (
-                                                <img
-                                                    className="creator_image_post" src={followingUser?.followingUserId?.profilePicture}
-                                                    alt="Profile"
-                                                />
-                                            )}
-                                        </div>
-                                        <small>
-                                            <span className='username'>{followingUser?.followingUserId?.username}</span>
-                                        </small>
-                                        <button className='btn btn-primary ms-auto btn-sm'>Follow</button>
-                                    </li>
-                                </ul>
+                                        <li className='d-flex'>
+                                            <div className="creator_block_post">
+                                                {followingUser?.followingUserId?.profilePicture === "default" ? (
+                                                    <img className="creator_image_post" src="/assets/defaultProfileImage.png" alt="Profile" />
+                                                ) : (
+                                                    <img
+                                                        className="creator_image_post" src={followingUser?.followingUserId?.profilePicture}
+                                                        alt="Profile"
+                                                    />
+                                                )}
+                                            </div>
+                                            <small>
+                                                <span className='username'>{followingUser?.followingUserId?.username}</span>
+                                            </small>
+                                            {!isUserProfile ? <button className='btn btn-primary ms-auto btn-sm'>Follow</button> : null
+                                            }
+                                        </li>
+                                    </ul>
 
-                            ))}
-
+                                ))) :
+                                <div className='text-center'>
+                                    <i className='text-secondary text-center'>Following List is Empty</i>
+                                </div>
+                            }
                         </div>
                     </div>
                 </div >
