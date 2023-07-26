@@ -39,7 +39,6 @@ const fetchAllPosts = async (req, res) => {
 
     const posts = await Post.find({
       postedBy: { $in: followingUsers },
-      isCollegePost: "Y",
       status: "ACTIVE",
     })
       .populate("postedBy")
