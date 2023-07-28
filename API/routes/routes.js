@@ -33,7 +33,8 @@ const {
   unfollowUser,
   fetchFollowingUsersList,
   fetchFollowersUsersList,
-  reportComment
+  reportComment,
+  fetchDataForDoughnutChart
 } = require("../controllers/controller.js");
 
 const {
@@ -71,6 +72,7 @@ const {
   API_TO_APPROVE_COMMENT_REPORTS,
   API_TO_REJECT_COMMENT_REPORTS,
   API_TO_FETCH_COMMENT_REPORTS,
+  API_TO_FETCH_DATA_FOR_DOUGNNUT_CHART,
 } = require("../utils/APIRequestUrl.js");
 
 const { setSuccessResponse } = require("../utils/Response.js");
@@ -150,5 +152,7 @@ router.post(
   authMiddleware,
   handleRejectCommentReports
 );
+
+router.get(API_TO_FETCH_DATA_FOR_DOUGNNUT_CHART, authMiddleware, fetchDataForDoughnutChart);
 
 module.exports = router;

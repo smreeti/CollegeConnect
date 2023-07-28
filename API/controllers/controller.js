@@ -53,6 +53,8 @@ const {
 
 const { reportComment } = require("../controllers/reportCommentController.js");
 
+const { fetchDataForDoughnutChart } = require("../controllers/adminHomeController.js");
+
 module.exports = {
   signupUser,
   fetchCollegeList,
@@ -86,5 +88,6 @@ module.exports = {
   unfollowUser,
   fetchFollowingUsersList,
   fetchFollowersUsersList,
-  reportComment
+  reportComment,
+  fetchDataForDoughnutChart
 };
