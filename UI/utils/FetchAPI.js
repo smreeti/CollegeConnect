@@ -1,7 +1,7 @@
 import { API_TO_VERIFY_REFRESH_TOKEN } from "./APIRequestUrl";
 
 const fetchData = async (url, method, body = null) => {
-
+console.log(body,"body");
   try {
     const accessToken = localStorage.getItem('jwt');
     const requestOptions = {

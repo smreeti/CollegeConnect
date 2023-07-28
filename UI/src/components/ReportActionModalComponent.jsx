@@ -75,7 +75,7 @@ const ReportActionModalComponent = (props) => {
     return (
         <>
             <div id="reportActionModal" className="modal" ref={reportModal} >
-                <ToastContainer />
+                
                 <div className="modal-dialog">
                     <div className="modal-content">
                         <div className="modal-header">
@@ -106,6 +106,7 @@ const ReportActionModalComponent = (props) => {
                         </div>
                     </div>
                 </div>
+                <ToastContainer />
             </div>
         </>
     )

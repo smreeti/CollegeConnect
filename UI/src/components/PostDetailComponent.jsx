@@ -6,6 +6,7 @@ import {
     API_TO_DELETE_POST,
     API_TO_FETCH_POST_DETAILS,
     API_TO_LIKE_UNLIKE_POST,
+    API_TO_REPORT_COMMENT,
     API_TO_SAVE_COMMENTS,
 } from "../../utils/APIRequestUrl";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -24,10 +25,13 @@ import { getLoggedInUser } from "../../utils/Auth";
 
 import { Dropdown } from "react-bootstrap";
 import { faClock } from '@fortawesome/free-solid-svg-icons';
+import ReportCommentModal from './ReportCommentModal.jsx';
+
 
 
 const PostDetailComponent = (props) => {
     const openUserPost = useRef(null);
+
     const [postDetails, setPostDetails] = useState({});
     const [postComments, setPostComments] = useState([]);
     const { userDetail, isNotificationDetail, onClose, OpenLikesModal } = props;
@@ -38,8 +42,11 @@ const PostDetailComponent = (props) => {
     const [selectedPostDetailId, setSelectedPostDetailId] = useState("");
     const [modalData, setModalData] = useState({ postId: '', postCommentId: '' });
     const [isPostDropdownVisible, setPostDropdownVisible] = useState(false);
+    const[isReportModalOpen,setIsReportModalOpen]=useState(false)
     const [isDeleteCommentDropdownVisible, setisDeleteCommentDropdownVisible] = useState(false);
     const loggedInUser = getLoggedInUser();
+    const[commentId,setCommentId]=useState("")
+    const { selectedPostId } = props;
 
     useEffect(() => {
         fetchPostDetails();
@@ -176,6 +183,15 @@ const PostDetailComponent = (props) => {
         window.location.reload();
     }
 
+   const  openReportModal = async(postId) => {
+    console.log("open");
+    setIsReportModalOpen(true)
+
+    setCommentId(postId)      
+   }
+
+ 
+
     return (
         <div id="openUserPost" className="modal modalmobilecen" ref={openUserPost}>
             <div className="modal-dialog modal-lg modalwidth">
@@ -245,7 +261,7 @@ const PostDetailComponent = (props) => {
                                                 <Dropdown.Item>
                                                     <span
                                                         className="deletecomment"
-                                                        onClick={() => deletePost(postDetails._id)}
+                                                        // onClick={() => deletePost(postDetails._id)}
                                                         style={{ cursor: 'pointer' }}
                                                     >
                                                         Delete
@@ -292,7 +308,7 @@ const PostDetailComponent = (props) => {
                                                             />
                                                             {isDeleteCommentDropdownVisible && modalData.postId === postDetails._id && modalData.postCommentId === postComment._id && (
                                                                 <Dropdown.Menu show={isDeleteCommentDropdownVisible}>
-                                                                    <Dropdown.Item>
+                                                                    {/* <Dropdown.Item>
                                                                         <span
                                                                             className="deletecomment"
                                                                             onClick={() => deleteComment(postDetails._id, postComment._id)}
@@ -300,6 +316,18 @@ const PostDetailComponent = (props) => {
                                                                         >
                                                                             Delete
                                                                         </span>
+                                                                       
+                                                                    </Dropdown.Item> */}
+                                                                   
+                                                                    <Dropdown.Item>
+                                                                        <span
+                                                                            className="deletecomment"
+                                                                            onClick={() => openReportModal(postComment?._id)}
+                                                                            style={{ cursor: 'pointer' }}
+                                                                        >
+                                                                            Report
+                                                                        </span>
+                                                                       
                                                                     </Dropdown.Item>
                                                                 </Dropdown.Menu>
                                                             )}
@@ -317,7 +345,7 @@ const PostDetailComponent = (props) => {
                                         ))
                                     )}
                                 </div>
-
+                      
                                 <div className="container-wrapper">
                                     <div className="divcontainer">
                                         <div className="d-flex flex-wrap post-details-stats likecontainer hrmargin">
@@ -374,6 +402,13 @@ const PostDetailComponent = (props) => {
             {isLikesModalOpen && (
                 <PostLikesComponent closePostDetailModal={cancelPostDetailModal()} />
             )}
+
+{isReportModalOpen &&
+                    <ReportCommentModal
+                        selectedCommenttId={commentId}
+                    />}
+                   
+
         </div>
     );
 };
