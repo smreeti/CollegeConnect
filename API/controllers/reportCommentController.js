@@ -5,7 +5,11 @@ const { setErrorResponse, setSuccessResponse } = require("../utils/Response");
 const { saveUserNotification } = require("./userNotificationController");
 
 const reportComment = async (req, res) => {
+    console.log("here");
+
     const { selectedPostCommentId, description } = req.body;
+    console.log(req.body);
+
     const loggedInUser = req.user;
 
     try {
@@ -15,6 +19,7 @@ const reportComment = async (req, res) => {
 
         const selectedPostComment = await PostComments.findById(selectedPostCommentId);
 
+        console.log(selectedPostComment);
         if (selectedPostComment) {
             await CommentReports.create({
                 description,

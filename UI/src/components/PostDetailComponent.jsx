@@ -42,10 +42,10 @@ const PostDetailComponent = (props) => {
     const [selectedPostDetailId, setSelectedPostDetailId] = useState("");
     const [modalData, setModalData] = useState({ postId: '', postCommentId: '' });
     const [isPostDropdownVisible, setPostDropdownVisible] = useState(false);
-    const[isReportModalOpen,setIsReportModalOpen]=useState(false)
+    const [isReportModalOpen, setIsReportModalOpen] = useState(false)
     const [isDeleteCommentDropdownVisible, setisDeleteCommentDropdownVisible] = useState(false);
     const loggedInUser = getLoggedInUser();
-    const[commentId,setCommentId]=useState("")
+    const [commentId, setCommentId] = useState("")
     const { selectedPostId } = props;
 
     useEffect(() => {
@@ -183,15 +183,11 @@ const PostDetailComponent = (props) => {
         window.location.reload();
     }
 
-   const  openReportModal = async(postId) => {
-    console.log("open");
-    setIsReportModalOpen(true)
-
-    setCommentId(postId)      
-   }
-
- 
-
+    const openReportModal = async (postId) => {
+        setIsReportModalOpen(true)
+        setCommentId(postId)
+    }
+    
     return (
         <div id="openUserPost" className="modal modalmobilecen" ref={openUserPost}>
             <div className="modal-dialog modal-lg modalwidth">
@@ -318,7 +314,7 @@ const PostDetailComponent = (props) => {
                                                                         </span>
                                                                        
                                                                     </Dropdown.Item> */}
-                                                                   
+
                                                                     <Dropdown.Item>
                                                                         <span
                                                                             className="deletecomment"
@@ -327,7 +323,7 @@ const PostDetailComponent = (props) => {
                                                                         >
                                                                             Report
                                                                         </span>
-                                                                       
+
                                                                     </Dropdown.Item>
                                                                 </Dropdown.Menu>
                                                             )}
@@ -345,7 +341,7 @@ const PostDetailComponent = (props) => {
                                         ))
                                     )}
                                 </div>
-                      
+
                                 <div className="container-wrapper">
                                     <div className="divcontainer">
                                         <div className="d-flex flex-wrap post-details-stats likecontainer hrmargin">
@@ -403,11 +399,11 @@ const PostDetailComponent = (props) => {
                 <PostLikesComponent closePostDetailModal={cancelPostDetailModal()} />
             )}
 
-{isReportModalOpen &&
-                    <ReportCommentModal
-                        selectedCommenttId={commentId}
-                    />}
-                   
+            {isReportModalOpen &&
+                <ReportCommentModal
+                    selectedCommenttId={commentId}
+                />}
+
 
         </div>
     );

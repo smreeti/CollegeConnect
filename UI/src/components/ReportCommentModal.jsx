@@ -21,7 +21,7 @@ const ReportCommentModal = (props) => {
 
     const cancelModal = () => {
         const modalInstance = M.Modal.getInstance(reportModal.current);
-        modalInstance.close(); 
+        modalInstance.close();
     };
 
     const handleReportPost = (event) => {
@@ -34,7 +34,7 @@ const ReportCommentModal = (props) => {
         setShowReportBody(false);
     }
 
-    const reportComment= async()=>{
+    const reportComment = async () => {
         const { selectedCommenttId } = props;
         setReportClicked(true);
 
@@ -43,12 +43,10 @@ const ReportCommentModal = (props) => {
             setFormErrors(formErrors);
         } else {
             const reportData = {
-                selectedCommenttId,
+                selectedPostCommentId: selectedCommenttId,
                 description
             };
-console.log(reportData,"pp");
             const data = await fetchData(API_TO_REPORT_COMMENT, "POST", reportData);
-            console.log(data,"data");
             if (!data.error) {
                 setShowReportBody(false);
                 setReportPostSuccess(true);
@@ -73,10 +71,8 @@ console.log(reportData,"pp");
         setErrors(formErrors);
     };
 
-
-console.log("comment");
     return (
-        <div id="reportModal" className="modal" ref={reportModal} style={{display:"block"}} >
+        <div id="reportModal" className="modal" ref={reportModal} style={{ display: "block" }} >
             <div className="modal-dialog">
                 <div className="modal-content">
                     <div className="modal-header">
@@ -126,7 +122,7 @@ console.log("comment");
                 </div>
             </div>
         </div>
-      
+
     );
 }
 
