@@ -671,6 +671,32 @@ button[type="submit"]:hover {
   margin-top: 5%;
 }
 
+.admin_main_container {
+  margin-top: 5rem;
+  min-height: 93vh;
+}
+
+.doughnut_main_container{
+  display: flex;
+}
+
+.doughnut_right_container {
+  width: 400px;
+  height: 400px
+}
+
+.doughnut_left {
+  flex: 1;
+  padding: 30px;
+  border-right: 1px solid #ccc;
+  margin-left: 40px;
+}
+
+.doughnut_right {
+  flex: 3;
+  padding: 20px;
+}
+
 /*hamburger start*/
 .dropdown-menu.show {
   background-color: #212121;
