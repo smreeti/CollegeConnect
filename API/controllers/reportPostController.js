@@ -89,7 +89,7 @@ const updateUserPosts = async (postReports, remarks) => {
 
     const userNotificationObj = {
         remarks,
-        subject: "Post Removed",
+        subject: "Post Removed by Admin",
         post: post,
         user: post.postedBy
     }

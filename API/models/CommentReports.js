@@ -10,6 +10,10 @@ const CommentReportsSchema = new Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "User"
     },
+    postedBy: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User"
+    },
     postComment: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "PostComments"
