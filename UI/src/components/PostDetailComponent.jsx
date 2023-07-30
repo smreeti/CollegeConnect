@@ -15,9 +15,10 @@ import {
     faHeart,
     faComment,
     faEllipsisH,
-    faL
+    faFlag,
+    faDeleteLeft,
+    faTrash
 } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom";
 import PostLikesComponent from './PostLikesComponent.jsx';
 
 import { formatDistanceToNow } from 'date-fns';
@@ -26,8 +27,6 @@ import { getLoggedInUser } from "../../utils/Auth";
 import { Dropdown } from "react-bootstrap";
 import { faClock } from '@fortawesome/free-solid-svg-icons';
 import ReportCommentModal from './ReportCommentModal.jsx';
-
-
 
 const PostDetailComponent = (props) => {
     const openUserPost = useRef(null);
@@ -43,7 +42,6 @@ const PostDetailComponent = (props) => {
     const [modalData, setModalData] = useState({ postId: '', postCommentId: '' });
     const [isPostDropdownVisible, setPostDropdownVisible] = useState(false);
     const [isReportModalOpen, setIsReportModalOpen] = useState(false)
-    const [isDeleteCommentDropdownVisible, setisDeleteCommentDropdownVisible] = useState(false);
     const loggedInUser = getLoggedInUser();
     const [commentId, setCommentId] = useState("")
     const { selectedPostId } = props;
@@ -154,17 +152,6 @@ const PostDetailComponent = (props) => {
         }
     };
 
-    const toggleCommentDropdown = (postId, postCommentId) => {
-        setisDeleteCommentDropdownVisible((prevState) => {
-            if (!prevState) {
-                setModalData({ postId, postCommentId });
-            } else {
-                setModalData({ postId: '', postCommentId: '' });
-            }
-            return !prevState;
-        });
-    };
-
     const togglePostDropdown = () => {
         setPostDropdownVisible((prevState) => !prevState);
     }
@@ -187,7 +174,7 @@ const PostDetailComponent = (props) => {
         setIsReportModalOpen(true)
         setCommentId(postId)
     }
-    
+
     return (
         <div id="openUserPost" className="modal modalmobilecen" ref={openUserPost}>
             <div className="modal-dialog modal-lg modalwidth">
@@ -257,7 +244,7 @@ const PostDetailComponent = (props) => {
                                                 <Dropdown.Item>
                                                     <span
                                                         className="deletecomment"
-                                                        // onClick={() => deletePost(postDetails._id)}
+                                                        onClick={() => deletePost(postDetails._id)}
                                                         style={{ cursor: 'pointer' }}
                                                     >
                                                         Delete
@@ -294,47 +281,30 @@ const PostDetailComponent = (props) => {
                                                 <span className="commentmain fonting">
                                                     {postComment.comment}
 
-                                                    {(loggedInUser._id === postComment.commentedBy._id || postDetails.postedBy._id === loggedInUser._id) && (
-                                                        <Dropdown className="threedots link">
-                                                            <Dropdown.Toggle
-                                                                as={FontAwesomeIcon}
-                                                                icon={faEllipsisH}
+                                                    <span className="comment-actions">                                                    {(loggedInUser._id === postComment.commentedBy._id
+                                                        || postDetails.postedBy._id === loggedInUser._id) && (
+                                                            <FontAwesomeIcon
                                                                 className=""
-                                                                onClick={() => toggleCommentDropdown(postDetails._id, postComment._id)}
+                                                                icon={faTrash}
+                                                                onClick={() => deleteComment(postDetails._id, postComment._id)}
+                                                                style={{ cursor: 'pointer' }}
                                                             />
-                                                            {isDeleteCommentDropdownVisible && modalData.postId === postDetails._id && modalData.postCommentId === postComment._id && (
-                                                                <Dropdown.Menu show={isDeleteCommentDropdownVisible}>
-                                                                    {/* <Dropdown.Item>
-                                                                        <span
-                                                                            className="deletecomment"
-                                                                            onClick={() => deleteComment(postDetails._id, postComment._id)}
-                                                                            style={{ cursor: 'pointer' }}
-                                                                        >
-                                                                            Delete
-                                                                        </span>
-                                                                       
-                                                                    </Dropdown.Item> */}
+                                                        )}
 
-                                                                    <Dropdown.Item>
-                                                                        <span
-                                                                            className="deletecomment"
-                                                                            onClick={() => openReportModal(postComment?._id)}
-                                                                            style={{ cursor: 'pointer' }}
-                                                                        >
-                                                                            Report
-                                                                        </span>
-
-                                                                    </Dropdown.Item>
-                                                                </Dropdown.Menu>
-                                                            )}
-                                                        </Dropdown>
-                                                    )}
+                                                        <FontAwesomeIcon
+                                                            data-target="reportCommentModal" className='modal-trigger icons'
+                                                            icon={faFlag}
+                                                            onClick={() => openReportModal(postComment?._id)}
+                                                            style={{ cursor: 'pointer' }}
+                                                        />
+                                                    </span>
 
                                                 </span><br />
 
                                                 <p className="timestamp">
 
-                                                    <FontAwesomeIcon className="clock" icon={faClock} /> <span className="clock"> {' '} {formatDistanceToNow(new Date(postComment.createdDate), { addSuffix: true })}
+                                                    <FontAwesomeIcon className="clock" icon={faClock} /> <span className="clock"> {' '}
+                                                        {formatDistanceToNow(new Date(postComment.createdDate), { addSuffix: true })}
                                                     </span>
                                                 </p>
                                             </div>

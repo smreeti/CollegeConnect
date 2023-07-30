@@ -75,13 +75,17 @@ body {
   min-width: 10px !important;
   --bs-dropdown-min-width: 10px !important;
   width: 60px !important;
-  height: 30px !important;
+  height: fit-content !important;
   padding: 0px !important;
 }
 
 .comment .dropdown-item,
 .post-detail-caption .dropdown-item {
   padding: 0 !important;
+}
+
+.comment-actions{
+  text-align: right;
 }
 
 .username {

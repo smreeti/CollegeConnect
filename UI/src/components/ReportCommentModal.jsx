@@ -8,7 +8,7 @@ import { API_TO_REPORT_COMMENT } from "../../utils/APIRequestUrl";
 import fetchData from "../../utils/FetchAPI";
 
 const ReportCommentModal = (props) => {
-    const reportModal = useRef(null);
+    const reportCommentRef = useRef(null);
     const [showReportBody, setShowReportBody] = useState(false);
     const [isReportClicked, setReportClicked] = useState(false);
     const [isReportPostSuccess, setReportPostSuccess] = useState(false);
@@ -16,11 +16,11 @@ const ReportCommentModal = (props) => {
     const [errors, setErrors] = useState('');
 
     useEffect(() => {
-        M.Modal.init(reportModal.current);
+        M.Modal.init(reportCommentRef.current);
     }, [props]);
 
     const cancelModal = () => {
-        const modalInstance = M.Modal.getInstance(reportModal.current);
+        const modalInstance = M.Modal.getInstance(reportCommentRef.current);
         modalInstance.close();
     };
 
@@ -72,58 +72,60 @@ const ReportCommentModal = (props) => {
     };
 
     return (
-        <div id="reportModal" className="modal" ref={reportModal} style={{ display: "block" }} >
-            <div className="modal-dialog">
-                <div className="modal-content">
-                    <div className="modal-header">
-                        <h4 className="modal-title">Report Comment</h4>
-                        <FontAwesomeIcon
-                            icon={faTimes}
-                            className="close"
-                            onClick={cancelModal}
-                        />
-                    </div>
+        <>
+            <div id="reportCommentModal" className="modal" ref={reportCommentRef} style={{ display: "block" }} >
+                <div className="modal-dialog">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <h4 className="modal-title">Report Comment</h4>
+                            <FontAwesomeIcon
+                                icon={faTimes}
+                                className="close"
+                                onClick={cancelModal}
+                            />
+                        </div>
 
-                    <div className="modal-body">
-                        {
-                            showReportBody ? (
+                        <div className="modal-body">
+                            {
+                                showReportBody ? (
+                                    <>
+                                        <textarea
+                                            value={description}
+                                            onChange={handleOnChange}
+                                            className="report_desc"
+                                            name="description"
+                                            placeholder=' Enter your description'
+                                        ></textarea>
+                                        <p className="required errormsg errpad1">
+                                            {errors["description"]}
+                                        </p>
+
+                                        <div className='mt-3'>
+                                            <button onClick={reportComment}>Report</button>
+                                            <Link onClick={goBack} style={{ marginLeft: '10px' }}>Go Back</Link>
+                                        </div>
+                                    </>
+                                ) :
+                                    !isReportClicked && <Link onClick={handleReportPost}>Report</Link>
+                            }
+
+                            {isReportPostSuccess &&
                                 <>
-                                    <textarea
-                                        value={description}
-                                        onChange={handleOnChange}
-                                        className="report_desc"
-                                        name="description"
-                                        placeholder=' Enter your description'
-                                    ></textarea>
-                                    <p className="required errormsg errpad1">
-                                        {errors["description"]}
-                                    </p>
-
-                                    <div className='mt-3'>
-                                        <button onClick={reportComment}>Report</button>
-                                        <Link onClick={goBack} style={{ marginLeft: '10px' }}>Go Back</Link>
-                                    </div>
+                                    <FontAwesomeIcon
+                                        icon={faCheck}
+                                        className="success-check"
+                                    />
+                                    <b><p className="text-center">Thanks for reporting this comment </p></b>
+                                    <p>We will review this post's comment to determine whether it violates our Policies. Thanks for helping us keep CollegeConnect safe.</p>
                                 </>
-                            ) :
-                                !isReportClicked && <Link onClick={handleReportPost}>Report</Link>
-                        }
-
-                        {isReportPostSuccess &&
-                            <>
-                                <FontAwesomeIcon
-                                    icon={faCheck}
-                                    className="success-check"
-                                />
-                                <b><p className="text-center">Thanks for reporting this ad </p></b>
-                                <p>We will review this post to determine whether it violates our Policies. Thanks for helping us keep CollegeConnect safe.</p>
-                            </>
-                        }
+                            }
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </>
 
-    );
+    )
 }
 
 export default ReportCommentModal;

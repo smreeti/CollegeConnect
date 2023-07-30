@@ -114,7 +114,7 @@ const ReportModalComponent = (props) => {
                                     icon={faCheck}
                                     className="success-check"
                                 />
-                                <b><p className="text-center">Thanks for reporting this ad </p></b>
+                                <b><p className="text-center">Thanks for reporting this post </p></b>
                                 <p>We will review this post to determine whether it violates our Policies. Thanks for helping us keep CollegeConnect safe.</p>
                             </>
                         }

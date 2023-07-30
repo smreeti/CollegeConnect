@@ -21,6 +21,7 @@ const ReportComponent = () => {
 
     const POST_REPORTS = "postReports";
     const PROFILE_REPORTS = "profileReports";
+    const COMMENT_REPORTS = "commentReports";
 
     useEffect(() => {
         fetchPostReports();
@@ -31,6 +32,8 @@ const ReportComponent = () => {
 
         if (tab === POST_REPORTS) {
             fetchPostReports();
+        } else if (tab === COMMENT_REPORTS) {
+
         }
     };
 
@@ -39,6 +42,19 @@ const ReportComponent = () => {
 
         try {
             const data = await fetchData(API_TO_FETCH_POST_REPORTS, "GET");
+            setPostReports(data.body);
+        } catch (error) {
+            console.log("Error:", error);
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
+    const fetchCommentReports = async () => {
+        setIsLoading(true);
+
+        try {
+            // const data = await fetchData(API_TO_FETCH_CO, "GET");
             setPostReports(data.body);
         } catch (error) {
             console.log("Error:", error);
@@ -87,8 +103,8 @@ const ReportComponent = () => {
 
                     <li className="nav-item">
                         <button
-                            className={`nav-link ${activeTab === PROFILE_REPORTS ? "active" : ""}`}
-                            onClick={() => handleTabClick(PROFILE_REPORTS)}
+                            className={`nav-link ${activeTab === COMMENT_REPORTS ? "active" : ""}`}
+                            onClick={() => handleTabClick(COMMENT_REPORTS)}
                         >
                             Profile Reports
                         </button>
@@ -178,7 +194,7 @@ const ReportComponent = () => {
                     </div>
                 )}
 
-                {activeTab === PROFILE_REPORTS && (
+                {activeTab === COMMENT_REPORTS && (
                     <div className="tab-pane active">
                         <p>Profile Reports tab content</p>
                     </div>
