@@ -33,18 +33,16 @@ const PostDetailComponent = (props) => {
 
     const [postDetails, setPostDetails] = useState({});
     const [postComments, setPostComments] = useState([]);
-    const { userDetail, isNotificationDetail, onClose, OpenLikesModal } = props;
+    const { userDetail, isNotificationDetail, OpenLikesModal } = props;
     const [comment, setComment] = useState("");
     const [error, setError] = useState("");
     const [isPostLiked, setIsPostLiked] = useState(false);
     const [isLikesModalOpen, setIsLikesModalOpen] = useState(false);
-    const [selectedPostDetailId, setSelectedPostDetailId] = useState("");
-    const [modalData, setModalData] = useState({ postId: '', postCommentId: '' });
+
     const [isPostDropdownVisible, setPostDropdownVisible] = useState(false);
     const [isReportModalOpen, setIsReportModalOpen] = useState(false)
     const loggedInUser = getLoggedInUser();
     const [commentId, setCommentId] = useState("")
-    const { selectedPostId } = props;
 
     useEffect(() => {
         fetchPostDetails();
@@ -231,7 +229,7 @@ const PostDetailComponent = (props) => {
                                     </small>
 
 
-                                    {postDetails?.postedBy?._id === loggedInUser._id && (
+                                    {!isNotificationDetail && postDetails?.postedBy?._id === loggedInUser._id && (
                                         <Dropdown className="threedots link">
                                             <Dropdown.Toggle
                                                 as={FontAwesomeIcon}
@@ -281,22 +279,29 @@ const PostDetailComponent = (props) => {
                                                 <span className="commentmain fonting">
                                                     {postComment.comment}
 
-                                                    <span className="comment-actions">                                                    {(loggedInUser._id === postComment.commentedBy._id
-                                                        || postDetails.postedBy._id === loggedInUser._id) && (
-                                                            <FontAwesomeIcon
-                                                                className=""
-                                                                icon={faTrash}
-                                                                onClick={() => deleteComment(postDetails._id, postComment._id)}
-                                                                style={{ cursor: 'pointer' }}
-                                                            />
-                                                        )}
+                                                    <span className="comment-actions">
 
-                                                        <FontAwesomeIcon
-                                                            data-target="reportCommentModal" className='modal-trigger icons'
-                                                            icon={faFlag}
-                                                            onClick={() => openReportModal(postComment?._id)}
-                                                            style={{ cursor: 'pointer' }}
-                                                        />
+                                                        {!isNotificationDetail ?
+                                                            <>
+                                                                (loggedInUser._id === postComment.commentedBy._id
+                                                                || postDetails.postedBy._id === loggedInUser._id) && (
+                                                                <FontAwesomeIcon
+                                                                    className=""
+                                                                    icon={faTrash}
+                                                                    onClick={() => deleteComment(postDetails._id, postComment._id)}
+                                                                    style={{ cursor: 'pointer' }}
+                                                                />)
+
+                                                                <FontAwesomeIcon
+                                                                    data-target="reportCommentModal" className='modal-trigger icons'
+                                                                    icon={faFlag}
+                                                                    onClick={() => openReportModal(postComment?._id)}
+                                                                    style={{ cursor: 'pointer' }}
+                                                                />
+                                                            </>
+                                                            : <></>
+                                                        }
+
                                                     </span>
 
                                                 </span><br />

@@ -1,4 +1,5 @@
 const CommentReports = require("../models/CommentReports");
+const Post = require("../models/Post");
 const PostComments = require("../models/PostComments");
 const { PENDING, APPROVED, BLOCKED } = require("../utils/ReportStatus");
 const { setErrorResponse, setSuccessResponse } = require("../utils/Response");
@@ -117,6 +118,10 @@ const updatePostComment = async (commentReports, remarks) => {
     const { description, postComment, postedBy } = commentReports;
 
     await updatePostCommentStatus(postComment._id, BLOCKED, description);
+
+    await Post.findByIdAndUpdate(postComment.post._id, {
+        $inc: { comments: -1 }
+    });
 
     const userNotificationObj = {
         remarks,
