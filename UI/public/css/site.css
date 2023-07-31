@@ -4,11 +4,14 @@ body {
 }
 
 /*comment design*/
-.user_details_container{
+.user_details_container {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* Adjust the number of columns as per your preference */
-  gap: 10px; /* Adjust the gap between images */
+  grid-template-columns: repeat(3, 1fr);
+  /* Adjust the number of columns as per your preference */
+  gap: 10px;
+  /* Adjust the gap between images */
 }
+
 .container-wrapper {
   position: fixed;
   bottom: 0;
@@ -88,12 +91,27 @@ body {
   padding: 0 !important;
 }
 
-.comment-actions{
+.comment_contents {
+  display: flex;
+  gap: 6px;
+}
+
+.comment_content {
+  padding-left: 8px;
+  max-width: 88%;
+  word-wrap: break-word;
+}
+
+.comment-actions {
+  flex-grow: 1;
   text-align: right;
+  display: flex;
+  justify-content: end;
+  gap: 8px;
+  padding-right: 8px;
 }
 
 .username {
-  padding-left: 12px;
   color: black;
 }
 
@@ -305,6 +323,11 @@ body {
   font-size: small !important;
   margin-top: 5px;
   border-radius: 12px;
+}
+
+.follow-modalbtn {
+  flex-grow: 1;
+  text-align: right;
 }
 
 .uniname {
@@ -675,7 +698,7 @@ button[type="submit"]:hover {
   min-height: 93vh;
 }
 
-.doughnut_main_container{
+.doughnut_main_container {
   display: flex;
 }
 
@@ -1293,7 +1316,6 @@ footer #footer {
 .collection-item {
   display: flex;
   gap: 10px;
-  padding-bottom: 10px;
 }
 
 @media screen and (min-width: 360px) and (max-width: 370px) {
@@ -2117,6 +2139,7 @@ hr {
   font-size: 15px;
   color: #212121;
   font-weight: bold;
+  max-width: 150px;
   text-align: center;
 }
 
@@ -2337,8 +2360,9 @@ hr {
 
 .user_details_bio_container {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   font-size: 13px;
+  gap: 4px;
 }
 
 .post-details-stats {
@@ -2785,11 +2809,20 @@ hr {
   .btncomment {
     margin-bottom: 20px;
   }
+
+  .comment_content {
+    width: 85%;
+  }
 }
 
 @media (max-width: 768px) {
   .edit_profile_button {
     margin: auto;
+  }
+
+  .profile-actions {
+    flex-direction: column;
+    align-items: center;
   }
 
   .clock {
@@ -2798,6 +2831,10 @@ hr {
 
   .btncomment {
     margin-bottom: 20px;
+  }
+
+  .comment_content {
+    width: 75%;
   }
 }
 
@@ -2835,6 +2872,10 @@ hr {
   .btncomment {
     margin-bottom: 20px;
   }
+
+  .comment_content {
+    width: 75%;
+  }
 }
 
 @media only screen and (min-width: 1001px) and (max-width: 1200px) {
@@ -2853,10 +2894,18 @@ hr {
   .btncomment {
     margin-bottom: 20px;
   }
+
+  .comment_content {
+    width: 75%;
+  }
 }
 
 @media only screen and (min-width: 1668px) and (max-width: 2000px) {
   .container-wrapper {
     position: relative;
+  }
+
+  .comment_content {
+    width: 85%;
   }
 }

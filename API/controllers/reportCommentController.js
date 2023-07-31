@@ -1,7 +1,7 @@
 const CommentReports = require("../models/CommentReports");
 const Post = require("../models/Post");
 const PostComments = require("../models/PostComments");
-const { PENDING, APPROVED, BLOCKED } = require("../utils/ReportStatus");
+const { PENDING, APPROVED, BLOCKED, REJECTED } = require("../utils/ReportStatus");
 const { setErrorResponse, setSuccessResponse } = require("../utils/Response");
 const { saveUserNotification } = require("./userNotificationController");
 
@@ -150,7 +150,7 @@ const handleRejectCommentReports = async (req, res) => {
 
     try {
         const commentReports = await CommentReports.findByIdAndUpdate(commentReportsId, {
-            status: PENDING,
+            status: REJECTED,
             remarks
         }, { new: true }).populate({
             path: "postComment",

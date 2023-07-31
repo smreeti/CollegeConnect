@@ -85,8 +85,8 @@ const FollowerModalComponent = (props) => {
                                                             {followersData?.userId?.username}
                                                         </Link>
                                                     </span>
-                                                    <span className='fullName'>
-                                                        {followersData?.userId?.firstName + " " + followersData?.userId?.lastName}</span>
+                                                    <p className='fullName'>
+                                                        {followersData?.userId?.firstName + " " + followersData?.userId?.lastName}</p>
 
                                                 </div>
 

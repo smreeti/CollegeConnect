@@ -6,7 +6,6 @@ import {
     API_TO_DELETE_POST,
     API_TO_FETCH_POST_DETAILS,
     API_TO_LIKE_UNLIKE_POST,
-    API_TO_REPORT_COMMENT,
     API_TO_SAVE_COMMENTS,
 } from "../../utils/APIRequestUrl";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -16,7 +15,6 @@ import {
     faComment,
     faEllipsisH,
     faFlag,
-    faDeleteLeft,
     faTrash
 } from "@fortawesome/free-solid-svg-icons";
 import PostLikesComponent from './PostLikesComponent.jsx';
@@ -258,29 +256,31 @@ const PostDetailComponent = (props) => {
                                     {postComments.length > 0 && (
                                         postComments.map((postComment) => (
                                             <div key={postComment._id} className="comment">
-                                                {postComment.commentedBy.profilePicture ===
-                                                    "default" ? (
-                                                    <img
-                                                        className="creator_image_post"
-                                                        src="/assets/profile.png"
-                                                        alt="Profile"
-                                                    />
-                                                ) : (
-                                                    <img
-                                                        className="creator_image_post"
-                                                        src={postComment.commentedBy.profilePicture}
-                                                        alt="Profile"
-                                                    />
-                                                )}
+                                                <div className="comment_contents">
 
-                                                <span className="username fonting">
-                                                    {postComment.commentedBy.username + " "}
-                                                </span>
-                                                <span className="commentmain fonting">
-                                                    {postComment.comment}
+                                                    {postComment.commentedBy.profilePicture ===
+                                                        "default" ? (
+                                                        <img
+                                                            className="creator_image_post"
+                                                            src="/assets/profile.png"
+                                                            alt="Profile"
+                                                        />
+                                                    ) : (
+                                                        <img
+                                                            className="creator_image_post"
+                                                            src={postComment.commentedBy.profilePicture}
+                                                            alt="Profile"
+                                                        />
+                                                    )}
+
+                                                    <p className="comment_content">
+                                                        <span className="username fonting">{postComment.commentedBy.username + " "}</span>
+                                                        <span className="commentmain fonting">
+                                                            {postComment.comment}
+                                                        </span>
+                                                    </p>
 
                                                     <span className="comment-actions">
-
                                                         {!isNotificationDetail ? (
                                                             <>
                                                                 {(loggedInUser._id === postComment.commentedBy._id || postDetails.postedBy._id === loggedInUser._id) && (
@@ -304,11 +304,8 @@ const PostDetailComponent = (props) => {
                                                             <></>
                                                         )}
                                                     </span>
-
-                                                </span><br />
-
+                                                </div>
                                                 <p className="timestamp">
-
                                                     <FontAwesomeIcon className="clock" icon={faClock} /> <span className="clock"> {' '}
                                                         {formatDistanceToNow(new Date(postComment.createdDate), { addSuffix: true })}
                                                     </span>

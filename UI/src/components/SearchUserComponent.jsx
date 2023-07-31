@@ -87,8 +87,8 @@ const SearchUserComponent = () => {
                                                 </Link>
 
                                             </span>
-                                            <span className='fullName'>
-                                                {userDetail?.firstName + " " + userDetail?.lastName}</span>
+                                            <p className='fullName'>
+                                                {userDetail?.firstName + " " + userDetail?.lastName}</p>
                                         </div>
 
                                     </li>
