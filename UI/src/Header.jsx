@@ -33,7 +33,7 @@ export default function Header() {
 
   return (
     <section className="top-nav">
-      <div><Link to="/" className="logonew" >
+      <div><Link to="/home" className="logonew" >
         <img className='headlogo' src='../../assets/logotestheader.png' /></Link>
       </div>
 
