@@ -224,7 +224,7 @@ const ProfileComponent = () => {
                   data-target="openUserPost"
                   className="modal-trigger" key={post._id}
                 >
-                  <div className="images bg-dark" >
+                  <div className="images bg-dark testgrid" >
                     <img alt="captured images" className="p_img" src={post.imageUrl} />
                     <div className="text d-flex">
                       <div>
