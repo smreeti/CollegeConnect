@@ -37,9 +37,11 @@ const NotificationsComponent = () => {
     };
 
     const openPostDetailModal = (notifications) => {
-        setPostDetailOpen(true);
-        setSelectedPostId(notifications.post);
-        setUserDetail(notifications.post.postedBy);
+        if (notifications?.post) {
+            setPostDetailOpen(true);
+            setSelectedPostId(notifications?.post);
+            setUserDetail(notifications?.post?.postedBy);
+        }
     }
 
     return (

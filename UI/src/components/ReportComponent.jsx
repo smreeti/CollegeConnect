@@ -9,6 +9,7 @@ import ReportActionModalComponent from "./ReportActionModalComponent.jsx";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ReportCommentActionModalComponent from "./ReportCommentActionModalComponent.jsx";
+import PostReportDetailComponent from "./PostReportDetailComponent.jsx";
 
 const ReportComponent = () => {
     const [activeTab, setActiveTab] = useState("postReports");
@@ -22,6 +23,9 @@ const ReportComponent = () => {
 
     const [isCommentReportActionModalOpen, setCommentReportActionModalOpen] = useState(false);
     const [selectedCommentReportId, setSelectedCommentReportId] = useState('');
+
+    const [isPostReportDetailOpen, setPostReportDetailOpen] = useState(false);
+    const [reportedComment, setReportedComment] = useState([]);
 
     const [userDetail, setUserDetail] = useState('');
     const [isLoading, setIsLoading] = useState('');
@@ -98,6 +102,19 @@ const ReportComponent = () => {
         setAction('APPROVE');
         setSelectedCommentReportId(reportId);
     };
+
+    const handleCommentReportReject = async (reportId) => {
+        setCommentReportActionModalOpen(true);
+        setAction('REJECT');
+        setSelectedCommentReportId(reportId);
+    };
+
+    const openPostReportDetailModal = (postReport) => {
+        setPostReportDetailOpen(true);
+        setSelectedPostId(postReport.postComment.post);
+        setUserDetail(postReport.postedBy);
+        setReportedComment(postReport.postComment);
+    }
 
     return (
         <>
@@ -220,7 +237,7 @@ const ReportComponent = () => {
                                     </div>
                                 ) :
 
-                                (postReports.length > 0 ? (
+                                (commentReports.length > 0 ? (
                                     <div className="table-responsive reports-table">
                                         <table className="table table-bordered">
                                             <thead>
@@ -244,7 +261,7 @@ const ReportComponent = () => {
                                                             <FontAwesomeIcon
                                                                 icon={faInfo}
                                                                 className="icons modal-trigger"
-                                                                onClick={() => openPostDetailModal(report)}
+                                                                onClick={() => openPostReportDetailModal(report)}
                                                                 data-target="openUserPost"
                                                             />
                                                             <button
@@ -256,7 +273,7 @@ const ReportComponent = () => {
                                                             </button>
                                                             <button
                                                                 className="btn btn-danger modal-trigger"
-                                                                onClick={() => handleReject(report._id)}
+                                                                onClick={() => handleCommentReportReject(report._id)}
                                                                 data-target="reportActionModal"
                                                             >
                                                                 <FontAwesomeIcon icon={faTimes} />
@@ -311,6 +328,14 @@ const ReportComponent = () => {
                             selectedCommentReportId={selectedCommentReportId}
                             action={action}
                         />
+                    )}
+
+                {isPostReportDetailOpen &&
+                    (<PostReportDetailComponent
+                        selectedPost={selectedPostId}
+                        userDetail={userDetail}
+                        postComment = {reportedComment}
+                    />
                     )}
             </div>
         </>

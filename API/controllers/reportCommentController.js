@@ -53,6 +53,7 @@ const validateReportRequest = async (selectedPostCommentId, description) => {
 
 const fetchCommentReports = async (req, res) => {
     const loggedInUser = req.user;
+
     try {
         const postReports = await fetchCommentReportsById(loggedInUser.collegeInfoId._id);
         return setSuccessResponse(res, "Comment Reports fetched successfully", postReports);
@@ -71,11 +72,19 @@ const fetchCommentReportsById = async (collegeId) => {
                 collegeInfoId: collegeId,
             },
         })
+        .populate('postedBy')
         .populate({
             path: "postComment",
             populate: {
                 path: "post",
                 model: "Post",
+            },
+        })
+        .populate({
+            path: "postComment",
+            populate: {
+                path: "commentedBy",
+                model: "User",
             },
         });
 }
@@ -131,13 +140,12 @@ const updatePostCommentStatus = async (postCommentId, status, remarks) => {
     );
 };
 
-
 const handleRejectCommentReports = async (req, res) => {
     const { commentReportsId, remarks } = req.body;
 
     try {
         const commentReports = await CommentReports.findByIdAndUpdate(commentReportsId, {
-            status: REJECTED,
+            status: PENDING,
             remarks
         }, { new: true }).populate({
             path: "postComment",
@@ -145,20 +153,17 @@ const handleRejectCommentReports = async (req, res) => {
                 path: "post",
                 model: "Post",
             },
-        });
+        }).populate('reportedBy');
 
-        const { postComment, postedBy } = commentReports;
-
+        const { postComment, reportedBy } = commentReports;
 
         const userNotificationObj = {
             remarks,
             subject: "Comment Report Rejected By Admin",
             post: postComment.post,
-            user: postedBy,
+            user: reportedBy,
             postComment
         }
-
-
 
         await saveUserNotification(userNotificationObj);
 

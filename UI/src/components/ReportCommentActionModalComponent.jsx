@@ -25,7 +25,6 @@ const ReportCommentActionModalComponent = (props) => {
     };
 
     const confirmAction = async () => {
-
         let formErrors = handleReportPostForm();
         if (Object.keys(formErrors).length > 0) {
             setFormErrors(formErrors);
@@ -42,8 +41,12 @@ const ReportCommentActionModalComponent = (props) => {
                     toast.success("Post report approved successfully!");
 
             } else if (action == "REJECT") {
+                console.log("cvd");
+
                 const data = await fetchData(API_TO_REJECT_COMMENT_REPORTS, "POST", reportData);
 
+                debugger
+                console.log(data)
                 if (!data.error)
                     toast.error("Post report rejected successfully!");
             }
