@@ -4,7 +4,11 @@ body {
 }
 
 /*comment design*/
-
+.user_details_container{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Adjust the number of columns as per your preference */
+  gap: 10px; /* Adjust the gap between images */
+}
 .container-wrapper {
   position: fixed;
   bottom: 0;
@@ -89,13 +93,8 @@ body {
 }
 
 .username {
-  padding-left: 10px;
+  padding-left: 12px;
   color: black;
-}
-
-.fullName {
-  padding-left: 10px;
-  color: #786f6f;
 }
 
 .commentmain {
@@ -375,10 +374,6 @@ body {
 
 .username {
   font-weight: bold;
-}
-
-.username a {
-  color: black !important;
 }
 
 .usernamespace {
@@ -866,11 +861,6 @@ button[type="submit"]:hover {
   justify-content: center;
 }
 
-.user-modal-details {
-  display: flex;
-  flex-direction: column;
-}
-
 .banimg {
   height: 100%;
   max-width: 100%;
@@ -1303,17 +1293,7 @@ footer #footer {
 .collection-item {
   display: flex;
   gap: 10px;
-  padding-bottom: 5px;
-}
-
-h5 {
-  margin-bottom: 0px !important;
-}
-
-.follow-modalbtn {
-  align-self: center;
-  text-align: right;
-  flex-grow: 1;
+  padding-bottom: 10px;
 }
 
 @media screen and (min-width: 360px) and (max-width: 370px) {
