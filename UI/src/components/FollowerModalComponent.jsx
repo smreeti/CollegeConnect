@@ -38,8 +38,7 @@ const FollowerModalComponent = (props) => {
 
     const removeFollower = async (followerUserId) => {
         try {
-            const data = await fetchData(API_TO_REMOVE_FOLLOWERS + `/${followerUserId}`, "POST");
-            setFollowersList(data.body.followers);
+            await fetchData(API_TO_REMOVE_FOLLOWERS + `/${followerUserId}`, "POST");
             await fetchFollowers();
         } catch (error) {
             console.log(error);
