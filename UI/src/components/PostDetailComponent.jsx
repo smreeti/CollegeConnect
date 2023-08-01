@@ -64,12 +64,13 @@ const PostDetailComponent = (props) => {
             const data = await fetchData(API_TO_FETCH_POST_DETAILS, "POST", {
                 _id: selectedPostId,
             });
-
             setPostDetails(data.body.postDetails[0]);
             setPostComments((prevComments) => [
                 ...prevComments,
                 ...data.body.postComments,
             ]);
+
+
             const hasUserLiked = isLiked(data.body.postDetails[0]?.likes);
             setIsPostLiked(hasUserLiked);
         } catch (error) {
@@ -261,7 +262,7 @@ const PostDetailComponent = (props) => {
                                     {postComments.length > 0 && (
                                         postComments.map((postComment) => (
                                             <div key={postComment._id} className="comment">
-                                                {postComment.commentedBy.profilePicture ===
+                                                {postComment?.commentedBy?.profilePicture ===
                                                     "default" ? (
                                                     <img
                                                         className="creator_image_post"
@@ -271,18 +272,18 @@ const PostDetailComponent = (props) => {
                                                 ) : (
                                                     <img
                                                         className="creator_image_post"
-                                                        src={postComment.commentedBy.profilePicture}
+                                                        src={postComment?.commentedBy?.profilePicture}
                                                         alt="Profile"
                                                     />
                                                 )}
 
                                                 <span className="username fonting">
-                                                    {postComment.commentedBy.username + " "}
+                                                    {postComment?.commentedBy?.username + " "}
                                                 </span>
                                                 <span className="commentmain fonting">
-                                                    {postComment.comment}
+                                                    {postComment?.comment}
 
-                                                    {(loggedInUser._id === postComment.commentedBy._id || postDetails.postedBy._id === loggedInUser._id) && (
+                                                    {(loggedInUser._id === postComment?.commentedBy?._id || postDetails.postedBy._id === loggedInUser._id) && (
                                                         <Dropdown className="threedots link">
                                                             <Dropdown.Toggle
                                                                 as={FontAwesomeIcon}

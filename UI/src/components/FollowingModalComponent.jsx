@@ -8,7 +8,7 @@ const FollowingModalComponent = (props) => {
     const [followingUsersList, setFollowingUsersList] = useState([]);
     const { followship, isUserProfile } = props;
 
-    console.log(isUserProfile, "btn");
+    console.log(followship, "btn");
     useEffect(() => {
         M.Modal.init(userFollowingModal.current);
     }, []);

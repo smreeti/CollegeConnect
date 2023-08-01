@@ -54,7 +54,6 @@ const ProfileComponent = () => {
       setPosts(userProfileDetails.posts);
       const hasUserLiked = isLiked(data.body.posts[0].likes);
       setIsPostLiked(hasUserLiked);
-      setIsUserProfile(data.body.userDetail._id === loggedInUser._id);
     } catch (error) {
       console.log("Error:", error);
     }
@@ -134,8 +133,11 @@ const ProfileComponent = () => {
   const fetchFOllowingUsers = async () => {
     try {
       const data = await fetchData(API_TO_FETCH_FOLLOWING_USERS + `/${id}`, "POST");
+      console.log(data.body, "Following");
       setFollowingUsers(data.body.followingUsers)
       setCurrentFollowship(data.body.followingUsers)
+      console.log(data.body.followingUsers[0]._id);
+      setIsUserProfile(data.body.followingUsers[0]._id === loggedInUser._id);
     } catch (error) {
       console.log(error);
     }
