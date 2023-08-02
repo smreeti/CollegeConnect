@@ -3,7 +3,7 @@ import Header from "../Header.jsx";
 import fetchData from "../../utils/FetchAPI";
 import { API_TO_FETCH_COMMENT_REPORTS, API_TO_FETCH_POST_REPORTS } from "../../utils/APIRequestUrl.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faInfo, faCheck, faTimes, faFlag } from "@fortawesome/free-solid-svg-icons";
+import { faInfo, faCheck, faTimes, faFlag, faSortAmountDownAlt, faSortAmountUp } from "@fortawesome/free-solid-svg-icons";
 import PostDetailComponent from "./PostDetailComponent.jsx";
 import ReportActionModalComponent from "./ReportActionModalComponent.jsx";
 import { ToastContainer } from "react-toastify";
@@ -29,6 +29,9 @@ const ReportComponent = () => {
 
     const [userDetail, setUserDetail] = useState('');
     const [isLoading, setIsLoading] = useState('');
+
+    const [isDescending, setIsDescending] = useState(false);
+    const [searchQuery, setSearchQuery] = useState("");
 
     const POST_REPORTS = "postReports";
     const PROFILE_REPORTS = "profileReports";
@@ -116,6 +119,42 @@ const ReportComponent = () => {
         setReportedComment(postReport.postComment);
     }
 
+    const sortReportsByDateDescending = (reports) => {
+        return reports.sort((a, b) => new Date(b.reportedDate) - new Date(a.reportedDate));
+    };
+
+    // Function to sort the reports by date in ascending order
+    const sortReportsByDateAscending = (reports) => {
+        return reports.sort((a, b) => new Date(a.reportedDate) - new Date(b.reportedDate));
+    };
+
+    // Function to toggle the sorting order for the reports
+    const handleSortByDate = () => {
+        if (activeTab === POST_REPORTS) {
+            const sortedPostReports = isDescending ?
+                sortReportsByDateAscending([...postReports]) : sortReportsByDateDescending([...postReports]);
+            setPostReports(sortedPostReports);
+        } else if (activeTab === COMMENT_REPORTS) {
+            const sortedCommentReports = isDescending ?
+                sortReportsByDateAscending([...commentReports]) : sortReportsByDateDescending([...commentReports]);
+            setCommentReports(sortedCommentReports);
+        }
+
+        setIsDescending(!isDescending);
+    };
+
+    // Function to handle search
+    const handleSearch = (reports) => {
+
+        return reports.filter((report) => {
+            const fullName = `${report?.reportedBy?.firstName} ${report?.reportedBy?.lastName}`;
+            return (
+                fullName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                formatDate(report.reportedDate).toLowerCase().includes(searchQuery.toLowerCase())
+            );
+        });
+    };
+
     return (
         <>
             <ToastContainer />
@@ -142,7 +181,7 @@ const ReportComponent = () => {
                 </ul>
 
                 {activeTab === POST_REPORTS && (
-                    <div className="tab-content mt-2">
+                    <div className="tab-content">
                         <div className="tab-pane active">
                             {isLoading ?
                                 (
@@ -155,52 +194,71 @@ const ReportComponent = () => {
                                 ) :
 
                                 (postReports.length > 0 ? (
-                                    <div className="table-responsive reports-table">
-                                        <table className="table table-bordered">
-                                            <thead>
-                                                <tr>
-                                                    <th style={{ width: "20%" }}>Reported By</th>
-                                                    <th style={{ width: "20%" }}>Reported Date</th>
-                                                    <th style={{ width: "40%" }}>Description</th>
-                                                    <th style={{ width: "10%" }}>Actions</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                {postReports.map((report) => (
-                                                    <tr key={report._id}>
-                                                        <td>
-                                                            {`${report?.reportedBy?.firstName} ${report?.reportedBy?.lastName} 
-                                                        (${report?.reportedBy?.username})`}
-                                                        </td>
-                                                        <td>{formatDate(report.reportedDate)}</td>
-                                                        <td>{report.description}</td>
-                                                        <td className="report_actions">
-                                                            <FontAwesomeIcon
-                                                                icon={faInfo}
-                                                                className="icons modal-trigger"
-                                                                onClick={() => openPostDetailModal(report)}
-                                                                data-target="openUserPost"
-                                                            />
-                                                            <button
-                                                                className="btn btn-success modal-trigger"
-                                                                onClick={() => handleApprove(report._id)}
-                                                                data-target="reportActionModal"
+                                    <>
+                                        <input
+                                            type="text"
+                                            className="form-control search-filter"
+                                            placeholder="Search by name or date (e.g., Jan 01, 2023)"
+                                            value={searchQuery}
+                                            onChange={(e) => setSearchQuery(e.target.value)}
+                                        />
+
+                                        <div className="table-responsive reports-table">
+                                            <table className="table table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th style={{ width: "20%" }}>Reported By</th>
+                                                        <th style={{ width: "20%" }}>Reported Date {" "}
+                                                            <span
+                                                                className="sort-icon"
+                                                                onClick={handleSortByDate}
                                                             >
-                                                                <FontAwesomeIcon icon={faCheck} />
-                                                            </button>
-                                                            <button
-                                                                className="btn btn-danger modal-trigger"
-                                                                onClick={() => handleReject(report._id)}
-                                                                data-target="reportActionModal"
-                                                            >
-                                                                <FontAwesomeIcon icon={faTimes} />
-                                                            </button>
-                                                        </td>
+                                                                {isDescending ? <FontAwesomeIcon icon={faSortAmountDownAlt} /> :
+                                                                    <FontAwesomeIcon icon={faSortAmountUp} />}
+                                                            </span>
+                                                        </th>
+                                                        <th style={{ width: "40%" }}>Description</th>
+                                                        <th style={{ width: "10%" }}>Actions</th>
                                                     </tr>
-                                                ))}
-                                            </tbody>
-                                        </table>
-                                    </div>
+                                                </thead>
+                                                <tbody>
+
+                                                    {handleSearch(postReports).map((report) => (
+                                                        <tr key={report._id}>
+                                                            <td>
+                                                                {`${report?.reportedBy?.firstName} ${report?.reportedBy?.lastName} 
+                                                        (${report?.reportedBy?.username})`}
+                                                            </td>
+                                                            <td>{formatDate(report.reportedDate)}</td>
+                                                            <td>{report.description}</td>
+                                                            <td className="report_actions">
+                                                                <FontAwesomeIcon
+                                                                    icon={faInfo}
+                                                                    className="icons modal-trigger"
+                                                                    onClick={() => openPostDetailModal(report)}
+                                                                    data-target="openUserPost"
+                                                                />
+                                                                <button
+                                                                    className="btn btn-success modal-trigger"
+                                                                    onClick={() => handleApprove(report._id)}
+                                                                    data-target="reportActionModal"
+                                                                >
+                                                                    <FontAwesomeIcon icon={faCheck} />
+                                                                </button>
+                                                                <button
+                                                                    className="btn btn-danger modal-trigger"
+                                                                    onClick={() => handleReject(report._id)}
+                                                                    data-target="reportActionModal"
+                                                                >
+                                                                    <FontAwesomeIcon icon={faTimes} />
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                    ))}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </>
                                 ) :
                                     (
                                         <div className="main-container" style={{ background: '#F5F5DC' }}>
@@ -238,52 +296,68 @@ const ReportComponent = () => {
                                 ) :
 
                                 (commentReports.length > 0 ? (
-                                    <div className="table-responsive reports-table">
-                                        <table className="table table-bordered">
-                                            <thead>
-                                                <tr>
-                                                    <th style={{ width: "20%" }}>Reported By</th>
-                                                    <th style={{ width: "20%" }}>Reported Date</th>
-                                                    <th style={{ width: "40%" }}>Description</th>
-                                                    <th style={{ width: "10%" }}>Actions</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                {commentReports.map((report) => (
-                                                    <tr key={report._id}>
-                                                        <td>
-                                                            {`${report?.reportedBy?.firstName} ${report?.reportedBy?.lastName} 
-                                                    (${report?.reportedBy?.username})`}
-                                                        </td>
-                                                        <td>{formatDate(report.reportedDate)}</td>
-                                                        <td>{report.description}</td>
-                                                        <td className="report_actions">
-                                                            <FontAwesomeIcon
-                                                                icon={faInfo}
-                                                                className="icons modal-trigger"
-                                                                onClick={() => openPostReportDetailModal(report)}
-                                                                data-target="openUserPost"
-                                                            />
-                                                            <button
-                                                                className="btn btn-success modal-trigger"
-                                                                onClick={() => handleCommentReportApprove(report._id)}
-                                                                data-target="reportActionModal"
+                                    <>
+                                        <input
+                                            type="text"
+                                            className="form-control search-filter"
+                                            placeholder="Search by name or date (e.g., Jan 01, 2023)"
+                                            value={searchQuery}
+                                            onChange={(e) => setSearchQuery(e.target.value)}
+                                        />
+                                        <div className="table-responsive reports-table">
+                                            <table className="table table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th style={{ width: "20%" }}>Reported By</th>
+                                                        <th style={{ width: "20%" }}>Reported Date {" "}
+                                                            <span
+                                                                className="sort-icon"
+                                                                onClick={handleSortByDate}
                                                             >
-                                                                <FontAwesomeIcon icon={faCheck} />
-                                                            </button>
-                                                            <button
-                                                                className="btn btn-danger modal-trigger"
-                                                                onClick={() => handleCommentReportReject(report._id)}
-                                                                data-target="reportActionModal"
-                                                            >
-                                                                <FontAwesomeIcon icon={faTimes} />
-                                                            </button>
-                                                        </td>
+                                                                {isDescending ? <FontAwesomeIcon icon={faSortAmountDownAlt} /> :
+                                                                    <FontAwesomeIcon icon={faSortAmountUp} />}
+                                                            </span></th>
+                                                        <th style={{ width: "40%" }}>Description</th>
+                                                        <th style={{ width: "10%" }}>Actions</th>
                                                     </tr>
-                                                ))}
-                                            </tbody>
-                                        </table>
-                                    </div>
+                                                </thead>
+                                                <tbody>
+                                                    {handleSearch(commentReports).map((report) => (
+                                                        <tr key={report._id}>
+                                                            <td>
+                                                                {`${report?.reportedBy?.firstName} ${report?.reportedBy?.lastName} 
+                                                    (${report?.reportedBy?.username})`}
+                                                            </td>
+                                                            <td>{formatDate(report.reportedDate)}</td>
+                                                            <td>{report.description}</td>
+                                                            <td className="report_actions">
+                                                                <FontAwesomeIcon
+                                                                    icon={faInfo}
+                                                                    className="icons modal-trigger"
+                                                                    onClick={() => openPostReportDetailModal(report)}
+                                                                    data-target="openUserPost"
+                                                                />
+                                                                <button
+                                                                    className="btn btn-success modal-trigger"
+                                                                    onClick={() => handleCommentReportApprove(report._id)}
+                                                                    data-target="reportActionModal"
+                                                                >
+                                                                    <FontAwesomeIcon icon={faCheck} />
+                                                                </button>
+                                                                <button
+                                                                    className="btn btn-danger modal-trigger"
+                                                                    onClick={() => handleCommentReportReject(report._id)}
+                                                                    data-target="reportActionModal"
+                                                                >
+                                                                    <FontAwesomeIcon icon={faTimes} />
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                    ))}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </>
                                 ) :
                                     (
                                         <div className="main-container" style={{ background: '#F5F5DC' }}>
@@ -334,7 +408,7 @@ const ReportComponent = () => {
                     (<PostReportDetailComponent
                         selectedPost={selectedPostId}
                         userDetail={userDetail}
-                        postComment = {reportedComment}
+                        postComment={reportedComment}
                     />
                     )}
             </div>

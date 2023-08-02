@@ -23,7 +23,7 @@ module.exports = (req, res, next) => {
             .populate('userTypeId')
             .populate('collegeInfoId')
             .then(existingUser => {
-                existingUser.password = undefined; //so that password is not exposed.
+                existingUser.password = "undefined"; //so that password is not exposed.
                 req.user = existingUser;
                 next();
             });
