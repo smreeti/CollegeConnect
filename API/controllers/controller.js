@@ -10,7 +10,7 @@ const {
   savePost,
   fetchAllPosts,
   fetchPostDetails,
-  deletePost
+  deletePost,
 } = require("./postController.js");
 
 const {
@@ -19,7 +19,7 @@ const {
   editProfilePhoto,
   editProfile,
   blockUser,
-  deleteProfile
+  deleteProfile,
 } = require("./userController.js");
 
 const { fetchProfileDetails } = require("./profileController.js");
@@ -50,12 +50,15 @@ const {
   followUser,
   unfollowUser,
   fetchFollowingUsersList,
-  fetchFollowersUsersList
+  fetchFollowersUsersList,
 } = require("../controllers/userFollowingController.js");
 
 const { reportComment } = require("../controllers/reportCommentController.js");
 
-const { fetchDataForDoughnutChart } = require("../controllers/adminHomeController.js");
+const {
+  fetchDataForDoughnutChart,
+  fetchDataForMasterDoughnutChart,
+} = require("../controllers/adminHomeController.js");
 
 module.exports = {
   signupUser,
@@ -92,6 +95,7 @@ module.exports = {
   fetchFollowersUsersList,
   reportComment,
   fetchDataForDoughnutChart,
+  fetchDataForMasterDoughnutChart,
   blockUser,
-  deleteProfile
+  deleteProfile,
 };

@@ -15,6 +15,7 @@ import SearchUserComponent from './components/SearchUserComponent.jsx';
 import EditProfileComponent from './components/EditProfileComponent.jsx';
 import ReportComponent from './components/ReportComponent.jsx';
 import NotificationsComponent from './components/NotificationsComponent.jsx';
+import UsersListComponent from './components/UsersListComponent.jsx';
 
 export default function AppRoutes() {
   const navigate = useNavigate();
@@ -27,7 +28,7 @@ export default function AppRoutes() {
 
         const currentPath = window.location.pathname;
 
-        if (currentPath === '/' || currentPath === '/signup' || currentPath === '/about' )
+        if (currentPath === '/' || currentPath === '/signup' || currentPath === '/about')
           return;
 
         if (!accessToken || !refreshToken) {
@@ -62,6 +63,9 @@ export default function AppRoutes() {
 
       <Route path="/reports" element={<ReportComponent />} />
       <Route path='/notifications' element={<NotificationsComponent />} />
+
+      <Route path='/userslist' element={<UsersListComponent />} />
+
 
       <Route path="/logout" element={<LogoutComponent />} />
       <Route path="*" element={<NotFound />} />

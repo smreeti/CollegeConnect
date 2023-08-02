@@ -11,7 +11,7 @@ export default class HomeComponent extends React.Component {
         return (
             <>
                 {
-                    loggedInUser && loggedInUser?.userTypeId?.code == UserType.ADMIN ?
+                    loggedInUser && loggedInUser?.userTypeId?.code === UserType.ADMIN || UserType.MASTER ?
                         <AdminHomeComponent /> :
                         <ClientHomeComponent />
                 }

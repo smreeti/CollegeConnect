@@ -35,8 +35,9 @@ const {
   fetchFollowersUsersList,
   reportComment,
   fetchDataForDoughnutChart,
+  // fetchDataForMasterDoughnutChart,
   blockUser,
-  deleteProfile
+  deleteProfile,
 } = require("../controllers/controller.js");
 
 const {
@@ -78,12 +79,19 @@ const {
   API_TO_BLOCK_USER,
   API_TO_DELETE_PROFILE,
   API_TO_FETCH_DATA_FOR_BAR_CHART,
+  API_TO_FETCH_DATA_FOR_MASTER_DOUGNNUT_CHART,
 } = require("../utils/APIRequestUrl.js");
 
 const { setSuccessResponse } = require("../utils/Response.js");
 const { removeFollower } = require("../controllers/userFollowingController.js");
-const { fetchCommentReports, handleApproveCommentReports, handleRejectCommentReports } = require("../controllers/reportCommentController.js");
-const { fetchDataForBarChart } = require("../controllers/adminHomeController.js");
+const {
+  fetchCommentReports,
+  handleApproveCommentReports,
+  handleRejectCommentReports,
+} = require("../controllers/reportCommentController.js");
+const {
+  fetchDataForBarChart,
+} = require("../controllers/adminHomeController.js");
 
 router.get(API_TO_FETCH_COLLEGE_INFO, fetchCollegeList);
 router.post(API_TO_SIGNUP_USER, signupUser);
@@ -140,7 +148,11 @@ router.post(API_TO_FETCH_POST_LIKES, authMiddleware, fetchPostLikes);
 router.post(API_TO_FOLLOW_USER, authMiddleware, followUser);
 router.post(API_TO_UNFOLLOW_USER, authMiddleware, unfollowUser);
 
-router.post(API_TO_FETCH_FOLLOWING_USERS, authMiddleware, fetchFollowingUsersList);
+router.post(
+  API_TO_FETCH_FOLLOWING_USERS,
+  authMiddleware,
+  fetchFollowingUsersList
+);
 router.post(API_TO_FETCH_FOLLOWERS, authMiddleware, fetchFollowersUsersList);
 router.post(API_TO_REMOVE_FOLLOWERS, authMiddleware, removeFollower);
 
@@ -159,8 +171,23 @@ router.post(
   handleRejectCommentReports
 );
 
-router.get(API_TO_FETCH_DATA_FOR_DOUGNNUT_CHART, authMiddleware, fetchDataForDoughnutChart);
-router.get(API_TO_FETCH_DATA_FOR_BAR_CHART, authMiddleware, fetchDataForBarChart);
+router.get(
+  API_TO_FETCH_DATA_FOR_DOUGNNUT_CHART,
+  authMiddleware,
+  fetchDataForDoughnutChart
+);
+
+// router.get(
+//   API_TO_FETCH_DATA_FOR_MASTER_DOUGNNUT_CHART,
+//   authMiddleware,
+//   fetchDataForMasterDoughnutChart
+// );
+
+router.get(
+  API_TO_FETCH_DATA_FOR_BAR_CHART,
+  authMiddleware,
+  fetchDataForBarChart
+);
 
 router.post(API_TO_BLOCK_USER, authMiddleware, blockUser);
 router.post(API_TO_DELETE_PROFILE, authMiddleware, deleteProfile);

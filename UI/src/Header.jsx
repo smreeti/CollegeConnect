@@ -11,6 +11,7 @@ import {
   faFileImage,
   faFlag,
   faBell,
+  faUsersGear,
 } from '@fortawesome/free-solid-svg-icons';
 import SearchUserComponent from './components/SearchUserComponent.jsx';
 import { Dropdown } from 'react-bootstrap';
@@ -81,24 +82,34 @@ export default function Header() {
                 </Link>
               </li>
 
-              <li className="tabmenu">
-                <FontAwesomeIcon className="icons" icon={faFileImage} />
-                <Link
-                  onClick={() => {
-                    toggleMenu();
-                    openCreatePostModal();
-                  }}
-                  data-target="createPostModal"
-                  className="modal-trigger"
-                >
-                  Create Post
-                </Link>
-              </li>
+              {loggedInUser?.userTypeId?.code != UserType.MASTER && (
+
+                <li className="tabmenu">
+                  <FontAwesomeIcon className="icons" icon={faFileImage} />
+                  <Link
+                    onClick={() => {
+                      toggleMenu();
+                      openCreatePostModal();
+                    }}
+                    data-target="createPostModal"
+                    className="modal-trigger"
+                  >
+                    Create Post
+                  </Link>
+                </li>
+              )}
 
               {loggedInUser?.userTypeId?.code === UserType.ADMIN && (
                 <li className="tabmenu">
                   <FontAwesomeIcon className="icons" icon={faFlag} />
                   <Link to="/reports"> Reports </Link>
+                </li>
+              )}
+
+              {loggedInUser?.userTypeId?.code === UserType.MASTER && (
+                <li className="tabmenu">
+                  <FontAwesomeIcon className="icons" icon={faUsersGear} />
+                  <Link to="/userslist"> Manage Users</Link>
                 </li>
               )}
 

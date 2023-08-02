@@ -47,6 +47,41 @@ const DoughnutChartComponent = () => {
         }
     }
 
+    // const fetchDataForMasterDoughnutChart = async () => {
+    //     try {
+    //         const response = await fetchData(API_TO_FETCH_DATA_FOR_MASTER_DOUGNNUT_CHART, "GET");
+    //         console.log(response.body);
+
+    //         if (response.message === 200 && response.body) {
+    //             const { totalRegularUsers, totalCollegePosts, totalUserPosts, totalPosts } = response.body;
+    //             const data = {
+    //                 labels: ['Regular Users', 'College Posts', 'User Posts', 'Total Posts'],
+    //                 datasets: [
+    //                     {
+    //                         data: [totalRegularUsers, totalCollegePosts, totalUserPosts, totalPosts],
+    //                         backgroundColor: [
+    //                             'rgba(255, 99, 132, 0.2)',
+    //                             'rgba(54, 162, 235, 0.2)',
+    //                             'rgba(255, 206, 86, 0.2)',
+    //                             'rgba(75, 192, 192, 0.2)',
+    //                         ],
+    //                         borderColor: [
+    //                             'rgba(255, 99, 132, 1)',
+    //                             'rgba(54, 162, 235, 1)',
+    //                             'rgba(255, 206, 86, 1)',
+    //                             'rgba(75, 192, 192, 1)',
+    //                         ],
+    //                         borderWidth: 1,
+    //                     },
+    //                 ],
+    //             };
+    //             setChartData(data);
+    //         }
+    //     } catch (error) {
+    //         console.log(error);
+    //     }
+    // }
+
     const chartOptions = {
         responsive: true,
         maintainAspectRatio: false,
