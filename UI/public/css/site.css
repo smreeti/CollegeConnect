@@ -706,6 +706,7 @@ button[type="submit"]:hover {
 
 .doughnut_main_container {
   display: flex;
+  align-items: center;
 }
 
 .doughnut_right_container {
@@ -723,6 +724,13 @@ button[type="submit"]:hover {
 .doughnut_right {
   flex: 3;
   padding: 20px;
+}
+
+.barchart_main_container{
+  width: 50%;
+  margin: auto;
+  margin-top: 30px;
+  margin-bottom: 20px;
 }
 
 /*hamburger start*/
@@ -2548,6 +2556,11 @@ hr {
   .clock {
     font-size: 11px !important;
   }
+
+  .doughnut_right_container{
+    width: 250px;
+    height: 250px;
+  }
 }
 
 @media screen and (min-width: 250px) and (max-width: 420px) {
@@ -2831,6 +2844,15 @@ hr {
     align-items: center;
   }
 
+  .doughnut_main_container{
+    flex-direction: column;
+  }
+
+  .doughnut_right_container{
+    width: 350px;
+    height: 350px;
+  }
+
   .clock {
     font-size: 11px !important;
   }
@@ -2881,6 +2903,11 @@ hr {
 
   .comment_content {
     width: 75%;
+  }
+
+  .doughnut_right_container{
+    width: 350px;
+    height: 350px;
   }
 }
 

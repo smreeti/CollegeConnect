@@ -31,6 +31,47 @@ const fetchDataForDoughnutChart = async (req, res) => {
     }
 }
 
+const getMonthName = (monthNumber) => {
+    const months = [
+        'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+        'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+    ];
+    return months[monthNumber - 1] || 'Unknown';
+};
+
+const fetchDataForBarChart = async (req, res) => {
+    const loggedInUser = req.user;
+    if (loggedInUser.userTypeId.code == "SUPER_ADMIN") {
+        try {
+            // The result will be an array of objects containing the month and the total count
+            // Example: [{ _id: 1, count: 10 }, { _id: 2, count: 15 }, ...]
+            const totalPostsByMonth = await Post.aggregate([
+                {
+                    $group: {
+                        _id: { $month: '$createdDate' },
+                        count: { $sum: 1 },
+                    },
+                },
+            ]);
+
+            // Transform the result to include month names and set count to 0 if not found
+            const transformedData = Array.from({ length: 12 }, (_, index) => {
+                const monthNumber = index + 1;
+                const monthName = getMonthName(monthNumber);
+                const count = totalPostsByMonth.find(item => item._id === monthNumber)?.count || 0;
+                return { month: monthName, count };
+            });
+
+            return setSuccessResponse(res, HttpStatus.OK, transformedData);
+        } catch (error) {
+            console.error(error);
+            return setErrorResponse(res, HttpStatus.BAD_REQUEST, "Something went wrong");
+        }
+    } else {
+        return setErrorResponse(res, HttpStatus.BAD_REQUEST, "Only admin can access this page");
+    }
+}
+
 const fetchTotalRegularUsers = async (collegeInfoId, regularUserTypeId) => {
 
     const totalRegularUsers = await User.countDocuments({
@@ -82,5 +123,6 @@ const fetchTotalUserPosts = async (collegeInfoId, regularUserTypeId) => {
 
 
 module.exports = {
-    fetchDataForDoughnutChart
+    fetchDataForDoughnutChart,
+    fetchDataForBarChart
 }

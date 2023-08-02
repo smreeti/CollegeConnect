@@ -76,11 +76,14 @@ const {
   API_TO_FETCH_COMMENT_REPORTS,
   API_TO_FETCH_DATA_FOR_DOUGNNUT_CHART,
   API_TO_BLOCK_USER,
+  API_TO_DELETE_PROFILE,
+  API_TO_FETCH_DATA_FOR_BAR_CHART,
 } = require("../utils/APIRequestUrl.js");
 
 const { setSuccessResponse } = require("../utils/Response.js");
 const { removeFollower } = require("../controllers/userFollowingController.js");
 const { fetchCommentReports, handleApproveCommentReports, handleRejectCommentReports } = require("../controllers/reportCommentController.js");
+const { fetchDataForBarChart } = require("../controllers/adminHomeController.js");
 
 router.get(API_TO_FETCH_COLLEGE_INFO, fetchCollegeList);
 router.post(API_TO_SIGNUP_USER, signupUser);
@@ -157,9 +160,9 @@ router.post(
 );
 
 router.get(API_TO_FETCH_DATA_FOR_DOUGNNUT_CHART, authMiddleware, fetchDataForDoughnutChart);
+router.get(API_TO_FETCH_DATA_FOR_BAR_CHART, authMiddleware, fetchDataForBarChart);
 
 router.post(API_TO_BLOCK_USER, authMiddleware, blockUser);
-
 router.post(API_TO_DELETE_PROFILE, authMiddleware, deleteProfile);
 
 module.exports = router;
