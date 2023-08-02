@@ -35,7 +35,8 @@ const {
   fetchFollowersUsersList,
   reportComment,
   fetchDataForDoughnutChart,
-  blockUser
+  blockUser,
+  deleteProfile
 } = require("../controllers/controller.js");
 
 const {
@@ -158,5 +159,7 @@ router.post(
 router.get(API_TO_FETCH_DATA_FOR_DOUGNNUT_CHART, authMiddleware, fetchDataForDoughnutChart);
 
 router.post(API_TO_BLOCK_USER, authMiddleware, blockUser);
+
+router.post(API_TO_DELETE_PROFILE, authMiddleware, deleteProfile);
 
 module.exports = router;

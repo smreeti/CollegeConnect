@@ -30,6 +30,8 @@ const login = async (req, res) => {
 
         if (user.status == "BLOCKED") {
             return setErrorResponse(res, HttpStatus.BAD_REQUEST, "This account is no longer active. We sent you an email explaining what happened.");
+        } else if (user.status == "DELETED") {
+            return setErrorResponse(res, HttpStatus.BAD_REQUEST, "Your account has been deleted.");
         }
 
         let passwordMatch = await bcrypt.compare(password, user.password);

@@ -146,6 +146,20 @@ const blockUser = async (req, res) => {
     }
 }
 
+const deleteProfile = async (req, res) => {
+    const { userId } = req.body;
+
+    try {
+        await User.findByIdAndUpdate(userId, {
+            status: 'DELETED'
+        }, { new: true });
+
+        return setSuccessResponse(res, { message: "User deleted successfully" });
+    } catch (error) {
+        return setErrorResponse(res, HttpStatus.INTERNAL_SERVER_ERROR, error);
+    }
+}
+
 const sendEmail = async (message) => {
     await sendgridMail.send(message);
 };
@@ -158,5 +172,6 @@ module.exports = {
     fetchUserDetails,
     editProfilePhoto,
     editProfile,
-    blockUser
+    blockUser,
+    deleteProfile
 };
