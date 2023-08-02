@@ -1,7 +1,11 @@
 const User = require('../models/User.js');
 const UserType = require('../models/UserType.js');
+const { BLOCK_USER } = require('../utils/EmailActionConstants.js');
+const { generateBlockUserEmail } = require('../utils/EmailTemplates/BlockUser.js');
 const { setSuccessResponse, setErrorResponse } = require('../utils/Response.js');
 const { validateImage, validateUser } = require('../utils/ValidationUtil.js');
+const { fetchEmailAction } = require('./emailActionController.js');
+const sendgridMail = require("@sendgrid/mail");
 
 const fetchUser = (username) => {
     const user = User.findOne({
@@ -121,6 +125,31 @@ const editProfile = async (req, res) => {
     }
 }
 
+const blockUser = async (req, res) => {
+    const { userId } = req.body;
+
+    try {
+        const user = await User.findByIdAndUpdate(userId, {
+            status: 'BLOCKED'
+        }, { new: true });
+
+        const blockUserEmail = generateBlockUserEmail(
+            user.username,
+            user.email,
+            "cdvs"
+        );
+        await sendEmail(blockUserEmail);
+
+        return setSuccessResponse(res, { message: "User blocked successfully" });
+    } catch (error) {
+        return setErrorResponse(res, HttpStatus.INTERNAL_SERVER_ERROR, error);
+    }
+}
+
+const sendEmail = async (message) => {
+    await sendgridMail.send(message);
+};
+
 module.exports = {
     fetchUser,
     fetchAdminUser,
@@ -128,5 +157,6 @@ module.exports = {
     fetchUserMinDetails,
     fetchUserDetails,
     editProfilePhoto,
-    editProfile
+    editProfile,
+    blockUser
 };

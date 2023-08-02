@@ -95,7 +95,7 @@ export default function Header() {
                 </Link>
               </li>
 
-              {loggedInUser.userTypeId.code === UserType.ADMIN && (
+              {loggedInUser?.userTypeId?.code === UserType.ADMIN && (
                 <li className="tabmenu">
                   <FontAwesomeIcon className="icons" icon={faFlag} />
                   <Link to="/reports"> Reports </Link>
@@ -130,7 +130,7 @@ export default function Header() {
                         />
                       )}
                       <span id="profileName">
-                        {loggedInUser.firstName + ' ' + loggedInUser.lastName}
+                        {loggedInUser?.firstName + ' ' + loggedInUser?.lastName}
                       </span>
                     </Dropdown.Toggle>
 
@@ -138,7 +138,7 @@ export default function Header() {
                       <Dropdown.Item className="custom-item">
                         <FontAwesomeIcon className="icons" icon={faUser} />
                         <Link
-                          to={`/profile/${loggedInUser._id}`}
+                          to={`/profile/${loggedInUser?._id}`}
                           onClick={closeMenu}
                         >
                           Profile

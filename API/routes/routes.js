@@ -34,7 +34,8 @@ const {
   fetchFollowingUsersList,
   fetchFollowersUsersList,
   reportComment,
-  fetchDataForDoughnutChart
+  fetchDataForDoughnutChart,
+  blockUser
 } = require("../controllers/controller.js");
 
 const {
@@ -73,6 +74,7 @@ const {
   API_TO_REJECT_COMMENT_REPORTS,
   API_TO_FETCH_COMMENT_REPORTS,
   API_TO_FETCH_DATA_FOR_DOUGNNUT_CHART,
+  API_TO_BLOCK_USER,
 } = require("../utils/APIRequestUrl.js");
 
 const { setSuccessResponse } = require("../utils/Response.js");
@@ -154,5 +156,7 @@ router.post(
 );
 
 router.get(API_TO_FETCH_DATA_FOR_DOUGNNUT_CHART, authMiddleware, fetchDataForDoughnutChart);
+
+router.post(API_TO_BLOCK_USER, authMiddleware, blockUser);
 
 module.exports = router;

@@ -27,6 +27,11 @@ const login = async (req, res) => {
     }).populate('userTypeId');
 
     if (user) {
+
+        if (user.status == "BLOCKED") {
+            return setErrorResponse(res, HttpStatus.BAD_REQUEST, "This account is no longer active. We sent you an email explaining what happened.");
+        }
+
         let passwordMatch = await bcrypt.compare(password, user.password);
         if (passwordMatch) { //if passwords match
 

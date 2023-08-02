@@ -18,6 +18,7 @@ const {
   fetchUserDetails,
   editProfilePhoto,
   editProfile,
+  blockUser
 } = require("./userController.js");
 
 const { fetchProfileDetails } = require("./profileController.js");
@@ -89,5 +90,6 @@ module.exports = {
   fetchFollowingUsersList,
   fetchFollowersUsersList,
   reportComment,
-  fetchDataForDoughnutChart
+  fetchDataForDoughnutChart,
+  blockUser
 };
