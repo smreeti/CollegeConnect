@@ -49,6 +49,7 @@ const ReportComponent = () => {
         } else if (tab === COMMENT_REPORTS) {
             fetchCommentReports();
         }
+        setSearchQuery('');
     };
 
     const fetchPostReports = async () => {
