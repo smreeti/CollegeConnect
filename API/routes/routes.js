@@ -34,7 +34,9 @@ const {
   fetchFollowingUsersList,
   fetchFollowersUsersList,
   reportComment,
-  fetchDataForDoughnutChart
+  fetchDataForDoughnutChart,
+  fetchAdminUser,
+  // fetchAdminList,
 } = require("../controllers/controller.js");
 
 const {
@@ -73,11 +75,16 @@ const {
   API_TO_REJECT_COMMENT_REPORTS,
   API_TO_FETCH_COMMENT_REPORTS,
   API_TO_FETCH_DATA_FOR_DOUGNNUT_CHART,
+  API_TO_FETCH_ADMIN_USER,
 } = require("../utils/APIRequestUrl.js");
 
 const { setSuccessResponse } = require("../utils/Response.js");
 const { removeFollower } = require("../controllers/userFollowingController.js");
-const { fetchCommentReports, handleApproveCommentReports, handleRejectCommentReports } = require("../controllers/reportCommentController.js");
+const {
+  fetchCommentReports,
+  handleApproveCommentReports,
+  handleRejectCommentReports,
+} = require("../controllers/reportCommentController.js");
 
 router.get(API_TO_FETCH_COLLEGE_INFO, fetchCollegeList);
 router.post(API_TO_SIGNUP_USER, signupUser);
@@ -134,7 +141,11 @@ router.post(API_TO_FETCH_POST_LIKES, authMiddleware, fetchPostLikes);
 router.post(API_TO_FOLLOW_USER, authMiddleware, followUser);
 router.post(API_TO_UNFOLLOW_USER, authMiddleware, unfollowUser);
 
-router.post(API_TO_FETCH_FOLLOWING_USERS, authMiddleware, fetchFollowingUsersList);
+router.post(
+  API_TO_FETCH_FOLLOWING_USERS,
+  authMiddleware,
+  fetchFollowingUsersList
+);
 router.post(API_TO_FETCH_FOLLOWERS, authMiddleware, fetchFollowersUsersList);
 router.post(API_TO_REMOVE_FOLLOWERS, authMiddleware, removeFollower);
 
@@ -153,6 +164,12 @@ router.post(
   handleRejectCommentReports
 );
 
-router.get(API_TO_FETCH_DATA_FOR_DOUGNNUT_CHART, authMiddleware, fetchDataForDoughnutChart);
+router.get(
+  API_TO_FETCH_DATA_FOR_DOUGNNUT_CHART,
+  authMiddleware,
+  fetchDataForDoughnutChart
+);
+
+// router.get(API_TO_FETCH_ADMIN_USER, authMiddleware, fetchAdminList);
 
 module.exports = router;

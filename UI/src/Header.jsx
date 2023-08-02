@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getLoggedInUser } from '../utils/Auth';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome, faUser, faInfo, faSignOutAlt, faSearch, faFileImage, faFlag, faBell } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faUser, faInfo, faSignOutAlt, faSearch, faFileImage, faFlag, faBell, faUserGear } from '@fortawesome/free-solid-svg-icons';
 import SearchUserComponent from './components/SearchUserComponent.jsx';
 import { Dropdown } from "react-bootstrap";
 import CreatePostComponent from './components/CreatePostComponent.jsx';
@@ -63,13 +63,19 @@ export default function Header() {
             data-target="modal1" className="modal-trigger">Search</Link>
         </li>
 
-        <li className='tabmenu'>
-          <FontAwesomeIcon className="icons" icon={faFileImage} />
-          <Link onClick={() => {
-            toggleMenu(); // Close the menu when Create Post is clicked
-            openCreatePostModal(); // Open the Create Post modal
-          }} data-target="createPostModal" className="modal-trigger">Create Post</Link>
-        </li>
+        {
+          loggedInUser.userTypeId.code == (UserType.REGULAR_USER && UserType.ADMIN) &&
+          (
+            <li className='tabmenu'>
+              <FontAwesomeIcon className="icons" icon={faFileImage} />
+              <Link onClick={() => {
+                toggleMenu(); // Close the menu when Create Post is clicked
+                openCreatePostModal(); // Open the Create Post modal
+              }} data-target="createPostModal" className="modal-trigger">Create Post</Link>
+            </li>
+          )
+        }
+
 
         {
           loggedInUser.userTypeId.code == UserType.ADMIN &&
@@ -77,6 +83,16 @@ export default function Header() {
             <li className='tabmenu'>
               <FontAwesomeIcon className='icons' icon={faFlag} />
               <Link to="/reports"> Reports </Link>
+            </li>
+          )
+        }
+
+        {
+          loggedInUser.userTypeId.code == UserType.MASTER &&
+          (
+            <li className='tabmenu'>
+              <FontAwesomeIcon className='icons' icon={faUserGear} />
+              <Link to="/listofusers">Manage Users </Link>
             </li>
           )
         }

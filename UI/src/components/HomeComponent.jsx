@@ -8,7 +8,6 @@ export default class HomeComponent extends React.Component {
 
     render() {
         const loggedInUser = getLoggedInUser();
-        console.log(loggedInUser);
         return (
             <>
                 {
