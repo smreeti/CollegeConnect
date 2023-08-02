@@ -8,11 +8,10 @@ export default class HomeComponent extends React.Component {
 
     render() {
         const loggedInUser = getLoggedInUser();
-        console.log(loggedInUser);
         return (
             <>
                 {
-                    loggedInUser.userTypeId.code == UserType.ADMIN ?
+                    loggedInUser && loggedInUser?.userTypeId?.code == UserType.ADMIN ?
                         <AdminHomeComponent /> :
                         <ClientHomeComponent />
                 }

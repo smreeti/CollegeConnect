@@ -16,7 +16,6 @@ const AdminHomeComponent = () => {
 
   const fetchDataForDoughnutChart = async () => {
     try {
-      // Fetch data from API...
       const response = await fetchData(API_TO_FETCH_DATA_FOR_DOUGNNUT_CHART, "GET");
 
       if (response.message === 200 && response.body) {

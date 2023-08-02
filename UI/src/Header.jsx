@@ -2,11 +2,20 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getLoggedInUser } from '../utils/Auth';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome, faUser, faInfo, faSignOutAlt, faSearch, faFileImage, faFlag, faBell } from '@fortawesome/free-solid-svg-icons';
+import {
+  faHome,
+  faUser,
+  faInfo,
+  faSignOutAlt,
+  faSearch,
+  faFileImage,
+  faFlag,
+  faBell,
+} from '@fortawesome/free-solid-svg-icons';
 import SearchUserComponent from './components/SearchUserComponent.jsx';
-import { Dropdown } from "react-bootstrap";
+import { Dropdown } from 'react-bootstrap';
 import CreatePostComponent from './components/CreatePostComponent.jsx';
-import UserType from '../utils/UserTypeConstants';
+import UserType from '../utils/UserTypeConstants'; // Make sure to import the UserTypeConstants
 
 export default function Header() {
   const loggedInUser = getLoggedInUser();
@@ -29,111 +38,134 @@ export default function Header() {
 
   const openCreatePostModal = () => {
     setIsCreatePostModalOpen(true);
-  }
+  };
 
   return (
-    <section className="top-nav">
-      <div><Link to="/home" className="logonew" >
-        <img className='headlogo' src='../../assets/logotestheader.png' /></Link>
-      </div>
+    <>
+      <section className="top-nav">
+        <div>
+          <Link to="/home" className="logonew">
+            <img className="headlogo" src="../../assets/logotestheader.png" />
+          </Link>
+        </div>
 
-      <input
-        id="menu-toggle"
-        type="checkbox"
-        checked={isMenuOpen}
-        onChange={toggleMenu}
-      />
-      <label className="menu-button-container" htmlFor="menu-toggle">
-        <div className="menu-button"></div>
-      </label>
+        {loggedInUser && (
+          <>
+            <input
+              id="menu-toggle"
+              type="checkbox"
+              checked={isMenuOpen}
+              onChange={toggleMenu}
+            />
+            <label className="menu-button-container" htmlFor="menu-toggle">
+              <div className="menu-button"></div>
+            </label>
 
-      <ul className="menu">
+            <ul className="menu">
+              <li className="tabmenu">
+                <FontAwesomeIcon className="icons" icon={faHome} />
+                <Link to="/home"> Home </Link>
+              </li>
 
-        <li className='tabmenu'>
-          <FontAwesomeIcon className='icons' icon={faHome} />
-          <Link to="/home"> Home </Link>
-        </li>
+              <li className="tabmenu">
+                <FontAwesomeIcon className="icons" icon={faSearch} />
+                <Link
+                  onClick={() => {
+                    toggleMenu();
+                    openSearchModal();
+                  }}
+                  data-target="modal1"
+                  className="modal-trigger"
+                >
+                  Search
+                </Link>
+              </li>
 
-        <li className='tabmenu'>
-          <FontAwesomeIcon className='icons' icon={faSearch} />
-          <Link onClick={() => {
-            toggleMenu(); // Close the menu when Create Post is clicked
-            openSearchModal(); // Open the Create Post modal
-          }}
-            data-target="modal1" className="modal-trigger">Search</Link>
-        </li>
+              <li className="tabmenu">
+                <FontAwesomeIcon className="icons" icon={faFileImage} />
+                <Link
+                  onClick={() => {
+                    toggleMenu();
+                    openCreatePostModal();
+                  }}
+                  data-target="createPostModal"
+                  className="modal-trigger"
+                >
+                  Create Post
+                </Link>
+              </li>
 
-        <li className='tabmenu'>
-          <FontAwesomeIcon className="icons" icon={faFileImage} />
-          <Link onClick={() => {
-            toggleMenu(); // Close the menu when Create Post is clicked
-            openCreatePostModal(); // Open the Create Post modal
-          }} data-target="createPostModal" className="modal-trigger">Create Post</Link>
-        </li>
+              {loggedInUser.userTypeId.code === UserType.ADMIN && (
+                <li className="tabmenu">
+                  <FontAwesomeIcon className="icons" icon={faFlag} />
+                  <Link to="/reports"> Reports </Link>
+                </li>
+              )}
 
-        {
-          loggedInUser.userTypeId.code == UserType.ADMIN &&
-          (
-            <li className='tabmenu'>
-              <FontAwesomeIcon className='icons' icon={faFlag} />
-              <Link to="/reports"> Reports </Link>
-            </li>
-          )
-        }
+              <li className="tabmenu">
+                <FontAwesomeIcon className="icons" icon={faBell} />
+                <Link to="/notifications"> Notifications</Link>
+              </li>
 
-        <li className='tabmenu'>
-          <FontAwesomeIcon className='icons' icon={faBell} />
-          <Link to="/notifications"> Notifications</Link>
-        </li>
+              <li className="tabmenu">
+                <FontAwesomeIcon className="icons" icon={faInfo} />
+                <Link to="/about"> About Us </Link>
+              </li>
 
-        <li className='tabmenu'>
-          <FontAwesomeIcon className='icons' icon={faInfo} />
-          <Link to="/about"> About Us </Link>
-        </li>
+              <li className="heightli tabmenu">
+                {loggedInUser && (
+                  <Dropdown className="iconimg">
+                    <Dropdown.Toggle variant="secondary" id="profile-dropdown">
+                      {loggedInUser.profilePicture === 'default' ? (
+                        <img
+                          id="prfimg"
+                          src="/assets/profile.png"
+                          alt="Profile"
+                        />
+                      ) : (
+                        <img
+                          id="prfimg"
+                          src={loggedInUser.profilePicture}
+                          alt="Profile"
+                        />
+                      )}
+                      <span id="profileName">
+                        {loggedInUser.firstName + ' ' + loggedInUser.lastName}
+                      </span>
+                    </Dropdown.Toggle>
 
-        <li className="heightli tabmenu">
-          {loggedInUser && (
-            <Dropdown className="iconimg">
-              <Dropdown.Toggle variant="secondary" id="profile-dropdown">
-                {loggedInUser?.profilePicture === "default" ? (
-                  <img id="prfimg" src="/assets/profile.png" alt="Profile" />
-                ) : (
-                  <img
-                    id="prfimg"
-                    src={loggedInUser?.profilePicture}
-                    alt="Profile"
-                  />
+                    <Dropdown.Menu className="test">
+                      <Dropdown.Item className="custom-item">
+                        <FontAwesomeIcon className="icons" icon={faUser} />
+                        <Link
+                          to={`/profile/${loggedInUser._id}`}
+                          onClick={closeMenu}
+                        >
+                          Profile
+                        </Link>
+                      </Dropdown.Item>
+
+                      <Dropdown.Item>
+                        <FontAwesomeIcon
+                          className="icons"
+                          icon={faSignOutAlt}
+                        />
+                        <Link to="/logout" onClick={closeMenu}>
+                          Logout
+                        </Link>
+                      </Dropdown.Item>
+                    </Dropdown.Menu>
+                  </Dropdown>
                 )}
-                <span id="profileName">
-                  {loggedInUser?.firstName + " " + loggedInUser?.lastName}
-                </span>
-              </Dropdown.Toggle>
+              </li>
+            </ul>
 
-              <Dropdown.Menu className="test">
-                <Dropdown.Item className="custom-item">
-                  <FontAwesomeIcon className="icons" icon={faUser} />
-                  <Link
-                    to={`/profile/${loggedInUser._id}`}
-                    onClick={closeMenu}>
-                    Profile
-                  </Link>
-                </Dropdown.Item>
+            {isSearchModalOpen && <SearchUserComponent />}
 
-                <Dropdown.Item>
-                  <FontAwesomeIcon className="icons" icon={faSignOutAlt} />
-                  <Link to="/logout" onClick={closeMenu}>
-                    Logout
-                  </Link>
-                </Dropdown.Item>
-              </Dropdown.Menu>
-            </Dropdown>
-          )}
-        </li>
-      </ul>
-
-      {isSearchModalOpen && <SearchUserComponent />}
-
-      {isCreatePostModalOpen && <CreatePostComponent />}
-    </section>
-  )
+            {isCreatePostModalOpen && <CreatePostComponent />}
+          </>
+        )}
+      </section>
+    </>
+  );
 }

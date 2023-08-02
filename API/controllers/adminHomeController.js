@@ -33,7 +33,6 @@ const fetchDataForDoughnutChart = async (req, res) => {
 
 const fetchTotalRegularUsers = async (collegeInfoId, regularUserTypeId) => {
 
-
     const totalRegularUsers = await User.countDocuments({
         userTypeId: regularUserTypeId,
         collegeInfoId
@@ -45,7 +44,8 @@ const fetchTotalCollegePosts = async (collegeInfoId, adminUserTypeId) => {
 
     try {
         const totalCollegePostsCount = await Post.countDocuments({
-            isCollegePost: "Y"
+            isCollegePost: "Y",
+            status: "ACTIVE"
         }).populate({
             path: "postedBy",
             match: {
@@ -64,7 +64,8 @@ const fetchTotalUserPosts = async (collegeInfoId, regularUserTypeId) => {
 
     try {
         const totalUserPostsCount = await Post.countDocuments({
-            isCollegePost: "N"
+            isCollegePost: "N",
+            status: "ACTIVE"
         }).populate({
             path: "postedBy",
             match: {

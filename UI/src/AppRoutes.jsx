@@ -27,8 +27,7 @@ export default function AppRoutes() {
 
         const currentPath = window.location.pathname;
 
-        // Exclude authentication check for login and signup routes
-        if (currentPath === '/' || currentPath === '/signup')
+        if (currentPath === '/' || currentPath === '/signup' || currentPath === '/about' )
           return;
 
         if (!accessToken || !refreshToken) {
