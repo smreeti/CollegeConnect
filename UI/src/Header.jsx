@@ -113,10 +113,12 @@ export default function Header() {
                 </li>
               )}
 
-              <li className="tabmenu">
-                <FontAwesomeIcon className="icons" icon={faBell} />
-                <Link to="/notifications"> Notifications</Link>
-              </li>
+              {loggedInUser?.userTypeId?.code != UserType.MASTER && (
+                <li className="tabmenu">
+                  <FontAwesomeIcon className="icons" icon={faBell} />
+                  <Link to="/notifications"> Notifications</Link>
+                </li>
+              )}
 
               <li className="tabmenu">
                 <FontAwesomeIcon className="icons" icon={faInfo} />
@@ -146,15 +148,18 @@ export default function Header() {
                     </Dropdown.Toggle>
 
                     <Dropdown.Menu className="test">
-                      <Dropdown.Item className="custom-item">
-                        <FontAwesomeIcon className="icons" icon={faUser} />
-                        <Link
-                          to={`/profile/${loggedInUser?._id}`}
-                          onClick={closeMenu}
-                        >
-                          Profile
-                        </Link>
-                      </Dropdown.Item>
+                      {loggedInUser?.userTypeId?.code != UserType.MASTER && (
+
+                        <Dropdown.Item className="custom-item">
+                          <FontAwesomeIcon className="icons" icon={faUser} />
+                          <Link
+                            to={`/profile/${loggedInUser?._id}`}
+                            onClick={closeMenu}
+                          >
+                            Profile
+                          </Link>
+                        </Dropdown.Item>
+                      )}
 
                       <Dropdown.Item>
                         <FontAwesomeIcon

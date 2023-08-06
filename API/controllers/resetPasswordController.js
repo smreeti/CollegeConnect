@@ -18,35 +18,54 @@ const {
   findEmailToken,
 } = require("./emailTokenController.js");
 const { checkPasswordValidity } = require("../utils/ValidationUtil.js");
+const {
+  generatePasswordEmail,
+} = require("../utils/EmailTemplates/GeneratedPassword.js");
 
 sendgridMail.setApiKey(process.env.SEND_GRID_API_KEY);
 
+const generatedPassword = generateRandomPassword();
+const randomToken = crypto.randomBytes(32).toString("hex");
+
 const resetPassword = async (req, res) => {
   try {
-    const { username } = req.body;
+    const { username, loggedInUser } = req.body;
     const user = await fetchUser(username);
 
     if (!user)
       return setErrorResponse(res, HttpStatus.NOT_FOUND, "User not found.");
 
-    const randomToken = crypto.randomBytes(32).toString("hex");
     const expiryDate = Date.now() + 3600000; // current date + 1 hour
 
     const emailAction = await fetchEmailAction(RESET_PASSWORD);
 
     await createEmailToken(randomToken, expiryDate, user._id, emailAction._id);
-    const resetPasswordEmail = generateResetPasswordEmail(
-      user.username,
-      user.email,
-      randomToken
-    );
-    await sendEmail(resetPasswordEmail);
+    if (!loggedInUser) {
+      const resetPasswordEmail = generateResetPasswordEmail(
+        user.username,
+        user.email,
+        randomToken
+      );
+      emailToSend = resetPasswordEmail;
+      await sendEmail(emailToSend);
 
-    return setSuccessResponse(
-      res,
-      "Reset Password Email Sent",
-      resetPasswordEmail
-    );
+      return setSuccessResponse(res, "Reset Password Email Sent", emailToSend);
+    } else {
+      const resetPasswordEmail = generatePasswordEmail(
+        user.username,
+        user.email,
+        randomToken,
+        generatedPassword
+      );
+      emailToSend = resetPasswordEmail;
+      await sendEmail(emailToSend);
+
+      return setSuccessResponse(
+        res,
+        "Reset Password Email Sent",
+        generatedPassword
+      );
+    }
   } catch (error) {
     console.error(error.message);
     return setErrorResponse(
@@ -56,9 +75,36 @@ const resetPassword = async (req, res) => {
     );
   }
 };
+function generateRandomPassword() {
+  const uppercaseChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  const lowercaseChars = "abcdefghijklmnopqrstuvwxyz";
+  const digitChars = "0123456789";
+
+  const getRandomChar = (charSet) =>
+    charSet[Math.floor(Math.random() * charSet.length)];
+
+  const passwordLength = 8;
+
+  let password = "";
+  password += getRandomChar(uppercaseChars);
+  password += getRandomChar(lowercaseChars);
+  password += getRandomChar(digitChars);
+
+  const remainingChars = passwordLength - 3;
+  const allChars = uppercaseChars + lowercaseChars + digitChars;
+
+  for (let i = 0; i < remainingChars; i++) {
+    password += getRandomChar(allChars);
+  }
+  const shuffledPassword = password
+    .split("")
+    .sort(() => Math.random() - 0.5)
+    .join("");
+
+  return shuffledPassword;
+}
 
 const updatePassword = async (req, res) => {
-
   const { newPassword, token } = req.body;
 
   const errors = checkPasswordValidity(newPassword, []);
@@ -67,23 +113,29 @@ const updatePassword = async (req, res) => {
 
   try {
     const emailAction = await fetchEmailAction(RESET_PASSWORD);
-    let emailToken = await findEmailToken(token, emailAction._id);
+    if (token) {
+      let emailToken = await findEmailToken(token, emailAction._id);
+      emailVerificationToken = emailToken;
+    } else {
+      let emailToken = await findEmailToken(randomToken, emailAction._id);
+      emailVerificationToken = emailToken;
+    }
 
-    if (!emailToken)
+    if (!emailVerificationToken)
       return setErrorResponse(
         res,
         HttpStatus.BAD_REQUEST,
         "Try again, session expired."
       );
 
-    const user = emailToken.userId;
+    const user = emailVerificationToken.userId;
     user.password = newPassword;
 
-    emailToken.token = undefined; //reset token and expiry date
-    emailToken.expiryDate = undefined;
-    emailToken.lastModifiedDate = Date.now();
+    emailVerificationToken.token = undefined; //reset token and expiry date
+    emailVerificationToken.expiryDate = undefined;
+    emailVerificationToken.lastModifiedDate = Date.now();
 
-    emailToken = await emailToken.save();
+    emailVerificationToken = await emailVerificationToken.save();
     await user.save();
 
     return setSuccessResponse(res, "Password updated successfully");

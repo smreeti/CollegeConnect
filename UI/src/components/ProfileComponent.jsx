@@ -156,14 +156,19 @@ const ProfileComponent = () => {
               <div className="sync">
                 <div className="d-flex justify-content-between profile-actions">
                   <div className="creator_desc">{userDetails?.firstName + " " + userDetails?.lastName}</div>
-                  <button className="editbutton">
-                    <Link className="edpr" to="/edit">
-                      <FontAwesomeIcon icon={faCog} /> Edit Profile
-                    </Link>
-                  </button>
-
                   {
-                    loggedInUser._id !== id && (
+                    (loggedInUser._id === userDetails?._id) && (
+                      <Link className="edpr" to="/edit">
+                        <button className="editbutton">
+
+                          <FontAwesomeIcon icon={faCog} /> Edit Profile
+                        </button>
+
+                      </Link>
+                    )
+                  }
+                  {
+                    (loggedInUser._id !== id && loggedInUser.collegeInfoId) && (
                       <button onClick={isFollowing ? unFollowUser : followUser} className="editbutton">
                         {isFollowing ? 'Unfollow' : 'Follow'}
                       </button>

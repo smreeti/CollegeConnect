@@ -38,6 +38,10 @@ const {
   // fetchDataForMasterDoughnutChart,
   blockUser,
   deleteProfile,
+  fetchAdminList,
+  fetchSuperAdminList,
+  fetchRegularUserList,
+  fetchUserData,
 } = require("../controllers/controller.js");
 
 const {
@@ -79,6 +83,10 @@ const {
   API_TO_BLOCK_USER,
   API_TO_DELETE_PROFILE,
   API_TO_FETCH_DATA_FOR_BAR_CHART,
+  API_TO_FETCH_ADMIN_LIST,
+  API_TO_FETCH_SUPERADMIN_LIST,
+  API_TO_FETCH_REGULAR_USER_LIST,
+  API_TO_FETCH_USER_DATA,
   API_TO_FETCH_DATA_FOR_MASTER_DOUGNNUT_CHART,
 } = require("../utils/APIRequestUrl.js");
 
@@ -158,6 +166,17 @@ router.post(API_TO_REMOVE_FOLLOWERS, authMiddleware, removeFollower);
 
 router.post(API_TO_REPORT_COMMENT, authMiddleware, reportComment);
 router.get(API_TO_FETCH_COMMENT_REPORTS, authMiddleware, fetchCommentReports);
+
+router.get(API_TO_FETCH_ADMIN_LIST, authMiddleware, fetchAdminList);
+router.get(API_TO_FETCH_SUPERADMIN_LIST, authMiddleware, fetchSuperAdminList);
+
+router.get(
+  API_TO_FETCH_REGULAR_USER_LIST,
+  authMiddleware,
+  fetchRegularUserList
+);
+
+router.post(API_TO_FETCH_USER_DATA, authMiddleware, fetchUserData);
 
 router.post(
   API_TO_APPROVE_COMMENT_REPORTS,

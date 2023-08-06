@@ -53,10 +53,14 @@ const API_TO_REJECT_COMMENT_REPORTS = "/rejectCommentReports";
 const API_TO_FETCH_DATA_FOR_DOUGNNUT_CHART = "/doughnutChart";
 const API_TO_FETCH_DATA_FOR_BAR_CHART = "/barchart";
 const API_TO_FETCH_DATA_FOR_MASTER_DOUGNNUT_CHART = "/masterDoughnutChart";
-
 const API_TO_BLOCK_USER = "/blockUser";
-
 const API_TO_DELETE_PROFILE = "/deleteProfile";
+const API_TO_FETCH_ADMIN_LIST = "/fetchAdminList";
+
+const API_TO_FETCH_SUPERADMIN_LIST = "/fetchSuperAdminList";
+const API_TO_FETCH_REGULAR_USER_LIST = "/fetchRegularUserList";
+
+const API_TO_FETCH_USER_DATA = "/fetchUserData";
 
 module.exports = {
   API_TO_FETCH_COLLEGE_INFO,
@@ -98,4 +102,8 @@ module.exports = {
   API_TO_FETCH_DATA_FOR_MASTER_DOUGNNUT_CHART,
   API_TO_BLOCK_USER,
   API_TO_DELETE_PROFILE,
+  API_TO_FETCH_ADMIN_LIST,
+  API_TO_FETCH_SUPERADMIN_LIST,
+  API_TO_FETCH_REGULAR_USER_LIST,
+  API_TO_FETCH_USER_DATA,
 };

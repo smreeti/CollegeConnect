@@ -62,36 +62,38 @@ const SearchUserComponent = () => {
                         {userDetails?.length > 0 && search ? (
                             userDetails.map((userDetail) => {
                                 return (
-                                    <li className="collection-item" key={userDetail._id}>
+                                    (userDetail.collegeInfoId &&
+                                        <li className="collection-item" key={userDetail._id}>
 
-                                        <div className="creator_block_post">
-                                            <img
-                                                className="creator_image_post"
-                                                src={
-                                                    userDetail.profilePicture === "default"
-                                                        ? "assets/profile.png"
-                                                        : userDetail.profilePicture
-                                                }
-                                                alt="Profile"
-                                            />
-                                        </div>
+                                            <div className="creator_block_post">
+                                                <img
+                                                    className="creator_image_post"
+                                                    src={
+                                                        userDetail.profilePicture === "default"
+                                                            ? "assets/profile.png"
+                                                            : userDetail.profilePicture
+                                                    }
+                                                    alt="Profile"
+                                                />
+                                            </div>
 
-                                        <div className="user-modal-details ml-2">
-                                            <span className="username">
-                                                <Link
-                                                    key={userDetail._id}
-                                                    to={`/profile/${userDetail._id}`}
-                                                    onClick={closeSearchModal}
-                                                >
-                                                    {userDetail.username}
-                                                </Link>
+                                            <div className="user-modal-details ml-2">
+                                                <span className="username">
+                                                    <Link
+                                                        key={userDetail._id}
+                                                        to={`/profile/${userDetail._id}`}
+                                                        onClick={closeSearchModal}
+                                                    >
+                                                        {userDetail.username}
+                                                    </Link>
 
-                                            </span>
-                                            <p className='fullName'>
-                                                {userDetail?.firstName + " " + userDetail?.lastName}</p>
-                                        </div>
+                                                </span>
+                                                <p className='fullName'>
+                                                    {userDetail?.firstName + " " + userDetail?.lastName}</p>
+                                            </div>
 
-                                    </li>
+                                        </li>
+                                    )
                                 );
                             })
                         ) : search ? (

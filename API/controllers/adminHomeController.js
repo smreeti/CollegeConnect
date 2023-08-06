@@ -8,7 +8,7 @@ const fetchDataForDoughnutChart = async (req, res) => {
   const loggedInUser = req.user;
   const { collegeInfoId, userTypeId } = loggedInUser;
 
-  if (loggedInUser.userTypeId.code == "SUPER_ADMIN") {
+  if (loggedInUser.userTypeId?.code == "SUPER_ADMIN") {
     const regularUserType = await UserType.findOne({ code: "REGULAR_USER" });
 
     if (!regularUserType)

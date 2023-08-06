@@ -24,7 +24,6 @@ export default class ClientHomeComponent extends React.Component {
             userDetail: '',
             isLikesModalOpen: false,
             isPostLiked: false,
-            isData: '',
         };
     }
 
@@ -118,7 +117,7 @@ export default class ClientHomeComponent extends React.Component {
     }
 
     render() {
-        const { posts, isLoading, isData } = this.state;
+        const { posts, isLoading } = this.state;
         return (
             <>
                 <Header />
