@@ -138,7 +138,7 @@ const UsersListComponent = () => {
                                     <>
                                         <input
                                             type="text"
-                                            className="form-control search-filter"
+                                            className="form-control w-50 my-5 mx-auto"
                                             placeholder="Search by name, email, username, phone number or status"
                                             value={searchQuery}
                                             onChange={(e) => setSearchQuery(e.target.value)}
@@ -175,18 +175,6 @@ const UsersListComponent = () => {
                                                                         icon={faInfoCircle}
                                                                     />
                                                                 </Link>
-                                                                <button
-                                                                    className="btn btn-success modal-trigger"
-                                                                    onClick={() => handleApprove(admin._id)}
-                                                                >
-                                                                    <FontAwesomeIcon icon={faCheck} />
-                                                                </button>
-                                                                <button
-                                                                    className="btn btn-danger modal-trigger"
-                                                                    onClick={() => blockUser(admin._id)}
-                                                                >
-                                                                    <FontAwesomeIcon icon={faTimes} />
-                                                                </button>
                                                             </td>
                                                         </tr>
                                                     ))}
@@ -234,7 +222,7 @@ const UsersListComponent = () => {
                                     <>
                                         <input
                                             type="text"
-                                            className="form-control search-filter"
+                                            className="form-control my-5 w-50 mx-auto"
                                             placeholder="Search by name, email, username, phone number or status"
                                             value={searchQuery}
                                             onChange={(e) => setSearchQuery(e.target.value)}
@@ -272,18 +260,6 @@ const UsersListComponent = () => {
                                                                         data-target="openUserPost"
                                                                     />
                                                                 </Link>
-                                                                <button
-                                                                    className="btn btn-success modal-trigger"
-                                                                    onClick={() => handleCommentReportApprove(regular._id)}
-                                                                >
-                                                                    <FontAwesomeIcon icon={faCheck} />
-                                                                </button>
-                                                                <button
-                                                                    className="btn btn-danger modal-trigger"
-                                                                    onClick={() => blockUser(regular._id)}
-                                                                >
-                                                                    <FontAwesomeIcon icon={faTimes} />
-                                                                </button>
                                                             </td>
                                                         </tr>
                                                     ))}

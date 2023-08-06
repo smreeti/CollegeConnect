@@ -63,9 +63,7 @@ module.exports = {
                                 <h3 className="bold">${generatedPassword}</h3>
                                 </br>
                                 <p>Do not share this code with anyone</p>
-                                <p className = "reset-button">
-                                    <a href="http://localhost:3000/#/updatePassword/${token}">Reset Password</a>
-                                </p>
+                                
                                 <p>If you did not request a password reset, please ignore this email. Your account is still secure.</p>
                                 <p>Thank you,</p>
                                 <p>College Connect Team</p>
