@@ -2,7 +2,7 @@ import React, { useEffect, useState, forwardRef } from "react";
 import Header from "../Header.jsx";
 import fetchData from "../../utils/FetchAPI.js";
 import {
-    API_TO_FETCH_SUPERADMIN_LIST, API_TO_FETCH_REGULAR_USER_LIST
+    API_TO_FETCH_SUPERADMIN_LIST, API_TO_FETCH_REGULAR_USER_LIST, API_TO_BLOCK_USER
 } from "../../utils/APIRequestUrl.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
@@ -86,10 +86,14 @@ const UsersListComponent = () => {
         });
     };
 
-    const openUserDetailModal = (selectedUser) => {
-        console.log(selectedUser, "is");
-        setUserDetailOpen(true);
-        setSelectedUserId(selectedUser);
+    const blockUser = async (userId) => {
+        try {
+            const data = await fetchData(API_TO_BLOCK_USER, "POST", userId);
+            console.log(data.body);
+        } catch (error) {
+            console.log("Error:", error);
+        }
+
     }
 
     return (
@@ -179,7 +183,7 @@ const UsersListComponent = () => {
                                                                 </button>
                                                                 <button
                                                                     className="btn btn-danger modal-trigger"
-                                                                    onClick={() => handleReject(admin._id)}
+                                                                    onClick={() => blockUser(admin._id)}
                                                                 >
                                                                     <FontAwesomeIcon icon={faTimes} />
                                                                 </button>
@@ -276,7 +280,7 @@ const UsersListComponent = () => {
                                                                 </button>
                                                                 <button
                                                                     className="btn btn-danger modal-trigger"
-                                                                    onClick={() => handleCommentReportReject(regular._id)}
+                                                                    onClick={() => blockUser(regular._id)}
                                                                 >
                                                                     <FontAwesomeIcon icon={faTimes} />
                                                                 </button>
