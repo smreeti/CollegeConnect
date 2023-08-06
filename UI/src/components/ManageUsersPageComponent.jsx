@@ -10,6 +10,12 @@ import fetchData from "../../utils/FetchAPI.js";
 const ManageUsersPageComponent = () => {
     const [isSchool, setSchool] = useState([]);
 
+    useEffect(() => {
+        schoolListName();
+    }, [])
+
+
+
     const schoolListName = async () => {
         try {
             const data = await fetchData(API_TO_FETCH_COLLEGE_INFO, "GET");
