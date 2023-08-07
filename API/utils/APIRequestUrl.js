@@ -54,6 +54,7 @@ const API_TO_FETCH_DATA_FOR_DOUGNNUT_CHART = "/doughnutChart";
 const API_TO_FETCH_DATA_FOR_BAR_CHART = "/barchart";
 
 const API_TO_BLOCK_USER = "/blockUser";
+const API_TO_UNBLOCK_USER = "/unblockUser";
 const API_TO_DELETE_PROFILE = "/deleteProfile";
 const API_TO_FETCH_ADMIN_LIST = "/fetchAdminList";
 
@@ -105,4 +106,5 @@ module.exports = {
   API_TO_FETCH_SUPERADMIN_LIST,
   API_TO_FETCH_REGULAR_USER_LIST,
   API_TO_FETCH_USER_DATA,
+  API_TO_UNBLOCK_USER
 };

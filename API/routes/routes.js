@@ -88,6 +88,7 @@ const {
   API_TO_FETCH_REGULAR_USER_LIST,
   API_TO_FETCH_USER_DATA,
   API_TO_FETCH_DATA_FOR_MASTER_DOUGNNUT_CHART,
+  API_TO_UNBLOCK_USER,
 } = require("../utils/APIRequestUrl.js");
 
 const { setSuccessResponse } = require("../utils/Response.js");
@@ -100,6 +101,7 @@ const {
 const {
   fetchDataForBarChart, fetchDataForMasterDoughnutChart,
 } = require("../controllers/adminHomeController.js");
+const { unBlockUser } = require("../controllers/userController.js");
 
 router.get(API_TO_FETCH_COLLEGE_INFO, fetchCollegeList);
 router.post(API_TO_SIGNUP_USER, signupUser);
@@ -203,6 +205,7 @@ router.get(
 );
 
 router.post(API_TO_BLOCK_USER, authMiddleware, blockUser);
+router.post(API_TO_UNBLOCK_USER, authMiddleware, unBlockUser);
 router.post(API_TO_DELETE_PROFILE, authMiddleware, deleteProfile);
 
 module.exports = router;

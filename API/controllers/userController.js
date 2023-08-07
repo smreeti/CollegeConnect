@@ -256,6 +256,24 @@ const blockUser = async (req, res) => {
   }
 };
 
+const unBlockUser = async (req, res) => {
+  const { userId } = req.body;
+
+  try {
+    await User.findByIdAndUpdate(
+      userId,
+      {
+        status: "ACTIVE",
+      },
+      { new: true }
+    );
+
+    return setSuccessResponse(res, { message: "User unblocked successfully" });
+  } catch (error) {
+    return setErrorResponse(res, HttpStatus.INTERNAL_SERVER_ERROR, error);
+  }
+};
+
 const deleteProfile = async (req, res) => {
   const { userId } = req.body;
 
@@ -292,4 +310,5 @@ module.exports = {
   fetchSuperAdminList,
   fetchRegularUserList,
   fetchUserData,
+  unBlockUser
 };

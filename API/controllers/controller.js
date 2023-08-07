@@ -99,7 +99,6 @@ module.exports = {
   fetchFollowersUsersList,
   reportComment,
   fetchDataForDoughnutChart,
-  // fetchDataForMasterDoughnutChart,
   blockUser,
   deleteProfile,
   fetchAdminList,

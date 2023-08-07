@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import fetchData from "../../utils/FetchAPI";
 import { API_TO_EDIT_PROFILE, API_TO_FETCH_USER_DATA, } from "../../utils/APIRequestUrl";
 import Header from "../Header.jsx";
-import ResetUserPasswordModalComponent from "./ResetUserPasswordModalComponent.jsx";
+import ResetUserPasswordModalComponent from "./BlockUserModalComponent.jsx";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { handleEditFormValidation } from "../../utils/validation";
 import EditProfilePhotoComponent from "./EditProfilePhotoComponent.jsx";
-
+import BlockUserModalComponent from "./BlockUserModalComponent.jsx";
 
 const UserDetailComponent = () => {
     const [userDetails, setUserDetails] = useState({});
@@ -14,9 +14,10 @@ const UserDetailComponent = () => {
     const [serverErrors, setServerErrors] = useState([]);
     const [isResetPasswordModal, setIsResetPasswordModal] = useState(false);
     const [isEditProfilePicture, setEditProfilePicture] = useState(false);
+    const [isBlockUserModal, setBlockUserModal] = useState(false);
+    const [userStatus, setUserStatus] = useState('');
     const { user, schoolName } = useParams();
     const navigate = useNavigate();
-
 
     useEffect(() => {
         fetchUserDetails();
@@ -26,6 +27,7 @@ const UserDetailComponent = () => {
         try {
             const data = await fetchData(API_TO_FETCH_USER_DATA, "POST", { id: user });
             setUserDetails(data.body);
+            setUserStatus(data.body.status);
         } catch (error) {
             console.log("Error:", error);
         }
@@ -43,7 +45,6 @@ const UserDetailComponent = () => {
         e.preventDefault();
         const form = document.forms.editform;
 
-        console.log(userDetails._id);
         const user = {
             firstName: form.firstName.value,
             lastName: form.lastName.value,
@@ -102,10 +103,12 @@ const UserDetailComponent = () => {
         setIsResetPasswordModal(true);
     }
 
-
-
     const openEditProfilePhotoModal = () => {
         setEditProfilePicture(true);
+    }
+
+    const openBlockUserModal = () => {
+        setBlockUserModal(true);
     }
 
     const {
@@ -264,6 +267,11 @@ const UserDetailComponent = () => {
                                             <Link onClick={openResetPasswordModal} className="modal-trigger" data-target="resetUserPasswordModal">
                                                 <h6>Reset Password?</h6>
                                             </Link>
+
+                                            <Link onClick={openBlockUserModal} className="modal-trigger"
+                                                data-target="blockUserModal">
+                                                <h6>{userStatus == "ACTIVE" ? "Block" : "Unblock"} user?</h6>
+                                            </Link>
                                         </div>
                                     </div>
 
@@ -272,7 +280,6 @@ const UserDetailComponent = () => {
                                     <button className="btnprofile" type="submit">
                                         Save Profile
                                     </button>
-
 
                                     {serverErrors.length > 0 && (
                                         <ul className="error-list text-danger">
@@ -289,6 +296,10 @@ const UserDetailComponent = () => {
                     </div>
                 </form>
                 {isResetPasswordModal && <ResetUserPasswordModalComponent userDetails={userDetails} />}
+                {isBlockUserModal && <BlockUserModalComponent
+                    userDetails={userDetails}
+                    userStatus={userStatus}
+                />}
                 {isEditProfilePicture && <EditProfilePhotoComponent userDetails={userDetails._id} />}
 
             </section >
