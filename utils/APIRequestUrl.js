@@ -1,4 +1,4 @@
-const BASE_SERVER_URL = "http://localhost:4000";
+const BASE_SERVER_URL = "https://tame-pear-chimpanzee-cuff.cyclic.app";
 
 const API_TO_FETCH_COLLEGE_INFO = BASE_SERVER_URL + "/fetchCollegeList";
 
