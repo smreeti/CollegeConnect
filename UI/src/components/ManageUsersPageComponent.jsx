@@ -31,13 +31,13 @@ const ManageUsersPageComponent = () => {
             <ToastContainer />
             <Header />
             <div className="container h-100 d-flex align-items-center justify-content-center" style={{ minHeight: '93.2vh' }}>
-                <div className="d-flex justify-content-between">
+                <div className="row justify-content-center">
                     {isSchool && isSchool.length > 0 && (
                         isSchool.map((school) => (
-                            <div className="col-sm-5" key={school._id}>
+                            <div className="col-sm-3" key={school._id}>
                                 <SchoolLinkComponent
                                     schoolName={school.name}
-                                    // imageSrc="/assets/group.jpg"
+                                    schoolImage="/assets/group.jpg"
                                     onClick={schoolListName}
                                     to={`/${school.name}/users-list`}
                                 />
