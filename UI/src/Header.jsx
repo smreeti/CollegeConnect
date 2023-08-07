@@ -149,7 +149,6 @@ export default function Header() {
 
                     <Dropdown.Menu className="test">
                       {loggedInUser?.userTypeId?.code != UserType.MASTER && (
-
                         <Dropdown.Item className="custom-item">
                           <FontAwesomeIcon className="icons" icon={faUser} />
                           <Link

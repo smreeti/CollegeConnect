@@ -130,7 +130,7 @@ const UsersListComponent = () => {
                                         <div className="spinner-border" role="status">
                                             <span className="sr-only">Loading...</span>
                                         </div>
-                                        <p>Loading post reports...</p>
+                                        <p>Loading users...</p>
                                     </div>
                                 ) :
 
@@ -192,7 +192,7 @@ const UsersListComponent = () => {
 
                                                     </p>
                                                     <h2 className="fs-2" style={{ color: '#008080' }}>
-                                                        No Post Report(s) to review yet !
+                                                        No Admin User yet !
                                                     </h2>
                                                 </div>
 
@@ -277,7 +277,7 @@ const UsersListComponent = () => {
 
                                                     </p>
                                                     <h2 className="fs-2" style={{ color: '#008080' }}>
-                                                        No Comment Report(s) to review yet !
+                                                        No Regular User yet !
                                                     </h2>
                                                 </div>
 
