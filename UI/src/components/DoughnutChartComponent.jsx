@@ -2,28 +2,43 @@ import React, { useEffect, useState } from 'react';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
 import fetchData from '../../utils/FetchAPI';
-import { API_TO_FETCH_DATA_FOR_DOUGNNUT_CHART, API_TO_FETCH_DATA_FOR_MASTER_DOUGNNUT_CHART } from '../../utils/APIRequestUrl';
+import { API_TO_FETCH_DATA_FOR_DOUGNNUT_CHART, API_TO_FETCH_COLLEGE_INFO } from '../../utils/APIRequestUrl';
 import { getLoggedInUser } from '../../utils/Auth';
-import UserType from '../../utils/UserTypeConstants';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const DoughnutChartComponent = () => {
     const [chartData, setChartData] = useState(null);
+    const [collegeList, setCollegeList] = useState([]);
+    const [selectedCollege, setSelectedCollege] = useState(null);
     const loggedInUser = getLoggedInUser();
 
     useEffect(() => {
+        fetchCollegeList();
         fetchDataForDoughnutChart();
-    }, []);
+    }, [selectedCollege]);
+
+    const fetchCollegeList = async () => {
+        try {
+            const data = await fetchData(API_TO_FETCH_COLLEGE_INFO, "GET");
+            setCollegeList(data.body);
+        }
+        catch (error) {
+            console.log("Error:", error);
+        }
+    }
+
+    const handleCollegeSelect = async (e) => {
+        const selectedCollegeId = e.target.value;
+        setSelectedCollege(selectedCollegeId);
+    }
 
     const fetchDataForDoughnutChart = async () => {
         try {
             const req = {
-                collegeInfoId: loggedInUser.collegeInfoId
+                collegeInfoId: selectedCollege
             }
-
-            const response = loggedInUser?.userTypeId?.code == UserType.MASTER ?
-                await fetchData(API_TO_FETCH_DATA_FOR_DOUGNNUT_CHART, "POST", req) :
+            const response =
                 await fetchData(API_TO_FETCH_DATA_FOR_DOUGNNUT_CHART, "POST", req);
 
             if (response.message === 200 && response.body) {
@@ -55,41 +70,6 @@ const DoughnutChartComponent = () => {
             console.log(error);
         }
     }
-
-    // const fetchDataForMasterDoughnutChart = async () => {
-    //     try {
-    //         const response = await fetchData(API_TO_FETCH_DATA_FOR_MASTER_DOUGNNUT_CHART, "GET");
-    //         console.log(response.body);
-
-    //         if (response.message === 200 && response.body) {
-    //             const { totalRegularUsers, totalCollegePosts, totalUserPosts, totalPosts } = response.body;
-    //             const data = {
-    //                 labels: ['Regular Users', 'College Posts', 'User Posts', 'Total Posts'],
-    //                 datasets: [
-    //                     {
-    //                         data: [totalRegularUsers, totalCollegePosts, totalUserPosts, totalPosts],
-    //                         backgroundColor: [
-    //                             'rgba(255, 99, 132, 0.2)',
-    //                             'rgba(54, 162, 235, 0.2)',
-    //                             'rgba(255, 206, 86, 0.2)',
-    //                             'rgba(75, 192, 192, 0.2)',
-    //                         ],
-    //                         borderColor: [
-    //                             'rgba(255, 99, 132, 1)',
-    //                             'rgba(54, 162, 235, 1)',
-    //                             'rgba(255, 206, 86, 1)',
-    //                             'rgba(75, 192, 192, 1)',
-    //                         ],
-    //                         borderWidth: 1,
-    //                     },
-    //                 ],
-    //             };
-    //             setChartData(data);
-    //         }
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-    // }
 
     const chartOptions = {
         responsive: true,
@@ -124,6 +104,22 @@ const DoughnutChartComponent = () => {
                 <p>
                     The Doughnut chart represents an overview of CollegeConnect statistics. It shows the following data:
                 </p>
+
+                {loggedInUser?.userTypeId?.code === 'MASTER_ADMIN' ?
+                    <div>
+                        <label htmlFor="collegeSelect">Select College:</label>
+                        <select
+                            id="collegeSelect"
+                            value={selectedCollege ? selectedCollege._id : ""}
+                            onChange={handleCollegeSelect}
+                        >
+                            <option value="">Select a college</option>
+                            {collegeList.map(college => (
+                                <option key={college._id} value={college._id}>{college.name}</option>
+                            ))}
+                        </select>
+                    </div> : ''}
+
                 <ul>
                     <li>Total Regular Users</li>
                     <li>Total College Posts</li>

@@ -1,18 +1,22 @@
 const Post = require("../models/Post");
+const CollegeInfo = require("../models/CollegeInfo");
+
 const User = require("../models/User");
 const UserType = require("../models/UserType");
 const HttpStatus = require("../utils/HttpStatus");
 const { setErrorResponse, setSuccessResponse } = require("../utils/Response");
+const mongoose = require('mongoose');
 
 const fetchDataForDoughnutChart = async (req, res) => {
   const loggedInUser = req.user;
-  const { userTypeId } = loggedInUser;
   const { collegeInfoId } = req.body;
+  const collegeInfo = await CollegeInfo.findById(collegeInfoId);
 
   const isMasterAdmin = loggedInUser.userTypeId?.code == "MASTER_ADMIN";
 
   if (loggedInUser.userTypeId?.code == "SUPER_ADMIN" || isMasterAdmin) {
     const regularUserType = await UserType.findOne({ code: "REGULAR_USER" });
+    const adminUserType = await UserType.findOne({ code: "SUPER_ADMIN" });
 
     if (!regularUserType)
       return setErrorResponse(
@@ -22,21 +26,18 @@ const fetchDataForDoughnutChart = async (req, res) => {
       );
 
     const totalRegularUsers = await fetchTotalRegularUsers(
-      collegeInfoId?._id,
-      regularUserType._id,
-      isMasterAdmin
+      collegeInfo?._id,
+      regularUserType._id
     );
 
     const totalCollegePosts = await fetchTotalCollegePosts(
-      collegeInfoId?._id,
-      userTypeId._id,
-      isMasterAdmin
+      collegeInfo?._id,
+      adminUserType._id
     );
 
     const totalUserPosts = await fetchTotalUserPosts(
-      collegeInfoId?._id,
-      regularUserType._id,
-      isMasterAdmin
+      collegeInfo?._id,
+      regularUserType._id
     );
 
     const doughnutChartData = {
@@ -76,7 +77,8 @@ const getMonthName = (monthNumber) => {
 
 const fetchDataForBarChart = async (req, res) => {
   const loggedInUser = req.user;
-  if (loggedInUser.userTypeId.code == "SUPER_ADMIN") {
+
+  if (loggedInUser.userTypeId.code == "SUPER_ADMIN" || loggedInUser.userTypeId?.code == "MASTER_ADMIN") {
     try {
       // The result will be an array of objects containing the month and the total count
       // Example: [{ _id: 1, count: 10 }, { _id: 2, count: 15 }, ...]
@@ -117,48 +119,69 @@ const fetchDataForBarChart = async (req, res) => {
   }
 };
 
-const fetchTotalRegularUsers = async (collegeInfoId, regularUserTypeId, isMasterAdmin) => {
-  const totalRegularUsers = isMasterAdmin ? await User.countDocuments({
-    userTypeId: regularUserTypeId,
+const fetchTotalRegularUsers = async (collegeInfoId, regularUserTypeId) => {
+  const totalRegularUsers = !collegeInfoId ? await User.countDocuments({
+    userTypeId: regularUserTypeId
   }) : await User.countDocuments({
     userTypeId: regularUserTypeId,
     collegeInfoId,
   });
+
   return totalRegularUsers;
 };
 
-const fetchTotalCollegePosts = async (collegeInfoId, adminUserTypeId, isMasterAdmin) => {
-  try {
-    const totalCollegePostsCount =
-      isMasterAdmin ? await Post.countDocuments({
-        isCollegePost: "Y",
-        status: "ACTIVE",
-      }).populate({
-        path: "postedBy",
-        match: {
-          userTypeId: adminUserTypeId,
-        },
-      }) :
-        await Post.countDocuments({
-          isCollegePost: "Y",
-          status: "ACTIVE",
-        }).populate({
-          path: "postedBy",
-          match: {
-            collegeInfoId: collegeInfoId,
-            userTypeId: adminUserTypeId,
-          },
-        });
-    return totalCollegePostsCount;
-  } catch (error) {
-    console.error(error);
-    throw error;
+const fetchTotalCollegePosts = async (collegeInfoId, adminUserTypeId) => {
+
+  console.log(collegeInfoId)
+  const query = {
+    isCollegePost: "Y",
+    status: "ACTIVE",
+  };
+
+  if (collegeInfoId) {
+    query["postedBy.collegeInfoId"] = collegeInfoId;
   }
+
+  if (adminUserTypeId) {
+    query["postedBy.userTypeId"] = adminUserTypeId;
+  }
+
+  const totalCollegePostsCount = await Post.countDocuments(query);
+  return totalCollegePostsCount;
+
+
+
+  // try {
+  //   const totalCollegePostsCount =
+  //     !collegeInfoId ? await Post.countDocuments({
+  //       isCollegePost: "Y",
+  //       status: "ACTIVE",
+  //     }).populate({
+  //       path: "postedBy",
+  //       match: {
+  //         userTypeId: adminUserTypeId,
+  //       },
+  //     }) :
+  //       await Post.countDocuments({
+  //         isCollegePost: "Y",
+  //         status: "ACTIVE",
+  //       }).populate({
+  //         path: "postedBy",
+  //         match: {
+  //           collegeInfoId: collegeInfoId,
+  //           userTypeId: adminUserTypeId,
+  //         },
+  //       });
+  //   return totalCollegePostsCount;
+  // } catch (error) {
+  //   console.error(error);
+  //   throw error;
+  // }
 };
 
-const fetchTotalUserPosts = async (collegeInfoId, regularUserTypeId, isMasterAdmin) => {
+const fetchTotalUserPosts = async (collegeInfoId, regularUserTypeId) => {
   try {
-    const totalUserPostsCount = isMasterAdmin ? await Post.countDocuments({
+    const totalUserPostsCount = !collegeInfoId ? await Post.countDocuments({
       isCollegePost: "N",
       status: "ACTIVE",
     }).populate({
@@ -173,7 +196,6 @@ const fetchTotalUserPosts = async (collegeInfoId, regularUserTypeId, isMasterAdm
       path: "postedBy",
       match: {
         collegeInfoId: collegeInfoId,
-        userTypeId: regularUserTypeId,
       },
     });
     return totalUserPostsCount;

@@ -4,6 +4,7 @@ import { BarComponent } from './BarComponent.jsx';
 import DoughnutChartComponent from './DoughnutChartComponent.jsx';
 
 const AdminHomeComponent = () => {
+
   return (
     <>
       <Header />
