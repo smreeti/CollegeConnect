@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import fetchData from "../../utils/FetchAPI";
 import { API_TO_EDIT_PROFILE, API_TO_FETCH_USER_DATA, } from "../../utils/APIRequestUrl";
 import Header from "../Header.jsx";
-import ResetUserPasswordModalComponent from "./BlockUserModalComponent.jsx";
+import ResetUserPasswordModalComponent from "./ResetUserPasswordModalComponent.jsx";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { handleEditFormValidation } from "../../utils/validation";
 import EditProfilePhotoComponent from "./EditProfilePhotoComponent.jsx";
