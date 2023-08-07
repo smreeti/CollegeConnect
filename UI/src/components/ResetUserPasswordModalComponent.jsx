@@ -8,6 +8,7 @@ import { getLoggedInUser } from '../../utils/Auth';
 
 const ResetUserPasswordModalComponent = (props) => {
     const resetUserPasswordModal = useRef(null);
+    const { userDetails } = props;
 
     useEffect(() => {
         M.Modal.init(resetUserPasswordModal.current);
@@ -20,7 +21,6 @@ const ResetUserPasswordModalComponent = (props) => {
     };
 
     const resetPasswordUser = async () => {
-        const { userDetails } = props;
         const loggedInUser = getLoggedInUser();
         try {
             const data = await fetchData(API_TO_RESET_PASSWORD, "POST", { username: userDetails.username, loggedInUser });
@@ -70,7 +70,7 @@ const ResetUserPasswordModalComponent = (props) => {
                     </div>
 
                     <div className="modal-body">
-                        <p>Are you sure you want to reset password?</p>
+                        <p>Are you sure you want to reset {userDetails.username} password?</p>
                         <div className="d-flex justify-content-between">
                             <button className="btn btn-success" onClick={() => { resetPasswordUser() }}>Yes</button>
                             <button className="btn btn-danger" type="button" onClick={cancelModal}>No</button>
