@@ -98,7 +98,7 @@ const {
   handleRejectCommentReports,
 } = require("../controllers/reportCommentController.js");
 const {
-  fetchDataForBarChart,
+  fetchDataForBarChart, fetchDataForMasterDoughnutChart,
 } = require("../controllers/adminHomeController.js");
 
 router.get(API_TO_FETCH_COLLEGE_INFO, fetchCollegeList);
@@ -190,17 +190,11 @@ router.post(
   handleRejectCommentReports
 );
 
-router.get(
+router.post(
   API_TO_FETCH_DATA_FOR_DOUGNNUT_CHART,
   authMiddleware,
   fetchDataForDoughnutChart
 );
-
-// router.get(
-//   API_TO_FETCH_DATA_FOR_MASTER_DOUGNNUT_CHART,
-//   authMiddleware,
-//   fetchDataForMasterDoughnutChart
-// );
 
 router.get(
   API_TO_FETCH_DATA_FOR_BAR_CHART,

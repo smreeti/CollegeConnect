@@ -6,9 +6,12 @@ const { setErrorResponse, setSuccessResponse } = require("../utils/Response");
 
 const fetchDataForDoughnutChart = async (req, res) => {
   const loggedInUser = req.user;
-  const { collegeInfoId, userTypeId } = loggedInUser;
+  const { userTypeId } = loggedInUser;
+  const { collegeInfoId } = req.body;
 
-  if (loggedInUser.userTypeId?.code == "SUPER_ADMIN") {
+  const isMasterAdmin = loggedInUser.userTypeId?.code == "MASTER_ADMIN";
+
+  if (loggedInUser.userTypeId?.code == "SUPER_ADMIN" || isMasterAdmin) {
     const regularUserType = await UserType.findOne({ code: "REGULAR_USER" });
 
     if (!regularUserType)
@@ -19,16 +22,21 @@ const fetchDataForDoughnutChart = async (req, res) => {
       );
 
     const totalRegularUsers = await fetchTotalRegularUsers(
-      collegeInfoId._id,
-      regularUserType._id
+      collegeInfoId?._id,
+      regularUserType._id,
+      isMasterAdmin
     );
+
     const totalCollegePosts = await fetchTotalCollegePosts(
-      collegeInfoId._id,
-      userTypeId._id
+      collegeInfoId?._id,
+      userTypeId._id,
+      isMasterAdmin
     );
+
     const totalUserPosts = await fetchTotalUserPosts(
-      collegeInfoId._id,
-      regularUserType._id
+      collegeInfoId?._id,
+      regularUserType._id,
+      isMasterAdmin
     );
 
     const doughnutChartData = {
@@ -47,45 +55,6 @@ const fetchDataForDoughnutChart = async (req, res) => {
     );
   }
 };
-
-// const fetchDataForMasterDoughnutChart = async (req, res) => {
-//   const loggedInUser = req.user;
-//   const { userTypeId } = loggedInUser;
-
-//   if (loggedInUser.userTypeId.code == "MASTER_ADMIN") {
-//     const regularUserType = await UserType.find({ code: "REGULAR_USER" });
-
-//     if (!regularUserType)
-//       return setErrorResponse(
-//         res,
-//         HttpStatus.NOT_FOUND,
-//         "Regular users not found"
-//       );
-
-//     const totalRegularUsers = await fetchMasterTotalRegularUsers(
-//       regularUserType._id
-//     );
-//     const totalCollegePosts = await fetchMasterTotalCollegePosts(
-//       userTypeId._id
-//     );
-//     const totalUserPosts = await fetchMasterTotalUserPosts(regularUserType._id);
-
-//     const doughnutChartData = {
-//       totalRegularUsers,
-//       totalCollegePosts,
-//       totalUserPosts,
-//       totalPosts: totalCollegePosts + totalUserPosts,
-//     };
-
-//     return setSuccessResponse(res, HttpStatus.OK, doughnutChartData);
-//   } else {
-//     return setErrorResponse(
-//       res,
-//       HttpStatus.BAD_REQUEST,
-//       "Only master can access this page"
-//     );
-//   }
-// };
 
 const getMonthName = (monthNumber) => {
   const months = [
@@ -148,33 +117,38 @@ const fetchDataForBarChart = async (req, res) => {
   }
 };
 
-const fetchTotalRegularUsers = async (collegeInfoId, regularUserTypeId) => {
-  const totalRegularUsers = await User.countDocuments({
+const fetchTotalRegularUsers = async (collegeInfoId, regularUserTypeId, isMasterAdmin) => {
+  const totalRegularUsers = isMasterAdmin ? await User.countDocuments({
+    userTypeId: regularUserTypeId,
+  }) : await User.countDocuments({
     userTypeId: regularUserTypeId,
     collegeInfoId,
   });
   return totalRegularUsers;
 };
 
-// const fetchMasterTotalRegularUsers = async (regularUserTypeId) => {
-//   const totalRegularUsers = await User.countDocuments({
-//     userTypeId: regularUserTypeId,
-//   });
-//   return totalRegularUsers;
-// };
-
-const fetchTotalCollegePosts = async (collegeInfoId, adminUserTypeId) => {
+const fetchTotalCollegePosts = async (collegeInfoId, adminUserTypeId, isMasterAdmin) => {
   try {
-    const totalCollegePostsCount = await Post.countDocuments({
-      isCollegePost: "Y",
-      status: "ACTIVE",
-    }).populate({
-      path: "postedBy",
-      match: {
-        collegeInfoId: collegeInfoId,
-        userTypeId: adminUserTypeId,
-      },
-    });
+    const totalCollegePostsCount =
+      isMasterAdmin ? await Post.countDocuments({
+        isCollegePost: "Y",
+        status: "ACTIVE",
+      }).populate({
+        path: "postedBy",
+        match: {
+          userTypeId: adminUserTypeId,
+        },
+      }) :
+        await Post.countDocuments({
+          isCollegePost: "Y",
+          status: "ACTIVE",
+        }).populate({
+          path: "postedBy",
+          match: {
+            collegeInfoId: collegeInfoId,
+            userTypeId: adminUserTypeId,
+          },
+        });
     return totalCollegePostsCount;
   } catch (error) {
     console.error(error);
@@ -182,27 +156,17 @@ const fetchTotalCollegePosts = async (collegeInfoId, adminUserTypeId) => {
   }
 };
 
-// const fetchMasterTotalCollegePosts = async (adminUserTypeId) => {
-//   try {
-//     const totalCollegePostsCount = await Post.countDocuments({
-//       isCollegePost: "Y",
-//       status: "ACTIVE",
-//     }).populate({
-//       path: "postedBy",
-//       match: {
-//         userTypeId: adminUserTypeId,
-//       },
-//     });
-//     return totalCollegePostsCount;
-//   } catch (error) {
-//     console.error(error);
-//     throw error;
-//   }
-// };
-
-const fetchTotalUserPosts = async (collegeInfoId, regularUserTypeId) => {
+const fetchTotalUserPosts = async (collegeInfoId, regularUserTypeId, isMasterAdmin) => {
   try {
-    const totalUserPostsCount = await Post.countDocuments({
+    const totalUserPostsCount = isMasterAdmin ? await Post.countDocuments({
+      isCollegePost: "N",
+      status: "ACTIVE",
+    }).populate({
+      path: "postedBy",
+      match: {
+        userTypeId: regularUserTypeId,
+      },
+    }) : await Post.countDocuments({
       isCollegePost: "N",
       status: "ACTIVE",
     }).populate({
@@ -219,26 +183,8 @@ const fetchTotalUserPosts = async (collegeInfoId, regularUserTypeId) => {
   }
 };
 
-// const fetchMasterTotalUserPosts = async (regularUserTypeId) => {
-//   try {
-//     const totalUserPostsCount = await Post.countDocuments({
-//       isCollegePost: "N",
-//       status: "ACTIVE",
-//     }).populate({
-//       path: "postedBy",
-//       match: {
-//         userTypeId: regularUserTypeId,
-//       },
-//     });
-//     return totalUserPostsCount;
-//   } catch (error) {
-//     console.error(error);
-//     throw error;
-//   }
-// };
-
 module.exports = {
   fetchDataForDoughnutChart,
-  fetchDataForBarChart,
-  //   fetchDataForMasterDoughnutChart,
+  fetchDataForBarChart
+
 };

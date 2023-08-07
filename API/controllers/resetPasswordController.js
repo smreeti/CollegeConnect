@@ -75,6 +75,7 @@ const resetPassword = async (req, res) => {
     );
   }
 };
+
 function generateRandomPassword() {
   const uppercaseChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   const lowercaseChars = "abcdefghijklmnopqrstuvwxyz";

@@ -2,12 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
 import fetchData from '../../utils/FetchAPI';
-import { API_TO_FETCH_DATA_FOR_DOUGNNUT_CHART } from '../../utils/APIRequestUrl';
+import { API_TO_FETCH_DATA_FOR_DOUGNNUT_CHART, API_TO_FETCH_DATA_FOR_MASTER_DOUGNNUT_CHART } from '../../utils/APIRequestUrl';
+import { getLoggedInUser } from '../../utils/Auth';
+import UserType from '../../utils/UserTypeConstants';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const DoughnutChartComponent = () => {
     const [chartData, setChartData] = useState(null);
+    const loggedInUser = getLoggedInUser();
 
     useEffect(() => {
         fetchDataForDoughnutChart();
@@ -15,7 +18,13 @@ const DoughnutChartComponent = () => {
 
     const fetchDataForDoughnutChart = async () => {
         try {
-            const response = await fetchData(API_TO_FETCH_DATA_FOR_DOUGNNUT_CHART, "GET");
+            const req = {
+                collegeInfoId: loggedInUser.collegeInfoId
+            }
+
+            const response = loggedInUser?.userTypeId?.code == UserType.MASTER ?
+                await fetchData(API_TO_FETCH_DATA_FOR_DOUGNNUT_CHART, "POST", req) :
+                await fetchData(API_TO_FETCH_DATA_FOR_DOUGNNUT_CHART, "POST", req);
 
             if (response.message === 200 && response.body) {
                 const { totalRegularUsers, totalCollegePosts, totalUserPosts, totalPosts } = response.body;
