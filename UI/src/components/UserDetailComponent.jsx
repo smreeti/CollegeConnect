@@ -3,14 +3,17 @@ import fetchData from "../../utils/FetchAPI";
 import { API_TO_EDIT_PROFILE, API_TO_FETCH_USER_DATA, } from "../../utils/APIRequestUrl";
 import Header from "../Header.jsx";
 import ResetUserPasswordModalComponent from "./ResetUserPasswordModalComponent.jsx";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import { handleEditFormValidation } from "../../utils/validation";
+import EditProfilePhotoComponent from "./EditProfilePhotoComponent.jsx";
+
 
 const UserDetailComponent = () => {
     const [userDetails, setUserDetails] = useState({});
     const [errors, setErrors] = useState([]);
     const [serverErrors, setServerErrors] = useState([]);
     const [isResetPasswordModal, setIsResetPasswordModal] = useState(false);
+    const [isEditProfilePicture, setEditProfilePicture] = useState(false);
     const { user, schoolName } = useParams();
     const navigate = useNavigate();
 
@@ -40,7 +43,7 @@ const UserDetailComponent = () => {
         e.preventDefault();
         const form = document.forms.editform;
 
-
+        console.log(userDetails._id);
         const user = {
             firstName: form.firstName.value,
             lastName: form.lastName.value,
@@ -99,6 +102,12 @@ const UserDetailComponent = () => {
         setIsResetPasswordModal(true);
     }
 
+
+
+    const openEditProfilePhotoModal = () => {
+        setEditProfilePicture(true);
+    }
+
     const {
         firstName,
         lastName,
@@ -134,12 +143,16 @@ const UserDetailComponent = () => {
                                     )}
                                     <span className="font-weight-bold namespacing usernamespace">{firstName + " " + lastName}</span>
                                     <span> </span>
+                                    <span> </span>
                                     <div className="modcen">
-                                        <button type="button" onClick={openResetPasswordModal} className="modal-trigger" data-target="resetUserPasswordModal">
-                                            Reset Password
-                                        </button>
+                                        <Link
+                                            onClick={openEditProfilePhotoModal}
+                                            data-target="editProfilePicModal"
+                                            className="modalcenter modal-trigger change-profile-photo-link modalcenter"
+                                        >
+                                            <span className="change"> Change profile photo</span>
+                                        </Link>
                                     </div>
-
                                 </div>
                             </div>
                             <div className="col-md-8 border-right">
@@ -245,8 +258,15 @@ const UserDetailComponent = () => {
                                                 className="form-control labelset"
                                                 placeholder="education"
                                             />
+                                            <br />
+                                        </div>
+                                        <div className="col-md-12 ms-3">
+                                            <Link onClick={openResetPasswordModal} className="modal-trigger" data-target="resetUserPasswordModal">
+                                                <h6>Reset Password?</h6>
+                                            </Link>
                                         </div>
                                     </div>
+
                                 </div>
                                 <div className=" text-center btnspace">
                                     <button className="btnprofile" type="submit">
@@ -269,8 +289,9 @@ const UserDetailComponent = () => {
                     </div>
                 </form>
                 {isResetPasswordModal && <ResetUserPasswordModalComponent userDetails={userDetails} />}
+                {isEditProfilePicture && <EditProfilePhotoComponent userDetails={userDetails._id} />}
 
-            </section>
+            </section >
 
         </>
     );

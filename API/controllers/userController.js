@@ -168,8 +168,9 @@ const fetchUserData = async (req, res) => {
 };
 
 const editProfilePhoto = async (req, res) => {
-  const loggedInUser = req.user;
-  const { imageUrl } = req.body;
+  const { imageUrl, id } = req.body;
+
+  const loggedInUser = id ? { _id: id } : req.user;
 
   try {
     let errors = await validateImage(imageUrl);
@@ -183,7 +184,6 @@ const editProfilePhoto = async (req, res) => {
       },
       { new: true }
     );
-
     return setSuccessResponse(
       res,
       { message: "Profile picture saved successfully" },

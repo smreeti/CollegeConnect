@@ -5,6 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import SchoolLinkComponent from "./SchoolLinkComponent.jsx";
 import { API_TO_FETCH_COLLEGE_INFO } from "../../utils/APIRequestUrl.js";
 import fetchData from "../../utils/FetchAPI.js";
+import EditProfilePhotoComponent from "./EditProfilePhotoComponent.jsx";
 
 
 const ManageUsersPageComponent = () => {
@@ -13,7 +14,6 @@ const ManageUsersPageComponent = () => {
     useEffect(() => {
         schoolListName();
     }, [])
-
 
 
     const schoolListName = async () => {
@@ -34,7 +34,7 @@ const ManageUsersPageComponent = () => {
                 <div className="d-flex justify-content-between">
                     {isSchool && isSchool.length > 0 && (
                         isSchool.map((school) => (
-                            <div className="col-sm-5">
+                            <div className="col-sm-5" key={school._id}>
                                 <SchoolLinkComponent
                                     schoolName={school.name}
                                     // imageSrc="/assets/group.jpg"
@@ -48,6 +48,7 @@ const ManageUsersPageComponent = () => {
             </div >
         </>
     );
+
 
 };
 

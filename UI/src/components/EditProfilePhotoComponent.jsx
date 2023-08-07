@@ -11,7 +11,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { API_TO_EDIT_PROFILE_PHOTO, API_TO_SAVE_POST } from "../../utils/APIRequestUrl.js";
 
-const EditProfilePhotoComponent = () => {
+const EditProfilePhotoComponent = (props) => {
   const [post, setPost] = useState({
     image: null,
   });
@@ -21,10 +21,12 @@ const EditProfilePhotoComponent = () => {
   const [serverErrors, setServerErrors] = useState([]);
 
   const createPostModal = useRef(null);
+  const { userDetails } = props;
+
 
   useEffect(() => {
     M.Modal.init(createPostModal.current);
-  }, []);
+  }, [], (console.log(userDetails)));
 
   const handleOnChange = (event) => {
     const { name, files } = event.target;
@@ -71,6 +73,7 @@ const EditProfilePhotoComponent = () => {
       if (cloudinaryData.url) {
         const postData = {
           imageUrl: cloudinaryData.url,
+          id: userDetails,
         };
 
         await uploadPostToServer(postData);
@@ -82,11 +85,14 @@ const EditProfilePhotoComponent = () => {
 
   const uploadPostToServer = async (post) => {
     try {
+      console.log(post.id, "Hey");
       const data = await fetchData(API_TO_EDIT_PROFILE_PHOTO, "POST", post);
       if (!data.error) {
-        await updateLocalStorage(data.body);
-        cancelModal();
-        console.log("Post saved successfully");
+        if (!post.id) {
+          await updateLocalStorage(data.body);
+          cancelModal();
+          console.log("Post saved successfully");
+        }
       } else {
         setServerErrors([data.error]);
         setErrors([]);

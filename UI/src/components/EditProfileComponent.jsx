@@ -75,6 +75,9 @@ export default class EditProfileComponent extends React.Component {
             const data = await fetchData(API_TO_EDIT_PROFILE, "POST", user);
             if (!data.error) {
                 await this.updateLocalStorage(data.body);
+                const data = await fetchData(API_TO_APPROVE_POST_REPORTS, "POST", user);
+                if (!data.error)
+                    toast.success("Post report approved successfully!");
                 window.location.reload();
                 console.log("User edited successfully");
             } else {
@@ -112,6 +115,37 @@ export default class EditProfileComponent extends React.Component {
         form.mobileNumber.value = "";
         form.username.value = "";
     };
+
+    async sendNotification() {
+
+        let formErrors = handleReportPostForm();
+        if (Object.keys(formErrors).length > 0) {
+            setFormErrors(formErrors);
+        } else {
+            const reportData = {
+                postReportsId: selectedPostId,
+                remarks
+            };
+
+            if (action == "APPROVE") {
+                const data = await fetchData(API_TO_APPROVE_POST_REPORTS, "POST", reportData);
+
+                if (!data.error)
+                    toast.success("Post report approved successfully!");
+
+            } else if (action == "REJECT") {
+                const data = await fetchData(API_TO_REJECT_POST_REPORTS, "POST", reportData);
+
+                if (!data.error)
+                    toast.error("Post report rejected successfully!");
+            }
+
+            cancelModal();
+            setTimeout(() => {
+                window.location.reload();
+            }, 2000);
+        }
+    }
 
     render() {
         const {
