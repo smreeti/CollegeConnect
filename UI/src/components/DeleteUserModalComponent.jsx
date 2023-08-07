@@ -2,40 +2,34 @@ import React, { useRef, useEffect, useState } from "react";
 import M from "materialize-css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
-import { API_TO_BLOCK_USER, API_TO_RESET_PASSWORD, API_TO_UNBLOCK_USER, API_TO_UPDATE_PASSWORD } from "../../utils/APIRequestUrl";
 import fetchData from "../../utils/FetchAPI";
+import { API_TO_DELETE_PROFILE } from "../../utils/APIRequestUrl";
 
-const BlockUserModalComponent = (props) => {
-    const blockUserModal = useRef(null);
-    const { userDetails, userStatus } = props;
+const DeleteUserModalComponent = (props) => {
+    const deleteUserModal = useRef(null);
+    const { userDetails } = props;
     const [confirmationMessage, setConfirmationMessage] = useState('');
 
     useEffect(() => {
-        M.Modal.init(blockUserModal.current);
+        M.Modal.init(deleteUserModal.current);
     }, [props]);
 
-
     const cancelModal = () => {
-        const modalInstance = M.Modal.getInstance(blockUserModal.current);
+        const modalInstance = M.Modal.getInstance(deleteUserModal.current);
         modalInstance.close();
     };
 
-    const handleBlock = async () => {
+    const deleteProfile = async () => {
         let data;
-        if (userStatus == "ACTIVE") {
-            data = await fetchData(API_TO_BLOCK_USER, "POST", { userId: userDetails._id });
-        } else if (userStatus == "BLOCKED") {
-            data = await fetchData(API_TO_UNBLOCK_USER, "POST", { userId: userDetails._id });
-        }
+
+        data = await fetchData(API_TO_DELETE_PROFILE, "POST", { userId: userDetails._id });
 
         if (!data?.error) {
-            if (userStatus == "ACTIVE") {
-                setConfirmationMessage("User blocked successfully and notification sent");
-            } else if (userStatus == "BLOCKED") {
-                setConfirmationMessage("User unblocked successfully");
-            }
+            setConfirmationMessage("Account deleted successfully. You will be logged out shortly");
+            setTimeout(() => {
+                window.location = '#/logout';
+            }, 2000);
         } else {
-            setServerErrors(data.error);
             setFormErrors([]);
         }
     }
@@ -45,7 +39,7 @@ const BlockUserModalComponent = (props) => {
     };
 
     return (
-        <div id="blockUserModal" className="modal" ref={blockUserModal} >
+        <div id="deleteUserModal" className="modal" ref={deleteUserModal} >
             <div className="modal-dialog">
                 <div className="modal-content">
                     <div className="modal-header">
@@ -59,9 +53,9 @@ const BlockUserModalComponent = (props) => {
 
                     <div className="modal-body">
                         {!confirmationMessage && <>
-                            <p>Are you sure you want to block {userDetails.username}?</p>
+                            <p>Are you sure you want to delete your profile, {userDetails.username}?</p>
                             <div className="d-flex justify-content-between">
-                                <button className="btn btn-success" onClick={handleBlock}>Yes</button>
+                                <button className="btn btn-success" onClick={deleteProfile}>Yes</button>
                                 <button className="btn btn-danger" type="button" onClick={cancelModal}>No</button>
                             </div>
                         </>
@@ -74,4 +68,4 @@ const BlockUserModalComponent = (props) => {
     );
 }
 
-export default BlockUserModalComponent;
+export default DeleteUserModalComponent;

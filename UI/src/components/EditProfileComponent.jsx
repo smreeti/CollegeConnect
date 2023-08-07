@@ -5,6 +5,7 @@ import Header from "../Header.jsx";
 import EditProfilePhotoComponent from "./EditProfilePhotoComponent.jsx";
 import { Link } from "react-router-dom";
 import { handleEditFormValidation } from "../../utils/validation";
+import DeleteUserModalComponent from "./DeleteUserModalComponent.jsx";
 
 export default class EditProfileComponent extends React.Component {
     constructor() {
@@ -12,6 +13,7 @@ export default class EditProfileComponent extends React.Component {
         this.state = {
             userDetails: {},
             isEditProfilePhotoModal: false,
+            isDeleteProfileModal: false,
             errors: [],
             serverErrors: []
         };
@@ -43,6 +45,12 @@ export default class EditProfileComponent extends React.Component {
     openEditProfilePhotoModal = () => {
         this.setState({
             isEditProfilePhotoModal: true
+        });
+    };
+
+    openDeleteProfileModal = () => {
+        this.setState({
+            isDeleteProfileModal: true
         });
     };
 
@@ -306,8 +314,18 @@ export default class EditProfileComponent extends React.Component {
                                                     placeholder="education"
                                                 />
                                             </div>
+                                            <div className="col-md-12 ms-3">
+                                                <br />
+                                                <Link
+                                                    onClick={this.openDeleteProfileModal}
+                                                    className="modal-trigger" data-target="deleteUserModal">
+                                                    <h6 style={{ color: 'red' }}>Delete Profile?</h6>
+                                                </Link>
+                                            </div>
                                         </div>
                                     </div>
+
+
                                     <div className=" text-center btnspace">
                                         <button className="btnprofile" type="submit">
                                             Save Profile
@@ -321,9 +339,6 @@ export default class EditProfileComponent extends React.Component {
                                             </ul>
                                         )}
 
-                                        {/* <button className="btnprofile btnmargin" type="button" onClick={this.clearFields}>
-                                            Clear Fields
-                                        </button> */}
                                     </div>
                                 </div>
                                 <div className="col-md-4">
@@ -351,6 +366,10 @@ export default class EditProfileComponent extends React.Component {
                     </form>
 
                     {this.state.isEditProfilePhotoModal && <EditProfilePhotoComponent />}
+
+                    {this.state.isDeleteProfileModal && <DeleteUserModalComponent
+                        userDetails={this.state.userDetails}
+                    />}
                 </section>
             </>
         );
