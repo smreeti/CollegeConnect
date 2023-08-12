@@ -31,7 +31,6 @@ const ResetUserPasswordModalComponent = (props) => {
                 console.log("Reset successful");
                 await updatePasswordUser(data.body);
                 setConfirmationMessage("We've sent an email notification to the user about the new password.");
-                cancelModal();
             } else {
                 setFormErrors([]);
             }
