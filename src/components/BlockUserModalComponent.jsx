@@ -1,8 +1,8 @@
 import React, { useRef, useEffect, useState } from "react";
 import M from "materialize-css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTimes } from "@fortawesome/free-solid-svg-icons";
-import { API_TO_BLOCK_USER, API_TO_RESET_PASSWORD, API_TO_UNBLOCK_USER, API_TO_UPDATE_PASSWORD } from "../../utils/APIRequestUrl";
+import { faTimes, faCheck } from "@fortawesome/free-solid-svg-icons";
+import { API_TO_BLOCK_USER, API_TO_UNBLOCK_USER } from "../../utils/APIRequestUrl";
 import fetchData from "../../utils/FetchAPI";
 
 const BlockUserModalComponent = (props) => {
@@ -58,19 +58,26 @@ const BlockUserModalComponent = (props) => {
                     </div>
 
                     <div className="modal-body">
-                        {!confirmationMessage && <>
-                            <p>Are you sure you want to block {userDetails.username}?</p>
-                            <div className="d-flex justify-content-between">
-                                <button className="btn btn-success" onClick={handleBlock}>Yes</button>
-                                <button className="btn btn-danger" type="button" onClick={cancelModal}>No</button>
-                            </div>
-                        </>
+
+                        {confirmationMessage ?
+                            <>
+                                <FontAwesomeIcon
+                                    icon={faCheck}
+                                    className="success-check"
+                                />
+                                <p>{confirmationMessage}</p>
+                            </> : <>
+                                <p>Are you sure you want to block {userDetails.username}?</p>
+                                <div className="d-flex justify-content-between">
+                                    <button className="btn btn-success" onClick={handleBlock}>Yes</button>
+                                    <button className="btn btn-danger" type="button" onClick={cancelModal}>No</button>
+                                </div>
+                            </>
                         }
-                        <p> {confirmationMessage}</p>
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     );
 }
 
