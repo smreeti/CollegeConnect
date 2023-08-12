@@ -83,9 +83,7 @@ export default class EditProfileComponent extends React.Component {
             const data = await fetchData(API_TO_EDIT_PROFILE, "POST", user);
             if (!data.error) {
                 await this.updateLocalStorage(data.body);
-                const data = await fetchData(API_TO_APPROVE_POST_REPORTS, "POST", user);
-                if (!data.error)
-                    toast.success("Post report approved successfully!");
+               
                 window.location.reload();
                 console.log("User edited successfully");
             } else {
