@@ -45,7 +45,8 @@ const ResetUserPasswordModalComponent = (props) => {
 
     const updatePasswordUser = async (user) => {
         try {
-            const data = await fetchData(API_TO_UPDATE_PASSWORD, "POST", { user });
+            const data = await fetchData(API_TO_UPDATE_PASSWORD, "POST",
+                { newPassword: user.generatedPassword, token: user.randomToken });
             if (!data.error) {
                 console.log("Update successful");
             } else {
