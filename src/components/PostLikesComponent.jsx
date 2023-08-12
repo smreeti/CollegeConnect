@@ -71,7 +71,6 @@ const PostLikesComponent = (props) => {
                                         <small>
                                             <span className='username'>{likesData?.username}</span>
                                         </small>
-                                        <button className='btn btn-primary ms-auto btn-sm'>Follow</button>
                                     </li>
                                 </ul>
 
