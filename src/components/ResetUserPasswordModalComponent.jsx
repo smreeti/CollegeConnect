@@ -27,16 +27,14 @@ const ResetUserPasswordModalComponent = (props) => {
             const data = await fetchData(API_TO_RESET_PASSWORD, "POST", { username: userDetails.username, loggedInUser });
             if (!data.error) {
                 console.log("Reset successful");
-                updatePasswordUser(data.body);
+                await updatePasswordUser(data.body);
                 setConfirmationMessage("We've sent an email notification to the user about the new password.");
                 cancelModal();
             } else {
-                setServerErrors(data.error);
                 setFormErrors([]);
             }
         } catch (error) {
             console.log("Error:", error);
-            setServerErrors(error);
         }
     }
     const setFormErrors = (formErrors) => {
@@ -49,12 +47,10 @@ const ResetUserPasswordModalComponent = (props) => {
             if (!data.error) {
                 console.log("Update successful");
             } else {
-                setServerErrors(data.error);
                 setFormErrors([]);
             }
         } catch (error) {
             console.log("Error:", error);
-            setServerErrors(error);
         }
     }
 
