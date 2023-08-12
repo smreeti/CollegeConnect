@@ -65,7 +65,7 @@ const BlockUserModalComponent = (props) => {
                                     icon={faCheck}
                                     className="success-check"
                                 />
-                                <p>{confirmationMessage}</p>
+                                <p className="text-center">{confirmationMessage}</p>
                             </> : <>
                                 <p>Are you sure you want to block {userDetails.username}?</p>
                                 <div className="d-flex justify-content-between">
