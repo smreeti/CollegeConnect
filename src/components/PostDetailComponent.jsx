@@ -55,6 +55,7 @@ const PostDetailComponent = (props) => {
     const cancelPostDetailModal = () => {
         const modalInstance = M.Modal.getInstance(openUserPost.current);
         modalInstance.close();
+        window.location.reload();
         // onClose(postDetails);
     };
 
