@@ -10,6 +10,7 @@ const ResetUserPasswordModalComponent = (props) => {
     const resetUserPasswordModal = useRef(null);
     const { userDetails } = props;
     const [confirmationMessage, setConfirmationMessage] = useState('');
+    const [errors, setErrors] = useState('');
 
     useEffect(() => {
         M.Modal.init(resetUserPasswordModal.current);
@@ -24,7 +25,8 @@ const ResetUserPasswordModalComponent = (props) => {
     const resetPasswordUser = async () => {
         const loggedInUser = getLoggedInUser();
         try {
-            const data = await fetchData(API_TO_RESET_PASSWORD, "POST", { username: userDetails.username, loggedInUser });
+            const data = await fetchData(API_TO_RESET_PASSWORD, "POST",
+                { username: userDetails.username, loggedInUser });
             if (!data.error) {
                 console.log("Reset successful");
                 await updatePasswordUser(data.body);
@@ -43,7 +45,7 @@ const ResetUserPasswordModalComponent = (props) => {
 
     const updatePasswordUser = async (user) => {
         try {
-            const data = await fetchData(API_TO_UPDATE_PASSWORD, "POST", { newPassword: user });
+            const data = await fetchData(API_TO_UPDATE_PASSWORD, "POST", { user });
             if (!data.error) {
                 console.log("Update successful");
             } else {
