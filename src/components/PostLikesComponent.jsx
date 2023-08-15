@@ -4,6 +4,7 @@ import fetchData from '../../utils/FetchAPI'
 import { API_TO_FETCH_POST_LIKES } from '../../utils/APIRequestUrl'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
+import { Link } from 'react-router-dom';
 
 const PostLikesComponent = (props) => {
     const postLikesModal = useRef(null);
@@ -14,23 +15,22 @@ const PostLikesComponent = (props) => {
         M.Modal.init(postLikesModal.current);
     }, [props]);
 
-
     const closeModal = () => {
         const modalInstance = M.Modal.getInstance(postLikesModal.current);
-        modalInstance.close()
+        modalInstance.close();
     };
 
     const fetchPostLikes = async () => {
         const { selectedPostId } = props;
         try {
             const data = await fetchData(API_TO_FETCH_POST_LIKES, "POST", { _id: selectedPostId });
+
             if (data.body && data.body.postLikes) {
                 setLikesList(data.body.postLikes);
             } else {
                 setLikesList([]);
             }
 
-            // setLikesList(data.body.postLikes);
         } catch (error) {
             console.log("Error:", error);
         }
@@ -69,7 +69,8 @@ const PostLikesComponent = (props) => {
                                             )}
                                         </div>
                                         <small>
-                                            <span className='username'>{likesData?.username}</span>
+                                            <span><Link to={`/profile/${likesData?._id}`}>{likesData?.username}</Link></span>
+
                                         </small>
                                     </li>
                                 </ul>

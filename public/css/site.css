@@ -732,6 +732,9 @@ button[type="submit"]:hover {
   margin-bottom: 20px;
 }
 
+.barchart_main_container_mobile{
+  display: none !important;
+}
 /*hamburger start*/
 .dropdown-menu.show {
   background-color: #212121;
@@ -2228,6 +2231,7 @@ hr {
 }
 
 @media screen and (min-width: 768px) {
+
   .labelset {
     margin-left: 12px;
   }
@@ -2827,6 +2831,14 @@ hr {
 }
 
 @media (max-width: 768px) {
+  .barchart_main_container{
+    display: none !important;
+  }
+
+  .barchart_main_container_mobile {
+    display: block !important;
+  }
+
   .edit_profile_button {
     margin: auto;
   }

@@ -54,7 +54,7 @@ export function BarComponent() {
                     labels: months,
                     datasets: [
                         {
-                            label: 'Bar Chart Data',
+                            label: 'Total Posts',
                             data: count,
                             backgroundColor: 'rgba(54, 162, 235, 0.2)',
                             borderColor: 'rgba(54, 162, 235, 1)',
@@ -69,9 +69,13 @@ export function BarComponent() {
         }
     }
 
-    return (
+    return (<>
         <div className='barchart_main_container'>
-            {chartData ? <Bar options={options} data={chartData} /> : <div>Loading...</div>}
+            {chartData ? <Bar height={200} options={options} data={chartData} /> : <div>Loading...</div>}
         </div>
+        <div className='barchart_main_container_mobile'>
+            {chartData ? <Bar height={250} options={options} data={chartData} /> : <div>Loading...</div>}
+        </div> 
+    </>
     )
 }

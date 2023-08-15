@@ -56,7 +56,6 @@ const PostDetailComponent = (props) => {
         const modalInstance = M.Modal.getInstance(openUserPost.current);
         modalInstance.close();
         window.location.reload();
-        // onClose(postDetails);
     };
 
     const fetchPostDetails = async () => {
@@ -109,10 +108,6 @@ const PostDetailComponent = (props) => {
     }
 
     const OpenModalLikes = (post) => {
-        cancelPostDetailModal();
-        if (cancelPostDetailModal) {
-            console.log("Closed");
-        }
         OpenLikesModal(post);
     }
 
@@ -330,7 +325,9 @@ const PostDetailComponent = (props) => {
 
                                                     {postDetails?.likes?.length == 0 ?
                                                         <small className='fs-6 fw-lighter'> {postDetails?.likes?.length} like</small>
-                                                        : <span onClick={() => OpenModalLikes(postDetails)} data-target="postLikesModal" className='modal-trigger text-primary'>
+                                                        : <span onClick={() => OpenModalLikes(postDetails)}
+                                                            data-target="postLikesModal"
+                                                            className='modal-trigger text-primary'>
                                                             <small className='fs-6 fw-lighter link'> {postDetails?.likes?.length} {postDetails?.likes?.length == 1 ? 'like' : 'likes'}</small>
                                                         </span>}
                                                 </div>
@@ -370,15 +367,13 @@ const PostDetailComponent = (props) => {
                 </div>
             </div>
             {isLikesModalOpen && (
-                <PostLikesComponent closePostDetailModal={cancelPostDetailModal()} />
+                <PostLikesComponent />
             )}
 
             {isReportModalOpen &&
                 <ReportCommentModal
                     selectedCommenttId={commentId}
                 />}
-
-
         </div>
     );
 };
