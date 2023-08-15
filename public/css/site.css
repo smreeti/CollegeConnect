@@ -41,6 +41,7 @@ body {
   padding-right: 10px;
   flex-grow: 1;
   text-align: right;
+  cursor: pointer;
 }
 
 .deletebutton:hover {
@@ -469,7 +470,7 @@ body {
   box-shadow: none;
 }
 
-.back:hover {
+.back:hover, .reportOption {
   color: #682773;
   cursor: pointer;
 }

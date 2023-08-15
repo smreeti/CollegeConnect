@@ -58,7 +58,7 @@ const SearchUserComponent = () => {
                         />
                     </div>
 
-                    <ul className="collection">
+                    <ul className="collection comments-container">
                         {userDetails?.length > 0 && search ? (
                             userDetails.map((userDetail) => {
                                 return (

@@ -132,7 +132,7 @@ export default class ClientHomeComponent extends React.Component {
                                             <Link to={`/profile/${post.postedBy?._id}`}>{post?.postedBy?.username}</Link>
 
                                             <FontAwesomeIcon icon={faEllipsisH}
-                                                className="ms-auto modal-trigger"
+                                                className="ms-auto modal-trigger reportOption"
                                                 data-target="reportModal"
                                                 onClick={() => this.openReportModal(post?._id)} />
                                         </p>
