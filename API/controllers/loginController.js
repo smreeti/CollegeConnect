@@ -24,9 +24,16 @@ const login = async (req, res) => {
             { mobileNumber: username },
             { username: username }
         ]
-    });
+    }).populate('userTypeId');
 
     if (user) {
+
+        if (user.status == "BLOCKED") {
+            return setErrorResponse(res, HttpStatus.BAD_REQUEST, "This account is no longer active. We sent you an email explaining what happened.");
+        } else if (user.status == "DELETED") {
+            return setErrorResponse(res, HttpStatus.BAD_REQUEST, "Your account has been deleted.");
+        }
+
         let passwordMatch = await bcrypt.compare(password, user.password);
         if (passwordMatch) { //if passwords match
 
@@ -36,12 +43,12 @@ const login = async (req, res) => {
 
             return setSuccessResponse(res, "User logged in successfully", { accessToken, refreshToken, user });
         } else {
-            return setErrorResponse(res, HttpStatus.BAD_REQUEST, "Sorry, your password was incorrect. Please double check your password.");
+            return setErrorResponse(res, HttpStatus.BAD_REQUEST, "Invalid login credentials.");
         }
     }
 
     console.log("User not found");
-    return setErrorResponse(res, HttpStatus.BAD_REQUEST, "Invalid username or password.");
+    return setErrorResponse(res, HttpStatus.BAD_REQUEST, "Invalid login credentials.");
 }
 
 const verifyRefreshToken = (req, res) => {

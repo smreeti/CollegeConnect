@@ -24,6 +24,9 @@ const CollegeInfoSchema = new Schema({
     postalCode: {
         type: String,
         required: [true, 'Please provide postal code'],
+    },
+    imageUrl:{
+        type: String
     }
 });
 

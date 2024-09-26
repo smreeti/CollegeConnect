@@ -6,7 +6,6 @@ import { API_TO_UPDATE_PASSWORD } from "../../utils/APIRequestUrl.js";
 import fetchData from "../../utils/FetchAPI.js";
 import { useParams } from 'react-router-dom';
 
-
 const UpdatePasswordComponent = () => {
     const { id } = useParams();
     const navigate = useNavigate();
@@ -66,10 +65,12 @@ const UpdatePasswordComponent = () => {
 
     return (
         <section className="main-section">
-            <div className="container min-vh-100 d-flex align-items-center justify-content-center">
+            <div className="main-container">
                 <div className="col-lg-6 col-md-8 col-11 p-3 bg-white px-md-5 py-md-4">
                     <div className="text-center">
-                        <img className="login-logo" src="../../assets/logotestnew.png" />
+                        <Link to='/'>
+                            <img className="login-logo" src="../../assets/logo.png" />
+                        </Link>
                         <h2 className="mt-3">Create New Password</h2>
                         <p className="fs-6 mb-5">A strong password helps prevent unauthorised access to your account</p>
                     </div>

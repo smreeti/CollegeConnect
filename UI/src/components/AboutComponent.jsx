@@ -7,8 +7,8 @@ export default function About() {
       <Header />
 
       <section className="wholesec">
-        <div className="cover-image">
-          <img src="../../assets/team.jpg" alt="Cover Image" />
+        <div className="cover-image resdiv">
+          <img src="../../assets/team.jpg" className="resimg" alt="Cover Image" />
           <div className="overlay">
             <h1>About Us</h1>
           </div>
@@ -47,9 +47,9 @@ export default function About() {
         <section id="top_selling_container" className="changecol">
           <h1>SUCCESS STORIES</h1>
           <div id="top_selling">
-            <div className="items">
+            <div className="items resdiv">
               <img
-                className="imgbor"
+                className="imgbor resimg"
                 src="../../assets/ryan.jpg"
                 alt="Scooby Doo"
               />
@@ -69,9 +69,9 @@ export default function About() {
                 pursued a degree in mathematics.
               </p>
             </div>
-            <div className="items">
+            <div className="items resdiv">
               <img
-                className="imgbor"
+                className="imgbor resimg"
                 src="../../assets/smiling.jpg"
                 alt="Scooby Doo"
               />
@@ -90,9 +90,9 @@ export default function About() {
               </p>
             </div>
 
-            <div className="items">
+            <div className="items resdiv">
               <img
-                className="imgbor"
+                className="imgbor resimg"
                 src="../../assets/woman.jpg"
                 alt="Scooby Doo"
               />
@@ -154,7 +154,7 @@ export default function About() {
                 />
               </div>
               <div className="col-md-6 order-md-1">
-                <h1>Stand out on CollegeConnect</h1>
+                <h1 className="std">Stand out on CollegeConnect</h1>
 
                 <p className="standout">
                   Connect with more people, build influence, and create
