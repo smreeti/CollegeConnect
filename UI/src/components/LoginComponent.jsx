@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { handleLoginFormValidation } from "../../utils/validation.js";
+import { handleLoginFormValidation } from "../../utils/Validation.js";
 import { API_TO_LOGIN_USER } from "../../utils/APIRequestUrl.js";
 import fetchData from "../../utils/FetchAPI.js";
 import { Link } from "react-router-dom";

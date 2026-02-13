@@ -2,7 +2,7 @@ import React from "react";
 import TextInput from './InputComponents/TextInput.jsx';
 import NumInput from './InputComponents/NumInput.jsx';
 import UserType from "../../utils/UserTypeConstants.js";
-import { handleFormValidation } from "../../utils/validation.js";
+import { handleFormValidation } from "../../utils/Validation.js";
 import { API_TO_FETCH_COLLEGE_INFO, API_TO_SIGNUP_USER } from "../../utils/APIRequestUrl.js";
 import fetchData from "../../utils/FetchAPI.js";
 import { Link } from "react-router-dom";

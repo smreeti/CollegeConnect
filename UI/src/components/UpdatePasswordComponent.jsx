@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from 'react-router-dom';
 import TextInput from './InputComponents/TextInput.jsx';
-import { handleUpdatePasswordValidation } from "../../utils/validation.js";
+import { handleUpdatePasswordValidation } from "../../utils/Validation.js";
 import { API_TO_UPDATE_PASSWORD } from "../../utils/APIRequestUrl.js";
 import fetchData from "../../utils/FetchAPI.js";
 import { useParams } from 'react-router-dom';
