@@ -1,35 +1,35 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
-  mode: "production", // production mode for smaller optimized build
+  mode: "production",
   entry: "./src/app.jsx",
   output: {
-    filename: "[name].bundle.js", // standard JS file
-    path: path.resolve(__dirname, "build"), // output folder for Vercel
-    publicPath: "/", // needed for React Router
+    filename: "[name].bundle.js",
+    path: path.resolve(__dirname, "build"),
+    publicPath: "/",
   },
   module: {
     rules: [
       {
-        test: /\.(png|jpg|gif)$/,
-        use: [{ loader: "file-loader", options: { limit: 8192 } }],
-      },
-      {
         test: /\.css$/,
-        use: ["style-loader", "css-loader"],
+        use: [MiniCssExtractPlugin.loader, "css-loader"], // <-- extract CSS into separate files
       },
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
         use: { loader: "babel-loader", options: { presets: ["@babel/preset-env", "@babel/preset-react"] } },
       },
+      {
+        test: /\.(png|jpg|gif)$/,
+        use: [{ loader: "file-loader", options: { limit: 8192 } }],
+      },
     ],
   },
   plugins: [
-    new HtmlWebpackPlugin({
-      template: "./public/index.html", // copy index.html to build/
-    }),
+    new HtmlWebpackPlugin({ template: "./public/index.html" }),
+    new MiniCssExtractPlugin({ filename: "[name].css" }), // output CSS filename
   ],
   optimization: {
     splitChunks: { name: "vendor", chunks: "all" },
