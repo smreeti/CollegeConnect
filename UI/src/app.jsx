@@ -3,7 +3,7 @@ import { createRoot } from "react-dom/client";
 import { HashRouter as Router } from 'react-router-dom';
 import Page from './Page.jsx';
 
-import './css/site.css'; // your custom styles
+import '/UI/public/css/site.css'; // your custom styles
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'materialize-css/dist/css/materialize.min.css';
 
