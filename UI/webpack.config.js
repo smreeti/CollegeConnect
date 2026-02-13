@@ -2,7 +2,7 @@ const path = require("path");
 
 module.exports = {
 
-  mode: "development",
+  mode: "production",
   entry: "./src/app.jsx",
   output: {
     filename: "[name].bundle.UIjs",
