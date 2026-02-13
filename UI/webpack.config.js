@@ -5,8 +5,9 @@ module.exports = {
   mode: "development",
   entry: "./src/app.jsx",
   output: {
-    filename: "[name].bundle.js",
-    path: path.resolve(__dirname, "public"),
+    filename: "[name].bundle.UIjs",
+    // path: path.resolve(__dirname, "public"),
+    path: path.resolve(__dirname, "build"), // use "build" folder
   },
   module: {
     rules: [
