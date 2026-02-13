@@ -4,7 +4,7 @@ import { API_TO_EDIT_PROFILE, API_TO_FETCH_USER_DETAILS } from "../../utils/APIR
 import Header from "../Header.jsx";
 import EditProfilePhotoComponent from "./EditProfilePhotoComponent.jsx";
 import { Link } from "react-router-dom";
-import { handleEditFormValidation } from "../../utils/validation";
+import { handleEditFormValidation } from "../../utils/Validation";
 import DeleteUserModalComponent from "./DeleteUserModalComponent.jsx";
 
 export default class EditProfileComponent extends React.Component {

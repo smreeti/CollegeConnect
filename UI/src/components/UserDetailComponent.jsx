@@ -4,7 +4,7 @@ import { API_TO_EDIT_PROFILE, API_TO_FETCH_USER_DATA, } from "../../utils/APIReq
 import Header from "../Header.jsx";
 import ResetUserPasswordModalComponent from "./ResetUserPasswordModalComponent.jsx";
 import { useParams, useNavigate, Link } from "react-router-dom";
-import { handleEditFormValidation } from "../../utils/validation";
+import { handleEditFormValidation } from "../../utils/Validation";
 import EditProfilePhotoComponent from "./EditProfilePhotoComponent.jsx";
 import BlockUserModalComponent from "./BlockUserModalComponent.jsx";
 

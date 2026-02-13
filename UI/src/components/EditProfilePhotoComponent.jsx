@@ -5,7 +5,7 @@ import {
   CLOUD_URL,
   UPLOAD_PRESET,
 } from "../../utils/CloudinaryConfig.js";
-import { handleCreatePostValidation } from "../../utils/validation.js";
+import { handleCreatePostValidation } from "../../utils/Validation.js";
 import M from "materialize-css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
