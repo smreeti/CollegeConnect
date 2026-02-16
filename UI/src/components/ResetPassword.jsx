@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from 'react-router-dom';
 import TextInput from './InputComponents/TextInput.jsx';
-import { handleResetPasswordValidation } from "../../utils/validation.js";
+import { handleResetPasswordValidation } from "../../utils/Validation.js";
 import { API_TO_RESET_PASSWORD } from "../../utils/APIRequestUrl.js";
 import fetchData from "../../utils/FetchAPI.js";
-
 
 const ResetPasswordComponent = () => {
     const navigate = useNavigate();
@@ -68,7 +67,8 @@ const ResetPasswordComponent = () => {
             <div className="main-container">
                 <div className="col-lg-6 col-md-8 col-11 p-3 bg-white px-md-5 py-md-4">
                     <div className="text-center">
-                        <img className="login-logo" src="../../assets/logotestnew.png" />
+                        <Link to='/'>
+                            <img className="login-logo" src="../../assets/logo.png" /></Link>
                         <h2 className="mt-3">Reset Password</h2>
                         <p className="fs-6 mb-5">Fear not. We'll help you get your account back!</p>
                     </div>
@@ -113,6 +113,5 @@ const ResetPasswordComponent = () => {
         </section>
     )
 }
-
 
 export default ResetPasswordComponent;

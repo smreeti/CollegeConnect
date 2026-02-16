@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { handleLoginFormValidation } from "../../utils/validation.js";
+import { handleLoginFormValidation } from "../../utils/Validation.js";
 import { API_TO_LOGIN_USER } from "../../utils/APIRequestUrl.js";
 import fetchData from "../../utils/FetchAPI.js";
 import { Link } from "react-router-dom";
@@ -69,7 +69,9 @@ const LoginComponent = () => {
         <div id="main-login-container">
           <div id="login-form-container">
             <div className="login-details">
-              <img className="login-logo" src="../../assets/logotestnew.png" />
+              <Link to='/'>
+                <img className="login-logo" src="../../assets/logo.png" />
+              </Link>
               <h2 className="color logfix">Login</h2>
             </div>
             <form

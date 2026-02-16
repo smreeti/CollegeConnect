@@ -36,7 +36,9 @@ const validateUser = async (req) => {
         email,
         mobileNumber,
         username,
-        password
+        password,
+        isEdit,
+        loggedInUserId
     } = req.body;
 
     const errors = [];
@@ -66,22 +68,38 @@ const validateUser = async (req) => {
     else if (!validateUsername(username))
         errors.push("Username can only contain letters, numbers, and underscores.");
 
-    checkPasswordValidity(password, errors);
-
-    const existingUser = await User.findOne({
-        $or: [
-            { email: email },
-            { mobileNumber: mobileNumber },
-            { username: username }
-        ]
-    });
+    let existingUser;
+    if (!isEdit) { //case of create
+        checkPasswordValidity(password, errors);
+        existingUser = await User.findOne({
+            $or: [
+                { email: email },
+                { mobileNumber: mobileNumber },
+                { username: username }
+            ]
+        });
+    } else {//case of edit
+        existingUser = await User.findOne({
+            $and: [
+                {
+                    _id: { $ne: loggedInUserId } // Exclude the logged-in user's ID
+                },
+                {
+                    $or: [
+                        { email: email },
+                        { mobileNumber: mobileNumber },
+                        { username: username }
+                    ]
+                }
+            ]
+        });
+    }
 
     if (existingUser)
         errors.push("Sorry, user with given information already exists.");
 
     return errors;
 };
-
 
 const validateLoginForm = async (username, password) => {
     const errors = [];
@@ -103,9 +121,18 @@ const checkPasswordValidity = (password, errors) => {
     return errors;
 }
 
+const validateImage = async (imageUrl) => {
+    const errors = [];
+
+    if (!imageUrl || imageUrl.length <= 0)
+        errors.push("Image is required.");
+    return errors;
+}
+
 module.exports = {
     validateField,
     validateUser,
     validateLoginForm,
-    checkPasswordValidity
+    checkPasswordValidity,
+    validateImage
 }

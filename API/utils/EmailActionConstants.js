@@ -1,3 +1,4 @@
 const RESET_PASSWORD = "RESET_PASSWORD";
+const BLOCK_USER = "BLOCK_USER";
 
-module.exports = { RESET_PASSWORD };
+module.exports = { RESET_PASSWORD, BLOCK_USER };

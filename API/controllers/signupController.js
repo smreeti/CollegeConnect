@@ -8,6 +8,9 @@ const {
 } = require("../utils/Response.js");
 
 const { validateUser } = require("../utils/ValidationUtil.js");
+const { fetchAdminUser } = require("./userController.js");
+const UserFollowing = require("../models/UserFollowing.js");
+const { incrementUserFollowingCount, incrementUserFollowerCount } = require("./userFollowingController.js");
 
 const signupUser = async (req, res) => {
   const {
@@ -18,10 +21,11 @@ const signupUser = async (req, res) => {
     mobileNumber,
     username,
     password,
-    userType,
+    userType
   } = req.body;
+  req.body.isEdit = false;
 
-  const errors = await validateUser(req, res);
+  const errors = await validateUser(req);
   const collegeInfo = await fetchCollegeInfo(collegeInfoId, errors);
   const userTypeId = await fetchUserType(userType);
 
@@ -29,7 +33,7 @@ const signupUser = async (req, res) => {
     return setErrorResponse(res, HttpStatus.BAD_REQUEST, errors);
 
   try {
-    await User.create({
+    const createdUser = await User.create({
       collegeInfoId: collegeInfo,
       userTypeId,
       firstName,
@@ -40,11 +44,28 @@ const signupUser = async (req, res) => {
       password,
     });
 
+    const savedUserId = createdUser._id;
+    await followCollegeAdmin(savedUserId, collegeInfoId);
+
     return setSuccessResponse(res, { message: "User saved successfully" });
   } catch (error) {
     return setErrorResponse(res, HttpStatus.INTERNAL_SERVER_ERROR, error);
   }
 };
+
+const followCollegeAdmin = async (userId, collegeInfoId) => {
+  const adminUser = await fetchAdminUser(collegeInfoId);
+
+  if (adminUser) {
+    await UserFollowing.create({
+      userId,
+      followingUserId: adminUser
+    })
+
+    await incrementUserFollowingCount(userId); //increment following count for the user
+    await incrementUserFollowerCount(adminUser._id); // user is following superadmin so increment the superadmin followers count
+  }
+}
 
 const fetchCollegeInfo = async (collegeInfoId, errors) => {
   let collegeInfo;

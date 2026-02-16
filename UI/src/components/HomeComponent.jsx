@@ -1,35 +1,21 @@
 import React from 'react';
-
-import fetchData from "../../utils/FetchAPI.js";
-import Header from '../Header.jsx';
-import { getLoggedInUser } from '../../utils/Auth.js';
+import { getLoggedInUser } from '../../utils/Auth';
+import UserType from '../../utils/UserTypeConstants';
+import AdminHomeComponent from './AdminHomeComponent.jsx';
+import ClientHomeComponent from './ClientHomeComponent.jsx';
 
 export default class HomeComponent extends React.Component {
 
-    constructor() {
-        super();
-        this.state = {};
-        this.fetchProtectedPage = this.fetchProtectedPage.bind(this);
-    }
-
-    componentDidMount() {
-        this.fetchProtectedPage();
-    }
-
-    async fetchProtectedPage() {
-        try {
-            const data = await fetchData("http://localhost:4000/protected", "POST");
-            console.log(data);
-        } catch (error) {
-            console.log("Error:", error);
-        }
-    }
-
     render() {
+        const loggedInUser = getLoggedInUser();
         return (
             <>
-                <Header />
-                <h1>Welcome to Home page, {getLoggedInUser()}</h1>
+                {
+                    loggedInUser && (loggedInUser?.userTypeId?.code == UserType.ADMIN
+                        || loggedInUser?.userTypeId?.code == UserType.MASTER) ?
+                        <AdminHomeComponent /> :
+                        <ClientHomeComponent />
+                }
             </>
         );
     }

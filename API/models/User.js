@@ -45,6 +45,21 @@ const UserSchema = new Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'CollegeInfo'
     },
+    bio: {
+        type: String
+    },
+    following: {
+        type: Number,
+        default: 0
+    },
+    followers: {
+        type: Number,
+        default: 0
+    },
+    status: {
+        type: String,
+        default: 'ACTIVE'
+    }
 });
 
 UserSchema.pre('save', function (next) {

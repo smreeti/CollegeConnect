@@ -2,7 +2,7 @@ import React from "react";
 import TextInput from './InputComponents/TextInput.jsx';
 import NumInput from './InputComponents/NumInput.jsx';
 import UserType from "../../utils/UserTypeConstants.js";
-import { handleFormValidation } from "../../utils/validation.js";
+import { handleFormValidation } from "../../utils/Validation.js";
 import { API_TO_FETCH_COLLEGE_INFO, API_TO_SIGNUP_USER } from "../../utils/APIRequestUrl.js";
 import fetchData from "../../utils/FetchAPI.js";
 import { Link } from "react-router-dom";
@@ -64,7 +64,6 @@ class SignupComponent extends React.Component {
       this.setFormErrors(formErrors);
     } else {
       await this.signupUser(user);
-      window.location = '/';
     }
   }
 
@@ -82,6 +81,7 @@ class SignupComponent extends React.Component {
       const data = await fetchData(API_TO_SIGNUP_USER, "POST", user);
       if (!data.error) {
         console.log("User saved successfully");
+        window.location = '/';
       } else {
         this.setServerErrors(data.error);
         this.setFormErrors([]);
@@ -100,7 +100,7 @@ class SignupComponent extends React.Component {
 
   setServerErrors(serverErrors) {
     this.setState({
-      serverErrors: serverErrors
+      serverErrors: [serverErrors],
     });
   }
 
@@ -130,7 +130,8 @@ class SignupComponent extends React.Component {
             <div className="row bg-white w-75">
               <div className="col-lg-6 col p-3 px-md-5 py-md-4">
                 <div className="text-center">
-                  <img className="login-logo" src="../../assets/logotestnew.png" />
+                  <Link to='/'>
+                    <img className="login-logo" src="../../assets/logo.png" /></Link>
                   <h2 className="mt-3">Create An Account</h2>
                   <p className="fs-6">Already a user? <Link to="/">Sign In</Link></p>
                 </div>
@@ -179,7 +180,7 @@ class SignupComponent extends React.Component {
                     <NumInput
                       id="mobileNumber"
                       name="mobileNumber"
-                      placeholder="Phone Number"
+                      placeholder="Mobile Number"
                       value={mobileNumber}
                       onChange={this.handleOnChange}
                       key="MobileNumberInput"
