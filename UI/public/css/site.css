@@ -1755,7 +1755,7 @@ footer {
 
 .slideshow {
   background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-    url(../../assets/imgone.jpg) no-repeat center left;
+    url(../assets/imgone.jpg) no-repeat center left;
   animation: slide 20s infinite;
   height: 500px;
   background-position: center;
