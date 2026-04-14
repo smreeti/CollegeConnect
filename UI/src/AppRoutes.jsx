@@ -9,6 +9,16 @@ import ResetPasswordComponent from './components/ResetPassword.jsx';
 import EmailSentComponent from './components/EmailSentComponent.jsx';
 import UpdatePasswordComponent from './components/UpdatePasswordComponent.jsx';
 import LogoutComponent from './components/LogoutComponent.jsx';
+import ProfileComponent from './components/ProfileComponent.jsx';
+import CreatePostComponent from './components/CreatePostComponent.jsx';
+import SearchUserComponent from './components/SearchUserComponent.jsx';
+import EditProfileComponent from './components/EditProfileComponent.jsx';
+import ReportComponent from './components/ReportComponent.jsx';
+import NotificationsComponent from './components/NotificationsComponent.jsx';
+import UsersListComponent from './components/UsersListComponent.jsx';
+import ManageUsersPageComponent from './components/ManageUsersPageComponent.jsx';
+import UserDetailComponent from './components/UserDetailComponent.jsx';
+
 
 export default function AppRoutes() {
   const navigate = useNavigate();
@@ -21,9 +31,9 @@ export default function AppRoutes() {
 
         const currentPath = window.location.pathname;
 
-        // Exclude authentication check for login and signup routes
-        if (currentPath === '/' || currentPath === '/signup')
+        if (currentPath === '/' || currentPath === '/signup' || currentPath === '/about') {
           return;
+        }
 
         if (!accessToken || !refreshToken) {
           navigate('/');
@@ -49,6 +59,21 @@ export default function AppRoutes() {
       <Route path="/resetPassword" element={<ResetPasswordComponent />} />
       <Route path="/emailSent" element={<EmailSentComponent />} />
       <Route path="/updatePassword/:id" element={<UpdatePasswordComponent />} />
+      <Route path="/profile/:id" element={<ProfileComponent />} />
+
+      <Route path="/createPost" element={<CreatePostComponent />} />
+      <Route path="/search" element={<SearchUserComponent />} />
+      <Route path="/edit" element={<EditProfileComponent />} />
+
+      <Route path="/reports" element={<ReportComponent />} />
+      <Route path='/notifications' element={<NotificationsComponent />} />
+
+      <Route path='/userslist' element={<ManageUsersPageComponent />} />
+
+      <Route path="/:schoolName/users-list" element={<UsersListComponent />} />
+
+      <Route path="/:schoolName/:user/details" element={<UserDetailComponent />} />
+
       <Route path="/logout" element={<LogoutComponent />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
